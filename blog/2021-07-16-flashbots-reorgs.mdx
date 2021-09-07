@@ -1,0 +1,64 @@
+---
+slug: flashbots-reorgs
+title: Flashbots on Reorgs
+authors: [phil]
+tags: [flashbots, reorgs]
+image: https://i.imgur.com/mErPwqL.png
+hide_table_of_contents: false
+---
+There has been a lot of discussion in the Ethereum community recently about chain-reorgs-as-a-service, and how it relates to MEV, the ETH2 merge, and other important ecosystem developments.
+<!--truncate-->
+
+In this post, we will provide a high-level overview of why Flashbots does not support reorg games, why we believe reorg games are a net-negative for all actors in the space (including miners!), and how the unique nature of [the Flashbots organization](https://github.com/flashbots/pm) is set up to respond to this and future political and technical challenges.
+
+## Reorgs are Negative-Sum
+To put it bluntly, we believe that miner reorg games degenerate into a [negative-sum unstable game](https://en.wikipedia.org/wiki/Tragedy_of_the_commons) **that harms all actors in the cryptocurrency space.** Here is a cursory and incomplete list of reasons why:
+* **Erosion of settlement assurances:** In the presence of reorgs, more confirmations are required for a given blockchain transaction, meaning the Ethereum network becomes [less secure and less stable against attackers.](https://economics.princeton.edu/working-papers/on-the-instability-of-bitcoin-without-the-block-reward/) This harms all users, developers, and miners who use the network to transfer value.
+
+* **Systemic effects:** Reorg incidents also have the potential to lower cryptocurrency prices, either through attacks or instability in external/centralized infrastructure or through bad PR. This can include all correlated-price cryptocurrencies, not just the blockchain under attack.
+
+* **Less revenue for miners:** In general, miners are believed to be actors paid by blockchains for network security. By actively attacking networks for short-term gain, miners risk accelerating transitions to systems that reduce their influence. For example, other MEV-carrying chains may also be incentivized to remove miners in the aftermath of an attack on Ethereum.
+
+* **Flashbots harm:** We believe a two-sided MEV marketplace is key to democratizing and illuminating the world of MEV. Reorgs harm Flashbots bots and miners by allowing searchers to [have transactions or bundles tampered with, reordered, censored, or potentially stolen.](https://twitter.com/bertcmiller/status/1382673587715342339) In doing this, reorgs limit long-term miner revenue by reducing the efficiency of the extraction engine responsible for generating them MEV. We believe in long-term, positive-EV games at Flashbots. Our current searcher and miner split allows for a democratic, independent, permissionless ecosystem for MEV, and it is these values that we focus on protecting.
+
+* **Game-theoretic instability:** The game theory behind reorgs is completely unanalyzed. Consider for example a subset of the reorg meta-game, selfish mining. To understand how to optimize reorgs, one must understand how to optimally selfishly-mine with static rewards. Even this is an unsolved problem! [Recent research](https://arxiv.org/abs/1912.01798) suggests that **selfishly mining turns from profitable to unprofitable when most miners do it**, and the same is almost certainly true for all miners reorging. So, any miner trying this strategy will at best be profitable only until others switch.
+
+So, we believe reorgs harm everyone, including the owners of the hardware whose support is necessary to pull them off. In general, we hope all this discussion of reorgs amounts to nothing more than some code and discussion that contributes to the hardening of our systems today. Nonetheless, we welcome the community to take this opportunity to think critically, and to join us in defending the long-term and value-creating games that arise from a stable and functional cryptocurrency ecosystem.
+
+## Reorgs are Easily Mitigated
+There are a number of protocol-level, social, and technical mitigations the community could deploy that would hamper such an attack, and highly increase the probability that it equates to burning money. Subjective fork-choice rules, more complicated rules that disincentivize new forks, exchange-level mitigations to pause deposits in the event of long reorgs, and more are obvious band-aids that call into question the profitability of reorgs.
+
+Moreover, the ETH community has an obvious mitigation strategy: accelerating the merge. If a rushed deployment of proof-of-stake is forced to ensure system stability in an environment of reorgs, all miners in the system, including the miners using hardware to try to pull off a reorg attack, will lose money, as they will lose months and months of revenue while the merge is being tested for a safe deployment.
+
+We believe the existence of this “nuclear option/mutually-assured-destruction” for miners is the most powerful bulwark against reorgs in the ETH community today. We believe forcing the community’s hand and accelerating the merge benefits nobody, least of all miners.
+
+## Flashbots’ Commitments
+We once again wish to emphasize that Flashbots was formed to democratize MEV and **mitigate negative externalities for Ethereum and its users.** [Our goals require aligning the incentives of every single actor in the cryptocurrency ecosystem](https://medium.com/flashbots/frontrunning-the-mev-crisis-40629a613752), and building a sustainable long-term future for programmatic finance that survives post-merge. This requires a sustainable incentive structure for users, dapp developers, protocol developers, miners, arbitrageurs and bot operators, and researchers.
+
+To protect these norms, and in the spirit of our mission statement, we commit to the following public action in the near to medium-term future:
+
+* **Product development for stability:** We will research the possibility of releasing products in complement to or in conjunction with MEV-Geth that are aimed at increasing network stability. This includes researching and advocating for fork-choice rules that disincentivize or penalize reorgs, collaborating with client devs and researchers on incentives, and implementing changes to marketplace-design that align existing participants with the incentive to protect a democratic marketplace for MEV long-term.
+
+* **Protection of the two-sided marketplace:** Flashbots’ market is key to the democratization of MEV. We commit to ensure that searchers and miners who are acting honestly in the system are treated and compensated fairly. While we cannot guarantee what execution will look like due to the decentralized nature of our system, we can commit to spending our resources on technical and political changes that ensure and protect the two sides of the MEV market.
+
+* **Illuminate the dark forest:** We commit to [providing data](https://dashboard.flashbots.net/) on reorgs to the entire community. Open questions of whether reorgs are already happening and whether they are benign or malicious remain unanswered, and we commit to developing tools to answer these important questions. We also commit to investigating the effects of reorgs on miners, searchers, users, and other actors in the ecosystem, quantifying any possible harms to both the Flashbots marketplace and general Ethereum users.
+
+* **Research the future:** It is believed to be the case that the upcoming ETH2 merge is a clear mitigation for reorg attacks due to the attestor-based fork-choice rule. We commit to investigating this [further](https://github.com/flashbots/mev-research/blob/main/FRPs/FRP-15.md), and to publishing our position on definitive answers to the community on how much of a risk reorgs remain after the transition, and the amount of coordination required to pull off such an attack.
+
+We commit to working towards ecosystem stability regardless of our profit or gain as an entity, in any event, indefinitely into the future. We are not interested in destabilizing Ethereum, and will not allow our profit incentives to change this calculation, ever.
+
+## Flashbots as an Anti-Fragile Research Collective
+Some additional community confusion centers around the notion that Flashbots supports reorgs. While there may have been contributors and users in the Flashbots ecosystem who take such positions, this is not the position of Flashbots.
+
+As a collective, we also believe in individual freedom and self-expression. Many people in the Flashbots community are not part of Flashbots the organization, and many people who have a connection to Flashbots the organization also have projects and work outside of Flashbots.
+
+We believe that shackles on talent are not appropriate for open source development, particularly in adversarial environments. We also encourage our members to exit the Flashbots collective to pursue non-aligned or conflicting work when appropriate, and our organization is structured to facilitate such easy exits.
+
+As stated, we believe the development of reorg clients does not currently have a place in our organization. There are no Flashbots-sanctioned reorg clients, and we have not and have no plans to allocate resources to the development of such clients. We have and will continue to encourage any Flashbots members looking to develop such clients to leverage our easy-exit mechanism.
+
+Note that running unsanctioned modifications to or forks to Flashbots code is risky, as Flashbots expends considerable engineering resources to ensure the stability and safety of its modifications to consensus clients. We cannot ever recommend modifying or running any modifications of Flashbots code without appropriate levels of validation.
+
+Because of this diverse and ever-changing nature of our collective, we encourage all members of the community to look to our official accounts on Medium, [Github](https://github.com/flashbots/), and [HackMD](https://hackmd.io/@flashbots) for the latest work that represents the position of Flashbots, the research collective.
+
+## Get involved
+At Flashbots, we research and build systems around MEV, and we would love to collaborate with you. We are a distributed organization with the principles of a [pirate hacker collective](https://www.youtube.com/watch?v=T0fAznO1wA8), and have several [open positions](https://www.notion.so/flashbots/Flashbots-Job-Board-94d53cb01ef04a9484711dacf18739e3). We also issue grants to external researchers doing work aligned with ours, please find out more in our [Research repository](https://github.com/flashbots/mev-research), or join our [Discord](https://discord.gg/7hvTycdNcK)!

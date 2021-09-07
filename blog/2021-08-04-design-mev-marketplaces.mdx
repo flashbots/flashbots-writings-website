@@ -1,0 +1,46 @@
+---
+slug: design-mev-marketplaces
+title: On the Design of MEV Marketplaces
+authors: [robert]
+tags: [flashbots, 1559]
+image: https://i.imgur.com/mErPwqL.png
+hide_table_of_contents: false
+---
+The beating heart of every blockchain is how space is allocated within a block. In less than 24 hours, Ethereum will undergo a historic change to how blockspace is allocated as transaction inclusion rules drastically change with the activation of EIP-1559. However, EIP-1559 does not affect miners’ ability to reorder, insert, or censor transactions, and as such it largely does not have an impact on MEV (Maximal Extractable Value).
+<!--truncate-->
+
+
+At Flashbots our goal is to design systems that are long term incentive aligned for all of Ethereum’s stakeholders, including users, searchers, applications, and the network’s keepers today and in the future: miners and validators. Central to this goal is the design of marketplaces for transaction ordering — or MEV marketplaces — that are democratic and efficient. Flashbots has been successful in achieving this goal on Ethereum to date with our Alpha.
+
+Given the major changes to the blockspace market on Ethereum today, and how the role of block producers on Ethereum will change in the near future, we’d like to share how Flashbots thinks about designing MEV marketplaces.
+
+## The Changing Role of Block Producers in Ethereum
+
+On Ethereum today mining consists of two jobs. First, creating the most profitable block. Second, attesting to this with a proof-of-work and propagating it to the network. Prior to the widespread adoption of MEV extraction the first job mainly consisted of ordering transactions received by their gas price. There was little revenue for miners to have in optimizing this, and they primarily focused on more profitable network-level optimizations.
+
+However, since MEV extraction is now widespread on the Ethereum network the job of miners has significantly changed. In order to produce the most profitable block, miners must now find the optimal ordering of transactions within a block to extract the maximum amount of MEV. This daunting task is exponentially more difficult than sorting transactions by gas price, and hence an entire industry has spawned to provide this service to miners. Due to this industry, revenue from MEV now makes up a significant share of miners’ income even prior to EIP-1559.
+
+It is essential to the Ethereum network’s security that all miners, no matter how large or small, can build the most profitable blocks possible. Otherwise larger miners will be able to use their resources to optimize their MEV extraction strategies more than other miners. In turn, the greater revenue from MEV can be used to grow more and further cement their dominance in the network.
+
+Flashbots believes that a separation between the party that proposes a block and the party that builds a block is the ideal way to achieve our goal of building a long term incentive-aligned system. Instead of block proposers creating MEV-optimized blocks themselves, they should rely on a marketplace of specialized third parties who build blocks for them in return for a fee. The block proposer’s role is then to pick the highest revenue block, an algorithm which is even more simple than ordering by gas price. Block producers who wish can participate as both proposers and builders as well, which allows them to get value from proposing blocks both for themselves and others.
+
+## Desirable Properties of MEV Marketplaces
+
+Beyond this high level architecture, how should this system be designed? How can we ensure long term incentive-alignment for all stakeholders and what are the properties that we are optimizing for? Flashbots evaluates MEV marketplaces along these dimensions:
+
+* **Efficiency: the system should provide maximum value to block producers, transaction senders and the Ethereum ecosystem as a whole.** It should avoid needless inefficiency (eg. waste from failed transactions being included on-chain) and avoid facilitating negative-sum attacks against applications. By doing so it ensures that block producers have access to the most profitable blocks, and in particular blocks that are competitive with any proprietary MEV extraction solutions. As we noted above this is an important property of ensuring that MEV extraction remains democratized.
+
+* **Avoiding capture:** the system should avoid deliberately introducing, and maximally protect against the accidental entrenchment of, actors that gain a position of value extraction and control from the MEV marketplace.
+
+For example, an MEV marketplace with a built-in token fails at this: the token holders become a value extractor, and furthermore governance tokens [in general are risky](https://hackingdistributed.com/2018/07/02/on-chain-vote-buying/). This risk may be tolerable for applications, but if a token-governed DAO is used to control base-layer transaction inclusion, a powerful economic actor who captures its governance could use that power to extract value, censor transactions, and even use the carrot of their monopoly on MEV revenue to push other miners into participating in hostile soft forks.
+
+* **Permissionlessness:** anyone should be able to participate in the MEV marketplace. Doing so will maximize revenue for market participants and make the market the most robust against shocks in the long term. If required for anti-abuse purposes, cryptoeconomic bonding models are ok, but centrally issued (or even DAO-governed) whitelists should be maximally avoided. Where possible Ether is preferred as a unit of account because it is maximally permissionless.
+
+* **Privacy:** MEV marketplaces should give participants privacy until their transactions successfully land on-chain. This is desirable because it enables a more efficient marketplace. Searchers would have the assurance that their strategies would not be frontrunnable or subject to unbundling by block producers. In turn this maintains incentives for permissionless innovation and would lead to more searcher strategies and more revenue for searchers and miners.
+
+We believe that [MEV-SGX](https://ethresear.ch/t/mev-sgx-a-sealed-bid-mev-auction-design/9677) [together](https://www.youtube.com/watch?v=GzuyOYiuipg) with a [cryptoeconomic solution for a separation of block proposers and builders](https://ethresear.ch/t/proposer-block-builder-separation-friendly-fee-market-designs/9725) meet all of these properties. We encourage the community to engage with us as we seek to further specify how such a solution works in practice as well as evaluating alternatives that could also achieve these properties.
+
+## Conclusion
+Flashbots sees the task of building a democratic and efficient MEV marketplace as existential for cryptocurrency for the reasons outlined above. We believe that building in public is the best way to maximize the likelihood of doing so. That is why we regularly have public conferences, such as [MEV Roasts](https://github.com/flashbots/pm#mev-roast-recordings), hosted by independent third parties where our ideas are publicly scrutinized. It is also why we require feedback from multiple stakeholders as a core part of our development process.
+
+As we collectively navigate the current and future changes to Ethereum we invite all members of the cryptocurrency community to hold us to these standards. We encourage engagement on existing and new designs for achieving the properties of efficiency, permissionlessness, avoiding capture, and privacy. Lastly, we caution against sudden changes to the MEV marketplace without careful consideration and study.
