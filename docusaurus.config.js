@@ -1,71 +1,71 @@
-require('dotenv').config()
-const math = require('remark-math');
-const katex = require('rehype-katex');
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+require("dotenv").config()
+const math = require("remark-math")
+const katex = require("rehype-katex")
+const lightCodeTheme = require("prism-react-renderer/themes/github")
+const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 // With JSDoc @type annotations, IDEs can provide config autocompletion
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 (module.exports = {
-  title: 'Flashbots Research',
-  tagline: 'Research respository of Flashbots',
+  title: "Flashbots Research",
+  tagline: "Research respository of Flashbots",
   baseUrl: process.env.BASE_URL,
   url: process.env.TARGET_URL,
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
-  organizationName: 'flashbots', // Usually your GitHub org/user name.
-  projectName: 'writings-website', // Usually your repo name.
+  onBrokenLinks: "throw",
+  onBrokenMarkdownLinks: "warn",
+  favicon: "img/favicon.ico",
+  organizationName: "flashbots", // Usually your GitHub org/user name.
+  projectName: "writings-website", // Usually your repo name.
   stylesheets: [
     {
-      href: 'https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css',
-      type: 'text/css',
+      href: "https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css",
+      type: "text/css",
       integrity:
-        'sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X',
-      crossorigin: 'anonymous',
-    },
+        "sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X",
+      crossorigin: "anonymous"
+    }
   ],
-
+  plugins: ['docusaurus-plugin-sass'],
   presets: [
     [
-      '@docusaurus/preset-classic',
+      "@docusaurus/preset-classic",
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: false,
         blog: {
-          path: './blog',          
-          routeBasePath: '/',
-          feedOptions: {           
-            type: 'all',            
+          path: "./blog",
+          routeBasePath: "/",
+          feedOptions: {
+            type: "all"
             // copyright: `Copyright © ${new Date().getFullYear()} Flashbots, .`,          
           },
           remarkPlugins: [math],
-          rehypePlugins: [katex],
+          rehypePlugins: [katex]
         },
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
-        },
-      }),
-    ],
+          customCss: require.resolve("./src/scss/custom.scss")
+        }
+      })
+    ]
   ],
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'My Site',
+        title: "Flashbots Research",
         logo: {
-          alt: 'My Site Logo',
-          src: 'img/logo.svg',
+          alt: "Flashbots Research",
+          src: "img/logo.png"
         },
         items: [
           // {to: 'blog', label: 'Blog', position: 'left'},
           {
-            href: 'https://github.com/flashbots/writings-website',
-            label: 'GitHub',
-            position: 'right',
-          },
-        ],
+            href: "https://github.com/flashbots/writings-website",
+            label: "GitHub",
+            position: "right"
+          }
+        ]
       },
       // footer: {
       //   style: 'dark',
@@ -121,7 +121,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
-        additionalLanguages: ['solidity']
-      },
-    }),
-});
+        additionalLanguages: ["solidity"]
+      }
+    })
+})
