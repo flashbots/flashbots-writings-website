@@ -48,7 +48,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
       })
     ]
   ],
-
+  
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
@@ -56,7 +56,8 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
         title: "Flashbots Research",
         logo: {
           alt: "Flashbots Research",
-          src: "img/logo.png"
+          src: "img/logo.png",
+          target: "_self"
         },
         items: [
           // {to: 'blog', label: 'Blog', position: 'left'},
