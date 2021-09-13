@@ -34,7 +34,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
         docs: false,
         blog: {
           path: "./blog",
-          routeBasePath: "/",
+          routeBasePath: "/writings",
           postsPerPage: "ALL",
           feedOptions: {
             type: "all"
@@ -63,6 +63,13 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
         },
         items: [
           // {to: 'blog', label: 'Blog', position: 'left'},
+          {to: 'about', label: 'About', position: 'left'},
+          {to: 'writings', label: 'Writings', position: 'left'},
+          {to: 'transparency', label: 'Transparency', position: 'left'},
+          // {          
+          //   type: 'localeDropdown',
+          //   position: 'right',
+          // },
           {
             href: "https://github.com/flashbots/writings-website",
             label: "GitHub",
