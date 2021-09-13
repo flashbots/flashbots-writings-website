@@ -17,6 +17,7 @@ import type {Props} from '@theme/Layout';
 import useKeyboardNavigation from '@theme/hooks/useKeyboardNavigation';
 import {ThemeClassNames} from '@docusaurus/theme-common';
 import './styles.css';
+import styles from  './styles.module.scss';
 
 function Layout(props: Props): JSX.Element {
   const {children, noFooter, wrapperClassName, pageClassName} = props;
@@ -38,6 +39,7 @@ function Layout(props: Props): JSX.Element {
           ThemeClassNames.wrapper.main,
           wrapperClassName,
           pageClassName,
+          styles.layoutDefaults
         )}>
         {children}
       </div>

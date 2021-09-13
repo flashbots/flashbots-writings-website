@@ -35,12 +35,13 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
         blog: {
           path: "./blog",
           routeBasePath: "/",
+          postsPerPage: "ALL",
           feedOptions: {
             type: "all"
             // copyright: `Copyright © ${new Date().getFullYear()} Flashbots, .`,          
           },
           remarkPlugins: [math],
-          rehypePlugins: [katex]
+          rehypePlugins: [katex],
         },
         theme: {
           customCss: require.resolve("./src/scss/custom.scss")
@@ -52,6 +53,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      hideableSidebar: true,
       navbar: {
         title: "Flashbots Research",
         logo: {

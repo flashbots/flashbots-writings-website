@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from "react"
+import React, { useMemo, useState } from "react"
 
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
 import BlogLayout from "@theme/BlogLayout"
@@ -14,6 +14,12 @@ import BlogListPaginator from "@theme/BlogListPaginator"
 import TagsListInline from "@theme/TagsListInline"
 import type { Props } from "@theme/BlogListPage"
 import { ThemeClassNames } from "@docusaurus/theme-common"
+
+import { Metadata } from "@theme/BlogPostPage"
+import clsx from "clsx"
+import styles from "./styles.module.scss"
+
+const POST_PER_PAGE = 10
 
 const extractTags = ({ items }: Props) => {
   const newCollection: Record<string, string> = {}
@@ -27,6 +33,18 @@ const extractTags = ({ items }: Props) => {
   }))
 }
 
+const paginate = function (array: Array<any>[], index: number, size: number) {
+  // transform values
+  index = Math.abs(index);
+  index = index > 0 ? index - 1 : index;
+  size = size < 1 ? 1 : size;
+
+  // filter
+  return [...(array.filter((value, n) => {
+      return (n >= (index * size)) && (n < ((index+1) * size))
+  }))]
+}
+
 function BlogListPage(props: Props): JSX.Element {
   const { metadata, items } = props
   const {
@@ -37,11 +55,31 @@ function BlogListPage(props: Props): JSX.Element {
   const title = isBlogOnlyMode ? siteTitle : blogTitle
 
   const tags = extractTags(props)
+
+  const [page, setPage] = useState(0)
+
+  const currentPage = useMemo(() => {
+    // @ts-ignore: Readonly prevents mutation calls 
+    return paginate([...items], page, POST_PER_PAGE)
+  }, [items, page])
+
+  // @ts-ignore: Destructuring doesn't ensure type fulfillment 
+  const settings: Metadata = useMemo(() => ({
+    ...metadata,
+    blogTitle: metadata.blogTitle,
+    blogDescription: metadata.blogDescription,
+    page,
+    postsPerPage: POST_PER_PAGE,
+    nextPage: (page + 1) * POST_PER_PAGE < metadata.totalCount ? () => setPage(page + 1) : undefined,
+    previousPage: page > 1 ? () => setPage(page - 1) : undefined,
+    totalPages: Math.ceil(metadata.totalCount / POST_PER_PAGE) 
+  }), [metadata, page])
+
   return (
     <BlogLayout
       title={title}
       description={blogDescription}
-      wrapperClassName={ThemeClassNames.wrapper.blogPages}
+      wrapperClassName={clsx(ThemeClassNames.wrapper.blogPages, styles.blogPageRoot)}
       pageClassName={ThemeClassNames.page.blogListPage}
       searchMetadatas={{
         // assign unique search tag to exclude this page from search results!
@@ -50,7 +88,7 @@ function BlogListPage(props: Props): JSX.Element {
       // sidebar={sidebar}
     >
       <TagsListInline tags={tags} />
-      {items.map(({ content: BlogPostContent }) => (
+      {currentPage.map(({ content: BlogPostContent }) => (
         <BlogPostItem
           key={BlogPostContent.metadata.permalink}
           frontMatter={BlogPostContent.frontMatter}
@@ -60,7 +98,7 @@ function BlogListPage(props: Props): JSX.Element {
           <BlogPostContent />
         </BlogPostItem>
       ))}
-      <BlogListPaginator metadata={metadata} />
+      <BlogListPaginator metadata={settings} />
     </BlogLayout>
   )
 }

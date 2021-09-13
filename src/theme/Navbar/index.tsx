@@ -27,7 +27,6 @@ import IconMenu from "@theme/IconMenu"
 import IconCloseThin from "@theme/IconCloseThin"
 
 import styles from "./styles.module.scss"
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
 
 // retrocompatible with v1
 const DefaultNavItemPosition = "right"
@@ -238,10 +237,6 @@ function Navbar(): JSX.Element {
   const items = useNavbarItems()
   const hasSearchNavbarItem = items.some((item) => item.type === "search")
   const { leftItems, rightItems } = splitNavItemsByPosition(items)
-
-  const temp = useDocusaurusContext()
-  console.log(temp)
-
   return (
     <nav
       ref={navbarRef}
