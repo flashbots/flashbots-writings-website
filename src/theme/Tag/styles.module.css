@@ -26,6 +26,23 @@
 }
 
 .tagWithCount {
+  border-radius: 0.5rem;
+  padding: 0.3rem 0.5rem;
+  font-size: 90%;
+}
+
+.tagWithCount span {
+  background: var(--ifm-color-secondary);
+  color: var(--ifm-color-black);
+  font-size: 0.7rem;
+  line-height: 1.2;
+  border-radius: var(--ifm-global-radius);
+  padding: 0.1rem 0.4rem;
+  margin-left: 0.3rem;
+}
+
+/* Original
+.tagWithCount {
   display: flex;
   align-items: center;
   position: relative;
@@ -67,4 +84,4 @@
   border-radius: var(--ifm-global-radius);
   padding: 0.1rem 0.4rem;
   margin-left: 0.3rem;
-}
+} */

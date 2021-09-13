@@ -22,14 +22,27 @@ import styles from "./styles.module.scss"
 const POST_PER_PAGE = 10
 
 const extractTags = ({ items }: Props) => {
-  const newCollection: Record<string, string> = {}
+  const newCollection: Record<string, {
+    permalink: string,
+    count: number
+  }> = {}
   items
     .map(
       ({ content: BlogPostContent }) => BlogPostContent.metadata.tags
-        .map(tag => newCollection[tag.label] = tag.permalink))
+        .map(tag => {
+          if (!newCollection[tag.label]) {
+            newCollection[tag.label] = {
+              permalink: tag.permalink,
+              count: 1
+            }
+          } else {
+            newCollection[tag.label].count++;
+          }
+        }))
   return Object.keys(newCollection).map(key => ({
     label: key,
-    permalink: newCollection[key]
+    permalink: newCollection[key].permalink,
+    count: newCollection[key].count
   }))
 }
 
@@ -75,6 +88,7 @@ function BlogListPage(props: Props): JSX.Element {
     totalPages: Math.ceil(metadata.totalCount / POST_PER_PAGE) 
   }), [metadata, page])
 
+  console.log(tags)
   return (
     <BlogLayout
       title={title}

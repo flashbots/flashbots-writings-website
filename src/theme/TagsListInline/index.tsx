@@ -24,11 +24,16 @@ export default function TagsListInline({ tags }: Props) {
         </Translate>
       </b>
       <ul className={clsx(styles.tags, "padding--none", "margin-left--sm")}>
-        {tags.map(({ label, permalink: tagPermalink }) => (
+        {tags.map(({ 
+          label,
+          permalink: tagPermalink,
+          // @ts-ignore
+          count 
+        }) => (
           <li key={tagPermalink}
             className={styles.tag}>
             <Tag name={label}
-              permalink={tagPermalink} />
+              permalink={tagPermalink} count={count} />
           </li>
         ))}
       </ul>
