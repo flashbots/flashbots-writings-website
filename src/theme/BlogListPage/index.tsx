@@ -88,7 +88,6 @@ function BlogListPage(props: Props): JSX.Element {
     totalPages: Math.ceil(metadata.totalCount / POST_PER_PAGE) 
   }), [metadata, page])
 
-  console.log(tags)
   return (
     <BlogLayout
       title={title}

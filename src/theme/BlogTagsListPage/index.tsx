@@ -17,7 +17,6 @@ import {
 
 function BlogTagsListPage(props: Props): JSX.Element {
   const {tags, sidebar} = props;
-  console.log(tags)
   const title = translateTagsPageTitle();
   return (
     <BlogLayout
