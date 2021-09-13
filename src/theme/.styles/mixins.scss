@@ -1,0 +1,10 @@
+@import "./variables.scss";
+
+@mixin standardLayout {
+  max-width: $desktop-max-width;
+  padding: 0 12px;
+  margin: 0 auto;
+  @media screen and (max-width: $desktop-max-width) {
+    max-width: 100vw;
+  }
+}

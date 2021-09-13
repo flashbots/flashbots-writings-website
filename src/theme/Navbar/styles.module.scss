@@ -1,3 +1,5 @@
+@import "../.styles/index.scss";
+
 /**
  * Copyright (c) Facebook, Inc. and its affiliates.
  *
@@ -31,9 +33,8 @@ Hide toggle in small viewports
 }
 
 .navbarInner {
-  max-width: 632px;
+  @include standardLayout;
   padding: 0 12px;
-  margin: 0 auto;
 }
 
 .logo {
