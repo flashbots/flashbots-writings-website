@@ -280,14 +280,18 @@ function Navbar(): JSX.Element {
           )}
           {!hasSearchNavbarItem && <SearchBar />}
         </div>
-        <div className={
-          clsx("navbar__items", styles.fixFlex, styles.customNav)
-        }>
-          {leftItems.map((item, i) => (
-            <NavbarItem {...item}
-              key={i} />
-          ))}
-        </div>
+        {
+          leftItems.length > 0 && (
+            <div className={
+              clsx("navbar__items", styles.fixFlex, styles.customNav)
+            }>
+              {leftItems.map((item, i) => (
+                <NavbarItem {...item}
+                  key={i} />
+              ))}
+            </div>
+          )
+        }
       </div>
 
       <div
