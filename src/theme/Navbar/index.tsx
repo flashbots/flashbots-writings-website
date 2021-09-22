@@ -240,7 +240,7 @@ function Navbar(): JSX.Element {
   return (
     <nav
       ref={navbarRef}
-      className={clsx("navbar", "navbar--fixed-top", {
+      className={clsx(styles.navRoot, "navbar", "navbar--fixed-top", {
         "navbar--dark": style === "dark",
         "navbar--primary": style === "primary",
         "navbar-sidebar--show": mobileSidebar.shown,
@@ -248,7 +248,7 @@ function Navbar(): JSX.Element {
         [styles.navbarHidden]: hideOnScroll && !isNavbarVisible
       })}>
       <div className={clsx(styles.navbarInner, "navbar__inner")}>
-        <div className="navbar__items">
+        <div className={clsx("navbar__items", styles.fixFlex)}>
           {(items?.length > 0 || activeDocPlugin) && (
             <button
               aria-label="Navigation bar toggle"
@@ -265,12 +265,8 @@ function Navbar(): JSX.Element {
             imageClassName={clsx("navbar__logo", styles.logo)}
             titleClassName={clsx("navbar__title", styles.title)}
           />
-          {leftItems.map((item, i) => (
-            <NavbarItem {...item}
-              key={i} />
-          ))}
         </div>
-        <div className="navbar__items navbar__items--right">
+        <div className={clsx("navbar__items navbar__items--right", styles.fixFlex)}>
           {rightItems.map((item, i) => (
             <NavbarItem {...item}
               key={i} />
@@ -283,6 +279,14 @@ function Navbar(): JSX.Element {
             />
           )}
           {!hasSearchNavbarItem && <SearchBar />}
+        </div>
+        <div className={
+          clsx("navbar__items", styles.fixFlex, styles.customNav)
+        }>
+          {leftItems.map((item, i) => (
+            <NavbarItem {...item}
+              key={i} />
+          ))}
         </div>
       </div>
 

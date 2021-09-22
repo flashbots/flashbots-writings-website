@@ -44,3 +44,31 @@ Hide toggle in small viewports
 .title {
   font-size: 24px;
 }
+
+.fixFlex {
+  flex: 1 1 auto;
+}
+
+.navRoot {
+  --ifm-navbar-height: auto;
+  box-shadow: none !important;
+  margin-top: 12px;
+}
+
+.customNav {
+  border-bottom: 1px solid #dce6f0;
+  border-top: 1px solid #dce6f0;
+  width: 100%; 
+  padding: 6px 0;
+  margin-top: 24px;
+  justify-content: space-around;
+  & > * {
+    min-width: 25%;
+    flex: 1 1 0;
+    text-align: center;
+    border-left: 1px solid #dce6f0;
+    &:first-child {
+      border-left: none;
+    }
+  }
+}

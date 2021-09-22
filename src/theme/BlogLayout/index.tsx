@@ -21,7 +21,7 @@ function BlogLayout(props: Props): JSX.Element {
 
   return (
     <Layout {...layoutProps}>
-      <div className={clsx("container", "margin-vert--lg", styles.containerRoot)}>
+      <div className={clsx("container", "margin-vert--md", styles.containerRoot)}>
         <div className="row">
           {/* {hasSidebar && (
             <aside className="col col--3">
