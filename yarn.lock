@@ -1278,7 +1278,7 @@
     url-loader "^4.1.1"
     webpack "^5.40.0"
 
-"@docusaurus/module-type-aliases@^2.0.0-beta.6":
+"@docusaurus/module-type-aliases@2.0.0-beta.6":
   version "2.0.0-beta.6"
   resolved "https://registry.yarnpkg.com/@docusaurus/module-type-aliases/-/module-type-aliases-2.0.0-beta.6.tgz#6d7388d65e1cf31e097f4e5924ec46cd6e7eff1c"
   integrity sha512-TrJ0u4F3mZ7uQNga22why3SsoNwlHp6vltDLlWI80jZmZpnk9BJglpcR8MPOTSEjyUgMxJ6B3q0PA/rWzupWZA==
@@ -1739,7 +1739,7 @@
   resolved "https://registry.yarnpkg.com/@trysound/sax/-/sax-0.1.1.tgz#3348564048e7a2d7398c935d466c0414ebb6a669"
   integrity sha512-Z6DoceYb/1xSg5+e+ZlPZ9v0N16ZvZ+wYMraFue4HYrE4ttONKtsvruIRf6t9TBR0YvSOfi1hUU0fJfBLCDYow==
 
-"@tsconfig/docusaurus@^1.0.4":
+"@tsconfig/docusaurus@1.0.4":
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/@tsconfig/docusaurus/-/docusaurus-1.0.4.tgz#fc40f87a672568678d83533dd4031a09d75877ca"
   integrity sha512-I6sziQAzLrrqj9r6S26c7aOAjfGVXIE7gWdNONPwnpDcHiMRMQut1s1YCi/APem3dOy23tAb2rvHfNtGCaWuUQ==
@@ -2915,7 +2915,7 @@ clone-response@^1.0.2:
   dependencies:
     mimic-response "^1.0.0"
 
-clsx@^1.1.1:
+clsx@1.1.1, clsx@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.1.1.tgz#98b3134f9abbdf23b2663491ace13c5c03a73188"
   integrity sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==
@@ -3591,14 +3591,14 @@ doctrine@^3.0.0:
   dependencies:
     esutils "^2.0.2"
 
-docusaurus-plugin-sass@^0.2.1:
+docusaurus-plugin-sass@0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/docusaurus-plugin-sass/-/docusaurus-plugin-sass-0.2.1.tgz#673c6b6ac00b581e8fb0baab22f2b3766735aafc"
   integrity sha512-cRugbRWnKLjFPQTo1k2cyn/AANYkXAPHv+DaLs7bkOfOofEgTSrMdpNidt3oZ0ltQcjUUbvmSRRjH9R1ifdRMA==
   dependencies:
     sass-loader "^10.1.1"
 
-docusaurus2-dotenv@^1.4.0:
+docusaurus2-dotenv@1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/docusaurus2-dotenv/-/docusaurus2-dotenv-1.4.0.tgz#9ab900e29de9081f9f1f28f7224ff63760385641"
   integrity sha512-iWqem5fnBAyeBBtX75Fxp71uUAnwFaXzOmade8zAhN4vL3RG9m27sLSRwjJGVVgIkEo3esjGyCcTGTiCjfi+sg==
@@ -3715,15 +3715,15 @@ dotenv-webpack@1.7.0:
   dependencies:
     dotenv-defaults "^1.0.2"
 
+dotenv@8.2.0:
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
+  integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
+
 dotenv@^6.2.0:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-6.2.0.tgz#941c0410535d942c8becf28d3f357dbd9d476064"
   integrity sha512-HygQCKUBSFl8wKQZBSemMywRWcEDNidvNbjGVyZu3nbZ8qq9ubiPoGLMdRDpfSrpkkm9BXYFkpKxxFX38o/76w==
-
-dotenv@^8.2.0:
-  version "8.6.0"
-  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.6.0.tgz#061af664d19f7f4d8fc6e4ff9b584ce237adcb8b"
-  integrity sha512-IrPdXQsk2BbzvCBGBOTmmSH5SodmqZNt4ERAZDmW4CT+tL8VtvinqywuANaFu4bOMWki16nqf0e4oC0QIaDr/g==
 
 duplexer3@^0.1.4:
   version "0.1.4"
@@ -7899,7 +7899,7 @@ sass-loader@^10.1.1:
     schema-utils "^3.0.0"
     semver "^7.3.2"
 
-sass@^1.39.0:
+sass@1.39.0:
   version "1.39.0"
   resolved "https://registry.yarnpkg.com/sass/-/sass-1.39.0.tgz#6c64695d1c437767c8f1a4e471288e831f81d035"
   integrity sha512-F4o+RhJkNOIG0b6QudYU8c78ZADKZjKDk5cyrf8XTKWfrgbtyVVXImFstJrc+1pkQDCggyidIOytq6gS4gCCZg==

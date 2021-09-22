@@ -34,13 +34,14 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
         docs: false,
         blog: {
           path: "./blog",
-          routeBasePath: "/",
+          routeBasePath: "/writings",
+          postsPerPage: "ALL",
           feedOptions: {
             type: "all"
             // copyright: `Copyright © ${new Date().getFullYear()} Flashbots, .`,          
           },
           remarkPlugins: [math],
-          rehypePlugins: [katex]
+          rehypePlugins: [katex],
         },
         theme: {
           customCss: require.resolve("./src/scss/custom.scss")
@@ -48,18 +49,27 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
       })
     ]
   ],
-
+  
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      hideableSidebar: true,
       navbar: {
         title: "Flashbots Research",
         logo: {
           alt: "Flashbots Research",
-          src: "img/logo.png"
+          src: "img/logo.png",
+          target: "_self"
         },
         items: [
           // {to: 'blog', label: 'Blog', position: 'left'},
+          {to: 'about', label: 'About', position: 'left'},
+          {to: 'writings', label: 'Writings', position: 'left'},
+          {to: 'transparency', label: 'Transparency', position: 'left'},
+          // {          
+          //   type: 'localeDropdown',
+          //   position: 'right',
+          // },
           {
             href: "https://github.com/flashbots/writings-website",
             label: "GitHub",

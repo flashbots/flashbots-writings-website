@@ -1,0 +1,5 @@
+@import "../.styles/index.scss";
+
+.layoutDefaults {
+  @include standardLayout;
+}

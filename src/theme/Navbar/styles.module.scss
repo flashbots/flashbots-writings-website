@@ -1,0 +1,79 @@
+@import "../.styles/index.scss";
+
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/*
+Hide toggle in small viewports
+ */
+@media screen and (max-width: 997px) {
+  .toggle {
+    display: none;
+  }
+}
+
+.navbarHideable {
+  transition: transform var(--ifm-transition-fast) ease;
+}
+
+.navbarHidden {
+  transform: translate3d(0, calc(-100% - 2px), 0);
+}
+
+.navbarSidebarToggle {
+  margin-right: 1rem;
+}
+
+.navbarSidebarCloseSvg {
+  fill: var(--ifm-color-emphasis-600);
+}
+
+.navbarInner {
+  @include standardLayout;
+  padding: 0 12px;
+}
+
+.logo {
+  height: 50px;
+  width: 50px;
+}
+.title {
+  font-size: 24px;
+}
+
+.fixFlex {
+  flex: 1 1 auto;
+}
+
+.navRoot {
+  --ifm-navbar-height: auto;
+  box-shadow: none !important;
+  margin-top: 12px;
+}
+
+
+.customNav {
+  border-bottom: 1px solid #dce6f0;
+  border-top: 1px solid #dce6f0;
+  width: 100%; 
+  padding: 6px 0;
+  margin-top: 24px;
+  justify-content: space-around;
+  & > * {
+    min-width: 25%;
+    flex: 1 1 0;
+    text-align: center;
+    border-left: 1px solid #dce6f0;
+    &:first-child {
+      border-left: none;
+    }
+  }
+
+  @media screen and (max-width: 997px) {
+    display: none;
+  }
+}

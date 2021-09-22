@@ -6,14 +6,52 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: rgb(33, 175, 144);
-  --ifm-color-primary-darker: rgb(31, 165, 136);
-  --ifm-color-primary-darkest: rgb(26, 136, 112);
-  --ifm-color-primary-light: rgb(70, 203, 174);
-  --ifm-color-primary-lighter: rgb(102, 212, 189);
-  --ifm-color-primary-lightest: rgb(146, 224, 208);
-  --ifm-code-font-size: 95%;
+  // Default
+  // --ifm-color-primary: #25c2a0;
+  // --ifm-color-primary-dark: rgb(33, 175, 144);
+  // --ifm-color-primary-darker: rgb(31, 165, 136);
+  // --ifm-color-primary-darkest: rgb(26, 136, 112);
+  // --ifm-color-primary-light: rgb(70, 203, 174);
+  // --ifm-color-primary-lighter: rgb(102, 212, 189);
+  // --ifm-color-primary-lightest: rgb(146, 224, 208);
+  // --ifm-code-font-size: 95%;
+
+  // Flashbots Blue: 
+  --ifm-color-primary: #30d2f8;
+  --ifm-color-primary-dark: #13ccf7;
+  --ifm-color-primary-darker: #08c7f3;
+  --ifm-color-primary-darkest: #07a4c8;
+  --ifm-color-primary-light: #4dd8f9;
+  --ifm-color-primary-lighter: #5bdbf9;
+  --ifm-color-primary-lightest: #86e5fb;
+
+  // Red
+  // --ifm-color-primary: #f03917;
+  // --ifm-color-primary-dark: #de2f0e;
+  // --ifm-color-primary-darker: #d22c0e;
+  // --ifm-color-primary-darkest: #ad250b;
+  // --ifm-color-primary-light: #f24e30;
+  // --ifm-color-primary-lighter: #f2593c;
+  // --ifm-color-primary-lightest: #f57861;
+
+  // Yellow
+  // --ifm-color-primary: #ffc93a;
+  // --ifm-color-primary-dark: #ffc01b;
+  // --ifm-color-primary-darker: #ffbc0b;
+  // --ifm-color-primary-darkest: #db9f00;
+  // --ifm-color-primary-light: #ffd259;
+  // --ifm-color-primary-lighter: #ffd669;
+  // --ifm-color-primary-lightest: #ffe398;
+}
+html[data-theme='dark'] {
+  --ifm-color-primary: #ffc93a;
+  --ifm-color-primary-dark: #ffc01b;
+  --ifm-color-primary-darker: #ffbc0b;
+  --ifm-color-primary-darkest: #db9f00;
+  --ifm-color-primary-light: #ffd259;
+  --ifm-color-primary-lighter: #ffd669;
+  --ifm-color-primary-lightest: #ffe398;
+  /* any other colors you wish to overwrite */
 }
 
 .docusaurus-highlight-code-line {
@@ -22,6 +60,7 @@
   margin: 0 calc(-1 * var(--ifm-pre-padding));
   padding: 0 var(--ifm-pre-padding);
 }
+
 
 html[data-theme='dark'] .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.3);
