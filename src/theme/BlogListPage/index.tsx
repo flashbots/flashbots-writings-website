@@ -19,6 +19,8 @@ import { Metadata } from "@theme/BlogPostPage"
 import clsx from "clsx"
 import styles from "./styles.module.scss"
 
+import Searchbar from "../../components/Searchbar/Searchbar"
+
 const POST_PER_PAGE = 10
 
 const extractTags = ({ items }: Props) => {
@@ -46,7 +48,7 @@ const extractTags = ({ items }: Props) => {
   }))
 }
 
-const paginate = function (array: Array<any>[], index: number, size: number) {
+const paginate = function (array: Array<any>[], index: number, size: number): any[] {
   // transform values
   index = Math.abs(index);
   index = index > 0 ? index - 1 : index;
@@ -88,6 +90,8 @@ function BlogListPage(props: Props): JSX.Element {
     totalPages: Math.ceil(metadata.totalCount / POST_PER_PAGE) 
   }), [metadata, page])
 
+  const [searchFilter, setSearchFilter] = useState("")
+  console.log(currentPage)
   return (
     <BlogLayout
       title={title}
@@ -101,7 +105,8 @@ function BlogListPage(props: Props): JSX.Element {
       // sidebar={sidebar}
     >
       <TagsListInline tags={tags} />
-      {currentPage.map(({ content: BlogPostContent }) => (
+      <Searchbar setValue={setSearchFilter}/>
+      {currentPage.filter(item => searchFilter === "" || item.content.frontMatter.title.toLowerCase().includes(searchFilter.toLowerCase())).map(({ content: BlogPostContent }) => (
         <BlogPostItem
           key={BlogPostContent.metadata.permalink}
           frontMatter={BlogPostContent.frontMatter}

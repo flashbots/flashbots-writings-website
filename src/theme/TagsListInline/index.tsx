@@ -20,7 +20,7 @@ export default function TagsListInline({ tags }: Props) {
         <Translate
           id="theme.tags.tagsListLabel"
           description="The label alongside a tag list">
-          Tags:
+          Filter:
         </Translate>
       </b>
       <ul className={clsx(styles.tags, "padding--none", "margin-left--sm")}>
