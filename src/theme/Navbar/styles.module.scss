@@ -55,6 +55,7 @@ Hide toggle in small viewports
   margin-top: 12px;
 }
 
+
 .customNav {
   border-bottom: 1px solid #dce6f0;
   border-top: 1px solid #dce6f0;
@@ -70,5 +71,9 @@ Hide toggle in small viewports
     &:first-child {
       border-left: none;
     }
+  }
+
+  @media screen and (max-width: 997px) {
+    display: none;
   }
 }
