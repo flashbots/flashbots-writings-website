@@ -91,7 +91,6 @@ function BlogListPage(props: Props): JSX.Element {
   }), [metadata, page])
 
   const [searchFilter, setSearchFilter] = useState("")
-  console.log(currentPage)
   return (
     <BlogLayout
       title={title}
@@ -104,6 +103,9 @@ function BlogListPage(props: Props): JSX.Element {
       }}
       // sidebar={sidebar}
     >
+      <h2 className={styles.header}>
+        Writings from the Flashbots team
+      </h2>
       <TagsListInline tags={tags} />
       <Searchbar setValue={setSearchFilter}/>
       {currentPage.filter(item => searchFilter === "" || item.content.frontMatter.title.toLowerCase().includes(searchFilter.toLowerCase())).map(({ content: BlogPostContent }) => (

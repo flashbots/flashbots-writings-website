@@ -14,7 +14,7 @@ import type {
   DesktopOrMobileNavBarItemProps,
   Props,
 } from '@theme/NavbarItem/DefaultNavbarItem';
-import IconExternalLink from '@theme/IconExternalLink';
+// import IconExternalLink from '@theme/IconExternalLink';
 import isInternalUrl from '@docusaurus/isInternalUrl';
 import {getInfimaActiveClassName} from './index';
 
@@ -63,7 +63,7 @@ export function NavLink({
       {isExternalLink ? (
         <span>
           {label}
-          <IconExternalLink {...(isDropdownLink && {width: 12, height: 12})} />
+          {/* <IconExternalLink {...(isDropdownLink && {width: 12, height: 12})} /> */}
         </span>
       ) : (
         label

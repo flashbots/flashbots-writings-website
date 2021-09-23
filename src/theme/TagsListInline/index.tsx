@@ -28,12 +28,12 @@ export default function TagsListInline({ tags }: Props) {
           label,
           permalink: tagPermalink,
           // @ts-ignore
-          count 
+          // count 
         }) => (
           <li key={tagPermalink}
             className={styles.tag}>
             <Tag name={label}
-              permalink={tagPermalink} count={count} />
+              permalink={tagPermalink} />
           </li>
         ))}
       </ul>

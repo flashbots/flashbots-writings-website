@@ -7,7 +7,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 // With JSDoc @type annotations, IDEs can provide config autocompletion
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
 (module.exports = {
-  title: "Flashbots Research",
+  title: "Flashbots Writings",
   tagline: "Research respository of Flashbots",
   baseUrl: process.env.BASE_URL,
   url: process.env.TARGET_URL,
@@ -34,7 +34,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
         docs: false,
         blog: {
           path: "./blog",
-          routeBasePath: "/writings",
+          routeBasePath: "/",
           postsPerPage: "ALL",
           feedOptions: {
             type: "all"
@@ -55,16 +55,16 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
     ({
       hideableSidebar: true,
       navbar: {
-        title: "Flashbots Research",
+        title: "Flashbots Writings",
         logo: {
-          alt: "Flashbots Research",
+          alt: "Flashbots Writings",
           src: "img/logo.png",
           target: "_self"
         },
         items: [
           // {to: 'blog', label: 'Blog', position: 'left'},
           {to: 'about', label: 'About', position: 'left'},
-          {to: 'writings', label: 'Writings', position: 'left'},
+          {to: '/', label: 'Writings', position: 'left'},
           {to: 'transparency', label: 'Transparency', position: 'left'},
           // {          
           //   type: 'localeDropdown',

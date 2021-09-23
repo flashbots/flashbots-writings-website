@@ -111,7 +111,7 @@ function BlogPostItem(props: Props): JSX.Element {
         <MDXProvider components={MDXComponents}>{children}</MDXProvider>
       </div>
 
-      {(tags.length > 0 || truncated) && (
+      {/* {(tags.length > 0 || truncated) && (
         <footer
           className={clsx('row docusaurus-mt-lg', {
             [styles.blogPostDetailsFull]: isBlogPostPage,
@@ -144,7 +144,7 @@ function BlogPostItem(props: Props): JSX.Element {
             </div>
           )}
         </footer>
-      )}
+      )} */}
     </article>
   );
 }
