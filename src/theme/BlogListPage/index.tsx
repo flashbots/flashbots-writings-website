@@ -103,9 +103,9 @@ function BlogListPage(props: Props): JSX.Element {
       }}
       // sidebar={sidebar}
     >
-      <h2 className={styles.header}>
+      <h1 className={styles.header}>
         Writings from the Flashbots team
-      </h2>
+      </h1>
       <TagsListInline tags={tags} />
       <Searchbar setValue={setSearchFilter}/>
       {currentPage.filter(item => searchFilter === "" || item.content.frontMatter.title.toLowerCase().includes(searchFilter.toLowerCase())).map(({ content: BlogPostContent }) => (
