@@ -3,3 +3,9 @@
 .blogPageRoot {
   @include standardLayout
 }
+
+.header {
+  font-size: 2.25rem;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+}

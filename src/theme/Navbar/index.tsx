@@ -267,10 +267,6 @@ function Navbar(): JSX.Element {
           />
         </div>
         <div className={clsx("navbar__items navbar__items--right", styles.fixFlex)}>
-          {rightItems.map((item, i) => (
-            <NavbarItem {...item}
-              key={i} />
-          ))}
           {!colorModeToggle.disabled && (
             <Toggle
               className={styles.toggle}
@@ -284,6 +280,10 @@ function Navbar(): JSX.Element {
           clsx("navbar__items", styles.fixFlex, styles.customNav)
         }>
           {leftItems.map((item, i) => (
+            <NavbarItem {...item}
+              key={i} />
+          ))}
+          {rightItems.map((item, i) => (
             <NavbarItem {...item}
               key={i} />
           ))}
