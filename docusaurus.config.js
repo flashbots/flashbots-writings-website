@@ -25,7 +25,24 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
       crossorigin: "anonymous"
     }
   ],
-  plugins: ['docusaurus-plugin-sass'],
+  plugins: [
+    'docusaurus-plugin-sass',
+    [
+      '@docusaurus/plugin-content-blog',
+      {
+        id: 'transparency',
+        routeBasePath: '/transparency',
+        path: './transparency',
+        postsPerPage: "ALL",
+        feedOptions: {
+          type: "all"
+          // copyright: `Copyright © ${new Date().getFullYear()} Flashbots, .`,          
+        },
+        remarkPlugins: [math],
+        rehypePlugins: [katex],
+      },
+    ],
+  ],
   presets: [
     [
       "@docusaurus/preset-classic",
@@ -33,8 +50,8 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
       ({
         docs: false,
         blog: {
-          path: "./blog",
-          routeBasePath: "/",
+          path: "./writings",
+          routeBasePath: "/writings",
           postsPerPage: "ALL",
           feedOptions: {
             type: "all"
@@ -62,9 +79,8 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
           target: "_self"
         },
         items: [
-          // {to: 'blog', label: 'Blog', position: 'left'},
           {to: 'about', label: 'About', position: 'left'},
-          {to: '/', label: 'Writings', position: 'left'},
+          {to: 'writings', label: 'Writings', position: 'left'},
           {to: 'transparency', label: 'Transparency', position: 'left'},
           // {          
           //   type: 'localeDropdown',

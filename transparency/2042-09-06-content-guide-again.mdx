@@ -1,0 +1,46 @@
+---
+slug: content-guide-2
+title: Content guide
+authors: [ryry79261]
+tags: [onboarding]
+image: https://i.imgur.com/mErPwqL.png
+hide_table_of_contents: false
+---
+
+Welcome to the Flashbots Writings repository, this is a simple guide to assist in contributing research docs to the website.
+
+Firstly, use a `<!--` `truncate` `-->` comment to limit blog post size in the list view.
+
+<!--truncate-->
+
+Now that we're out of the comement zone, below is a couple cheatsheets best practices
+
+## Metadata & authors
+
+If you're reading this file, you'll notice the file name starts with the date and ends with the extensions `.mdx` the date is important as this is how things are indexed.
+
+
+### Filenames
+
+The `.mdx` extension is essential to allow our custom visual components to function, it translates to MarkDown eXtended.
+
+### Metadata
+
+At the start of this file is a couple fields for metadata, from tags to authors, to the url name, the page heading.
+
+The system is called FrontMatter and you can read the full option list at [Docusaurus's blog documentation](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-blog#markdown-frontmatter)
+
+```
+---
+slug: content-guide
+title: Content guide
+authors: [ryry79261]
+tags: [flashbots, onboarding]
+image: https://i.imgur.com/mErPwqL.png
+hide_table_of_contents: false
+---
+```
+
+The Author entry `ryry79261` is a general entry, which you can find at `writings-website/blog/authors.yml`
+
+For additional information, [Docusaurus Docs](https://docusaurus.io/docs/blog#blog-post-authors) has very good examples of adding authors to the site or just on the fly
