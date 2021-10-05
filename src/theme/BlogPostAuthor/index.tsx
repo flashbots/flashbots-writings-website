@@ -30,15 +30,15 @@ function BlogPostAuthor({author}: Props): JSX.Element {
             itemScope
             itemType="https://schema.org/Person">
             <div className="avatar__name">
-              <Link href={url} itemProp="url">
+              <Link className={styles.fixedColor} href={url} itemProp="url">
                 <span itemProp="name">{name}</span>
               </Link>
             </div>
-            {title && (
+            {/* {title && (
               <small className="avatar__subtitle" itemProp="description">
                 {title}
               </small>
-            )}
+            )} */}
           </div>
         )
       }

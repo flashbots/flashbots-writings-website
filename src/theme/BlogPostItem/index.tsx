@@ -19,6 +19,7 @@ import type {Props} from '@theme/BlogPostItem';
 import styles from './styles.module.css';
 import TagsListInline from '@theme/TagsListInline';
 import BlogPostAuthors from '@theme/BlogPostAuthors';
+import dayjs from 'dayjs';
 
 // Very simple pluralization: probably good enough for now
 function useReadingTimePlural() {
@@ -80,7 +81,7 @@ function BlogPostItem(props: Props): JSX.Element {
         </TitleHeading>
         <div className={clsx(styles.blogPostData, 'margin-vert--md')}>
           <time dateTime={date} itemProp="datePublished">
-            {formattedDate}
+            { dayjs(date).format("DD.MM.YY") }
           </time>
 
           {typeof readingTime !== 'undefined' && (
