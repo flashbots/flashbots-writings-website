@@ -61,7 +61,8 @@ const paginate = function (array: Array<any>[], index: number, size: number): an
 }
 
 function BlogListPage(props: Props): JSX.Element {
-  const { metadata, items } = props
+  const { metadata, items, location } = props
+  console.log(props)
   const {
     siteConfig: { title: siteTitle }
   } = useDocusaurusContext()
@@ -103,9 +104,15 @@ function BlogListPage(props: Props): JSX.Element {
       }}
       // sidebar={sidebar}
     >
-      <h1 className={styles.header}>
-        Writings from the Flashbots team
-      </h1>
+      <h3 className={styles.header}>
+        {
+          location.pathname === "/research" ?  (<>
+            Research from the Flashbots team. Learn more in our <a href="https://github.com/flashbots/mev-research">research repo</a> 
+          </>) : (<>
+            Writings from the Flashbots team
+          </>)
+        }
+      </h3>
       <TagsListInline tags={tags} />
       <Searchbar setValue={setSearchFilter}/>
       {currentPage.filter(item => searchFilter === "" || item.content.frontMatter.title.toLowerCase().includes(searchFilter.toLowerCase())).map(({ content: BlogPostContent }) => (
