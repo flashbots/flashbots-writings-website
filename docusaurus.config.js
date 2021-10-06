@@ -25,7 +25,24 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
       crossorigin: "anonymous"
     }
   ],
-  plugins: ['docusaurus-plugin-sass'],
+  plugins: [
+    'docusaurus-plugin-sass',
+    [
+      '@docusaurus/plugin-content-blog',
+      {
+        id: 'research',
+        routeBasePath: '/research',
+        path: './research',
+        postsPerPage: "ALL",
+        feedOptions: {
+          type: "all"
+          // copyright: `Copyright © ${new Date().getFullYear()} Flashbots, .`,
+        },
+        remarkPlugins: [math],
+        rehypePlugins: [katex],
+      },
+    ],
+  ],
   presets: [
     [
       "@docusaurus/preset-classic",
@@ -33,12 +50,12 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
       ({
         docs: false,
         blog: {
-          path: "./blog",
-          routeBasePath: "/",
+          path: "./writings",
+          routeBasePath: "/writings",
           postsPerPage: "ALL",
           feedOptions: {
             type: "all"
-            // copyright: `Copyright © ${new Date().getFullYear()} Flashbots, .`,          
+            // copyright: `Copyright © ${new Date().getFullYear()} Flashbots, .`,
           },
           remarkPlugins: [math],
           rehypePlugins: [katex],
@@ -49,7 +66,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
       })
     ]
   ],
-  
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
@@ -62,19 +79,18 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
           target: "_self"
         },
         items: [
-          // {to: 'blog', label: 'Blog', position: 'left'},
           {to: 'about', label: 'About', position: 'left'},
-          {to: '/', label: 'Writings', position: 'left'},
-          {to: 'transparency', label: 'Transparency', position: 'left'},
-          // {          
+          {to: 'writings', label: 'Writings', position: 'left'},
+          {to: 'research', label: 'Research', position: 'left'},
+          // {
           //   type: 'localeDropdown',
           //   position: 'right',
           // },
-          {
-            href: "https://github.com/flashbots/writings-website",
-            label: "GitHub",
-            position: "right"
-          }
+          // {
+          //  href: "https://github.com/flashbots/writings-website",
+          //  label: "GitHub",
+          //  position: "right"
+          // }
         ]
       },
       // footer: {

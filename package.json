@@ -25,6 +25,7 @@
     "@typescript-eslint/eslint-plugin": "^4.15.2",
     "@typescript-eslint/parser": "^4.15.2",
     "clsx": "1.1.1",
+    "dayjs": "^1.10.7",
     "docusaurus-plugin-sass": "0.2.1",
     "docusaurus2-dotenv": "1.4.0",
     "dotenv": "8.2.0",
