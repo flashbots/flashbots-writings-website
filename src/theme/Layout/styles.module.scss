@@ -3,3 +3,7 @@
 .layoutDefaults {
   @include standardLayout;
 }
+
+body {
+  @include standardBackground;
+}
