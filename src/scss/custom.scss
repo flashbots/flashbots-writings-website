@@ -17,13 +17,13 @@
   // --ifm-code-font-size: 95%;
 
   // Flashbots Blue: 
-  // --ifm-color-primary: #30d2f8;
-  // --ifm-color-primary-dark: #13ccf7;
-  // --ifm-color-primary-darker: #08c7f3;
-  // --ifm-color-primary-darkest: #07a4c8;
-  // --ifm-color-primary-light: #4dd8f9;
-  // --ifm-color-primary-lighter: #5bdbf9;
-  // --ifm-color-primary-lightest: #86e5fb;
+  --ifm-color-primary: #052CA3;
+  --ifm-color-primary-dark: #229402;
+  --ifm-color-primary-darker: #118391;
+  --ifm-color-primary-darkest: #007280;
+  --ifm-color-primary-light: #4416B4;
+  --ifm-color-primary-lighter: #5527C5;
+  --ifm-color-primary-lightest: #6638D6;
 
   // Red
   // --ifm-color-primary: #f03917;
@@ -35,22 +35,23 @@
   // --ifm-color-primary-lightest: #f57861;
 
   // Yellow
-  --ifm-color-primary: #ffc93a;
-  --ifm-color-primary-dark: #ffc01b;
-  --ifm-color-primary-darker: #ffbc0b;
-  --ifm-color-primary-darkest: #db9f00;
-  --ifm-color-primary-light: #ffd259;
-  --ifm-color-primary-lighter: #ffd669;
-  --ifm-color-primary-lightest: #ffe398;
+  // --ifm-color-primary: #ffc93a;
+  // --ifm-color-primary-dark: #ffc01b;
+  // --ifm-color-primary-darker: #ffbc0b;
+  // --ifm-color-primary-darkest: #db9f00;
+  // --ifm-color-primary-light: #ffd259;
+  // --ifm-color-primary-lighter: #ffd669;
+  // --ifm-color-primary-lightest: #ffe398;
 }
 html[data-theme='dark'] {
-  --ifm-color-primary: #ffc93a;
-  --ifm-color-primary-dark: #ffc01b;
-  --ifm-color-primary-darker: #ffbc0b;
-  --ifm-color-primary-darkest: #db9f00;
-  --ifm-color-primary-light: #ffd259;
-  --ifm-color-primary-lighter: #ffd669;
-  --ifm-color-primary-lightest: #ffe398;
+  --ifm-color-primary: #385FD6;
+  //--ifm-color-primary: #ffc93a;
+  //--ifm-color-primary-dark: #ffc01b;
+  //--ifm-color-primary-darker: #ffbc0b;
+  //--ifm-color-primary-darkest: #db9f00;
+  //--ifm-color-primary-light: #ffd259;
+  //--ifm-color-primary-lighter: #ffd669;
+  //--ifm-color-primary-lightest: #ffe398;
   /* any other colors you wish to overwrite */
 }
 

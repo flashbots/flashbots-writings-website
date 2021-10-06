@@ -5,9 +5,10 @@
 
 .TOC {
   position: fixed;
-  right: 10px;
-  width: calc(100vw / 6) !important;
+  right: 0px;
+  width: calc(90vw / 6) !important;
   max-width: unset !important;
   background-color: var(--ifm-background-surface-color);
+  margin-top: -1rem;
 }
 

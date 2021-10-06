@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-
 #__docusaurus {
   min-height: 100%;
   display: flex;
@@ -22,9 +21,12 @@
   margin-top: 3rem;
 }
 
+.root_src-components-Searchbar-styles-module {   
+   background-color: var(--ifm-background-surface-color);
+   color: var(--ifm-color-primary);
+}
 
 header {
-    text-align: justify;
-    margin-bottom: 2em;
+    text-align: center !important;
 }
 
