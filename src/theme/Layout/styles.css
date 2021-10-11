@@ -21,7 +21,7 @@
   margin-top: 3rem;
 }
 
-.root_src-components-Searchbar-styles-module {   
+input {   
    background-color: var(--ifm-background-surface-color);
    color: var(--ifm-color-primary);
 }
