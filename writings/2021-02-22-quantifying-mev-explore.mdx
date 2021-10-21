@@ -1,0 +1,93 @@
+---
+slug: quantifying-mev
+title: Quantifying MEV—Introducing MEV-Explore v0
+authors: [obadiaa]
+tags: [flashbots]
+image: https://miro.medium.com/max/2000/1*ZpRhuTKj-gqURgslnqEtIg.png
+hide_table_of_contents: false
+---
+We took the first deep look at MEV and released our findings through MEV-Explore, a public dashboard and live MEV transactions explorer.
+After scraping the Ethereum blockchain starting from the first block of 2020, we’ve classified more than 1.3M MEV transactions and found a total of at least $314M worth of Extracted MEV since Jan 1st 2020, as well as $4.5M wasted gas fees on failed MEV transactions, equivalent to 4,500 Ethereum blocks of wasted blockspace.
+<!--truncate-->
+
+### Introduction:
+MEV is a metric representing the total value that can be extracted permissionlessly from the re-ordering, inclusion or censoring of transactions within a block being produced on a blockchain. So far, MEV extraction on Ethereum has been primarily conducted by DeFi traders and bot operators via the execution of trading strategies where transaction ordering matters, with a small percentage going to miners from the gas fees associated with these actors’ MEV transactions. Instead of the theoretical value that could have been extracted in any given block, for example the MEV uniquely available to miners from transaction re-orderings of a block they are producing, MEV-Explore v0 focuses on the empirical evidence of MEV activities currently happening on Ethereum.
+How much MEV has been extracted on Ethereum? How much MEV do DeFi traders and bot operators capture? How much gas was spent on MEV transactions that went to the miners who mined the proof of work solutions with the MEV transactions? What are the most common types of MEV extraction strategies? Which DeFi protocols contain the most MEV? How much network resources do successful and failed MEV transactions take up?
+
+With these questions in mind, we scraped Ethereum, covering over 8 major DeFi protocols and their clones, and collected more than 1.3 million MEV transactions that landed on-chain since Jan 1 2020 to provide a preliminary lower-bound to Extracted MEV. We are now releasing our findings through MEV-Explore v0: explore.flashbots.net, a public dashboard that tracks in near real-time aggregate metrics on MEV and the latest MEV transactions on Ethereum.
+
+### At Least $314M of Extracted MEV since Jan 1st 2020
+After scraping the Ethereum blockchain starting from the first block of 2020 (9193266), we’ve found a total of at least $314M worth (~540k ETH) of Extracted MEV since Jan 1st 2020. This includes successful, reverted and checked MEV transactions, and their associated gas fees.
+
+Fig 1: Cumulative Extracted MEV since Jan 1 2020 (in USD)
+Total Extracted MEV has grown significantly: in January 2021 we recorded a total extracted MEV of $57M (47.6k ETH), an over 300x increase in absolute dollar amount or 43x increase in ETH from the $180k (1.1k ETH) we recorded for the month of January 2020. This number establishes a lower bound on MEV since Jan 1st 2020 and gives an indicative figure of how much value is at least at stake from transaction ordering. We believe the actual MEV extracted to be higher than our measure given our incomplete protocol and transaction type coverage in our data collection process. We also expect the metric will continue to grow, not only by mirroring DeFi’s growth and Ethereum’s increasing complexity that will open up new ways to capture value from transaction ordering, but also as more sophisticated MEV extraction methods emerge.
+MEV-Explore v0 marks the first milestone of our collective effort in quantifying and classifying MEV activities through MEV-Inspect. Currently the data collection that underlies these metrics inspects the 8 protocols listed in the table below (see fig.2). There are many newly emergent DeFi protocols with significant MEV exposure (eg. ESD/DSD) as well as OG DeFi protocols where most of the MEV existed before the recent growth in DeFi (eg. Bancor, Kyber, Etherdelta, Airswap) which we are planning on covering in MEV-Explore v1. In addition, we also do not yet cover a significant set of MEV activities such as multi-tx opportunities (eg. sandwich trades) and CEX-DEX price arbitrage. We invite the community to join us in improving the dashboard metrics, refining our data collection and cleaning process, and writing more MEV inspectors to increase the data coverage of MEV-Explore.
+
+Figure 2: Protocol Coverage
+
+### What’s counted in Extracted MEV?
+As mentioned above, MEV is captured today mostly by traders seizing trading opportunities dependent on transaction ordering. This includes opportunities such as price arbitrages between tokens on Uniswap, loan liquidations after an oracle update on dYdX, and coupon redemptions from protocols such as Empty Set Dollar.
+We’ve split MEV transactions included in Extracted MEV into two broad kinds: Successful and Failed. Within Failed, there are two sub-kinds: Reverted and Checked.
+**Successful MEV transactions** are ones that went after an MEV opportunity and successfully captured it.
+**Reverted MEV transactions** are a type of Failed MEV txs that went after an MEV opportunity but didn’t manage to capture it, either because someone else snatched it before them, because they ran out of gas or because market conditions changed against them.
+**Checked MEV transactions** are another type of Failed MEV txs where the failure is more subtle, the sender first checked whether the opportunity still existed before firing their MEV transaction in order to save gas. While the sender still ends up paying gas fees for their check, its cost is considerably lower than if they had fired the transaction directly.
+Let’s look at a few examples:
+
+### Example 1: A Successful MEV transaction from a Priority Gas Auction
+A 3-hop arbitrage between the 3 liquidity pools Balancer ETH/USDC, Sushiswap USDC/SIL and Sushiswap SIL/ETH that paid 12 ETH ($14.1k at the time) in tx fees and worth 16.7 ETH ($19.6k at the time) of Extracted MEV. https://etherscan.io/tx/0x2bde6e654eb93c990ae5b50a75ce66ef89ea77fb05836d7f347a8409f141599f
+The high transaction fee hints at the fact that the sender iteratively bid up the gas price of their arbitrage transaction by replacing their existing trade before it gets mined with one with the same nonce but a higher gas price in order to compete with other traders going for the same opportunity. One loser of the gas auction landed here for a loss of 1.18 ETH in “checked” MEV(see example 3). The winning transaction above ended up paying a gas price of 51.6k gwei, 547x higher than the average gas price at the time (94 gwei), but only 2x higher than the loser at 27.6k gwei.
+**Extracted MEV breakdown for tx #1:** 4.7 ETH ($5.5k at the time) for the sender, 12 ETH ($14.1k at the time) for F2Pool, the miner of this block.
+**Extracted MEV breakdown for tx #2:** 1.18 ETH ($1.4k at the time) for F2Pool, the miner of this block.
+
+### Example 2: A Failed (Reverted) MEV transaction
+A transaction that attempted to capture MEV from a Cream Finance liquidation and failed because it ran out of gas, costing the sender 5.75 ETH (~$10k at the time) in transaction fees.
+https://etherscan.io/tx/0x8cfb46876ce1d40250e9690482bdaaffc1f6b60e18c3405ff5e98b636840875f
+Using 1.5M gas and spending nearly 6 ETH in fees, the transaction requested a $88K USDC flashloan in order to liquidate a Cream Finance position. It began doing so before failing halfway through due to a lack of provided gas. While on the face of it 0x8cfb4 looks innocent, its internal transactions reveal more than 237 transactions. This is a very sophisticated transaction with complex costly logic in EVM compute that ended up using 1.5M gas, nearly 13% of the block it was included in! However much gas was spent, the transaction still failed because it ran out of gas and ended up costing the sender ~5.75 ETH (~$10K at the time) in transaction fees.
+After this “Reverted” transaction, the opportunity was still available and was seized by the second best gas (or first loser) auction participant for a total Extracted MEV of 4.125 ETH where 3.75 ETH was paid in gas fees.
+**Extracted MEV breakdown for tx #1:** $0 revenue for the sender and ~5.75 ETH (~$9.3K at the time) for Sparkpool, the miner of this block.
+**Extracted MEV breakdown for tx #2:** 0.375 ETH ($600 at the time) for sender #2 and 3.75 ETH (~$6k at the time) for Sparkpool, the miner of this block.
+
+### Example 3: A Failed (Checked) MEV transaction
+A transaction that checked the liquidity pools of Uniswap WETH/PRT, Uniswap SFI/PRT and Sushiswap SFI/WETH for a 3-hop arbitrage opportunity, discovered none currently existed, and returned gracefully, consuming only 43K gas and costing the sender ~0.01ETH ($19 at the time) in transaction fees.
+https://etherscan.io/tx/0xf629036e2740a98e1ca5ce32fff85f27337d224e94cbeee6c3d7aabb7507b050
+Some traders are more cost-efficient than our first sender in Example 2, and before firing a transaction with complex logic and burning a lot of gas, execute a ‘check’ in order to verify whether the opportunity is still available. We consider these also failed MEV txs as the MEV tx was ultimately not fired because the check returned that the opportunity had disappeared.
+Extracted MEV breakdown: $0 revenue for the sender and ~0.01ETH ($19 at the time) for Ethermine, the miner of this block.
+MEV transactions are fascinating, sometimes by their complexity, sometimes by their way of failing more or less gracefully or sometimes by the story they tell about pseudonymous users (like this arb from a seemingly misplaced 0x open order-book order that netted the sender a $1.9m revenue for a $73 tx fee). Dive into more MEV transactions in the live MEV transaction explorer of MEV-Explore and help us identify misclassified transactions in the ‘Outlier MEV txs currently in review’ tab!
+
+### Network Overhead from MEV Extraction
+DeFi trading bot operators compete for MEV opportunities by engaging in frontrunning/priority gas auctions like in example 1 and engaging in backrunning (ie. aiming to be, in the same block, as close as possible behind a specific transaction such as an oracle update by spamming the network with many transactions with a gas price slightly below or equal to the target and hoping one gets included).
+Both of these practices are nefarious to Ethereum by bloating the chain and exercising an upwards pressure on gas prices, as we can see from the gas price of example 2 above. This problem is particularly relevant at the moment given the high gas prices we’re seeing. Such prices contribute to eroding Ethereum’s permisionlessness by pushing out small users from the network as it becomes too costly for them.
+In addition, since a single transaction will win an MEV opportunity, we find that the Ethereum blockchain is littered with Reverted and Checked transactions which we’ve classified as Failed MEV transactions. We believe none of these failed MEV transactions needed to be recorded on chain and take up valuable block space.
+Since Jan 1 2020, Extracted MEV activity has represented at least ~3% of the overall gas consumption on the Ethereum network (see fig. 4). Zooming in on Reverted and Checked MEV transactions, we’ve found that their gas consumption could’ve filled at least 4500 Ethereum blocks, a lot of valuable blockspace wasted!
+
+Fig 3: Gas usage from Extracted MEV relative to overall network gas usage, split by successful (green) and failed (red) MEV txs since Jan 1 2020
+
+### Evolution of MEV: M̶i̶n̶e̶r̶ Maximal Extractable Value
+
+On Ethereum today, and before it moves to proof-of-stake consensus, miners have the most power with respect to transaction inclusion and ordering as they are the block producers. Hence the term MEV was initially introduced as miner extractable value by Phil Daian et al. in the 2019 research paper Flash Boys 2.0: Front Running, Transaction Reordering, and Consensus Instability in Decentralized Exchanges. However, MEV exists on all smart contract blockchains where there is a party responsible for transaction ordering, including non-miner actors such as validators in ETH2.0 and rollup providers on Optimistic Rollups. Therefore we propose to rename MEV as maximal extractable value, broadening the scope to cover other blockchain architectures, while still being ‘backwards compatible’ with its initial name (ie. hinting at the upper bound set by the rights of the most powerful actor with respect to transaction ordering).
+Taking the word miner out of MEV’s name also addresses another common confusion: that miners are the only ones who capture this value. As mentioned above, the reality is that MEV extraction on Ethereum so far has been primarily conducted by non-mining DeFi traders and bot operators.
+
+Fig 4: Extracted MEV Split between MEV Tx Sender and MEV Tx Miner (gas fees) since Jan 1 2020
+In recent months however, we’ve started to see more active participation in the MEV game from miners either through direct extraction by running bots themselves, profit-sharing agreements with DeFi traders, or through adopting MEV extraction market infrastructure such as Flashbots’ MEV-Geth.
+
+### Averting the MEV crisis
+As described in our previous post Introducing Flashbots: Frontrunning the MEV crisis, the MEV crisis might happen over several dimensions: miner incentive misalignment leading to consensus instability, unilateral miner-trader deals leading to unfair information asymmetries, and network overhead rendering Ethereum unusable are one of the few we describe. This crisis is hard to solve because any attempt to prevent miners, or traders, from accessing the MEV revenue stream is liable to incentivize the creation of potentially opaque off-protocol markets, yet Ethereum’s increasing complexity (ie. new smart contracts deployed, new users joining, new layers of composability) suggests MEV will only continue to grow in size.
+We believe MEV extraction is unavoidable. To avoid the MEV crisis, this extraction must happen in a trustless, fair, and efficient manner. The first step we took towards averting this crisis was to create a proof of concept for efficient and fair extraction and we are working on improving its trust guarantees.
+
+### Taking our second step
+While the concerns around MEV are shared by many, the topic has rarely left the theoretical realm until recent months, as seen in research paper by Zhou et al. in Quantifying Blockchain Extractable Value: How dark is the forest, discussed in our January 21 MEV Workshop. This may be because quantifying MEV is troublesome as it requires significant infrastructure, data analysis, and in-depth knowledge of smart contract interactions. To make matters worse, as more and more security-critical infrastructure moves off-chain (eg. trading logic of liquidator bots moved off-chain), and as chain state and size grows, it will become increasingly complex to understand MEV.
+As we release this v0 of MEV-Explore, we are now taking our second step towards solving this crisis by shining a light on MEV activity and providing the community with much-needed data. This is a first version of the dashboard that we release to the community not as a final product, but rather as one we believe to be good enough to be useful and more importantly, to be contributed to. Quantifying MEV activities on-chain is an unbounded problem. There are always more DeFi protocols to inspect, more metrics to measure and more data cleaning that you can start contribute to by opening a github issue on the MEV-Explore repo or start a discussion in the repo’s Discussions board.
+We believe the MEV conversation is an important topic to Ethereum’s future and will be growing louder in 2021. One cannot separate the social dimension of Ethereum from its technological one. Ultimately, the MEV debate, and Ethereum’s future, will also be about the social norms that the community will come to a consensus on. We hope MEV-Explore can help in the discussion around these norms.
+
+Special thanks to Danning Sui, Tom Schmidt and Ryan Noble for their contribution to MEV-Explore v0, and thanks to Flashbots core developers and community contributors to MEV-Explore and MEV-Inspect Georgios Konstantopoulos, Jason Paryani, Scott Bigelow, Austin Williams, Alejo Salles, Tina Zhen, Andrei Anisimov and Alex Manuskin.
+
+Who we are: Flashbots is a research and development organization formed to mitigate the negative externalities and existential risks posed by miner-extractable value (MEV) to smart-contract blockchains, starting with Ethereum.
+
+We are not your typical startup, our principles are based on that of a pirate hacker collective. If you are a self-reliant, self-directed individual who puts collective success above your own and are motivated by solving hard problems with asymmetric impact & opportunities, you will fit right in.
+
+Resources:
+MEV-Explore v0
+Contribute to MEV-Explore
+Flashbots: Frontrunning the MEV crisis
+Flashbots Github
+Flashbots Discord

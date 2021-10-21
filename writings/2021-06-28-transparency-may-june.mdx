@@ -13,7 +13,9 @@ In May and June 2021 Flashbots strengthened and moved forward our network, succe
 As an open research organization we stayed true to our commitment to learning from the community and iterating in public. Here are the highlights:
 
 * Released Flashbots Auction v0.2 and bundle merging (May 24th)
+
 * Released ethresearch post: MEV-SGX Proposal (May 31st)
+
 * Released research post: MEV in ETH2 — an early exploration (June 10th)
 
 ## Flashbots Auction
@@ -36,7 +38,9 @@ Given that this affected both searcher and miner’s profitability we pushed a f
 
 ### Release v0.2.3
 As part of the update to bundle scoring in release v0.2 we started to discount the fees from transactions that had been seen in the mempool in order to prevent “bundle stuffing,” where searchers take high gas price transactions from the mempool and include them in their bundles in order to “piggyback” off of those gas prices and get some transactions accepted that otherwise wouldn’t have been.
+
 Our implementation of this discounting did fix bundle stuffing, but it also wrongly penalized a class of searchers who submit both transactions in the regular mempool and Flashbots transactions at the same time. Essentially we wrongly discounted coinbase payments from these transactions, which meant they landed in Flashbots blocks much less often than they should. The fix for this issue can be found here.
+
 ### Bundle merging highlights
 Since bundle merging launched we can see a substantial increase in the number of bundles included in blocks. In fact the number of bundles more than doubled, going from ~6,000 to ~13,000 in the weeks after bundle merging was launched.
 
@@ -51,7 +55,7 @@ EIP-1559 has big implications for searchers and miners. Searchers will need to a
 
 Flashbots Research is currently analyzing the impact of EIP-1559 on MEV and Flashbots. The preliminary results will be presented in MEV.wtf summit on Jul 1, followed by a research post.
 
-###Reputation
+### Reputation
 We are starting to experiment with a reputation system to handle the load we have been receiving in periods of heavy activity — this should lead to improved relay performance for searchers with a history of successful inclusions. While we expect this change to have an immediate positive impact, it is a temporary solution and we are actively looking for feedback on how we should think about scaling the relay moving forward. See our proposal here: https://github.com/flashbots/pm/discussions/79
 
 ## Flashbots Data
