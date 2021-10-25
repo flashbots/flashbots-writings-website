@@ -30,13 +30,17 @@ We begin with a model where a single searcher performs an $\textrm{MEV}$ extract
 
 We decompose the opportunity's $\textrm{REV}$ in two terms:
 
-$$\textrm{REV} = \textrm{REV}_S + \textrm{REV}_M, \tag{1}$$
+$$
+\textrm{REV} = \textrm{REV}_S + \textrm{REV}_M, \tag{1}
+$$
 
 where $\textrm{REV}_S$ is the value that goes to the searcher, and $\textrm{REV}_M$ is the value that goes to the miner. Note that, as we expand on below, $\textrm{REV}$ already encompasses the opportunity's _extraction costs_ (_i.e._ the actual $\textrm{REV}$ of an opportunity depends on the gas price of the network at extraction time[^3]).
 
 Let's dive into the two different terms. The searcher $\textrm{REV}$ is composed by:
 
-$$\textrm{REV}_S = V_{in} - V_{out} - g_{\textrm{MEV}}.s_{\textrm{MEV}}, \tag{2}$$
+$$
+\textrm{REV}_S = V_{in} - V_{out} - g_{\textrm{MEV}}.s_{\textrm{MEV}}, \tag{2}
+$$
 
 where $V_{out}$ is the value that flows from the searcher to the blockchain in the transactions performing the extraction (excluding gas); $V_{in}$ is the value flowing from the blockchain to the searcher; $g_{\textrm{MEV}}$ is the gas price of the transactions; and $s_{\textrm{MEV}}$ is their _size_, _i.e._ the total amount of gas they consumed. $V_{out}$, $V_{in}$, and $g_{\textrm{MEV}}$ are denominated in the base network currency (ETH), while $s_{\textrm{MEV}}$ is in units of gas. Separating the gas term from $V_{out}$ will be helpful in quantifying the extraction costs, and it is also how we compute $\textrm{REV}_S$ in practice.
 
@@ -44,19 +48,25 @@ We use "the blockchain" loosely here to refer to any other addresses (correspond
 
 Turning to the miner side, we have:
 
-$$\textrm{REV}_M = s_{\textrm{MEV}}.(g_{\textrm{MEV}}-g_{eff}), \tag{3}$$
+$$
+\textrm{REV}_M = s_{\textrm{MEV}}.(g_{\textrm{MEV}}-g_{eff}), \tag{3}
+$$
 
 where $g_{eff}$ is the _effective gas price_ of the transactions that _would have been included_ in the block had the opportunity not been taken. $\textrm{REV}_M$ is thus defined to include the _opportunity cost_ the miner incurs by including the $\textrm{MEV}$-extracting transactions.
 
 As transactions in the mempool are ephemeral, it is impossible to measure $g_{\textrm{eff}}$ _a posteriori_ from only blockchain data and logs. We resort to an approximation that also serves as a lower bound for the value realized by the miner:
 
-$$\textrm{REV}_M  \gtrsim s_{\textrm{MEV}}.(g_{\textrm{MEV}}-g_{tail}), \tag{4}$$
+$$
+\textrm{REV}_M  \gtrsim s_{\textrm{MEV}}.(g_{\textrm{MEV}}-g_{tail}), \tag{4}
+$$
 
 where $g_{tail}$ is the gas price of the last transaction in the block[^4].
 
 Plugging equations (2) and (4) we get for the total realized value:
 
-$$\textrm{REV} \gtrsim V_{in} - V_{out} - s_{\textrm{MEV}}.g_{tail}. \tag{5}$$
+$$
+\textrm{REV} \gtrsim V_{in} - V_{out} - s_{\textrm{MEV}}.g_{tail}. \tag{5}
+$$
 
 In this rendition the miner and searcher roles are blurred, but we can clearly identify the _extraction costs_ of the opportunity, given by the subtrahend $s_{\textrm{MEV}}.g_{tail}$.
 
@@ -70,13 +80,17 @@ Note, however, that all of this activity is zero-sum: all costs incurred by sear
 
 We will then need to take a broader view of $\textrm{MEV}$, and define a new term, the _Extractable Value Cost_ (${\textrm{EVC}}$), which summarizes all the extra value _induced_ by $\textrm{MEV}$ extraction activity, that is not part of the extracted value itself. With this definition, we have:
 
-$$\textrm{Total MEV Activity} = \textrm{REV}_S + \textrm{REV}_M + {\textrm{EVC}}. \tag{6}$$
+$$
+\textrm{Total MEV Activity} = \textrm{REV}_S + \textrm{REV}_M + {\textrm{EVC}}. \tag{6}
+$$
 
 In words, the _total $\textrm{MEV}$ activity_ is composed of the extracted $\textrm{MEV}$ ($\textrm{REV}$, divided among searchers and miners), and the global costs of extractable value, going directly to miners and quantified by ${\textrm{EVC}}$. Note that ${\textrm{EVC}}$ only encompasses _on-chain_ activity, ignoring off-chain costs like network bloating due same-nonce transaction replacement.
 
 We can compute the ${\textrm{EVC}}$ as follows:
 
-$${\textrm{EVC}} = \sum_{tx\in X} s_{tx}.g_{tx},\quad X=\{\textrm{preflights},\textrm{failures}, \textrm{cancellations} \}.\tag{7}$$
+$$
+{\textrm{EVC}} = \sum_{tx\in X} s_{tx}.g_{tx},\quad X=\{\textrm{preflights},\textrm{failures}, \textrm{cancellations} \}.\tag{7}
+$$
 
 While altogether eliminating $\textrm{MEV}$ is likely impossible[^5], it is Flashbots' [core mission](https://ethresear.ch/t/flashbots-frontrunning-the-mev-crisis/8251) to reduce the negative externalities of $\textrm{MEV}$-related activities by improving the overall efficiency of the extraction process. The present framework allows us to state this mission concisely as that of reducing ${\textrm{EVC}}$.
 
@@ -87,7 +101,9 @@ Flashbots optimizes $\textrm{MEV}$ extraction by allowing searchers to submit bu
 
 We thus need to account for this extra term in our miner revenue formula (4):
 
-$$\textrm{REV}_M^{Flashbots}  \gtrsim s_{\textrm{MEV}}.(g_{\textrm{MEV}}-g_{tail}) + V_{direct}, \tag{8}$$
+$$
+\textrm{REV}_M^{Flashbots}  \gtrsim s_{\textrm{MEV}}.(g_{\textrm{MEV}}-g_{tail}) + V_{direct}, \tag{8}
+$$
 
 where $V_{direct}$ is the total value transferred to the `coinbase` address. Note that this new term doesn't affect the total $\textrm{REV}$ as it is accounted for by a corresponding increase of the $V_{out}$ term.
 
