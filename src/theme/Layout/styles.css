@@ -5,11 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-html,
-body {
-  height: 100%;
-}
-
 #__docusaurus {
   min-height: 100%;
   display: flex;
@@ -25,3 +20,13 @@ body {
 .docusaurus-mt-lg {
   margin-top: 3rem;
 }
+
+input {   
+   background-color: var(--ifm-background-surface-color);
+   color: var(--ifm-color-primary);
+}
+
+header {
+    text-align: center !important;
+}
+

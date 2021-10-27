@@ -1,0 +1,57 @@
+---
+slug: transparency-july-august
+title: Flashbots Transparency Report — July & August 2021
+authors: [robert]
+tags: [transparency report]
+image: https://i.imgur.com/mErPwqL.png
+hide_table_of_contents: false
+---
+<!--truncate-->
+### Overview
+Flashbots’ last two months have been packed. In July we hosted MEV.wtf, a summit dedicated to MEV with top thinkers discussing a wide range of topics. We also released an update to MEV-Geth in advance of 1559, published an article on MEV and 1559, and clarified our stance on reorgs.
+
+In August we shared our thoughts for how MEV marketplaces should be designed in the long term, hosted a summit dedicated to MEV and reorgs, pushed two updates to MEV-Geth, and saw the launch of an xDAI MEV relay. Flashbots also welcomed a new set of stewards and several full time employees!
+
+## Flashbots Auction
+### Flashbots Auction v0.3
+
+On July 15th we published a release to MEV-Geth which added support for EIP-1559. After that in July and August we published three follow up releases:
+* Fix the consensus failure bug that occurred on Ropsten
+
+* A maintenance release with no important changes for miners
+
+* Patching a vulnerability in the EVM that was merged upstream
+
+### Flashbots Auction v0.4
+
+With 1559 behind us Flashbots is focused on our next release: adding support for mega bundles. With the new RPC endpoint added `eth_sendMegaBundle` in v0.4, MEV-geth can now insert larger bundles directly into the multi-worker. These larger bundles will be premerged upstream before miners receive them and will lead to more profitable blocks for miners due to better bundle scoring/merging. They will also increase inclusion rate for the searchers.
+
+Read more about the discussions [here](https://github.com/flashbots/pm/discussions/52) and the specifications [here](https://docs.flashbots.net/flashbots-auction/miners/mev-geth-spec/v04/).
+
+## Flashbots Data
+### MEV-Inspect-py
+We started work on a python version of [MEV-Inspect-py](https://github.com/flashbots/mev-inspect-py) in July, making the decision to deprecate the rust version in order to better maintain MEV-Inspect and hopefully garner more community involvement.
+
+There has been a ton of progress so far and we’re excited by how powerful MEV-Inspect-py has become. In the coming weeks we hope to ship more features that will bring it to parity with the rust library. If you’re interested in contributing please reach out!
+
+Shout out to our great July and August contributors: Luke, Gui, and Patrick!
+
+### Reorg monitoring
+
+Community contributor turned Flashbots member Metachris built a tool for monitoring reorgs which we’ve been running and will open source. This monitoring tool watches for reorgs as they happen as well as checking for uncles that we may have missed which are included in protocol.
+
+### Dashboard maintenance
+We made a few improvements to the backend of our dashboard to more accurately reflect certain statistics. For example, post-1559 we made sure that base fee was accounted for where it should be. We also improved our detection of bundles from relays other than Flashbots and accounted for that.
+## Flashbots Research
+
+Flashbots researcher Alejo Salles published a note [on MEV and 1559](https://hackmd.io/@flashbots/MEV-1559), in collaboration with Kristof Gazso from Nethermind. The note highlights three areas where EIP-1559 might have interesting consequences for MEV: increased MEV extraction incentives for miners, the coexistence of different auctions in the Ethereum protocol and its implications for EIP design, and the role of Flashbots as a miner coordinating agent and its ethical implications.
+
+Aside from 1559, our focus for the last 2 months has been on [MEV within and across Layer 2s](https://github.com/flashbots/mev-research/blob/main/FRPs/FRP-16.md), on transitioning some of our work on eth2 from research to productization while continuing research [on eth2 security and inequality from MEV](https://github.com/flashbots/mev-research/blob/main/FRPs/FRP-15.md), and on an MPC-based approach to Flashbots’ architecture. We’re excited to share more about these efforts soon from Flashbots Research contributors Blagoj, Forrest, Lakshman, Marcello, Vaibhav, Caspar, Barnabe, Alon, Mikerah & Tomas (Hashcloak)!
+
+In the next month, we’ll be starting our next wave of research grants, and will be onboarding new research contributors, please reach out if you’re interested!
+
+## Community
+In previous transparency reports we highlighted community activity. To better highlight this activity we’re going to post about it separately in a reoccurring blog post specifically dedicated to the Flashbots community. Stay tuned!
+
+### Get involved
+At Flashbots, we research and build systems around MEV, and we would love to collaborate with you. We are a distributed organization with the principles of a [pirate hacker collective](https://www.youtube.com/watch?v=T0fAznO1wA8), and have [several open positions](https://www.notion.so/flashbots/Flashbots-Job-Board-94d53cb01ef04a9484711dacf18739e3). We also issue grants to external researchers doing work aligned with ours, please find out more in [our Research repository](https://github.com/flashbots/mev-research), or join our [Discord](https://discord.gg/7hvTycdNcK)!

@@ -203,21 +203,20 @@ We've already shared some our findings in talks [here](https://youtu.be/Hjd9WowO
 At Flashbots, we perform research and build systems around MEV, and we would love your help. We are a distributed organization with the principles of a [pirate hacker collective](https://www.youtube.com/watch?v=T0fAznO1wA8), and have several [open positions](https://github.com/flashbots/pm/tree/main/jobs). We also issue grants to external researchers doing work aligned with ours, please find out more in our [Research repository](https://github.com/flashbots/mev-research), or join our [Discord](https://discord.gg/7hvTycdNcK)!
 
 
-_Thanks to [Terence Tsao](https://twitter.com/terencechain), [Raul Jordan](https://twitter.com/rauljordaneth), [Alejo Salles](https://twitter.com/fiiiu_), [Luke Youngblood](https://twitter.com/LukeYoungblood), [Tomasz Stanczak](https://twitter.com/tkstanczak), [Lakshman Sankar](https://twitter.com/lakshmansankar), [Barnabe Monnot](https://twitter.com/barnabemonnot), [Caspar S](https://twitter.com/casparschwa), and [Viktor Bunin](https://twitter.com/ViktorBunin) for their valuable contributions and edits to this post. And thanks to the rest of the Flashbots team for discussions leading to it._
+_Thanks to [Terence Tsao](https://twitter.com/terencechain), [Raul Jordan](https://twitter.com/rauljordaneth), [Alejo Salles](https://bit.ly/3mcaRrS), [Luke Youngblood](https://twitter.com/LukeYoungblood), [Tomasz Stanczak](https://twitter.com/tkstanczak), [Lakshman Sankar](https://twitter.com/lakshmansankar), [Barnabe Monnot](https://twitter.com/barnabemonnot), [Caspar S](https://twitter.com/casparschwa), and [Viktor Bunin](https://twitter.com/ViktorBunin) for their valuable contributions and edits to this post. And thanks to the rest of the Flashbots team for discussions leading to it._
 
 [^1]: More on justification and finalization https://our.status.im/two-point-oh-justification-and-finalization/
 
- [^2]: MEV is a metric representing the total value that can be extracted permissionlessly from the re-ordering, inclusion or censoring of transactions within a block being produced on a blockchain. So far, MEV extraction on Ethereum has been primarily conducted by DeFi traders and bot operators via the execution of trading strategies where transaction ordering matters, with a small percentage going to miners from the gas fees associated with these actors’ MEV transactions. Read more about MEV [here](https://medium.com/flashbots/quantifying-mev-introducing-mev-explore-v0-5ccbee0f6d02)
+[^2]: MEV is a metric representing the total value that can be extracted permissionlessly from the re-ordering, inclusion or censoring of transactions within a block being produced on a blockchain. So far, MEV extraction on Ethereum has been primarily conducted by DeFi traders and bot operators via the execution of trading strategies where transaction ordering matters, with a small percentage going to miners from the gas fees associated with these actors’ MEV transactions. Read more about MEV [here](https://medium.com/flashbots/quantifying-mev-introducing-mev-explore-v0-5ccbee0f6d02)
 
- [^3]: a topic discussed by Phil Daian in [MEV...wat do](https://pdaian.com/blog/mev-wat-do/).
+[^3]: a topic discussed by Phil Daian in [MEV...wat do](https://pdaian.com/blog/mev-wat-do/).
 
- [^4]: More on staking pools and staking derivatives in this great [post](https://research.paradigm.xyz/staking)
+[^4]: More on staking pools and staking derivatives in this great [post](https://research.paradigm.xyz/staking)
 
- [^5]: https://benjaminion.xyz/eth2-annotated-spec/phase0/beacon-chain/#compute_proposer_index
+[^5]: https://benjaminion.xyz/eth2-annotated-spec/phase0/beacon-chain/#compute_proposer_index
 
+[^6]: If a pool holds $k$ out of $N$ total validators, the probability of producing an individual slot is $p=k/N$. The probability of the pool producing two consecutive slots within an epoch is $p_2=\frac{k}{N}\frac{k-1}{N}$. (The probability of producing 2 consecutive slots when relaxing the single-epoch constraint is actually slightly higher considering that now unique validators could produce adjacent slots across epochs---a tiny effect for the larger $k$ numbers we're interested in here). If we take the approximate numbers of $N=120\textrm{k}$ total validators, and the largest pool (Kraken) running $k=20\textrm{k}$ of them, we find $p\simeq0.17$ and $p_2\simeq0.026$, or $2.6\%$.
 
- [^6]: If a pool holds $k$ out of $N$ total validators, the probability of producing an individual slot is $p=k/N$. The probability of the pool producing two consecutive slots within an epoch is $p_2=\frac{k}{N}\frac{k-1}{N}$. (The probability of producing 2 consecutive slots when relaxing the single-epoch constraint is actually slightly higher considering that now unique validators could produce adjacent slots across epochs---a tiny effect for the larger $k$ numbers we're interested in here). If we take the approximate numbers of $N=120\textrm{k}$ total validators, and the largest pool (Kraken) running $k=20\textrm{k}$ of them, we find $p\simeq0.17$ and $p_2\simeq0.026$, or $2.6\%$.
+[^7]: In addition, there are concerns [outlined by Vitalik Buterin](https://ethresear.ch/t/rng-exploitability-analysis-assuming-pure-randao-based-main-chain/1825) of randomness manipulation from controlling contiguous slots of the end of an epoch.
 
- [^7]:In addition, there are concerns [outlined by Vitalik Buterin](https://ethresear.ch/t/rng-exploitability-analysis-assuming-pure-randao-based-main-chain/1825) of randomness manipulation from controlling contiguous slots of the end of an epoch.
-
- [^8]: More on incentivizing shard staggering [here](https://ethresear.ch/t/simple-approach-to-incentivizing-shard-staggering/9149) by Vitalik Buterin
+[^8]: More on incentivizing shard staggering [here](https://ethresear.ch/t/simple-approach-to-incentivizing-shard-staggering/9149) by Vitalik Buterin

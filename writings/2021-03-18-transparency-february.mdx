@@ -1,0 +1,136 @@
+---
+slug: transparency-february
+title: Flashbots Transparency Report — February 2021
+authors: [thegostep]
+tags: [transparency report]
+image: https://i.imgur.com/mErPwqL.png
+hide_table_of_contents: false
+---
+*Sandwiching, Fairness, and EIP-1559*
+<!--truncate-->
+## Overview
+As EIP-1559 and ETH2 are looming with an impact on future income for Ethereum miners, we are witnessing a surge of interest from miners to increase their revenue via MEV extraction. This was an inevitability, but the timeline has accelerated. Will miners pick the democratic, transparent, fair, and efficient path to MEV extraction, or seek to extract on their own in a permissioned manner? We will soon find out…
+
+*On Jan 6, we launched Flashbots Alpha, our market-based alternative to unilateral trader-miner collusion for the extraction of MEV. Flashbots is a two-sided marketplace composed of miners and MEV searchers. Any miner or mining pool can run MEV-geth and receive additional income from MEV strictly more than what it would earn from running vanilla geth, without the need to enter into any bespoke deal with traders. MEV searchers, predominantly bot operators, are able to send transactions through a Flashbots gateway called MEV-relay to improve chance of landing on-chain without the need to pay for gas on failed transaction, or causing chain congestion and enter into gas war that hurts other Ethereum users.*
+
+At the time of writing, there are **5 mining pools** running MEV-geth, collectively accounting for over **12%** of total Ethereum hashrate, collecting **0.13ETH** per block of additional MEV revenue from Flashbots transaction bundles. On the MEV searcher side, we are seeing a 3x increase in unique searchers who have successfully landed bundles on chain.
+
+This post constitutes our second monthly update to shed light on the activity happening on Flashbots, as part of our ongoing efforts in fulfilling Flashbots’ commitment to iterate in the public. In addition to open-sourcing our codebase, and providing monthly progress updates via MEV Roasts and Flashbots Community Calls, this Transparency Update aims to review the searcher and miner activity on Flashbots core infrastructure.
+
+## Novel Use Cases of Flashbots
+
+### Account Abstraction
+An accidental use case for flashbots was discovered: account abstraction. The creative use cases of Flashbots in the rescue of compromised Cryptokitties and ENS in January has inspired the community to come up with research ideas and experimental implementations.
+
+Since Flashbots allows for submitting zero gas transactions, it’s also possible to submit transactions which are paid for with any ERC20 token. This is commonly referred to as “account abstraction” or “sponsored transactions”. Flashbots in-house white hat Scott open-sourced a sample searcher which makes it easy to execute sponsored transactions. EIP-3074 has been proposed for the next hardfork which is poised to play well with our system.
+
+Vitalik also chimed in on how Flashbots can be used as a backdoor path to account abstraction.
+
+[picture missing]
+
+### Community Experiments
+Community is an integral part of the Flashbots ecosystem. We are lucky to have trailblazers pushing the boundary of what is possible on ethereum today with Flashbots.
+
+* Integrate flashbots in DApps to align interest of users and miners
+
+For your reference, the idea is inspired by this post. Pay with MEV In brief, DApps may "create" MEV on purpose, to pay…
+ethresear.ch
+
+* Beginner’s guide to troubleshooting MEV on Flashbots
+
+When I first started playing with the Flashbots’ infrastructure there was a lot of onion peeling on my part just to…
+fifikobayashi.medium.com
+
+* The enemy of your enemy is NOT your friend
+
+Unbeknownst to the average DeFi user, battlelines are currently being drawn as we speak in the ever evolving realm of…
+fiona.mirror.xyz
+
+## Upgrades and Releases
+**MEV-Relay v2** — Searchers no longer need an API key to submit bundles. We now require all bundles to be signed with an ethereum private key which allows us to start tracking a searcher’s reputation. This reputation could in the future be used to provide a priority channel for high reputation searchers as suggested here. You can find out more about this change here.
+
+**Bundle Simulation** — We added an `eth_callBundle` RPC to MEV-relay in order to help searchers debug their bundle execution. By default, this RPC allows for simulating the execution of an arbitrary bundle up to 64 blocks in the past. You can find out more about this new feature here. Bundle simulation was added to both the ethers.js and web3.py flashbots libraries (thanks to 0xVerif !)
+
+**MEV-explore v0** — We released the v0 of MEV-explore to explore.flashbots.net and received great feedback on how we can continue to improve data accuracy. We were able to pruned several false positives which inflated the initial numbers. Thanks to Ankur for his contributions here. Next steps will be to add Flashbots specific metrics within the dashboard!
+
+**Flashbots Forum** — Over the course of February, our efforts were focused on improving the UX for searchers and miners. As part of this effort, we created a new forum on github to aggregate feature requests and provide technical support. If you have any suggestions or questions, please direct them there and help us identify the most important discussions by voting up and down!
+
+## Searcher Adoption
+### 2x bundle inclusion
+Despite not increasing the amount of hashrate in February compared to January, there was 2x the number of successfully mined flashbots bundles. This indicates flashbots blocks are more frequently competitive with regular blocks. A sneak peak into the month of March shows additional hashrate participation which is expected to increase number of successful bundles mined.
+
+[picture missing]
+
+*Note: Data as of March 18th*
+
+### 3x unique searchers
+Another metric we are watching closely is the number of unique searchers who’ve successfully landed a bundle on chain. This gives us a good approximate of the level of adoption on the searcher side and how democratic MEV extraction is. We expect removing API keys from the relay will help speed up adoption.
+
+[picture missing]
+
+*Note: Data as of March 18th*
+
+### New strategies
+* **Big boy arb** — Just a straight (non-toast) arb between uni & sushi. Miner took 40 ETH, searcher took 5 ETH. — https://etherscan.io/tx/0x5e1657ef0e9be9bc72efefe59a2528d0d730d478cfc9e6cdd09af9f997bb3ef4
+
+* **Multigrain Toast** — Toast, with 4-hop ETH->HYPE->METRIC->BUILD->ETH route, turned 1.75 ETH into 10.37. Miner got 2.5ETH, searcher got 7 ETH — https://etherscan.io/tx/0xe7692082844eb95d5e0946cd6f17031f435e1bf8ef5e14a2d14e7bd423f4e75e
+
+* **Paint Rescue** — CheckAndSend, withdrawing $800 of “PAINT” tokens from a well-known private key. Otherwise tokens would be “stuck” with less knowledgable users trying to pull tokens out by first sending ETH (that gets swept). — https://etherscan.io/txs?block=12035866&p=4
+
+* **Risk Free Breeding** — CryptoKitties runs a “privileges birther”, giving themselves exclusive right to first 5 blocks of birth-eligibility. It would be rough competing against that privileged birther PLUS other regular birthers for the scraps without using Flashbots. Miner took 0.062, searcher took 0.038. — https://etherscan.io/txs?block=11930608&p=3
+
+* **Whitehat Sandwicher** — Uniswap sandwiching has seen an uptick in the last month, but a new breed of sandwichers have appeared. Sandwichers that sandwich other sandwichers. — https://twitter.com/fifikobayashi/status/1372338964326092802?s=20
+
+### A note on sandwiching
+Sandwiching is probably one of the most controversial MEV strategies out there at this moment. It is usually at the core of Flashbots criticism and we do not shy away from it. At Flashbots, we strongly believe the systems we build must exhibit credible neutrality if we wish to be successful in mitigating the bigger MEV crisis. We believe the infrastructure we build must optimize for both fairness and economic optimality if it is to be resilient in the long run. Censorship of any arbitrary strategy would create an economic incentive for less moral actors to deviate from a democratic solution. As such, we are forced to take a research driven stance on what is “good” and “bad” MEV. We refer to this as an “MEV Taxonomy” which we are helping define at the core of our research agenda. We cannot be the enforcers, but are working hard to provide the education, transparency, and tools necessary for the community to establish their own norms and be able to enforce them.
+
+## Miner Participation
+### A wild miner appears
+Several new miners have been hard at work integrating MEV-geth over the course of February and have come online in early March. These miners collectively represent over 12% of the total ethereum hashrate. Many of them are taking a phased approach to integration and will be gradually increasing their level of hashrate pointed to MEV-geth if profitability continues to be high.
+
+[picture missing]
+
+*Note: Data as of March 18th*
+
+### Profitability is up
+Miners collected 174 ETH in flashbots fees in February, up by more than 6x in January. Average per block fees were also up more than 3x in February and continue to increase.
+
+[picture missing]
+
+*Note: Data as of March 18th*
+
+### Biggest bundle award
+A massive bundle landed on chain in February and made a miner very happy. Not bad for a single block.
+
+[tweet embed missing]
+
+### MEV and EIP1559
+The conversation around EIP-1559 has heated up in the last month and the standard is now set to be included in the upcoming London hard fork. This is a delicate topic and while we aim to remain neutral in discussing potential adoption of the standard, EIP-1559 has become a catalyst for miner awareness of MEV.
+
+Indeed, for many solo-miners the EIP1559 community call was the first introduction to MEV and its implications for miner profitability.
+
+[embed missing]
+
+The first thing to understand is that not all ethereum transactions are created equal. Regular ethereum transactions bid for “inclusion” where they can be included anywhere in a block, while MEV transactions bid for “priority” where they want to be included only in specific block positions (often the first in the block).
+
+Under the current EIP1559 proposal, “inclusion” fees are burned as the basefee while “priority” fees are sent to the miner as a tip. This means everything hangs on this question: How do “inclusion” fees compare to “priority” fees in the long run?
+
+As shown by MEV-explore, MEV is already a significant driver of transaction flow on the network. This is because priority positions in a block are much more scarce than inclusion positions. Over time, we expect mining fees derived from MEV to greatly exceed mining fees derived from regular ethereum transaction.
+
+Miners looking to maximize their fees will adopt MEV extraction systems like MEV-geth regardless of whether EIP1559 is adopted.
+
+[picture missing]
+
+### Solo miners and Flashbots
+The Flashbots organization maintains MEV-geth which provides a simple way for miners to maximize their revenues from MEV / priority transactions.
+
+Revenues generated from MEV have high variance (ie. they are not distributed equally between blocks), and therefore the likelihood of a solo miner mining a Flashbots block is extremely low.
+
+The Flashbots system is still in “Alpha” release which unfortunately means it has some limitations. Revenues generated from MEV have high variance (ie. they are not distributed equally between blocks), and therefore the likelihood of a solo miner mining a Flashbots block is extremely low. For this reason, Flashbots only supports large hashrate providers during the Alpha.
+
+If you are a solo miner, we encourage you to reach out to your mining pool of choice and ask if they support MEV-geth.
+
+## About Flashbots
+Flashbots is a research and development organization formed to mitigate the negative externalities and existential risks posed by miner-extractable value (MEV) to smart-contract blockchains, starting with Ethereum.
+
+We are not your typical startup, we are fully remote and our principles are based on that of a pirate hacker collective and are actively recruiting talented, self-directed individuals to join our crew. You can find out more about us and our open positions on our github.

@@ -1,1 +1,100 @@
-$desktop-max-width: 632px;
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+$desktop-max-width: 80em;
+
+// random bg seed: 2192
+$transparent: rgba(255, 255, 255, 0);
+$x: 5;
+$color-2: rgba(230, 230, 230, 0.1);
+$color-3: rgba(180, 180, 180, 0.1);
+$color-4: rgba(100, 100, 100, 0.1);
+$color-1: rgba(50, 50, 50, 0.1);
+
+$size: 2em;
+$big-size: 1+$size*1.0*random(3);
+$min: 1+$size*1.0/random(10);
+$max: 1+$min*1+random(3);
+$step: $min*5.0;
+
+HTML {
+  height: 100%;
+  }
+BODY {
+  background: 
+    radial-gradient(circle at right,
+      $transparent $min, 
+      $color-1 $min, $color-1 $max,
+      $transparent $max
+      ) 0 0,
+    radial-gradient(circle at left,
+      $transparent $min, 
+      $color-1 $min, $color-1 $max,
+      $transparent $max
+      ) 0 $size,
+    
+    radial-gradient(circle at right,
+      $transparent $min, 
+      $color-2 $min, $color-2 $max,
+      $transparent $max
+      ) $step 0,
+    radial-gradient(circle at left,
+      $transparent $min, 
+      $color-2 $min, $color-2 $max,
+      $transparent $max
+      ) $step $size,
+    
+    radial-gradient(circle at right,
+      $transparent $min, 
+      $color-3 $min, $color-3 $max,
+      $transparent $max
+      ) $step*2 0,
+    radial-gradient(circle at left,
+      $transparent $min, 
+      $color-3 $min, $color-3 $max,
+      $transparent $max
+      ) $step*2 $size,
+    
+    radial-gradient(circle at right,
+      $transparent $min, 
+      $color-4 $min, $color-4 $max,
+      $transparent $max
+      ) $step*3 0,
+    radial-gradient(circle at left,
+      $transparent $min, 
+      $color-4 $min, $color-4 $max,
+      $transparent $max
+      ) $step*3 $size
+    ;
+  background-size:  $big-size $big-size;
+  background-attachment: fixed;
+  background-repeat: repeat;
+  //font: 16px/2 'Trebuchet MS', Verdana, sans-serif;
+    font-family: 'Poppins', sans-serif;
+    //max-width: 70vw !important;
+    min-height: 100%;
+  }
+
+header {
+    text-align: justify;
+    margin-bottom: 2rem !important;
+    margin-top  : 2rem !important;
+    font-size: 1.5em !important;
+}
+
+article {
+    padding-bottom: 4em !important;
+}
+
+main {
+    font-size: 1.15em !important;
+    padding-left: 4vw !important;
+    padding-right: 4vw !important;
+}
+ 
+h2 {
+    text-align: center;
+}
+.layoutDefaults_src-theme-Layout-styles-module {
+    margin-top: -50px;
+}
+
+
