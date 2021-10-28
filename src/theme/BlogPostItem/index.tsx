@@ -111,7 +111,7 @@ function BlogPostItem(props: Props): JSX.Element {
       <div className="markdown" itemProp="articleBody">
         <MDXProvider components={MDXComponents}>{children}</MDXProvider>
       </div>
-
+   
       {/* {(tags.length > 0 || truncated) && (
         <footer
           className={clsx('row docusaurus-mt-lg', {

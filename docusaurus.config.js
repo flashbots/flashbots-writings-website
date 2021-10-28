@@ -9,8 +9,8 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 (module.exports = {
   title: "Flashbots",
   tagline: "Research respository of Flashbots",
-  baseUrl: process.env.BASE_URL,
-  url: process.env.TARGET_URL,
+  baseUrl: process.env.REACT_APP_BASE_URL,
+  url: process.env.REACT_APP_TARGET_URL,
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
@@ -27,6 +27,17 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
   ],
   plugins: [
     'docusaurus-plugin-sass',
+    [
+      'docusaurus2-dotenv',
+      {
+          path: "./.env", // The path to your environment variables.
+          safe: false, // If false ignore safe-mode, if true load './.env.example', if a string load that file as the sample
+          systemvars: false, // Set to true if you would rather load all system variables as well (useful for CI purposes)
+          silent: false, //  If true, all warnings will be suppressed
+          expand: false, // Allows your variables to be "expanded" for reusability within your .env file
+          defaults: false, //  Adds support for dotenv-defaults. If set to true, uses ./.env.defaults
+      }
+    ],
     [
       '@docusaurus/plugin-content-blog',
       {
