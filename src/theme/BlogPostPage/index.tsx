@@ -33,7 +33,7 @@ function BlogPostPage(props: Props): JSX.Element {
   const image = assets.image ?? frontMatter.image;
 
   const siteUrl = process.env.REACT_APP_TARGET_URL
-  const fmtId = permalink.replace(/^\//, '').replaceAll(/[\s\/]/gi, '-');
+  const fmtId = permalink.replace(/^\//, '').replace(/[\s\/]/gi, '-');
   const disqusId = fmtId == '' ? 'main' : fmtId;
 
   return (
