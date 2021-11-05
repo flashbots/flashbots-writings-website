@@ -3,14 +3,14 @@ slug: transparency-april
 title: Flashbots Transparency Report — April 2021
 authors: [robert]
 tags: [transparency report]
-image: https://i.imgur.com/mErPwqL.png
+image: /img/transparency-january-1.png
 hide_table_of_contents: false
 ---
 <!--truncate-->
 ### Overview
 April 2021 was a month of tremendous adoption, experimentation and learning from the community for Flashbots. At the time of writing, mining pools accounting for more than 84% of the Ethereum network hash rate has adopted Flashbots, and the number of unique searchers who landed Flashbots bundles on chain has grown 1430% month on month to over 600 unique searchers in April. Maintaining software stability throughout the Ethereum Berlin Upgrade and improving core infrastructure has been a primary focus for Flashbots. In parallel, we finalized the spec for Flashbots Alpha v0.2, our 2nd major release of Flashbots, surveyed the community for technical feedback, and worked hard towards our release in May.
 
-[picture missing]
+![](/img/transparency-april-1.png)
 
 As an open research organization we stayed true to our commitment to learning from the community and iterating in public. Here are the highlights:
 
@@ -59,13 +59,13 @@ Adoption of Flashbots has continued to steadily increase and at the time of writ
 
 *Source: Etherscan (5/12/2021)*
 
-[picture missing]
+![](/img/transparency-april-2.png)
 
 The total profit that miners have made from Flashbots increased nearly 10X in April from ~1k ETH to ~10k ETH of profit. At the same time the average profit per block has stabilized at 0.18–0.2 ETH per block. It is expected that Flashbots’ next release will increase both total profit and average profit per block.
 
 *Source: Flashbots. Miner profit is found by taking the increase in revenue from Flashbots bundles (e.g. coinbase payments) minus the opportunity cost of including Flashbots bundles (e.g. gas fees from displaced transactions).*
 
-[picture missing]
+![](/img/transparency-april-3.png)
 
 ## Searcher Adoption
 ### Key Metrics
@@ -73,13 +73,13 @@ The number of unique active searchers using Flashbots multiplied several times i
 
 *Source: Flashbots.*
 
-[picture missing]
+![](/img/transparency-april-4.png)
 
 Although Flashbots bundles typically have 0 gas price transactions, bundles do have an “effective” gas price that can be found by taking the bundle’s coinbase transfer payments divided by the gas that the bundle consumes. MEV-Geth compares the bundle’s gas price to the gas price of transactions at the tail end of the block, which we refer to as the “tail gas price.” As you can see in the above graph the bundle gas price closely tracked tail gas price until roughly the start of March, when there was an uptick in searcher adoption on Flashbots. At that point the median bundle gas price was substantially higher than the tail gas price and the difference between the two continued to grow until it stabilized in April.
 
 *Source: Flashbots*
 
-[picture missing]
+![](/img/transparency-april-5.png)
 
 ### Battle of the Bots
 In early April sandwich bots turned on each other as several attackers deployed malicious tokens designed to drain the funds of sandwich bots. To work these malicious tokens needed to evade sandwich bots simulations and take advantage of how Flashbots operates. Ultimately one attacker made hundreds of ETH from draining sandwich bots. Read this thread for a fascinating look at how sandwich bots work and the extremely adversarial environment in which they operate.

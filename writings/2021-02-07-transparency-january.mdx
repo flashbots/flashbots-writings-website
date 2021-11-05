@@ -3,7 +3,7 @@ slug: transparency-january
 title: Flashbots Transparency Report — January 2021
 authors: [thegostep]
 tags: [transparency report]
-image: https://i.imgur.com/mErPwqL.png
+image: /img/transparency-january-1.png
 hide_table_of_contents: false
 ---
 *The first Flashbots bundle was mined in block 11550019 on Dec-29–2020 04:33:22 PM UTC, kicking off what is poised to be the year of MEV.*
@@ -40,9 +40,9 @@ We recorded a live demo of this rescue operation using Flashbots during the Jan 
 ### MEV search activities on Flashbots
 Over the course of January, a total of 19 searcher bots have successfully landed a total of 1485 bundles on chain and paid a total of 51.76 ETH in fees to miners.
 
-[picture missing]
+![](/img/transparency-january-2.png)
 
-[picture missing]
+![](/img/transparency-january-3.png)
 
 There were a wide range of MEV strategies landed on chain through Flashbots — including some fairly innovative ones, such as an incentivized call, and market-taker that arbs without causing user harm.
 
@@ -65,11 +65,11 @@ Flashbots provides technical support to miners and mining pools adopting MEV-get
 ### Blocks mined including Flashbots transaction bundles
 Below is a graph of the % of total blocks mined by a Flashbots-enabled miner. It shows that over the course of January, MEV-geth consistently received between 3–4% of the total network hashrate.
 
-[picture missing]
+![](/img/transparency-january-4.png)
 
 The following graph shows all the blocks mined by Flashbots miners over the course of the month. The breakdown of the blocks mined by the participating mining pool shows how frequently Flashbots blocks (green), which are blocks mined with Flashbots transaction bundles, are more valuable than regular blocks (blue).
 
-[picture missing]
+![](/img/transparency-january-5.png)
 
 ### Observed deviation from expected miner behavior and subsequent correction
 While MEV-geth has a built-in profit switcher which guarantees that the most valuable block is mined, we noticed a deviation from the expected behavior where the miner sometimes mined a Flashbots block when a regular block would have been more profitable and vice-versa. Our investigation revealed that the participating mining pool disabled the profit switcher in MEV-geth and was instead using a proprietary profit switcher based on their custom mining pool setup which ended up leaving money on the table. We notified the mining pool of the suboptimal outcome of their set-up and saw a subsequent correction towards the end of the month.

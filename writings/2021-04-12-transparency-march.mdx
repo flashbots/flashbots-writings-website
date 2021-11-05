@@ -3,7 +3,7 @@ slug: transparency-march
 title: Flashbots Transparency Report — March 2021
 authors: [thegostep]
 tags: [transparency report]
-image: https://i.imgur.com/mErPwqL.png
+image: /img/transparency-january-1.png
 hide_table_of_contents: false
 ---
 *The good, the bad, and the ugly of MEV*
@@ -13,7 +13,7 @@ March 2021 has been the month of adoption and alignment for Flashbots. While one
 
 *There were **90 unique active MEV searchers** that succeeded in landing 5,423 **flashbots bundles** on-chain, up from 23 searchers in the month of February. Miners on average received **0.2 ETH per “flashblock”** (block with flashbots bundle inclusion) of additional revenue, up 313% month-on-month, with the most profitable bundle paying **101.11 ETH** as tx bundle tip to a lucky miner.*
 
-[picture missing]
+![](/img/transparency-march-1.png)
 
 *Source: Etherscan, Flashbots, updated as of UTC 09:25, Apr 12, 2021*
 
@@ -47,18 +47,19 @@ b) **v0.2 release** (end of April): Request for Comments
 ## Searcher Adoption
 ### Key Metrics
 
-[picture missing]
+![](/img/transparency-march-2.png)
 
 *Source: Etherscan, date range: Jan 6-Apr 5, updated as of UTC 09:00, Apr 12, 2021*
 
 The total number of ethereum blocks including flashbots transaction bundles grew 16x from 0.83% at the beginning of March to 13.9% of the entire network by April 1, and the growth has been further accelerating since then.
 
-[picture missing]
+![](/img/transparency-march-3.png)
 
 *Source: Flashbots, based on signing address with >20 transactions and API keys. date range: Jan 1-Apr 1, updated as of UTC 09:00, Apr 12, 2021*
 
 We witnessed a continued organic searcher growth with 154 unique active searchers who submitted transaction bundles to MEV-relay in March, among which 90 searchers succeeded in landing on-chain. Each day we saw (at least) one new searcher successfully landing a flashbots bundle on-chain.
 
+![](/img/transparency-march-4.png)
 *Source: Flashbots, date range: Feb-Apr, updated as of UTC 09:00, Apr 12, 2021*
 
 In March, flashbots searchers submitted over 4 million flashbots bundles to our MEV-relay (up 666% from February), among which 5,423 outcompeted transactions in vanilla blocks, and got mined by 8 different mining pools.
@@ -68,13 +69,13 @@ Whether the recent drop in ethereum gas prices has to do with flashbots has been
 
 On the other hand, the current implementation of flashbots alpha is a sealed-bid auction. By submitting through flashbots MEV-relay, MEV searchers not only preserve pre-trade privacy, but more importantly save on gas paid on failed transactions in the PGA game, only paying tips to miners if their transaction succeeds in landing on-chain.
 
-[picture missing]
+![](/img/transparency-march-5.png)
 
 *Source: Flashbots, Etherscan, comparing trend over time of 2+ ETH miner tips txs with number of 2+ ETH gas fee txs. Date range: Jan 1-Apr 1, updated as of UTC 09:00, Apr 12, 2021*
 
 We saw a drop in high-gwei transactions in the mempool PGA game responsible for ethereum network congestion and high gas fees, and a rise in high bundle tip transactions on flashbots. We observe MEV searchers shutting down their bots competing in the mempool and focus exclusively on flashbots as hashrate growth on flashbots continues to increase, effectively rendering PGA bots uncompetitive.
 
-[picture missing]
+![](/img/transparency-march-6.png)
 
 *Source: Flashbots, Etherscan, effective gas price calculated by taking the miner tips of flashbots bundles divided by the gas used. Data range: last 500 blocks, updated as of UTC 12:45, Apr 12, 2021*
 
@@ -84,7 +85,7 @@ This pattern marks the beginning of a market-driven separation of the “high-sp
 ### Key Metrics
 Flashbots hashrate adoption has gone hockey-stick in March as miners turn to MEV as a substitute to their mining income in light of EIP-1559. At the time of writing, 12 mining pools (including 4 out of the top 5) accounting for over 58% of Ethereum hashrate are receiving flashbots transaction bundles.
 
-[picture missing]
+![](/img/transparency-march-7.png)
 
 *Source: Flashbots, Etherscan. Date range: hashrate ranking based on 7 day average taking from Apr 1 to Apr 7.*
 
@@ -92,13 +93,13 @@ Just a few months ago we thought this was impossible. Mining pool operators who 
 
 Since we embarked on the Flashbots journey, we have been blown away by the support and commitment these miners have shown for a fair, democratic, and efficient MEV extraction ecosystem and are thrilled to continue working with them towards a bright MEV future that contributes to the security of ethereum.
 
-[picture missing]
+![](/img/transparency-march-8.png)
 
 *Source: Flashbots, Etherscan. Miner profit is calculated as miner revenue net of opportunity cost (tail gas of the block), reward is the total miner tips per flashbots bundle. Date range: Jan 1 to Apr 1.*
 
 Miners’ per block profitability quadrupled in March with an average of 0.2 ETH per block, while the most profitable bundle payed 101.11 ETH as tx bundle tip to a lucky miner. Searchers paid a total of 1.4k ETH in fees to miners for the month of March.
 
-[picture missing]
+![](/img/transparency-march-9.png)
 
 *Source: Flashbots, Etherscan. Date range: Jan 1 to Apr 1.*
 
@@ -112,11 +113,11 @@ There is a reason we designed flashbots system to enable a competitive market fo
 ### Big bundle alert: 101 ETH in 1 bundle as miner tips
 On March 30th the $MARSH token added significant initial liquidity to Uniswap, and the transaction lingered in the mempool for 4 minutes. That time was long enough for a searcher to find it and combine their own buy transaction.
 
-[picture missing]
+![](/img/transparency-march-10.png)
 
 By doing so this searcher gained the opportunity to buy tokens from the $MARSH pool before anyone else. They chose to purchase 250 ETH worth of $MARSH, and were able to sell this later for a significant profit.
 
-[picture missing]
+![](/img/transparency-march-11.png)
 
 But this did not come cheaply for this searcher: they paid 101.112 ETH or ~$200,000 to a miner to have their buy transaction placed immediately after the liquidity was added. Not a bad payoff in return for ordering two transactions.
 
@@ -139,7 +140,7 @@ Surya Bakshi defined the problems in the current mempool auction, and how MEV au
 
 Robert Miller presented the design for a future flashbots core infrastructure with complete cryptographic guarantee for privacy. MEV-sgx is a solution aiming to provide searchers a way to send their transaction bundles to miners directly without the need for a relay and to keep those bundles private until mined. It is the next step in achieving our design goals listed above, and we will be formally releasing our spec in the coming weeks.
 
-[picture missing]
+![](/img/transparency-march-12.png)
 
 *Design goals for flashbots core infrastructure*
 
@@ -170,7 +171,7 @@ An under-utilized feature of flashbots is frontrunning protection. While the fla
 ### MEV NFT: Absolution
 Flashbots community member Fiona Kobayashi created and minted a flashbots centered NFT as a part of their MEV Series! Check out “Absolution,” a short story about a wounded bot seeking shelter in the dark forest.
 
-[picture missing]
+![](/img/transparency-march-13.png)
 
 Join us this Thursday (Apr 15) for our monthly Flashbots Community Call (subscribe to MEV calendar), where we will share:
 * A sneak peek preview of the Flashbots Transparency Dashboard

@@ -3,7 +3,7 @@ slug: quantifying-mev
 title: Quantifying MEV—Introducing MEV-Explore v0
 authors: [obadiaa]
 tags: [flashbots]
-image: https://miro.medium.com/max/2000/1*ZpRhuTKj-gqURgslnqEtIg.png
+image: /img/introducing-explore-1
 hide_table_of_contents: false
 ---
 We took the first deep look at MEV and released our findings through [MEV-Explore](https://explore.flashbots.net/), a public dashboard and live MEV transactions explorer.
@@ -20,15 +20,14 @@ With these questions in mind, we scraped Ethereum, covering over 8 major DeFi pr
 
 ### At Least $314M of Extracted MEV since Jan 1st 2020
 After scraping the Ethereum blockchain starting from the first block of 2020 (9193266), we’ve found a total of at least $314M worth (~540k ETH) of Extracted MEV since Jan 1st 2020. This includes successful, reverted and checked MEV transactions, and their associated gas fees.
-
-[picture missing]
+![Cumulative Extracted MEV](/img/introducing-explore-2.png)
 Fig 1: Cumulative Extracted MEV since Jan 1 2020 (in USD)
 
 Total Extracted MEV has grown significantly: in January 2021 we recorded a total extracted MEV of $57M (47.6k ETH), an over 300x increase in absolute dollar amount or 43x increase in ETH from the $180k (1.1k ETH) we recorded for the month of January 2020. This number establishes a lower bound on MEV since Jan 1st 2020 and gives an indicative figure of how much value is at least at stake from transaction ordering. We believe the actual MEV extracted to be higher than our measure given our incomplete protocol and transaction type coverage in our data collection process. We also expect the metric will continue to grow, not only by mirroring DeFi’s growth and Ethereum’s increasing complexity that will open up new ways to capture value from transaction ordering, but also as more sophisticated MEV extraction methods emerge.
 
 MEV-Explore v0 marks the first milestone of our collective effort in quantifying and classifying MEV activities through MEV-Inspect. Currently the data collection that underlies these metrics inspects the 8 protocols listed in the table below (see fig.2). There are many newly emergent DeFi protocols with significant MEV exposure (eg. ESD/DSD) as well as OG DeFi protocols where most of the MEV existed before the recent growth in DeFi (eg. Bancor, Kyber, Etherdelta, Airswap) which we are planning on covering in MEV-Explore v1. In addition, we also do not yet cover a significant set of MEV activities such as multi-tx opportunities (eg. sandwich trades) and CEX-DEX price arbitrage. We invite the community to join us in improving the dashboard metrics, refining our data collection and cleaning process, and writing more MEV inspectors to increase the data coverage of MEV-Explore.
 
-[picture missing]
+![Protocol Coverage](/img/introducing-explore-3.png)
 Figure 2: Protocol Coverage
 
 ### What’s counted in Extracted MEV?
@@ -89,7 +88,7 @@ In addition, since a single transaction will win an MEV opportunity, we find tha
 
 Since Jan 1 2020, Extracted MEV activity has represented at least ~3% of the overall gas consumption on the Ethereum network (see fig. 4). Zooming in on Reverted and Checked MEV transactions, we’ve found that their gas consumption could’ve filled at least 4500 Ethereum blocks, a lot of valuable blockspace wasted!
 
-[picture missing]
+![Gas usage from Extracted MEV](/img/introducing-explore-4.png)
 Fig 3: Gas usage from Extracted MEV relative to overall network gas usage, split by successful (green) and failed (red) MEV txs since Jan 1 2020
 
 ### Evolution of MEV: M̶i̶n̶e̶r̶ Maximal Extractable Value
@@ -98,7 +97,8 @@ On Ethereum today, and before it moves to proof-of-stake consensus, miners have 
 
 Taking the word miner out of MEV’s name also addresses another common confusion: that miners are the only ones who capture this value. As mentioned above, the reality is that MEV extraction on Ethereum so far has been primarily conducted by non-mining DeFi traders and bot operators.
 
-[picture missing]
+![Extracted MEV Split between MEV Tx Sender and MEV Tx Miner](/img/introducing-explore-5.png)
+
 Fig 4: Extracted MEV Split between MEV Tx Sender and MEV Tx Miner (gas fees) since Jan 1 2020
 
 In recent months however, we’ve started to see more active participation in the MEV game from miners either through direct extraction by running bots themselves, profit-sharing agreements with DeFi traders, or through adopting MEV extraction market infrastructure such as Flashbots’ MEV-Geth.
