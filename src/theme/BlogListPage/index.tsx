@@ -53,16 +53,16 @@ const paginate = function (array: Array<any>[], index: number, size: number): an
   index = Math.abs(index);
   index = index > 0 ? index - 1 : index;
   size = size < 1 ? 1 : size;
-
   // filter
   return [...(array.filter((value, n) => {
       return (n >= (index * size)) && (n < ((index+1) * size))
   }))]
 }
 
+
+
 function BlogListPage(props: Props): JSX.Element {
   const { metadata, items, location } = props
-  console.log(props)
   const {
     siteConfig: { title: siteTitle }
   } = useDocusaurusContext()
@@ -76,7 +76,7 @@ function BlogListPage(props: Props): JSX.Element {
 
   const currentPage = useMemo(() => {
     // @ts-ignore: Readonly prevents mutation calls 
-    return paginate([...items], page, POST_PER_PAGE)
+    return paginate([...items], page + 1, POST_PER_PAGE)
   }, [items, page])
 
   // @ts-ignore: Destructuring doesn't ensure type fulfillment 
@@ -87,9 +87,10 @@ function BlogListPage(props: Props): JSX.Element {
     page,
     postsPerPage: POST_PER_PAGE,
     nextPage: (page + 1) * POST_PER_PAGE < metadata.totalCount ? () => setPage(page + 1) : undefined,
-    previousPage: page > 1 ? () => setPage(page - 1) : undefined,
+    previousPage: page >= 1 ? () => setPage(page - 1) : undefined,
     totalPages: Math.ceil(metadata.totalCount / POST_PER_PAGE) 
   }), [metadata, page])
+
 
   const [searchFilter, setSearchFilter] = useState("")
   return (
