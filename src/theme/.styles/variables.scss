@@ -16,10 +16,13 @@ $min: math.div($size * 1, random(10));
 $max: 1+$min*1+random(3);
 $step: $min*5.0;
 
+
 HTML {
   height: 100%;
-  }
+}
+
 BODY {
+  --ifm-font-family-base: 'Poppins', sans-serif; 
   background: 
     radial-gradient(circle at right,
       $transparent $min, 
@@ -69,10 +72,10 @@ BODY {
   background-attachment: fixed;
   background-repeat: repeat;
   //font: 16px/2 'Trebuchet MS', Verdana, sans-serif;
-    font-family: 'Poppins', sans-serif;
-    //max-width: 70vw !important;
-    min-height: 100%;
-  }
+  font-family: var(--ifm-font-family-base);
+  //max-width: 70vw !important;
+  min-height: 100%;
+}
 
 header {
     text-align: justify;
@@ -94,6 +97,7 @@ main {
 h2 {
     text-align: center;
 }
+
 .layoutDefaults_src-theme-Layout-styles-module {
     margin-top: -50px;
 }
