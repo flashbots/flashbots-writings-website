@@ -61,6 +61,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
       ({
         docs: false,
         blog: {
+          blogTitle: "Writings",
           path: "./writings",
           routeBasePath: "/writings",
           postsPerPage: "ALL",
