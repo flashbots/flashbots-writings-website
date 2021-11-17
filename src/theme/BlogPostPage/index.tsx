@@ -12,7 +12,7 @@ import BlogPostItem from '@theme/BlogPostItem';
 import BlogPostPaginator from '@theme/BlogPostPaginator';
 import type {Props} from '@theme/BlogPostPage';
 import {ThemeClassNames} from '@docusaurus/theme-common';
-import { DiscussionEmbed } from 'disqus-react';
+// import { DiscussionEmbed } from 'disqus-react';
 import styles from './styles.module.css';
 
 function BlogPostPage(props: Props): JSX.Element {
@@ -81,7 +81,7 @@ function BlogPostPage(props: Props): JSX.Element {
       {(nextItem || prevItem) && (
         <BlogPostPaginator nextItem={nextItem} prevItem={prevItem} />
       )}
-      <section className={styles.comments}>
+      {/* <section className={styles.comments}>
         <DiscussionEmbed
           shortname='flashbots-writings-1'
           config={{
@@ -90,7 +90,7 @@ function BlogPostPage(props: Props): JSX.Element {
             title: title,
           }}
         />
-      </section>
+      </section> */}
 
     </BlogLayout>
   );

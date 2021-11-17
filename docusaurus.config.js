@@ -42,6 +42,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
       '@docusaurus/plugin-content-blog',
       {
         id: 'research',
+        blogTitle: "Research",
         routeBasePath: '/research',
         path: './research',
         postsPerPage: "ALL",
@@ -61,6 +62,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
       ({
         docs: false,
         blog: {
+          blogTitle: "Writings",
           path: "./writings",
           routeBasePath: "/writings",
           postsPerPage: "ALL",
