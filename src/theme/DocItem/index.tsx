@@ -46,9 +46,6 @@ export default function DocItem(props: Props): JSX.Element {
   const renderTocDesktop =
     canRenderTOC && (windowSize === 'desktop' || windowSize === 'ssr');
 
-  const siteUrl = `${process.env.TARGET_URL}`
-  const fmtId = permalink.replace(/^\//, '').replaceAll(/[\s\/]/gi, '-');
-  const disqusId = fmtId == '' ? 'main' : fmtId;
   return (
     <>
       <Seo {...{title, description, keywords, image}} />
