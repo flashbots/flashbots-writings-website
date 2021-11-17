@@ -1,5 +1,4 @@
 @use 'sass:math';
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
 $desktop-max-width: 80em;
 
 // random bg seed: 2192
@@ -22,7 +21,6 @@ HTML {
 }
 
 BODY {
-  --ifm-font-family-base: 'Poppins', sans-serif; 
   background: 
     radial-gradient(circle at right,
       $transparent $min, 
@@ -72,7 +70,7 @@ BODY {
   background-attachment: fixed;
   background-repeat: repeat;
   //font: 16px/2 'Trebuchet MS', Verdana, sans-serif;
-  font-family: var(--ifm-font-family-base);
+  // font-family: var(--ifm-font-family-base);
   //max-width: 70vw !important;
   min-height: 100%;
 }
