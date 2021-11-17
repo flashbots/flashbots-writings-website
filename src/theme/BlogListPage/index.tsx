@@ -75,11 +75,11 @@ function BlogListPage(props: Props): JSX.Element {
   const [page, setPage] = useState(0)
 
   const currentPage = useMemo(() => {
-    // @ts-ignore: Readonly prevents mutation calls 
+    // @ts-ignore: Readonly prevents mutation calls
     return paginate([...items], page + 1, POST_PER_PAGE)
   }, [items, page])
 
-  // @ts-ignore: Destructuring doesn't ensure type fulfillment 
+  // @ts-ignore: Destructuring doesn't ensure type fulfillment
   const settings: Metadata = useMemo(() => ({
     ...metadata,
     blogTitle: metadata.blogTitle,
@@ -88,7 +88,7 @@ function BlogListPage(props: Props): JSX.Element {
     postsPerPage: POST_PER_PAGE,
     nextPage: (page + 1) * POST_PER_PAGE < metadata.totalCount ? () => setPage(page + 1) : undefined,
     previousPage: page >= 1 ? () => setPage(page - 1) : undefined,
-    totalPages: Math.ceil(metadata.totalCount / POST_PER_PAGE) 
+    totalPages: Math.ceil(metadata.totalCount / POST_PER_PAGE)
   }), [metadata, page])
 
 
@@ -108,9 +108,9 @@ function BlogListPage(props: Props): JSX.Element {
       <h3 className={styles.header}>
         {
           location.pathname === "/research" ?  (<>
-            Research from the Flashbots team. Learn more in our <a href="https://github.com/flashbots/mev-research">research repo</a> 
+            Research from the Flashbots team. Learn more in our <a href="https://github.com/flashbots/mev-research">research repo</a>
           </>) : (<>
-            Writings from the Flashbots team
+            Research from the Flashbots team
           </>)
         }
       </h3>
