@@ -108,9 +108,9 @@ function BlogListPage(props: Props): JSX.Element {
       <h3 className={styles.header}>
         {
           location.pathname === "/research" ?  (<>
-            Research from the Flashbots team. Learn more in our <a href="https://github.com/flashbots/mev-research">research repo</a>
+            Research from the Flashbots team.
           </>) : (<>
-            Research from the Flashbots team
+            Writings from the Flashbots team.
           </>)
         }
       </h3>
