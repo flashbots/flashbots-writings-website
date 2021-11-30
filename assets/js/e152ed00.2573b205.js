@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwrittings_website=self.webpackChunkwrittings_website||[]).push([[890],{6883:function(s){s.exports=JSON.parse('{"allTagsPath":"/research/tags","slug":"/research/tags/sgx","name":"sgx","count":1,"permalink":"/research/tags/sgx"}')}}]);

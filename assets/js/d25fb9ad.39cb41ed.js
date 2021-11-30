@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwrittings_website=self.webpackChunkwrittings_website||[]).push([[6903],{3696:function(e){e.exports=JSON.parse('{"allTagsPath":"/research/tags","slug":"/research/tags/eth-2","name":"eth2","count":2,"permalink":"/research/tags/eth-2"}')}}]);
