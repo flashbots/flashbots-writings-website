@@ -2,6 +2,7 @@
   "name": "writtings-website",
   "version": "0.0.0",
   "private": true,
+  "homepage": "./",
   "scripts": {
     "docusaurus": "docusaurus",
     "setup-cname": "node ./scripts/setup-cname.js",
