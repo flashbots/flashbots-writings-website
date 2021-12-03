@@ -1,0 +1,31 @@
+---
+slug: cross-domain-mev
+title: Unity is Strength - A Formalization of Cross-Domain Maximal Extractable Value
+authors: [obadiaa, alejo, lakshman, tarun, phil, vaibhav]
+tags: [research]
+image: https://i.imgur.com/mErPwqL.png
+hide_table_of_contents: false
+---
+The multi-chain future is upon us. Modular architectures are coming to maturity across the ecosystem
+to scale bandwidth and throughput of cryptocurrency. One example of such is the Ethereum modular
+architecture, with its beacon chain, its execution chain, its Layer 2s, and soon its shards. These can all
+be thought as separate blockchains, heavily inter-connected with one another, and together forming an
+ecosystem.
+
+<!--truncate-->
+
+In this work, we call each of these interconnected blockchains ‘domains’, and study the manifestation of
+Maximal Extractable Value (MEV, a generalization of “Miner Extractable Value”) across them. In other
+words, we investigate whether there exists extractable value that depends on the ordering of transactions
+in two or more domains jointly.
+
+We first recall the definitions of Extractable and Maximal Extractable Value, before introducing a
+definition of Cross-Domain Maximal Extractable Value. We find that Cross-Domain MEV can be used
+to measure the incentive for transaction sequencers in different domains to collude with one another,
+and study the scenarios in which there exists such an incentive. We end the work with a list of negative
+externalities that might arise from cross-domain MEV extraction and lay out several open questions.
+We note that the formalism in this work is a work-in-progress, and we hope that it can serve as the
+basis for formal analysis tools in the style of those presented in Clockwork Finance [1], as well as for
+discussion on how to mitigate the upcoming negative externalities of substantial cross-domain MEV.
+
+Access the full paper here: https://arxiv.org/pdf/2112.01472.pdf
