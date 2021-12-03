@@ -50,17 +50,6 @@
         </author>
     </entry>
     <entry>
-        <title type="html"><![CDATA[On the Formalization of MEV]]></title>
-        <id>formalization-mev</id>
-        <link href="https://writings.flashbots.net/research/formalization-mev"/>
-        <updated>2021-12-03T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[Thanks to Phil Daian, Alex Obadia, and Mahimna Kelkar for plenty of discussions on the topic.]]></summary>
-        <author>
-            <name>Alejo Salles</name>
-            <uri>https://twitter.com/fiiiu_</uri>
-        </author>
-    </entry>
-    <entry>
         <title type="html"><![CDATA[MEV-Boost -- Merge ready Flashbots Architecture]]></title>
         <id>mev-boost</id>
         <link href="https://writings.flashbots.net/research/mev-boost"/>

@@ -22,13 +22,6 @@
             <description><![CDATA[The multi-chain future is upon us. Modular architectures are coming to maturity across the ecosystem]]></description>
         </item>
         <item>
-            <title><![CDATA[On the Formalization of MEV]]></title>
-            <link>https://writings.flashbots.net/research/formalization-mev</link>
-            <guid>formalization-mev</guid>
-            <pubDate>Fri, 03 Dec 2021 00:00:00 GMT</pubDate>
-            <description><![CDATA[Thanks to Phil Daian, Alex Obadia, and Mahimna Kelkar for plenty of discussions on the topic.]]></description>
-        </item>
-        <item>
             <title><![CDATA[MEV-Boost -- Merge ready Flashbots Architecture]]></title>
             <link>https://writings.flashbots.net/research/mev-boost</link>
             <guid>mev-boost</guid>
