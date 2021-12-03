@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkwrittings_website=self.webpackChunkwrittings_website||[]).push([[5317],{4117:function(e){e.exports=JSON.parse('{"permalink":"/writings","page":1,"postsPerPage":11,"totalPages":1,"totalCount":11,"previousPage":null,"nextPage":null,"blogDescription":"Blog","blogTitle":"Writings"}')}}]);

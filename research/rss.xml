@@ -4,9 +4,23 @@
         <title>Flashbots Blog</title>
         <link>https://writings.flashbots.net/research</link>
         <description>Flashbots Blog</description>
-        <lastBuildDate>Fri, 03 Dec 2021 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sat, 04 Dec 2021 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
+        <item>
+            <title><![CDATA[On the Formalization of MEV]]></title>
+            <link>https://writings.flashbots.net/research/formalization-mev</link>
+            <guid>formalization-mev</guid>
+            <pubDate>Sat, 04 Dec 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[Thanks to Phil Daian, Alex Obadia, and Mahimna Kelkar for plenty of discussions on the topic.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Unity is Strength - A Formalization of Cross-Domain Maximal Extractable Value]]></title>
+            <link>https://writings.flashbots.net/research/cross-domain-mev</link>
+            <guid>cross-domain-mev</guid>
+            <pubDate>Fri, 03 Dec 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[The multi-chain future is upon us. Modular architectures are coming to maturity across the ecosystem]]></description>
+        </item>
         <item>
             <title><![CDATA[On the Formalization of MEV]]></title>
             <link>https://writings.flashbots.net/research/formalization-mev</link>

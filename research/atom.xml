@@ -2,11 +2,53 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://writings.flashbots.net/research</id>
     <title>Flashbots Blog</title>
-    <updated>2021-12-03T00:00:00.000Z</updated>
+    <updated>2021-12-04T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://writings.flashbots.net/research"/>
     <subtitle>Flashbots Blog</subtitle>
     <icon>https://writings.flashbots.net/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[On the Formalization of MEV]]></title>
+        <id>formalization-mev</id>
+        <link href="https://writings.flashbots.net/research/formalization-mev"/>
+        <updated>2021-12-04T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Thanks to Phil Daian, Alex Obadia, and Mahimna Kelkar for plenty of discussions on the topic.]]></summary>
+        <author>
+            <name>Alejo Salles</name>
+            <uri>https://twitter.com/fiiiu_</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Unity is Strength - A Formalization of Cross-Domain Maximal Extractable Value]]></title>
+        <id>cross-domain-mev</id>
+        <link href="https://writings.flashbots.net/research/cross-domain-mev"/>
+        <updated>2021-12-03T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[The multi-chain future is upon us. Modular architectures are coming to maturity across the ecosystem]]></summary>
+        <author>
+            <name>Alex Obadia</name>
+            <uri>https://twitter.com/ObadiaAlex</uri>
+        </author>
+        <author>
+            <name>Alejo Salles</name>
+            <uri>https://twitter.com/fiiiu_</uri>
+        </author>
+        <author>
+            <name>Lakshman Sankar</name>
+            <uri>https://twitter.com/lakshmansankar</uri>
+        </author>
+        <author>
+            <name>Tarun Chitra</name>
+            <uri>https://twitter.com/tarunchitra</uri>
+        </author>
+        <author>
+            <name>Phil Daian</name>
+            <uri>https://pdaian.com/</uri>
+        </author>
+        <author>
+            <name>Vaibhav Chellani</name>
+            <uri>https://twitter.com/vaibhavchellani</uri>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[On the Formalization of MEV]]></title>
         <id>formalization-mev</id>
