@@ -4,9 +4,16 @@
         <title>Flashbots Blog</title>
         <link>https://flashbots.github.io/research</link>
         <description>Flashbots Blog</description>
-        <lastBuildDate>Wed, 03 Nov 2021 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 03 Dec 2021 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
+        <item>
+            <title><![CDATA[On the Formalization of MEV]]></title>
+            <link>https://flashbots.github.io/research/formalization-mev</link>
+            <guid>formalization-mev</guid>
+            <pubDate>Fri, 03 Dec 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[Thanks to Phil Daian, Alex Obadia, and Mahimna Kelkar for plenty of discussions on the topic.]]></description>
+        </item>
         <item>
             <title><![CDATA[MEV-Boost -- Merge ready Flashbots Architecture]]></title>
             <link>https://flashbots.github.io/research/mev-boost</link>

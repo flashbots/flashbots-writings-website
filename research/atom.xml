@@ -2,11 +2,22 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://flashbots.github.io/research</id>
     <title>Flashbots Blog</title>
-    <updated>2021-11-03T00:00:00.000Z</updated>
+    <updated>2021-12-03T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://flashbots.github.io/research"/>
     <subtitle>Flashbots Blog</subtitle>
     <icon>https://flashbots.github.io/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[On the Formalization of MEV]]></title>
+        <id>formalization-mev</id>
+        <link href="https://flashbots.github.io/research/formalization-mev"/>
+        <updated>2021-12-03T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Thanks to Phil Daian, Alex Obadia, and Mahimna Kelkar for plenty of discussions on the topic.]]></summary>
+        <author>
+            <name>Alejo Salles</name>
+            <uri>https://twitter.com/fiiiu_</uri>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[MEV-Boost -- Merge ready Flashbots Architecture]]></title>
         <id>mev-boost</id>
