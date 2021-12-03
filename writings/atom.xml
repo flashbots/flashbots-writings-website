@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://flashbots.github.io/writings</id>
+    <id>https://writings.flashbots.net/writings</id>
     <title>Flashbots Blog</title>
     <updated>2021-10-06T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://flashbots.github.io/writings"/>
+    <link rel="alternate" href="https://writings.flashbots.net/writings"/>
     <subtitle>Flashbots Blog</subtitle>
-    <icon>https://flashbots.github.io/img/favicon.ico</icon>
+    <icon>https://writings.flashbots.net/img/favicon.ico</icon>
     <entry>
         <title type="html"><![CDATA[Announcing Flashbots Protect]]></title>
         <id>announcing-protect</id>
-        <link href="https://flashbots.github.io/writings/announcing-protect"/>
+        <link href="https://writings.flashbots.net/writings/announcing-protect"/>
         <updated>2021-10-06T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Today Flashbots and our community are excited to launch a public beta of Flashbots Protect, a new product line focused on allowing everyday users and developers to easily submit transactions to Flashbots.]]></summary>
         <author>
@@ -21,7 +21,7 @@
     <entry>
         <title type="html"><![CDATA[Flashbots Transparency Report — July & August 2021]]></title>
         <id>transparency-july-august</id>
-        <link href="https://flashbots.github.io/writings/transparency-july-august"/>
+        <link href="https://writings.flashbots.net/writings/transparency-july-august"/>
         <updated>2021-09-21T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Flashbots’ last two months have been packed.]]></summary>
         <author>
@@ -32,7 +32,7 @@
     <entry>
         <title type="html"><![CDATA[On the Design of MEV Marketplaces]]></title>
         <id>design-mev-marketplaces</id>
-        <link href="https://flashbots.github.io/writings/design-mev-marketplaces"/>
+        <link href="https://writings.flashbots.net/writings/design-mev-marketplaces"/>
         <updated>2021-08-04T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[The beating heart of every blockchain is how space is allocated within a block. In less than 24 hours, Ethereum will undergo a historic change to how blockspace is allocated as transaction inclusion rules drastically change with the activation of EIP-1559. However, EIP-1559 does not affect miners’ ability to reorder, insert, or censor transactions, and as such it largely does not have an impact on MEV (Maximal Extractable Value).]]></summary>
         <author>
@@ -43,7 +43,7 @@
     <entry>
         <title type="html"><![CDATA[Flashbots on Reorgs]]></title>
         <id>flashbots-reorgs</id>
-        <link href="https://flashbots.github.io/writings/flashbots-reorgs"/>
+        <link href="https://writings.flashbots.net/writings/flashbots-reorgs"/>
         <updated>2021-07-16T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[There has been a lot of discussion in the Ethereum community recently about chain-reorgs-as-a-service, and how it relates to MEV, the ETH2 merge, and other important ecosystem developments.]]></summary>
         <author>
@@ -54,7 +54,7 @@
     <entry>
         <title type="html"><![CDATA[Flashbots Transparency Report — May & June 2021]]></title>
         <id>transparency-may-june</id>
-        <link href="https://flashbots.github.io/writings/transparency-may-june"/>
+        <link href="https://writings.flashbots.net/writings/transparency-may-june"/>
         <updated>2021-06-28T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[In May and June 2021 Flashbots strengthened and moved forward our network, successfully releasing v0.2 and with it improved auction pricing as well as bundle merging.]]></summary>
         <author>
@@ -65,7 +65,7 @@
     <entry>
         <title type="html"><![CDATA[Flashbots Transparency Report — April 2021]]></title>
         <id>transparency-april</id>
-        <link href="https://flashbots.github.io/writings/transparency-april"/>
+        <link href="https://writings.flashbots.net/writings/transparency-april"/>
         <updated>2021-05-13T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[April 2021 was a month of tremendous adoption, experimentation and learning from the community for Flashbots.]]></summary>
         <author>
@@ -76,7 +76,7 @@
     <entry>
         <title type="html"><![CDATA[Flashbots Transparency Report — March 2021]]></title>
         <id>transparency-march</id>
-        <link href="https://flashbots.github.io/writings/transparency-march"/>
+        <link href="https://writings.flashbots.net/writings/transparency-march"/>
         <updated>2021-04-12T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[The good, the bad, and the ugly of MEV.]]></summary>
         <author>
@@ -87,7 +87,7 @@
     <entry>
         <title type="html"><![CDATA[Flashbots Transparency Report — February 2021]]></title>
         <id>transparency-february</id>
-        <link href="https://flashbots.github.io/writings/transparency-february"/>
+        <link href="https://writings.flashbots.net/writings/transparency-february"/>
         <updated>2021-03-18T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Sandwiching, Fairness, and EIP-1559]]></summary>
         <author>
@@ -98,7 +98,7 @@
     <entry>
         <title type="html"><![CDATA[Quantifying MEV—Introducing MEV-Explore v0]]></title>
         <id>quantifying-mev</id>
-        <link href="https://flashbots.github.io/writings/quantifying-mev"/>
+        <link href="https://writings.flashbots.net/writings/quantifying-mev"/>
         <updated>2021-02-22T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[We took the first deep look at MEV and released our findings through MEV-Explore, a public dashboard and live MEV transactions explorer.]]></summary>
         <author>
@@ -109,7 +109,7 @@
     <entry>
         <title type="html"><![CDATA[Flashbots Transparency Report — January 2021]]></title>
         <id>transparency-january</id>
-        <link href="https://flashbots.github.io/writings/transparency-january"/>
+        <link href="https://writings.flashbots.net/writings/transparency-january"/>
         <updated>2021-02-07T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[The first Flashbots bundle was mined in block 11550019 on Dec-29–2020 0422 PM UTC, kicking off what is poised to be the year of MEV.]]></summary>
         <author>
@@ -120,7 +120,7 @@
     <entry>
         <title type="html"><![CDATA[Flashbots—Frontrunning the MEV Crisis]]></title>
         <id>frontrunning-mev-crisis</id>
-        <link href="https://flashbots.github.io/writings/frontrunning-mev-crisis"/>
+        <link href="https://writings.flashbots.net/writings/frontrunning-mev-crisis"/>
         <updated>2020-11-23T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Flashbots is a research and development organization formed to mitigate the negative externalities and existential risks posed by miner-extractable value (MEV) to smart-contract blockchains. We propose a permissionless, transparent, and fair ecosystem for MEV extraction to reinforce the Ethereum ideals.]]></summary>
         <author>

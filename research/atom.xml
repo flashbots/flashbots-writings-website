@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://flashbots.github.io/research</id>
+    <id>https://writings.flashbots.net/research</id>
     <title>Flashbots Blog</title>
     <updated>2021-12-03T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://flashbots.github.io/research"/>
+    <link rel="alternate" href="https://writings.flashbots.net/research"/>
     <subtitle>Flashbots Blog</subtitle>
-    <icon>https://flashbots.github.io/img/favicon.ico</icon>
+    <icon>https://writings.flashbots.net/img/favicon.ico</icon>
     <entry>
         <title type="html"><![CDATA[On the Formalization of MEV]]></title>
         <id>formalization-mev</id>
-        <link href="https://flashbots.github.io/research/formalization-mev"/>
+        <link href="https://writings.flashbots.net/research/formalization-mev"/>
         <updated>2021-12-03T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Thanks to Phil Daian, Alex Obadia, and Mahimna Kelkar for plenty of discussions on the topic.]]></summary>
         <author>
@@ -21,7 +21,7 @@
     <entry>
         <title type="html"><![CDATA[MEV-Boost -- Merge ready Flashbots Architecture]]></title>
         <id>mev-boost</id>
-        <link href="https://flashbots.github.io/research/mev-boost"/>
+        <link href="https://writings.flashbots.net/research/mev-boost"/>
         <updated>2021-11-03T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[This document outlines the design for a marketplace for block construction (often referred to as block proposer / block builder separation or PBS) compatible with the upcoming Ethereum merge fork. This trust based solution closely resembles the current Flashbots auction design with modifications to enable solo staker participation without introducing changes to Ethereum consensus. This solution aims to bridge the gap to a permissionless PBS design which should be strongly considered for the cleanup fork in order to improve decentralization.]]></summary>
         <author>
@@ -32,7 +32,7 @@
     <entry>
         <title type="html"><![CDATA[MEV and EIP-1559]]></title>
         <id>mev-1559</id>
-        <link href="https://flashbots.github.io/research/mev-1559"/>
+        <link href="https://writings.flashbots.net/research/mev-1559"/>
         <updated>2021-07-19T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[The incorporation of EIP-1559 in the London hardfork brings a major restructuring of the Ethereum fee mechanism, aiming to allow for easier fee estimation by users and consolidate ETH as the base currency of the network by burning part of the transaction fees. This post analyzes some of the consequences of this EIP under the light of the MEV (Maximal Extractable Value) phenomenon, that is, the permissionless extraction of value by the reordering, addition, or censoring of transactions.]]></summary>
         <author>
@@ -47,7 +47,7 @@
     <entry>
         <title type="html"><![CDATA[MEV in eth2 - an early exploration]]></title>
         <id>mev-eth2</id>
-        <link href="https://flashbots.github.io/research/mev-eth2"/>
+        <link href="https://writings.flashbots.net/research/mev-eth2"/>
         <updated>2021-06-09T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Ethereum will soon transition from a Proof of Work (PoW) to a Proof of Stake (PoS) consensus protocol. This transition has been worked on for years and is happening in multiple steps. The first step in December 2020 consisted in launching the beacon chain. It is now live, and, at the time of writing, has more than 160k validators or an equivalent of ~5m ETH staked on it.]]></summary>
         <author>
@@ -62,7 +62,7 @@
     <entry>
         <title type="html"><![CDATA[MEV-SGX -- A sealed bid MEV auction design]]></title>
         <id>mev-sgx</id>
-        <link href="https://flashbots.github.io/research/mev-sgx"/>
+        <link href="https://writings.flashbots.net/research/mev-sgx"/>
         <updated>2021-05-31T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[While Flashbots Alpha has been and continues to be successful it offers incomplete trust guarantees. It is not permissionless because miners who adopt it have to be whitelisted by MEV-Relay in order to be forwarded bundles. It is not completely private because bundles can be seen by miners prior to inclusion on-chain. Lastly, Flashbots Alpha offers no finality protection against chain reorgs. While finality is important, we are focusing first on permissionless and complete privacy as the next design goals to achieve.]]></summary>
         <author>
@@ -73,7 +73,7 @@
     <entry>
         <title type="html"><![CDATA[Quantifying Realized Extractable Value]]></title>
         <id>quantifying-rev</id>
-        <link href="https://flashbots.github.io/research/quantifying-rev"/>
+        <link href="https://writings.flashbots.net/research/quantifying-rev"/>
         <updated>2021-05-16T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Maximal (formerly Miner) Extractable Value ($\textrm$) is the value that can be extracted from a blockchain by any agent without special permissions. Considering this permissionless nature, any agent with transaction ordering rights will be in a privileged position to perform the extraction. In Proof of Work blockchains, it is miners who determine transaction ordering within a block, hence the former "miner" term. In practice, bot operators seek to extract $\textrm{MEV}$ by either paying high fees to increase the likelihood that their transactions are mined, or by fine-tuning their gas price choices in order to "time" their transactions right, as is the case when backrunning an oracle update to perform a liquidation.]]></summary>
         <author>
@@ -84,7 +84,7 @@
     <entry>
         <title type="html"><![CDATA[Flashbots -- Frontrunning the MEV crisis]]></title>
         <id>ethr-frontrunning-mev-crisis</id>
-        <link href="https://flashbots.github.io/research/ethr-frontrunning-mev-crisis"/>
+        <link href="https://writings.flashbots.net/research/ethr-frontrunning-mev-crisis"/>
         <updated>2020-11-23T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Flashbots is a research and development organization formed to mitigate the negative externalities and existential risks posed by miner-extractable value (MEV) to smart-contract blockchains. We propose a permissionless, transparent, and fair ecosystem for MEV extraction to preserve the ideals of Ethereum.]]></summary>
         <author>
