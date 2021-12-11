@@ -1,0 +1,107 @@
+---
+slug: speeding-up-evm-part-1
+title: Speeding up the EVM (part 1)
+authors: [sxysun]
+tags: [optimization]
+image: /img/frontrunning-mev-crisis-1
+hide_table_of_contents: false
+---
+# Speeding up the EVM (part 1)
+
+*Thanks to Alejo Salles, Hongbo Zhang and whole Flashbots team for feedback and review of this post.*
+
+Current EVM performance is not ideal for a decentralized blockchain where everyone can run a full node easily, even though at the moment the biggest bottleneck of Ethereum is not EVM, but it will soon be as Ethereum TPS goes up to four digits. To improve EVM performance with backward compatibility and minimal change to consensus rules or how storage is implemented, we need parallelism. Moreover, as the MEV crisis on Ethereum becomes more prominent, it is vital for us to make MEV extraction easier so profits can be distributed and democratized (minimization of MEV via maximization). A parallel EVM could help searchers perform more simulations on bundle outcomes and therefore help optimize the MEV profit within that bundle. It could also help MEV relayers or block builders in [PBS](https://twitter.com/VitalikButerin/status/1462885361219252232) to produce better full blocks with smaller latency. 
+
+<!--truncate-->
+
+## TLDR:
+This series of posts explore possible directions to speed up the EVM. __In part 1 of the series we argue the need for a parallel EVM and cover general approaches to achieve it. We also discuss how different solutions like [EIP 648](https://ethresear.ch/t/parallelilizing-evm-through-end-of-the-block-virtual-transactions/7787) or [speculative execution](https://drops.dagstuhl.de/opus/volltexte/2020/11968/pdf/OASIcs-Tokenomics-2019-4.pdf) might interact with each other together with their pros and cons.__ In part 2 (much more technical) of the series we analyze the possibility of using static analysis and formal methods to make the EVM parallelizable, specifically we propose two simple algorithms for achieving parallelization.
+
+![](https://i.imgur.com/NY2PSzX.png)
+
+
+## Background
+
+Decentralization is vital to blockchain security. And [ideally](https://vitalik.ca/general/2021/05/23/scaling.html), this is achieved by as many individual parties running nodes to verify ongoing transactions as possible. However, to spin up a full node of Ethereum, it usually takes more than 3 days for regular users with a personal computer (it requires days to re-compute and validate the 13 million blocks out there). And it will soon get worse as Eth 2.0 comes in and more users emerge. Studies have shown that behind this inefficiency is [Ethereum's large storage size](https://vitalik.ca/general/2021/05/23/scaling.html) and more specifically [EVM's storage design](https://www.youtube.com/watch?v=2_GX8iCVNrA): 
+
+![](https://i.imgur.com/PelIHBC.png)
+
+It is a [consensus](https://ethresear.ch/t/parallelilizing-evm-through-end-of-the-block-virtual-transactions/7787) that for node performances, EVM storage maintenance (reading and writing data to the [Ethereum state Merkle trie](https://www.reddit.com/r/BlockchainKnowledge/comments/8emgbj/visual_interpretation_of_ethereum_yellow_paper_by/)) is the big bottleneck (taking more than [70%](https://www.youtube.com/watch?v=2_GX8iCVNrA) of the transaction processing time). And for the other 20%+ part of actual EVM instruction interpretation time, the most time-consuming opcode is `SLOAD` because of the randomized access of Merkle trie nodes (so it cannot be efficiently cached) in a large database involving IO access (note that `SSTORE` is not a big overhead because EVM inherently caches it and thus no expensive Merkle trie update is performed during runtime)
+
+![](https://i.imgur.com/CwzYJfe.jpg)
+
+So, to scale Ethereum without compromising decentralization, what can we do? 
+
+Several directions have been proposed:
+1. [Statelessness](https://hackmd.io/@vbuterin/state_expiry_paths), this is basically introducing a separation of roles within Ethereum nodes, with some nodes being "storage nodes" and others being "validator nodes." And have the validator nodes only receive part of the storage upon validating a block. The correctness of the storage is ensured by also transmitting a proof of its legitimacy. But this incurs extra Network IO overhead. The solution is to use new data structures for Ethereum storage like [Verkle trees](https://vitalik.ca/general/2021/06/18/verkle.html) to compress storage validation proofs.
+2. [RainBlock](https://www.usenix.org/conference/atc21/presentation/ponnapalli), also a separation of node functionality proposal. Alongside storage nodes and validator nodes, it also introduces a special IO-helper node. This proposal runs into the same problem of incurring extra Network IO overhead, and it tackles that problem with their custom data structure called DSM-tree.
+3. Sharding, which is like a vertical separation of node functionality.
+
+Those proposals, though fundamental and promising, all involve significant changes to the underlying client or consensus rules.
+
+What we could do now, as an orthogonal direction, is to make EVM parallel (executing txns with no storage access conflicts at the same time, and maybe even [pre-loading](https://github.com/ethereum/EIPs/issues/648#issuecomment-310695339) some storage accesses). This directly helps scalability because EVM throughput is increased, thus we could raise the gas limit and include more transactions in one block, raising the TPS. On the other hand, this can also horizontally help existing scalability proposals like [sharding](https://dl.acm.org/doi/pdf/10.1145/3453483.3454112).
+
+### MEV fairness
+
+The following graph (taken from the [Clockwork Finance paper](https://arxiv.org/pdf/2109.04347.pdf)) shows the number of blocks with more than one relevant AMM transaction that could be used for MEV extraction, which is quite a lot considering the authors are sampling only deterministic single-block MEV opportunities from two DeFi protocols. And the benchmark data was drawn only 6 months after the "DeFi summer," after which MEV opportunities have grown tremendously. 
+
+![](https://i.imgur.com/xFZkPIK.png)
+
+If DeFi evolves in the same way as TradFi, we will soon see probabilistic MEV dominate the playing field (just like statistical arbitrage and quantitative trading is a much larger market than technical arbitrage in TradFi). There are three implications of this: (i) searchers will submit larger bundles, (ii) the number of bundles submitted per block will increase, and  (iii) those bundles won't have a clear storage access conflict relation with each other. This is because every searcher has a different statistical model, so they tend to submit less similar bundles (i.e., dominance of probailistic MEV, if things turn out to be like in TradFi), unlike now, as most searchers submit similar bundles which all access the same Ethereum storage location because the alphas are simple and deterministic.  Those three implications make it difficult for [block builders](https://github.com/flashbots/pm/issues/98) to produce optimal full blocks efficiently (or, before [the Splurge](https://twitter.com/VitalikButerin/status/1466411377107558402) of Ethereum and introduction of PBS, [mega-bundles](https://docs-staging.flashbots.net/flashbots-auction/miners/mev-geth-spec/v04)).
+
+A study on EVM parallelization can help with this increasingly challenging bundle merging problem. As, essentially, _the dual problem of parallelization algorithm design is understanding how [clashes](https://hackmd.io/hvOkCzxRQu6pJCmcLVzQaQ) take place in searcher bundles_: they both require knowing a transaction's shared data access information. Moreover, a parallel EVM also helps searchers to do more simulations to produce more profitable bundles. As a result, MEV extraction becomes more efficient on both searchers' and block builders' sides.
+
+## A breakdown of the parallelization problem
+
+Parallelizing EVM might not be as simple as it seems. Naive solutions like [speculative concurrency](https://drops.dagstuhl.de/opus/volltexte/2020/11968/pdf/OASIcs-Tokenomics-2019-4.pdf) (optimistically execute txns in parallel, then check for conflicts, if exists, resorts to sequential execution) had shown that the conflict rate for optimistic execution grows as Ethereum becomes more and more crowded. Just for transactions in 2017, there is already a ~35% conflict rate. For current Ethereum in 2021, the conflict rate could be way higher as DeFi explodes and we are processing more transactions.
+
+![](https://i.imgur.com/M4P2Hh9.png)
+
+The high conflict rate indicates that we need to devise a more refined parallelization algorithm, which will require more refined storage access information. Next, we scope these tasks formally.
+
+Let the current blocknumber be $k$, the state of the Ethereum blockchain be $s_k$, and the state transition function of the sequential EVM be $\delta(\bar{t}, s)$ which returns a new EVM state given a list of transactions $\bar{t}$ and a state $s$. Suppose in list $\bar{t}$ there are $n$ transactions $txn_1$ to $txn_n$ with an ordering of $txn_1 \prec txn_2 \prec ... \prec txn_n$ ($txn_i \prec txn_j$ means we only start executing $txn_j$ after we finish executing $txn_i$). Our goal is to devise a parallel EVM execution state transition function $\delta_p$ such that $\delta(\bar{t}, s_{k-1}) = \delta_p(\bar{t}, s_{k-1})$. Note that in $\delta$ always executes $\bar{t}$ in the order they are passed in, while in $\delta_p$, $\bar{t}$'s execution isn't ordered. For example, two transactions running on two different CPU cores could finish execution at the same time, or that $txn_j$'s execute would finish before we start executing $txn_i$.
+
+For us to derive a good $\delta_p$, we have two jobs:
+
+1. Derive information on possible shared data conflicts (this is where [bundle clashing analysis](https://hackmd.io/hvOkCzxRQu6pJCmcLVzQaQ) could be informative) for each transaction. This means that if we are only parallelizing at the transaction level, shared data conflict would be just the EVM storage, as the only way in which info from one transaction can spill over to a different transaction is via storage. If we were parallelizing at deeper levels like EVM opcodes, then the information we derive would also include EVM calldata, stack, and memory. Formally, this means that with each $txn_i$, we have some information on its shared data access $\kappa(txn_i)$. This information could be anything, for example, $\kappa(txn_i)$ could return a set of storage location literals in the contract code that the transaction calls. Assuming the perfect information function is $\kappa_{perfect}$, then the $\kappa$ we derive is an estimation of $\kappa_{perfect}$.
+2. Based on the preciseness of the information, we design our parallelization algorithm $\delta_p(\bar{t}, s_{k-1}, \kappa)$ which now takes in $\kappa$ as an additional parameter. The exact strategy and abstraction level on which we parallelize depends on how refined $\kappa$ is and to what degree we tolerate conflicts (this is like how sharding works). For example, with perfect information $\kappa_{perfect}$ on each transaction's calldata, stack, memory, and storage, we could design a $\delta_p$ that parallelizes on the opcode level with no conflicts.
+
+For simplicity, we only consider transaction-level parallelism in this post. That is, we assume $\kappa$ only contains information on storage access. We leave the more refined parallelization models for future posts.
+
+Next, we discuss how to approach those two jobs respectively.
+
+## Storage access information (the first job)
+
+To retrieve information on storage access, one could directly acquire that from manual input. For example, [changing how transactions are passed in](https://github.com/ethereum/EIPs/issues/648) and require users to list a sound overestimate of the addresses they are going to use, or [like Solana](https://docs.solana.com/developing/programming-model/accounts) or other [UTXO-based chains](https://news.ycombinator.com/item?id=27134679), have every transaction include a list of account signatures that it interacts with. This seems like an easy solution because we incur no runtime overhead for the generation of $\kappa$ and can always ensure its soundness (by reverting the transaction if it is not). But these methods require at least changing the client or implementing an additional layer before the client. Moreover, they change user/developer habits a lot, so it may be hard to enforce. 
+
+Alternatively, it is [proposed](https://www.youtube.com/watch?v=4FknO8ooqhE) that we outsource the work to flashbots searchers as they need to run transactions either way when coming up with a profitable bundle. This is analogous to the [Rainblock](https://www.usenix.org/conference/atc21/presentation/ponnapalli) solution in which there is a separation of roles: searchers are acting as Rainblock's "IO helper" nodes. This method achieves the best precision by providing $\kappa = \kappa_{perfect}$, but it relies on searchers to honestly pass additional information along with their bundles and only covers clients that use `mev-geth`. More importantly, it is hard to enforce in a permission-less system like flashbots without devising some additional incentive systems. 
+
+We can use speculative execution to generate storage information ahead of runtime and cache them. Because this method is speculative, the storage information collected is unsound, in which case we retreat to normal storage access. This proposal works best if we have node functionality separation like in Rainblock. But as discussed previously that is assumed to be not present. However, we can use a similar idea (formal methods-aided bytecode analysis) to achieve high-performing parallelization, which we will cover in the next post. [Forerunner](https://www.microsoft.com/en-us/research/publication/forerunner-constraint-based-speculative-transaction-execution-for-ethereum/), which achieves a whopping [8x](https://github.com/microsoft/Forerunner) performance boost compared with raw geth, is also based on the idea of speculative execution and is most similar to our approach in the second post (url incoming) in that they also use formal methods techniques to aid the generation of $\kappa$.
+
+## Parallelization algorithms (the second job)
+
+At this stage, we should have already acquired the necessary shared data access information $\kappa$ using whatever method of our choice. Now, for demonstration purposes, we use a specific example of $\kappa$. Suppose we have two transactions $txn_i \prec txn_j$ that both access a storage location $\sigma$, we record their access information as a tuple of tuples `{(r, w), (r, w)}`. With the first tuple `(r, w)` denoting the read/write operation of $txn_i$ and the second tuple denoting those of $txn_j$. For example, writing `{(r), (r, w)}` means that $txn_i$ read but didn't write to $\sigma$ while $txn_j$ both read and wrote to $\sigma$.
+
+Using this formalization, we can think of four simple situations:
+- ``{(r), (r)}``: $txn_i$ and $txn_j$ are parallelizable, assuming that $\sigma$ is only one in the "read" set of both those transactions.
+- ``{(r), (w)}``: $txn_i$ and $txn_j$ must be executed sequentially in order of $\bar{t}$
+- ``{(w), (r)}``: $txn_i$ and $txn_j$ must be executed sequentially in order of $\bar{t}$
+- ``{(w), (w)}``: if the write operation to $s'$ is [commutative](https://arxiv.org/abs/1802.08748) (e.g., addition on unsigned integers is a commutative operation), then $txn_i$ and $txn_j$ are parallelizable, or else they must be executed in order of $\bar{t}$. _Examples of (non)commutative writes in smart contracts can be found [here](https://dl.acm.org/doi/pdf/10.1145/3453483.3454112)._
+
+However, $txn_i$ and $txn_j$ access not only $\sigma$ but more locations, so we extend our four simple rules to include a read set and a write set for every transaction, and when searching for parallelizable transactions to execute, we loop through every transactions' storage access information $\kappa$ and apply the above rules. Or, of course, we could use the simple algorithm described by Vitalik in [EIP 648](https://github.com/ethereum/EIPs/issues/648) (TLDR: each transaction includes a set $\beta$ of the addresses it accesses, and if two transactions $txn_i$ and $txn_j$ satisfy $\beta_i \cap \beta_j = \emptyset$, then execute them in parallel, else not). Ultimately, it all depends on how refined our $\kappa$ is and how refined we want our parallel execution to be. For example, it could be more than [quadratic](https://www.google.com/search?q=quadratic+sharding), meaning that we have $\kappa$ not only contain storage access information but also those on memory/calldata, as we are parallelizing within a single transaction as well.
+
+Of course, besides those four situations, there are other countless possibilities. For example: ``{(r, w), (r, w)}``. In this situation, it is possible that we have $txn_i$ first reads $s'$ and then changes it, but the value assigned to $s'$ always equals that of $txn_j$'s assignment because of how the smart contract was written. So this effectively reduces to the ``{(r), (r)}`` case. Or this could easily go the other way and reduce to ``{(w), (r)}``,  ``{(w), (w)}``, or ``{(r), (w)}``. And even then it could be that the writer somehow doesn't change the storage's value or that the reader doesn't affect state change in the EVM (e.g., reading some value to be 2 while it was originally 1, but the only use for that storage reading was only a `require` checking if the variable is positive). The point of those examples is just to say that there are lots of specific classes of situations where our parallelization algorithm doesn't work optimally. And due to [impossibility results](https://en.wikipedia.org/wiki/Rice%27s_theorem) they have to. So this means depending on the exact structure of $\kappa$, there are lots of long-tail optimizations for us to devise vastly different parallelization algorithms for optimal performance. We will come back to exact optimizations to this in the next post.
+
+## Conclusion
+
+EVM parallelization facilitates Ethereum scalability without compromising decentralization or requiring major changes to protocol/client. It also helps to minimize the negative impact of MEV by allowing better bundle merging and production. We approach the parallelization problem by dissecting it into two parts, generating shared data access information and devising a parallelization algorithm that utilizes the information. We've seen the landscape of Ethereum scalability solutions and discussed why current parallelization tricks don't work smoothly. 
+
+## References
+1. What Makes EVM slow, https://docs.google.com/presentation/d/11DqpZP1NA24OvJe3l9yaAPavQk7luGIE5oxIe07IayA/edit#slide=id.ge4c54e2503_0_20
+2. Easy Parallelizability, https://github.com/ethereum/EIPs/issues/648
+3. An Empirical Study of Speculative Concurrency in Ethereum Smart Contracts, https://drops.dagstuhl.de/opus/volltexte/2020/11968/pdf/OASIcs-Tokenomics-2019-4.pdf
+4. Clockwork Finance: Automated Analysis of Economic Security in Smart Contracts, https://arxiv.org/abs/2109.04347
+5. Erigon, https://github.com/ledgerwatch/erigon
+6. Searching for EVM Parallelism, https://www.youtube.com/watch?v=4FknO8ooqhE
+7. Rainblock, https://www.usenix.org/conference/atc21/presentation/ponnapalli
+8. Forerunner, https://www.microsoft.com/en-us/research/publication/forerunner-constraint-based-speculative-transaction-execution-for-ethereum/
