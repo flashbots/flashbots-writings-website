@@ -25,7 +25,7 @@ To democratize MEV Flashbots released its alpha: a marketplace for transaction o
 
 An example bundle from a searcher would be an arbitrage placed behind a large trade, where the miner is paid 90% of arbitrage profits by the searcher in the arbitrage transaction. For the majority of MEV strategies today searchers pay roughly 90 - 95% of profit to miners. Over time the auction structure and competition among searchers has led to most MEV being captured by miners while still supporting an ecosystem of searchers.
 
-Miners that don’t want to, or cannot, extract MEV themselves can tap into Flashbots’ marketplace and have searchers extract MEV for them. All that is required is for miners to register with Flashbots, run mev-geth, the open source geth fork, and receive bundles. As a result of the market structure and ease of integration, Flashbots Alpha allows miners of any size to extract MEV and compete on producing the most profitable blocks.
+Miners that don’t want to, or cannot, extract MEV on their own can tap into Flashbots’ marketplace and have searchers extract MEV for them. All that is required is for miners to register with Flashbots, run mev-geth, the open source geth fork, and receive bundles. As a result of the market structure and ease of integration, Flashbots Alpha allows miners of any size to extract MEV and compete on producing the most profitable blocks.
 
 ## The limits of Flashbots Alpha
 
@@ -45,7 +45,7 @@ Bundle A will win the Flashbots Auction because it has a higher gas price despit
 
 The reason this design decision was made is because optimizing bundles for gas price is computationally simpler than optimizing for overall profit. However this opens up a dimension for competition: if a miner has a proprietary solution that allows them to optimize bundles for overall profit they could extract more MEV than their peers in some cases. Similarly, being able to include more bundles per block would also lead to more MEV extraction.
 
-Lastly, in Flashbots Alpha bundles are seen by both relays and miners. As a result searchers need to make a key trust assumption that relays and miners won’t frontrun or unbundle their bundles. This may be an acceptable assumption for searchers to make with large and established miners who have social capital, but not with small and newer miners who lack social capital. Moving from proof-of-work to proof-of-stake exacerbates this because the barriers to becoming a block producer are much lower.
+Lastly, in Flashbots Alpha bundles are seen by both relays and miners. As a result searchers need to make a key trust assumption that relays and miners won’t frontrun or unbundle their bundles. This may be an acceptable assumption for searchers to make with large and established miners who have social capital, but not with small and newer miners who lack social capital. It also opens up an attack vector whereby a searcher could run a miner in order to receive bundle flow themselves, which is why Flashbots needs to require that miners have a history of mining prior to sending them bundles. Moving from proof-of-work to proof-of-stake exacerbates these dynamics because the barriers to becoming a block producer are much lower.
 
 If searchers' bundles don't have privacy before being include then they risk having their bundles frontrun or unbundled and searchers will not want to send bundles to small block producers because of these risks. In turn this will be centralizing for the network because small block producers won’t be able to produce as profitable blocks as their large peers.
 
