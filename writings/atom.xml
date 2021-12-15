@@ -2,11 +2,22 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://writings.flashbots.net/writings</id>
     <title>Flashbots Blog</title>
-    <updated>2021-11-30T00:00:00.000Z</updated>
+    <updated>2021-12-12T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://writings.flashbots.net/writings"/>
     <subtitle>Flashbots Blog</subtitle>
     <icon>https://writings.flashbots.net/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Why Building the Most Profitable Block is Important]]></title>
+        <id>on-the-most-profitable-block</id>
+        <link href="https://writings.flashbots.net/writings/on-the-most-profitable-block"/>
+        <updated>2021-12-12T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Central to the security of Ethereum is that every miner, and soon validator, can produce the most profitable block possible. Why is this? Why has Flashbots made it a goal to democratize access to the most profitable blocks? How are we doing so? This blog post answers these questions and more.]]></summary>
+        <author>
+            <name>Robert Miller</name>
+            <uri>https://twitter.com/bertcmiller</uri>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Announcing the Flashbots Eth2 Working Group]]></title>
         <id>announcing-eth2-working-group</id>
