@@ -69,7 +69,7 @@ Some proposers may have their own block building solutions. However these propos
 ## PBS and Privacy
 However, PBS cannot ensure that all proposers have access to the most profitable block unless builders’ blocks are private from proposers until they are included on-chain. The reason for this is that without privacy builders risk having their blocks frontrun by proposers. In turn, small proposers will be systematically excluded from the best MEV opportunities because large MEV opportunities are worth more to them and reputation is harder for them to build.
 
-One solution, proposed by Vitalik in his first proposer/block builder ETHResearch post, is to have builders only publish a block header instead of publishing a full block’s contents. As a part of this block header the builder would include a payment to the proposer. Thus proposers would be able to easily select the most profitable block to them without seeing the block’s contents. Builders would be relied on to publish the body of the block after their block is chosen.
+One solution, proposed by Vitalik in his [first proposer/block builder ETHResearch post](https://ethresear.ch/t/proposer-block-builder-separation-friendly-fee-market-designs/), is to have builders only publish a block header instead of publishing a full block’s contents. As a part of this block header the builder would include a payment to the proposer. Thus proposers would be able to easily select the most profitable block to them without seeing the block’s contents. Builders would be relied on to publish the body of the block after their block is chosen.
 
 Another solution from Flashbots’ [MEV-SGX](https://ethresear.ch/t/mev-sgx-a-sealed-bid-mev-auction-design/9677) is to use trusted hardware to keep the contents of blocks private. Builders create blocks, encrypt them, and send them along with decrypted block headers to miners (who are builders here). Miners can use the block header to perform proof-of-work, and if they find a valid proof-of-work solution then this can be input into an SGX along with the encrypted block to produce a decrypted and attested block. More work is needed to make this system work in proof-of-stake.
 
@@ -83,4 +83,4 @@ These proposals are vital to the health of the Ethereum network. The previously 
 
 In the short term Flashbots Alpha has created an early but limited marketplace for MEV that miners can tap into. In the long term a block builder and proposer split is necessary to ensure MEV is democratized and to prevent MEV from becoming economically centralizing. Much of this post has centered on miners, but the same ideas are applicable to PoS and validators as well.
 
-Thanks to niftynei, Georgios, Hasu, thegostep, and Alex for reviewing this blog post and providing comments
+Thanks to niftynei, Georgios, Hasu, thegostep, Alex, and Alejo for reviewing this blog post and providing comments
