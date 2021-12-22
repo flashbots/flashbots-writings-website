@@ -111,7 +111,8 @@ class PunkBid(BaseModel):
     from_address: str
     punk_index: int
     price: int
-    ```
+```
+
 You will need to make a schema for each new object you’d like to create. In my case, I created three: punk bids, punk bid acceptances, and punk snipes. In making a schema think about the information that you and others will want to see.
 
 ### Parse the traces into our new schemas
@@ -175,6 +176,7 @@ Now we connect to the local postgres database:
 You should see ```mev_inspect=#```. In my case I wanted to check out my new punk tables, so I ran
 ```SELECT COUNT(*) FROM punk_snipes;```
 Which returned 1! That means Inspect is successfully finding punk snipes. 
+
 Congratulations! You’ve learned about the different moving parts involved in creating a new MEV inspector. I hope you’ll give writing one yourself a shot, and don’t be afraid to jump in the Flashbots Discord to ask questions in #mev-inspect. We have a list of current and desired classifiers on the Inspect repo if you suggestions for where to start. Come illuminate the dark forest with us, anon!
 
 Thank you to Taarush, Chris, Gui, Luke, and Alex for reviewing this article.
