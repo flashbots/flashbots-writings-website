@@ -8,7 +8,7 @@
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <item>
-            <title><![CDATA[How to light up the dark forest - a walkthrough of building a cryptopunk MEV inspector]]></title>
+            <title><![CDATA[How To Light Up The Dark Forest - A Walkthrough of Building A Cryptopunk MEV Inspector]]></title>
             <link>https://writings.flashbots.net/writings/the-anatomy-of-an-inspector</link>
             <guid>the-anatomy-of-an-inspector</guid>
             <pubDate>Wed, 15 Dec 2021 00:00:00 GMT</pubDate>
