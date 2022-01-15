@@ -1,6 +1,6 @@
 ---
 slug: the-anatomy-of-an-inspector
-title: How to light up the dark forest - a walkthrough of building a cryptopunk MEV inspector
+title: How To Light Up The Dark Forest - A Walkthrough of Building A Cryptopunk MEV Inspector
 authors: [robert]
 tags: [flashbots]
 image: /img/transparency-january-1.png
@@ -84,7 +84,7 @@ CRYPTOPUNKS_CLASSIFIER_SPECS = [CRYPTO_PUNKS_SPEC]
 ```
 
 
-Let’s work through this. First, we create classes for the classifiers of the action that we are interested in. In our case we want to classify punk bids and acceptances, so we create PunkBidAcceptanceClassifier and PunkBidClassifier. 
+Let’s work through this. First, we create classes for the classifiers of the action that we are interested in. In our case we want to classify punk bids and acceptances, so we create PunkBidAcceptanceClassifier and PunkBidClassifier.
 
 Inspect asks you to be specific about how these classifiers are used. The reason for this is that we want to be able to identify some types of actions across many protocols, but not all protocols are designed in the same way. For example, the function to swap assets is different across many DEXes, so in order to build a single “swap” classification, we need to tell Inspect what to do for each protocol you want to classify swaps on.
 
@@ -96,7 +96,7 @@ Below these standardized functions are the spec itself. The spec has 4 parts:
 * *valid_contract_addresses*: any contract addresses that you want to look for. Note that this can be omitted in the case that you don’t want to limit a classifier to a set of addresses.
 * *classifiers*: a list of functions that you want to look for along with their classifications. For example, we want to look for punk bids, so we create an entry for the “PunkBidClassifier” for the function “enterBidForPunk(uint256).” Note that classifiers work through the usage of [function selectors](https://solidity-by-example.org/function-selector/), so you must specify the function name and its types with no spaces.
 
-Lastly, you must add the classifier spec to the [init.py](https://github.com/flashbots/mev-inspect-py/blob/main/mev_inspect/classifiers/specs/__init__.py) file to make it visible to Inspect. At this point, Inspect will start to classify traces associated with your protocol :tada:! 
+Lastly, you must add the classifier spec to the [init.py](https://github.com/flashbots/mev-inspect-py/blob/main/mev_inspect/classifiers/specs/__init__.py) file to make it visible to Inspect. At this point, Inspect will start to classify traces associated with your protocol :tada:!
 
 After running inspect on blocks that contain the MEV you are looking for you can [view the output of Inspect by pulling up the database](https://github.com/flashbots/mev-inspect-py#exploring) and querying the “classified_traces” table for your ABI. If you are adding support for a new protocol (e.g. a dex) to an existing inspector (e.g. arbs) then your work would be finished at this stage!
 
@@ -175,7 +175,7 @@ Now we connect to the local postgres database:
 ```./mev db```
 You should see ```mev_inspect=#```. In my case I wanted to check out my new punk tables, so I ran
 ```SELECT COUNT(*) FROM punk_snipes;```
-Which returned 1! That means Inspect is successfully finding punk snipes. 
+Which returned 1! That means Inspect is successfully finding punk snipes.
 
 Congratulations! You’ve learned about the different moving parts involved in creating a new MEV inspector. I hope you’ll give writing one yourself a shot, and don’t be afraid to jump in the Flashbots Discord to ask questions in #mev-inspect. We have a list of current and desired classifiers on the Inspect repo if you suggestions for where to start. Come illuminate the dark forest with us, anon!
 
