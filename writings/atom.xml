@@ -2,11 +2,22 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://writings.flashbots.net/writings</id>
     <title>Flashbots Blog</title>
-    <updated>2021-12-15T00:00:00.000Z</updated>
+    <updated>2022-01-17T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://writings.flashbots.net/writings"/>
     <subtitle>Flashbots Blog</subtitle>
     <icon>https://writings.flashbots.net/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Flashbots Transparency Report — Sept-Dec 2021]]></title>
+        <id>transparency-21q4</id>
+        <link href="https://writings.flashbots.net/writings/transparency-21q4"/>
+        <updated>2022-01-17T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Hi everyone, it's been a while! Here is a double-edition of our latest transparency report. As you can imagine, we've been busy.]]></summary>
+        <author>
+            <name>Xinyuan Sun</name>
+            <uri>https://twitter.com/sxysun1</uri>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[How To Light Up The Dark Forest - A Walkthrough of Building A Cryptopunk MEV Inspector]]></title>
         <id>the-anatomy-of-an-inspector</id>

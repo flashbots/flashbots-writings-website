@@ -4,9 +4,16 @@
         <title>Flashbots Blog</title>
         <link>https://writings.flashbots.net/writings</link>
         <description>Flashbots Blog</description>
-        <lastBuildDate>Wed, 15 Dec 2021 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 17 Jan 2022 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
+        <item>
+            <title><![CDATA[Flashbots Transparency Report — Sept-Dec 2021]]></title>
+            <link>https://writings.flashbots.net/writings/transparency-21q4</link>
+            <guid>transparency-21q4</guid>
+            <pubDate>Mon, 17 Jan 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Hi everyone, it's been a while! Here is a double-edition of our latest transparency report. As you can imagine, we've been busy.]]></description>
+        </item>
         <item>
             <title><![CDATA[How To Light Up The Dark Forest - A Walkthrough of Building A Cryptopunk MEV Inspector]]></title>
             <link>https://writings.flashbots.net/writings/the-anatomy-of-an-inspector</link>
