@@ -1,0 +1,124 @@
+---
+slug: transparency-21q4
+title: Flashbots Transparency Report — Sept-Dec 2021
+authors: [sxysun]
+tags: [transparency report]
+image: /img/transparency-january-1.png
+hide_table_of_contents: false
+---
+# Flashbots Transparency Report — Sept-Dec 2021
+
+Hi everyone, it's been a while! Here is a double-edition of our latest transparency report. As you can imagine, we've been busy.
+<!--truncate-->
+
+## Overview
+In the last 4 months of 2021, the Flashbots team has grown to a size of 20 members, welcoming new teammates like myself (hi 🙋‍). 
+
+We released [v0.4](https://docs.flashbots.net/flashbots-auction/releases/alpha-v0.4) of Flashbots Auction, which introduces megabundles, released [Flashbots Protect](https://docs.flashbots.net/flashbots-protect/overview), which provides an easy way to use Flashbots for frontrunning protection, and improved the performance and reliability of our infrastructure on many fronts.
+
+The research that was started in the previous months on Ethereum 2.0 was productized, culminating in the release of our design of the Flashbots Auction for Ethereum 2.0, [MEV-Boost](https://ethresear.ch/t/mev-boost-merge-ready-flashbots-architecture/11177), and in the creation of the [Flashbots Eth2.0 Working Group](https://medium.com/flashbots/announcing-the-flashbots-eth2-working-group-599b2b92634b).
+
+In addition, some of the research we had been working on internally saw the light of day, such as our work on [MEV formalization](https://writings.flashbots.net/research/formalization-mev) and on [cross-domain MEV](https://arxiv.org/pdf/2112.01472.pdf).
+
+## Flashbots Auction
+
+In the last 4 months, miners made 65,961.98 ETH (258,976,454.42 USD) using Flashbots, the Flashbots network sustained a hashrate of around 83%, and our inclusion rate has oscillated at around 55%. You can find all of these numbers and more at https://dashboard.flashbots.net
+
+### v0.4 Megabundle release
+
+On September 27th, we published v0.4 of MEV-Geth which introduces megabundles. This allows trusted relayers to submit larger, pre-merged, and ordered bundles of transactions to miners. While those bundles are initially scored and sorted against the existing bundle-merging algorithm introduced in v0.3, the fact bundle-merging now lives at the relayer level means it can be improved without impacting the performance of mev-geth for all mining pools and miners. 
+
+This update is a prequel to the [proposer-builder separation on Ethereum](https://ethresear.ch/t/proposer-block-builder-separation-friendly-fee-market-designs/9725), where megabundles would become full blocks. For the detailed specification of this update, please see our [docs](https://docs.flashbots.net/flashbots-auction/releases/alpha-v0.4). We expect mega bundles to continue to be a focus going forward.
+
+### Infrastructure improvements
+In the last four months, we’ve been working on making the Flashbots auction more efficient by developing better bundle pricing and merging techniques, and working on specialized infrastructure.
+
+With these improvements, we started the journey of delivering the most profitable searcher bundles to miners faster than ever before.
+
+### Searcher tooling
+
+Shout out to community members [libevm](https://twitter.com/libevm) for adding a new simulation call [`estimateGasBundle`](https://github.com/flashbots/mev-geth/pull/102) method to the MEV-Geth repo, and [shekirin](https://github.com/shekhirin) for adding new RPC method [`flashbots_getWork`](https://github.com/flashbots/mev-geth/pull/106) which adds a new block reward including MEV to the `eth_getWork` RPC result. 
+
+
+To better help our searchers land bundles, we've published a [guide](https://docs.flashbots.net/flashbots-auction/searchers/advanced/troubleshooting/) to troubleshoot bundle inclusion problems. In addition, two articles were published by [Robert Miller](https://twitter.com/bertcmiller) that should help the MEV community understand MEV better. The first is [_Anatomy of an MEV Strategy: Synthetix_](https://bertcmiller.com/2021/09/05/mev-synthetix.html), published alongside [a repo](https://github.com/bertmiller/sMEV) where the searcher written about was open sourced. The second is a [glimpse](https://www.bertcmiller.com/2021/12/28/glimpse_nonce_reuse.html) into some of the MEV bots targeting tail-end opportunities out there, preying on obscure cryptographic inefficiencies
+
+
+
+### Preparing for Proof of Stake Ethereum
+
+Ethereum will soon transition to a proof of stake consensus protocol in an event called 'The Merge'. Anticipating this important change, we released on November 4th [MEV-Boost: Merge-ready Flashbots Architecture](https://ethresear.ch/t/mev-boost-merge-ready-flashbots-architecture/11177), where we outline a design for a marketplace for block construction (or block proposer/builder separation, PBS) compatible with the upcoming Ethereum merge fork. 
+
+We implemented this prototype on the latest Kintsugi testnet, and walked through it during an Ethereum Core Developer call which you can watch [here](https://www.youtube.com/watch?v=ivcI_plFu1o). 
+
+We also launched the [Flashbots Eth2 Working Group](https://medium.com/flashbots/announcing-the-flashbots-eth2-working-group-599b2b92634b), a working group for flashbots and teams building, staking, and validating in proof of stake Ethereum to come together to ensure that we can continue developing and promoting the adoption of an effective MEV solution on Ethereum post-merge. The working group will be operating in an open and credibly neutral manner, just like Flashbots, and will not be exclusive to a small group of insiders or favor certain groups over others. 
+
+Since the announcement, the working group has grown to more than 28 members from the validating, staking, client, and infrastructure provider communities.
+
+
+
+
+## Flashbots Protect
+
+On October 6th, we [released](https://docs.flashbots.net/flashbots-protect/overview/) Flashbots Protect. Protect allows everyday Ethereum users and developers to enjoy frontrunning protection. Specifically, it abstracts away the complexity of submitting bundles to the Flashbots Auction and makes integrating it as simple as adding an RPC URL to your Metamask. 
+
+Since the release, we've gradually added more features to it, like [cancellation](https://docs.flashbots.net/flashbots-protect/rpc/cancellations) of private transactions and an [API](https://docs.flashbots.net/flashbots-protect/rpc/status-api) to get pending transaction status. The UX has also been improved because Etherscan integrated our pending status API, and are working with rollup providers to help settle large transactions. 
+
+In the coming months, we'll be integrating Protect with various dApps and [wallets](https://medium.com/alchemistcoin/how-to-add-flashbots-protect-rpc-to-your-metamask-3f1412a16787), and will offer offer new features, improve inclusion rates, and make Flashbots Protect onboarding/integration easier.
+
+
+## Flashbots Data
+The Data team has been focused on rewriting mev-inspect from Rust to Python to make it easier for others to contribute to the codebase. 
+
+[mev-inspect-py](https://github.com/flashbots/mev-inspect-py) comes with many improvements, including several orders of magnitude faster analysis of blocks and a much smoother contributor flow.
+
+In order to encourage others to collaborate, resources have also been pubished such as a [step-by-step walkthrough](https://writings.flashbots.net/writings/the-anatomy-of-an-inspector/) by Robert Miller of how to add a new MEV inspector using as an example a cryptopunk snipers MEV inspector, and a walkthrough of the mev-inspect-py codebase you can watch [here](https://youtu.be/Fuw891c4vA8).
+
+Thanks to the many awesome community contributors to Inspect for PRs such as [this one](https://github.com/flashbots/mev-inspect-py/pull/210) by tmilukin and that [one](https://github.com/flashbots/mev-inspect-py/pull/109) by mazzafish, and to the users trying it out and giving us feedback on what isn't work for them!
+
+In the coming months, we will be updating mev-explore by replacing its backend with mev-inspect-py, revamp other Flashbots dashboards and aim to make mev-inspect data be more accessible to the public.
+
+## Flashbots Research
+As we continued research on Proof of Stake Ethereum (FRP-15), we also turned our attention to MEV on Layer 2s and other chains (FRP-16). Out of this work, we released the first paper out of Flashbots Research on December 2nd called [_Unity is Strength: A Formalization of Cross-Domain Maximal Extractable Value_](https://arxiv.org/abs/2112.01472). The paper formalizes a definition of cross-domain MEV in a multi-chain future, as well as possible negative externalities that could arise from cross-domain MEV extraction.
+
+As a companion post to the paper, Flashbots researcher Alejo Salles published [_On the Formalization of MEV_](https://writings.flashbots.net/research/formalization-mev). The post presents formal definitions of MEV that improve on issues encountered in previous works and community misconceptions. It also paves the way for a more systematic approach in studying MEV by highlighting many of the subtleties involved in giving a robust MEV formalization.
+
+We ran a research workshop on the paper which you can watch [here](https://youtu.be/uR0Z0nWXeFU), and were happy to see Vitalik Buterin use the paper in [_Endgame_](https://vitalik.ca/general/2021/12/06/endgame.html) to reason about block builder centralization in a 'many rollups' world.
+
+
+In the coming months, we will be working on EVM parallelization (and many other useful relay simulation optimizations), MEV taxonomy, and follow-up works on cross-domain MEV, as well as supporting research on the Proposer-Builder Separation. We are also expanding and hiring talented researchers! If you are interested, please reach out!
+
+
+## Community
+### Whitehat
+
+The Flashbots Whitehat community has executed 100 successful rescues in the last 6 months. Activities are ramping up to more than 200 rescue requests a month, and more people have joined the effort to support it.
+
+Shout out to the amazing [Scott Bigelow](https://twitter.com/epheph), [0xdeadf4ce](https://twitter.com/0xdeadf4ce), [amanusk](https://twitter.com/amanusk_), [zeroXbrock](https://twitter.com/zeroXbrock), [sipox11](https://twitter.com/sipox11), mov and [Riposte](https://twitter.com/MevRefund) for pulling off these rescues!
+
+Some highlights:
+
+* On Dec 21st in the wake of a $27m whitehat rescue by samczsun and others, the Gelato team, and Flashbots community members (whitehat searchers) 0x911, imagine, Robert Miller helped [rescue](https://medium.com/gelato-network/sorbet-finance-vulnerability-post-mortem-6f8fba78f109) user funds that were at risk from an attacker. 
+* Kane Wallmann used Flashbots Auction to [recover](https://medium.com/@kanewallmann_71759/recovering-assets-from-a-hacked-account-with-flashbots-bfe920435fb6) $13k worth of ENS tokens from a hacked account and return them to their rightful owner. 
+* Steve Pikelny shared about their Flashbots [recovery experience](https://steviep.xyz/txt/compromised) saving contract ownership the hacker did not know about until it was too late!
+
+
+### Public appearances 
+
+After several months without one, we hosted a [Roast](https://github.com/flashbots/pm/issues/98) entitled "*PBS on Ethereum Roadmap*" on Dec 3rd, covering several Proposer-Builder Separation-related research proposals/WIPs. Watch the recording [here](https://youtu.be/8mcm-jT2nq4).
+
+Flashbots was covered in Bloomberg's article [Robot Crypto Traders Are the New Flash Boys](https://www.bloomberg.com/news/articles/2021-09-23/crypto-trading-how-flashbots-work-to-front-run-ether-and-other-coin-purchases).
+
+### Resources
+
+We released a [blog](https://writings.flashbots.net) website where we've aggregated all our written content. This should make it easier for our community to find things we've written. 
+
+We also aggregated all our videos on a [Youtube channel](https://www.youtube.com/channel/UCclbTgsnYUy3vmrptIqCmqQ) which includes [playlists](https://www.youtube.com/channel/UCclbTgsnYUy3vmrptIqCmqQ/playlists) for all the Roasts, research workshops, tutorials and community events we participated in.
+
+Shoutout to awesome community resources we've seen shared around Twitter and Github such as [Moebius' _0 to 1 Guide To MEV_ ](https://calblockchain.mirror.xyz/c56CHOu-Wow_50qPp2Wlg0rhUvdz1HLbGSUWlB_KX9o). 
+
+
+
+## Get involved
+At Flashbots, we research and build systems around MEV, and we would love to collaborate with you. We are a distributed organization with the principles of a [pirate hacker collective](https://www.youtube.com/watch?v=T0fAznO1wA8), and have several [open positions](https://www.notion.so/flashbots/Flashbots-Job-Board-94d53cb01ef04a9484711dacf18739e3). We also issue grants to external researchers doing work aligned with ours, please find out more in [our Research repository](https://github.com/flashbots/mev-research), or join our [Discord](https://discord.com/invite/7hvTycdNcK)!
+
+
