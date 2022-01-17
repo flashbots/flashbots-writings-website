@@ -23,13 +23,13 @@ To improve EVM performance with backward compatibility and minimal change to con
 [^1]: Even though at the moment the biggest bottleneck of Ethereum is not EVM's performance (the size of the Ethereum state storage is), it will soon be as Ethereum TPS goes up.
 [^2]: Of course, many other optimizations don't need base layer changes, such as batching state read & write operations, caching, flattening the storage database, or just using a more performant programming language. We see many of those optimizations implemented in clients like [Akula](https://medium.com/@vorot93/meet-akula-the-fastest-ethereum-implementation-ever-built-58eaca244c39) and [Silkworm](https://medium.com/@giulio.rebuffo/silkworm-and-akula-the-future-of-erigon-fda4d6813505).
 
-__In part 1 of the series, we argue the need for a parallel EVM and cover general approaches to achieve it such as [EIP 648](https://ethresear.ch/t/parallelilizing-evm-through-end-of-the-block-virtual-transactions/7787) and [speculative execution](https://drops.dagstuhl.de/opus/volltexte/2020/11968/pdf/OASIcs-Tokenomics-2019-4.pdf).__ In part 2 we study how static analysis and formal methods can make the EVM parallelizable, specifically we present two simple algorithms for achieving parallelization.
+__In part 1 of the series, we argue the need for a parallel EVM and cover general approaches to achieve it such as [EIP 648](https://ethresear.ch/t/parallelilizing-evm-through-end-of-the-block-virtual-transactions/7787), [EIP 2930](https://eips.ethereum.org/EIPS/eip-2930) and [speculative execution](https://drops.dagstuhl.de/opus/volltexte/2020/11968/pdf/OASIcs-Tokenomics-2019-4.pdf).__ In part 2 we study how static analysis and formal methods can make the EVM parallelizable, specifically we present two simple algorithms for achieving parallelization.
 
 ![](https://i.imgur.com/IZlQIFg.png)
 
 ## Background
 
-Decentralization is vital to blockchain security so that it's hard for participants in the network to collude. [Ideally](https://vitalik.ca/general/2021/05/23/scaling.html), this is achieved by as many individual parties as possible running nodes to verify ongoing transactions. However it usually takes more than 3 days for regular users with a personal computer to spin up a full node on Ethereum (it requires days to re-compute and validate the 13 million blocks out there). Behind this inefficiency is [Ethereum's large storage size](https://vitalik.ca/general/2021/05/23/scaling.html) and more specifically [EVM's storage design](https://www.youtube.com/watch?v=2_GX8iCVNrA):
+Decentralization is vital to blockchain security: it is hard for participants in a decentralized network to collude. [Ideally](https://vitalik.ca/general/2021/05/23/scaling.html), this is achieved by as many individual parties as possible running nodes to verify ongoing transactions. However it usually takes more than 3 days for regular users with a personal computer to spin up a full node on Ethereum (it requires days to re-compute and validate the 13 million blocks out there). Behind this inefficiency is [Ethereum's large storage size](https://vitalik.ca/general/2021/05/23/scaling.html) and more specifically [EVM's storage design](https://www.youtube.com/watch?v=2_GX8iCVNrA):
 
 ![](https://i.imgur.com/PelIHBC.png)
 
@@ -46,13 +46,13 @@ Several directions have been proposed:
 2. [RainBlock](https://www.usenix.org/conference/atc21/presentation/ponnapalli), also a separation of node functionality proposal. Alongside storage nodes and validator nodes, it also introduces a special IO-helper node. This proposal runs into the same problem of incurring extra network IO overhead, and it tackles that problem with their custom data structure called DSM-tree.
 3. [Sharding](https://ethereum.org/en/eth2/shard-chains/), which is analogous to a vertical separation of node functionality, offloads computation to different network segments.
 
-These proposals, though fundamental and promising, all involve significant changes to the underlying client or to consensus rules.
+These proposals, though promising, all involve significant changes to the underlying client or to consensus rules.
 
-What we could do now, as an orthogonal direction, is to make the EVM parallel (i.e. executing transaction with no storage access conflicts at the same time, and maybe even [pre-loading](https://github.com/ethereum/EIPs/issues/648#issuecomment-310695339) some storage accesses). This helps to directly increase EVM's throughput so we could raise the gas limit and include more transactions in one block, raising the amount of transactions per second (tps). In addition, this can also horizontally help existing scalability proposals like [sharding](https://dl.acm.org/doi/pdf/10.1145/3453483.3454112).
+What we could do now, as an orthogonal direction, is to make the EVM parallel (i.e. executing transaction with no storage access conflicts at the same time, and maybe even [pre-loading](https://github.com/ethereum/EIPs/issues/648#issuecomment-310695339) some storage accesses  using [optional access lists](https://github.com/ethereum/yellowpaper/pull/839)). This helps to directly increase EVM's throughput so we could raise the gas limit and include more transactions in one block, raising the amount of transactions per second (tps). In addition, this can also horizontally help existing scalability proposals like [sharding](https://dl.acm.org/doi/pdf/10.1145/3453483.3454112).
 
 ### Efficient MEV Extraction
 
-The following graph (taken from the [Clockwork Finance paper](https://arxiv.org/pdf/2109.04347.pdf) from Babel et. al.) shows the number of blocks with more than one relevant AMM transaction that could be used for MEV extraction. The authors are only sampling deterministic single-block MEV opportunities before May 2021 from two DeFi protocols [^4], yet the result is striking.
+The following graph (taken from the [Clockwork Finance paper](https://arxiv.org/pdf/2109.04347.pdf) from Babel et. al.) shows the number of blocks with more than one relevant AMM transaction that could be used for MEV extraction. The authors are only sampling deterministic single-block MEV opportunities before May 2021 from three DeFi protocols (MakerDAO, Uniswap, SushiSwap)[^4], yet the result is striking.
 
 [^4]: For detailed benchmark setup, refer to the original paper at https://arxiv.org/pdf/2109.04347.pdf
 
@@ -64,11 +64,11 @@ Since block building and bundle profit optimization is an [NP-complete](https://
 
 [^5]: Default mev-geth release only merges 3 bundles per block, and over the past year on average there are 5 bundles per block, which is much less than the total number of profitable bundles per block.
 
-A study on EVM parallelization can help with this increasingly challenging bundle merging problem. As essentially, _the dual problem of parallelization algorithm design is understanding how [clashes](https://hackmd.io/hvOkCzxRQu6pJCmcLVzQaQ) take place in searcher bundles_: they both require knowing a transaction's shared data access information. Moreover, a parallel EVM helps builders(searchers) do more simulations, therefore producing more profitable bundles (as we previously mentioned, producing the most profitable block is an NPC problem, so the only way to be competitive and push the extraction limit is to do more state-space searches, i.e. simulations).
+A study on EVM parallelization can help with this increasingly challenging bundle merging problem. As essentially, _the dual problem of parallelization algorithm design is understanding how [clashes](https://hackmd.io/hvOkCzxRQu6pJCmcLVzQaQ) take place in searcher bundles_: they both require knowing a transaction's shared data access information. Moreover, a parallel EVM helps full block builders (and MEV searchers) do more simulations, therefore producing more profitable bundles (as we previously mentioned, producing the most profitable block is an NPC problem, so the only way to be competitive and push the extraction limit is to do more state-space searches, i.e. simulations).
 
 ## A breakdown of the parallelization problem
 
-Parallelizing the EVM might not be as simple as it seems. Naive solutions like [speculative concurrency](https://drops.dagstuhl.de/opus/volltexte/2020/11968/pdf/OASIcs-Tokenomics-2019-4.pdf) (optimistically execute transactions in parallel, then check for conflicts, if exists, resorts to sequential execution) have shown that the conflict rate for optimistic execution grows as Ethereum becomes more and more crowded. Just for transactions in 2017, there is already a ~35% conflict rate.
+Parallelizing the EVM might not be as simple as it seems. Naive solutions like [speculative concurrency](https://drops.dagstuhl.de/opus/volltexte/2020/11968/pdf/OASIcs-Tokenomics-2019-4.pdf) (optimistically execute transactions in parallel, then check for conflicts, if exists, resorts to sequential execution) have shown that the conflict rate for optimistic execution grows as Ethereum becomes more and more crowded (more transactions in mempool). Just for transactions in 2017, there is already a [~35% conflict rate](https://drops.dagstuhl.de/opus/volltexte/2020/11968/pdf/OASIcs-Tokenomics-2019-4.pdf).
 
 <!-- ![](https://i.imgur.com/M4P2Hh9.png) -->
 
