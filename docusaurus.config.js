@@ -9,8 +9,8 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 (module.exports = {
   title: "Flashbots",
   tagline: "Research respository of Flashbots",
-  baseUrl: process.env.REACT_APP_BASE_URL,
-  url: process.env.REACT_APP_TARGET_URL,
+  baseUrl: "/",
+  url: "/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
