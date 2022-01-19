@@ -4,9 +4,16 @@
         <title>Flashbots Blog</title>
         <link>https://writings.flashbots.net/research</link>
         <description>Flashbots Blog</description>
-        <lastBuildDate>Sat, 04 Dec 2021 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 17 Jan 2022 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
+        <item>
+            <title><![CDATA[Speeding up the EVM (part 1)]]></title>
+            <link>https://writings.flashbots.net/research/speeding-up-evm-part-1</link>
+            <guid>speeding-up-evm-part-1</guid>
+            <pubDate>Mon, 17 Jan 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Thanks to Alejo Salles, Hongbo Zhang, Alex Obadia, and Kushal Babel for feedback and review of this post.]]></description>
+        </item>
         <item>
             <title><![CDATA[On the Formalization of MEV]]></title>
             <link>https://writings.flashbots.net/research/formalization-mev</link>

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwrittings_website=self.webpackChunkwrittings_website||[]).push([[428],{7242:function(t){t.exports=JSON.parse('{"allTagsPath":"/research/tags","slug":"/research/tags/optimization","name":"optimization","count":1,"permalink":"/research/tags/optimization"}')}}]);
