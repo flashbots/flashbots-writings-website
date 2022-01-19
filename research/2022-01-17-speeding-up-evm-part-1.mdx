@@ -8,9 +8,9 @@ hide_table_of_contents: false
 ---
 # Speeding up the Ethereum Virtual Machine (part 1)
 
-*Thanks to Alejo Salles, Hongbo Zhang, and Alex Obadia for feedback and review of this post.*
+*Thanks to Alejo Salles, Hongbo Zhang, Alex Obadia, and Kushal Babel for feedback and review of this post.*
 
-With a more performant Ethereum Virtual Machine (EVM), we can achieve better network scalability and more efficient maximal-extractable-value (MEV) extraction. This series of posts analyzes several approaches to speed up the EVM with a focus on parallelization.
+With a more performant Ethereum Virtual Machine (EVM), we can achieve better network scalability and more efficient maximal-extractable-value (MEV) extraction. This series of posts analyzes several approaches to speed up the EVM with a focus on parallelization and shared data conflict analysis.
 
 <!--truncate-->
 
@@ -20,8 +20,8 @@ Ethereum Virtual Machine(EVM)'s performance is vital for several reasons. First,
 
 To improve EVM performance with backward compatibility and minimal change to consensus rules or how storage is implemented, we need parallelism.[^2]
 
-[^1]: Even though at the moment the biggest bottleneck of Ethereum is not EVM's performance (the size of the Ethereum state storage is), it will soon be as Ethereum TPS goes up.
-[^2]: Of course, many other optimizations don't need base layer changes, such as batching state read & write operations, caching, flattening the storage database, or just using a more performant programming language. We see many of those optimizations implemented in clients like [Akula](https://medium.com/@vorot93/meet-akula-the-fastest-ethereum-implementation-ever-built-58eaca244c39) and [Silkworm](https://medium.com/@giulio.rebuffo/silkworm-and-akula-the-future-of-erigon-fda4d6813505).
+[^1]: Even though [at the moment](https://vitalik.ca/general/2021/05/23/scaling.html) the biggest bottleneck of Ethereum is not EVM's performance (the size of the Ethereum state storage is), it will soon be as Ethereum TPS goes up.
+[^2]: Of course, many other optimizations don't need base layer changes, such as batching state read & write operations, caching, flattening the storage database, or just using a more performant programming language. We see many of those optimizations implemented in clients like [Akula](https://medium.com/@vorot93/meet-akula-the-fastest-ethereum-implementation-ever-built-58eaca244c39) and [Silkworm](https://medium.com/@giulio.rebuffo/silkworm-and-akula-the-future-of-erigon-fda4d6813505). We believe the content of this post (especially the part on shared data conflict analysis) should also help the aforementioned optimizations (e.g., through state preloading).
 
 __In part 1 of the series, we argue the need for a parallel EVM and cover general approaches to achieve it such as [EIP 648](https://ethresear.ch/t/parallelilizing-evm-through-end-of-the-block-virtual-transactions/7787), [EIP 2930](https://eips.ethereum.org/EIPS/eip-2930) and [speculative execution](https://drops.dagstuhl.de/opus/volltexte/2020/11968/pdf/OASIcs-Tokenomics-2019-4.pdf).__ In part 2 we study how static analysis and formal methods can make the EVM parallelizable, specifically we present two simple algorithms for achieving parallelization.
 
@@ -64,7 +64,9 @@ Since block building and bundle profit optimization is an [NP-complete](https://
 
 [^5]: Default mev-geth release only merges 3 bundles per block, and over the past year on average there are 5 bundles per block, which is much less than the total number of profitable bundles per block.
 
-A study on EVM parallelization can help with this increasingly challenging bundle merging problem. As essentially, _the dual problem of parallelization algorithm design is understanding how [clashes](https://hackmd.io/hvOkCzxRQu6pJCmcLVzQaQ) take place in searcher bundles_: they both require knowing a transaction's shared data access information. Moreover, a parallel EVM helps full block builders (and MEV searchers) do more simulations, therefore producing more profitable bundles (as we previously mentioned, producing the most profitable block is an NPC problem, so an important way to be competitive and push the extraction limit is to do more state-space searches, i.e. simulations).
+A study on EVM parallelization can help with this increasingly challenging bundle merging problem. As essentially, _the dual problem of parallelization algorithm design is understanding how [clashes](https://hackmd.io/hvOkCzxRQu6pJCmcLVzQaQ) take place in searcher bundles_: they both require knowing a transaction's shared data access information. Moreover, a parallel EVM helps full block builders (and MEV searchers) do more simulations, therefore producing more profitable bundles (as we previously mentioned, producing the most profitable block is an NPC problem, so an important way to be competitive and push the extraction limit is to do more state-space searches, i.e. simulations[^13]).
+
+[^13]: It is true that many traditionally discussed NP hard problems have very good approximation algorithms and we probably will see the same happen in the block building game: builders try to optimize for algorithmic heuristics (or network structures so they can see more searcher bundles and have lower propagation latency) more rather than putting all the effort into pure simulation speed. 
 
 ## A breakdown of the parallelization problem
 
@@ -138,7 +140,7 @@ The point of those examples is just to say that there are lots of specific class
 
 [^11]: In fact, due to [impossibility results](https://en.wikipedia.org/wiki/Rice%27s_theorem), there will always be sub-optimal situations and it is impossible to eliminate them.
 
-[^12]: To audiences familiar with parallel programming, the description of parallelization algorithm here resembles the [synchronization mechanism](http://read.seas.harvard.edu/~kohler/class/cs111-s05/notes/notes8.html) of read-write locks. We deliberately chose this formulation over synchronization primitives to avoid getting into the details of data races.
+[^12]: To audiences familiar with parallel programming, the description of parallelization algorithm here resembles the [synchronization mechanism](http://read.seas.harvard.edu/~kohler/class/cs111-s05/notes/notes8.html) of (fine-grained) read-write locks. We deliberately chose this formulation over synchronization primitives to avoid getting into the details of data races.
 
 ## Conclusion
 
