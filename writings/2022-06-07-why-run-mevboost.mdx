@@ -1,0 +1,83 @@
+---
+slug: why-run-mevboost
+title: Why run mev-boost?
+authors: [hasu, thegostep]
+tags: [mev-boost]
+#image: /img/transparency-january-1.png
+hide_table_of_contents: false
+---
+
+# Why run mev-boost? — final
+
+The block producer role consists of two jobs: (1) **building** the best block from all available transactions, and (2) **proposing** this block to the network together with a proof-of-work or stake. While block building used to be easy, MEV creates an incentive for block producers to vertically integrate with trading firms to boost their returns. Unchecked, this would be a centralizing force in Ethereum.
+
+<!--truncate-->
+
+The solution is a technique called **proposer-builder separation** (PBS) in which validators can outsource the difficult building of blocks to specialized parties called **block builders**. PBS is being rolled out to Ethereum in three stages:
+
+1. Stage 1 (2020 until today): Flashbots started as a builder specializing in MEV extraction in proof-of-work Ethereum to democratize access to MEV and make the most profitable blocks available to all miners. >90% of miners are outsourcing some of their block construction to Flashbots today.
+2. Stage 2 (we are here!): **mev-boost** is a new middleware in which validators can sell their blockspace to not just Flashbots but other builders as well. This opens up the market to more builders and creates competition between them, leading to more revenue and choice for validators, and better censorship-resistance for Ethereum.
+3. Stage 3 (in ~2 years): In the future, [PBS](https://www.notion.so/Ethereum-Research-449b623382e24a67aba9d48b96e7e0b0) will be **enshrined** in the Ethereum protocol itself to further harden its trust model.
+
+In this article, we explain the benefits of mev-boost to the network and to validators, node operators, and staking pools.
+
+# Reason 1: Builder competition is good for everyone
+
+**Competition between buyers** maximizes revenue for the seller, and the market for blockspace is no different. The more block builders compete to buy blockspace from your validators, the more they have to bid. As a result, validators can earn higher returns than using any other approach.
+
+The Flashbots builder, for example, has pioneered the **sealed-bid auction** with a new transaction type called “bundle”. bundles allow transactors to express a preference for transaction placement independent from their bid, which is particularly useful to extractors of MEV. Access to MEV is even more important in PoS Ethereum, as the [planned reduction in block subsidies](https://hackmd.io/@flashbots/mev-in-eth2) will make MEV [an even larger share of total staking revenue.](https://github.com/flashbots/eth2-research/blob/main/notebooks/mev-in-eth2/eth2-mev-calc.ipynb)
+
+The difference is even more important for **solo validators**, who couldn’t participate in Stage 1 PBS because of their size and were cut off from any MEV revenue. In the old infrastructure, miners were trusted not to “unbundle” MEV transactions. in mev-boost, validators commit to a certain seller knowing only that the block is valid and how much it pays them, but not the transactions inside. so this trust is no longer required, allowing even small or solo validators to sell their blockspace to the best builders.
+
+A competitive market between several builders is also better for **Ethereum’s censorship resistance**, as censoring builders will make less money than non-censoring ones and not be able to bid as much. For that reason, competitive PBS is generally said to have a 1/N security model (1 non-censoring builder is enough.) validators also have full control over the builders they include in their market and can remove ones that were found to be censoring.
+
+Finally, we expect PBS to create a **green field for builders as an entirely new type of service provider** in Ethereum. For example, the Flashbots builder is accessible to anyone [via the Flashbots Protect RPC](https://docs.flashbots.net/flashbots-protect/rpc/quick-start/) and creates a de-facto overlay to Ethereum where users can transact privately and are protected from frontrunners and reverts. In the future, we expect builders to improve on Ethereum’s UX in dramatic ways, e.g. by offering generalized account abstraction.
+
+# Reason 2: mev-boost is neutral infrastructure
+
+While mev-boost is built by Flashbots in collaboration with the Ethereum Foundation and client teams, it is developed as **neutral infrastructure** in two major ways.
+
+First, even though the Flashbots builder uses mev-auction as its ordering algorithm, mev-boost itself is **unopinionated about the ordering approach used**. Any builder can compete on the same infrastructure and use other ordering approaches, from full or partial auction to first-come-first-serve to selling blockspace in a futures market, and more. We ultimately expect the users of Ethereum to determine the winning approach by voting with their feet and sending their transactions to builders that best represent them.
+
+Second, mev-boost is **compatible with any Ethereum client**. This is a major upgrade to the Flashbots builder of proof-of-work Ethereum which required all participating miners to run mev-geth, a fork of go-ethereum.
+
+# Reason 3: mev-boost is secure and redundant
+
+![why-run-mevboost.drawio.png](/img/why-run-mevboost.drawio.png)
+
+mev-boost is designed from the ground up with **Ethereum security as the primary objective**. It is designed such that the worst-case scenario for validators is to lose one block of MEV revenue.
+
+To prevent any risk to Ethereum **liveness**, mev-boost is implemented as a sidecar for consensus clients. Using the standard [builder specs](https://github.com/ethereum/builder-specs) ensures that client diversity is maintained and validators benefit from operating in the same security model regardless of the client. This security model ensures that if a fault occurs in the mev-boost software, the consensus nodes fall back to local block production.
+
+To ensure high levels of **data availability**, mev-boost introduces mutually trusted relays that sit between builders and validators and are responsible for simulating blocks, filtering out the bad ones, and escrowing block bodies. Relay activity is publicly auditable, allowing the entire network to monitor its performance. Using fraud proofs and circuit breakers, validators can automatically disconnect from underperforming relays. Data availability committees may be introduced in the future to provide additional redundancy to the network.
+
+To reduce the risk of **censorship**, mev-boost allows validators to connect to any and as many relays as they trust. High levels of builder and relay competition ensure that users and validators always have many options to chose from.
+
+# Reason 4: mev-boost is an important step to in-protocol PBS
+
+As outlined in the intro, it is very important for Ethereum that all validators have access to the best blocks and that competition between builders is encouraged. mev-boost improves on Stage 1 PBS in both of these dimensions by being very easy to join as both a validator and builder.
+
+While we estimate enshrined PBS to be two years from production, mev-boost can serve as an **interim solution**. It uses mutually trusted relays to get the benefits of PBS today, whilst the in-protocol solution is developed.
+
+There are good reasons to move ahead with an out-of-protocol PBS at this time instead of waiting. mev-boost is available today while enshrined PBS is still an active area of research. The “private market” can generally iterate faster toward a winning design, and allows us to build more knowledge before enshrining PBS in Ethereum. Both of these points were also emphasized by Barnabé Monnot of the Ethereum Foundation [in this talk](https://www.youtube.com/watch?v=jQjBNbEv9Mg&list=PLRHMe0bxkuel3w3C7P_WVvp9ShLi3HKRI&index=15).
+
+# Reason 5: mev-boost prevents MEV hiding
+
+Most stake in PoS ethereum will be delegated to staking pools, who further delegate it to trusted (Lido, Alluvial) or bonded (Rocket Pool) node operators. But these pools suffer from a risk called **mev hiding** where node operators are incentivized to hide the real value they make from a block and keep a larger fee for themselves. An open market for block building solves this problem because builders need to maximize their public bids in order to be competitive. As long as validators sell their blockspace to the highest bidder, there is very high confidence they are not engaging in mev hiding on the side.
+
+# Remaining risks of mev-boost
+
+The first and biggest risk to block production in Ethereum remains that of **builder centralization**. A builder that dominates the market because of its outsized profitability gains the ability (although not the incentive) for censorship. They can also extract rent from Ethereum users and validators. It should be noted that mev-boost doesn’t *create* the risk of builder centralization - MEV does. mev-boost merely makes it easy for builders to buy the blockspace of all validators and thereby isolate the centralization to the builder layer, where it is easier to address. If anything, encouraging competition between many builders is the primary mitigation to builder centralization, but it should be supported by techniques like [censorship resistance lists (crLists)](https://vitalik.ca/general/2021/12/06/endgame.html) and others still in early research.
+
+First, mev-boost has the role of the **mutually trusted relay**. Anyone can be a relay, and they will compete on reputation and service to both builders and validators. While this is a strict improvement to the trust model compared to Stage 1 PBS, relays can still be a risk to both builders and validators. This risk will be addressed in Stage 3 PBS (enshrined), which is getting rid of the trusted relay altogether.
+
+# References
+
+- [mev-boost GitHub](https://github.com/flashbots/mev-boost)
+- [The Hitchhiker's Guide to Ethereum](https://members.delphidigital.io/reports/the-hitchhikers-guide-to-ethereum) (good layman's explanation of PBS)
+- [MEV in eth2 - an early exploration](https://hackmd.io/@flashbots/mev-in-eth2)
+- [Analysis of MEV rewards in ETH2](https://github.com/flashbots/eth2-research/blob/main/notebooks/mev-in-eth2/eth2-mev-calc.ipynb)
+- [Ethereum builder API specification](https://github.com/ethereum/builder-specs)
+- [Vitalik - Endgame](https://vitalik.ca/general/2021/12/06/endgame.html)
+- [A study of the transaction supply chain from CryptoKitties to MEV-Boost to PBS - Barnabé Monnot (EF)](https://www.youtube.com/watch?v=jQjBNbEv9Mg&list=PLRHMe0bxkuel3w3C7P_WVvp9ShLi3HKRI&index=16)
+- [Flashbots Protect RPC](https://docs.flashbots.net/flashbots-protect/rpc/quick-start/)
