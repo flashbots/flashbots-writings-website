@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwrittings_website=self.webpackChunkwrittings_website||[]).push([[9554],{9393:function(s){s.exports=JSON.parse('{"allTagsPath":"/writings/tags","slug":"/writings/tags/mev-boost","name":"mev-boost","count":1,"permalink":"/writings/tags/mev-boost"}')}}]);

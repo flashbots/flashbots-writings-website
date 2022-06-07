@@ -2,11 +2,26 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://writings.flashbots.net/writings</id>
     <title>Flashbots Blog</title>
-    <updated>2022-01-17T00:00:00.000Z</updated>
+    <updated>2022-06-07T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://writings.flashbots.net/writings"/>
     <subtitle>Flashbots Blog</subtitle>
     <icon>https://writings.flashbots.net/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Why run mev-boost?]]></title>
+        <id>why-run-mevboost</id>
+        <link href="https://writings.flashbots.net/writings/why-run-mevboost"/>
+        <updated>2022-06-07T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[This article explains the benefits of mev-boost to the network and to validators, node operators, and staking pools.]]></summary>
+        <author>
+            <name>Hasu</name>
+            <uri>https://twitter.com/hasufl</uri>
+        </author>
+        <author>
+            <name>Stephane Gosselin</name>
+            <uri>https://twitter.com/thegostep</uri>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Flashbots Transparency Report — Sept-Dec 2021]]></title>
         <id>transparency-21q4</id>
