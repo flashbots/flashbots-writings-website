@@ -1,3 +1,9 @@
+hasu:
+  name: Hasu
+  title: Strategy lead
+  url: https://twitter.com/hasufl
+  image_url: https://pbs.twimg.com/profile_images/1512839785232093193/BU3pInpO_400x400.jpg
+
 ryry79261:
   name: Ryan James Noble
   title: Frontend mercenary for Flashbots
@@ -52,3 +58,9 @@ sxysun:
   title: Research @Flashbots
   url: https://twitter.com/sxysun1
   image_url: https://pbs.twimg.com/profile_images/1461834528629080071/xzfOvt9Q_400x400.jpg
+
+stephane:
+  name: Stephane Gosselin
+  title: Product @Flashbots
+  url: https://twitter.com/thegostep
+  image_url: https://pbs.twimg.com/profile_images/1432425822707650565/bKxdVmeR_400x400.jpg
