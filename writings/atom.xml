@@ -2,11 +2,21 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://writings.flashbots.net/writings</id>
     <title>Flashbots Blog</title>
-    <updated>2022-06-07T00:00:00.000Z</updated>
+    <updated>2022-06-15T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://writings.flashbots.net/writings"/>
     <subtitle>Flashbots Blog</subtitle>
     <icon>https://writings.flashbots.net/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Beginner's Guide to mev-boost]]></title>
+        <id>beginners-guide-mevboost</id>
+        <link href="https://writings.flashbots.net/writings/beginners-guide-mevboost"/>
+        <updated>2022-06-15T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Understanding mev-boost as an iteration on the original Flashbots auction, and how it paves the way for full in-protocol PBS]]></summary>
+        <author>
+            <name>Jolene Dunne</name>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Why run mev-boost?]]></title>
         <id>why-run-mevboost</id>
