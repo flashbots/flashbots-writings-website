@@ -32,12 +32,6 @@ kristof:
     url: https://twitter.com/kristofgazso?lang=en
     image_url: https://pbs.twimg.com/profile_images/1326269994074779648/840HwaDE_400x400.jpg
 
-ryry79261:
-  name: Ryan James Noble
-  title: Frontend mercenary for Flashbots
-  url: https://github.com/ryry79261
-  image_url: https://github.com/ryry79261.png
-
 obadiaa:
   name: Alex Obadia
   title: Research @Flashbots
@@ -55,6 +49,12 @@ robert:
     title: Product @Flashbots
     url: https://twitter.com/bertcmiller
     image_url: https://pbs.twimg.com/profile_images/1336354612064911360/qGVMxddJ_400x400.jpg
+
+ryry79261:
+  name: Ryan James Noble
+  title: Frontend mercenary for Flashbots
+  url: https://github.com/ryry79261
+  image_url: https://github.com/ryry79261.png
 
 stephane:
   name: Stephane Gosselin
