@@ -9,66 +9,11 @@ $color-3: rgba(180, 180, 180, 0.1);
 $color-4: rgba(100, 100, 100, 0.1);
 $color-1: rgba(50, 50, 50, 0.1);
 
-$size: 2em;
-$big-size: 1+$size*1.0*random(3);
-$min: math.div($size * 1, random(10));
-$max: 1+$min*1+random(3);
-$step: $min*5.0;
-
-
 HTML {
   height: 100%;
 }
 
 BODY {
-  background: 
-    radial-gradient(circle at right,
-      $transparent $min, 
-      $color-1 $min, $color-1 $max,
-      $transparent $max
-      ) 0 0,
-    radial-gradient(circle at left,
-      $transparent $min, 
-      $color-1 $min, $color-1 $max,
-      $transparent $max
-      ) 0 $size,
-    
-    radial-gradient(circle at right,
-      $transparent $min, 
-      $color-2 $min, $color-2 $max,
-      $transparent $max
-      ) $step 0,
-    radial-gradient(circle at left,
-      $transparent $min, 
-      $color-2 $min, $color-2 $max,
-      $transparent $max
-      ) $step $size,
-    
-    radial-gradient(circle at right,
-      $transparent $min, 
-      $color-3 $min, $color-3 $max,
-      $transparent $max
-      ) $step*2 0,
-    radial-gradient(circle at left,
-      $transparent $min, 
-      $color-3 $min, $color-3 $max,
-      $transparent $max
-      ) $step*2 $size,
-    
-    radial-gradient(circle at right,
-      $transparent $min, 
-      $color-4 $min, $color-4 $max,
-      $transparent $max
-      ) $step*3 0,
-    radial-gradient(circle at left,
-      $transparent $min, 
-      $color-4 $min, $color-4 $max,
-      $transparent $max
-      ) $step*3 $size
-    ;
-  background-size:  $big-size $big-size;
-  background-attachment: fixed;
-  background-repeat: repeat;
   //font: 16px/2 'Trebuchet MS', Verdana, sans-serif;
   // font-family: var(--ifm-font-family-base);
   //max-width: 70vw !important;
