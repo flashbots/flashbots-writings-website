@@ -6,7 +6,8 @@
   padding: 0 12px;
   margin: 0 auto;
   @media screen and (max-width: $desktop-max-width) {
-    max-width: 95vw;
+    width: 95vw;
+    max-width: 670px;
   }
   background-color: var(--ifm-background-surface-color);
 }

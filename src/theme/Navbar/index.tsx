@@ -266,7 +266,15 @@ function Navbar(): JSX.Element {
             titleClassName={clsx("navbar__title", styles.title)}
           />
         </div>
-        <div className={clsx("navbar__items navbar__items--right", styles.fixFlex)}>
+        <div className={clsx("navbar__items navbar__items--right", styles.fixFlex, styles.navItems)}>
+        {leftItems.map((item, i) => (
+            <NavbarItem {...item}
+              key={i} />
+          ))}
+          {rightItems.map((item, i) => (
+            <NavbarItem {...item}
+              key={i} />
+          ))}
           {!colorModeToggle.disabled && (
             <Toggle
               className={styles.toggle}
@@ -276,7 +284,7 @@ function Navbar(): JSX.Element {
           )}
           {!hasSearchNavbarItem && <SearchBar />}
         </div>
-        <div className={
+        {/* <div className={
           clsx("navbar__items", styles.fixFlex, styles.customNav)
         }>
           {leftItems.map((item, i) => (
@@ -287,7 +295,7 @@ function Navbar(): JSX.Element {
             <NavbarItem {...item}
               key={i} />
           ))}
-        </div>
+        </div> */}
       </div>
 
       <div

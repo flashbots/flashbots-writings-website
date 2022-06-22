@@ -1,0 +1,12 @@
+@import "../.styles/index.scss";
+
+.logoTitle {
+  font-size: 16px !important;
+  font-weight: 400;
+}
+
+.wrapper{
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+}
