@@ -105,15 +105,18 @@ function BlogListPage(props: Props): JSX.Element {
       }}
       // sidebar={sidebar}
     >
-      <h3 className={styles.header}>
-        {
-          location.pathname.indexOf("/research") >= 0 ?  (<>
-            Research from the Flashbots team.
-          </>) : (<>
-            Writings from the Flashbots team.
-          </>)
-        }
-      </h3>
+      <div className={styles.header}>
+        <h1>
+          {
+            location.pathname.indexOf("/research") >= 0 ?  (<>
+              Research
+            </>) : (<>
+              Writings
+            </>)
+          }
+        </h1>
+        <p>Writings & Research from the Flashbots team. <br/> This serves as an archive of the written content we put out.</p>
+      </div>
       <TagsListInline tags={tags} />
       <Searchbar setValue={setSearchFilter}/>
       {currentPage.filter(item => searchFilter === "" || item.content.frontMatter.title.toLowerCase().includes(searchFilter.toLowerCase())).map(({ content: BlogPostContent }) => (
