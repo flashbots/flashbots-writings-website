@@ -21,24 +21,23 @@ BODY {
 }
 
 header {
-    text-align: justify;
-    margin-bottom: 2rem !important;
-    margin-top  : 2rem !important;
-    font-size: 1.5em !important;
+  text-align: justify;
+  margin-bottom: 2rem !important;
+  margin-top  : 2rem !important;
+  font-size: 1.5em !important;
 }
 
 article {
-    padding-bottom: 4em !important;
+  padding-bottom: 4em !important;
+  border-bottom: 1px solid #c4c4c4;
 }
 
 main {
-    font-size: 1.15em !important;
-    padding-left: 4vw !important;
-    padding-right: 4vw !important;
+  font-size: 1.15em !important;
+  padding-left: 4vw !important;
+  padding-right: 4vw !important;
 }
  
 .layoutDefaults_src-theme-Layout-styles-module {
     margin-top: -50px;
 }
-
-
