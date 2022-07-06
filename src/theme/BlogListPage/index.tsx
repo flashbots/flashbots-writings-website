@@ -115,7 +115,7 @@ function BlogListPage(props: Props): JSX.Element {
             </>)
           }
         </h1>
-        <p>Writings & Research from the Flashbots team. <br/> This serves as an archive of the written content we put out.</p>
+        <p>A collection of articles and papers from Flashbots.</p>
       </div>
       <TagsListInline tags={tags} />
       <Searchbar setValue={setSearchFilter}/>
