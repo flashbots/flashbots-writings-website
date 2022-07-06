@@ -1,9 +1,11 @@
 .root {
   display: block;
   width: 100%;
-  padding: 6px;
+  padding: .5rem 0;
+  font-family: var(--ifm-font-size-base)/var(--ifm-line-height-base) var(--ifm-font-family-base);
+  font-style: italic;
+  font-size: 1rem;
   border: none;
   outline: none;
-  margin: 6px 0;
   border-bottom: 1px solid #dce6f0;
 }

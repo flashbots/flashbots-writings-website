@@ -7,7 +7,14 @@
 
 .blogPostTitle {
   font-size: 2rem;
+  padding-top: 2rem;
 }
+.blogPostTitle:first-child {
+  padding-top: 8rem;
+}
+/* .blogPostTitle a {
+  color: #0d0d0d;
+} */
 
 .blogPostData {
   font-size: 0.9rem;

@@ -5,6 +5,16 @@
 }
 
 .header {
-  margin-top: 1rem;
-  margin-bottom: 3rem;
+  text-align: center;
+  padding: 10em 0 6em;
+}
+.header h1 {
+  font-weight: normal;
+  font-size: 3em;
+  margin-bottom: 20px;
+}
+.header p {
+  font-size: 1em;
+  font-style: italic;
+  line-height: 1.5;
 }
