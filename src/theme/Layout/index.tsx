@@ -43,7 +43,7 @@ function Layout(props: Props): JSX.Element {
         )}>
         {children}
       </div>
-
+      
       {!noFooter && <Footer />}
     </LayoutProviders>
   );

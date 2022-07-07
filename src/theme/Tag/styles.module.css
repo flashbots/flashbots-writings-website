@@ -17,12 +17,16 @@
 .tag:hover {
   --docusaurus-tag-list-border: var(--ifm-link-color);
   text-decoration: none;
+  /* --docusaurus-tag-list-border: blue; */
+  /* color: blue; */
 }
 
 .tagRegular {
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   padding: 0.3rem 0.5rem;
   font-size: 90%;
+  font-style: italic;
+  /* color: blue; */
 }
 
 .tagWithCount {
