@@ -16,13 +16,13 @@ import styles from "./styles.module.css"
 export default function TagsListInline({ tags }: Props) {
   return (
     <>
-      <b>
+      <span>
         <Translate
           id="theme.tags.tagsListLabel"
           description="The label alongside a tag list">
           Filter:
         </Translate>
-      </b>
+      </span>
       <ul className={clsx(styles.tags, "padding--none", "margin-left--sm")}>
         {tags.map(({ 
           label,
