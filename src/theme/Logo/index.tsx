@@ -33,6 +33,7 @@ const Logo = (props: Props): JSX.Element => {
 
   return (
     <Link
+      className={styles.wrapper}
       to={logoLink}
       {...propsRest}
       {...(logo.target && {target: logo.target})}>
