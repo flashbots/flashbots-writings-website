@@ -4,9 +4,16 @@
         <title>Flashbots Blog</title>
         <link>https://writings.flashbots.net/writings</link>
         <description>Flashbots Blog</description>
-        <lastBuildDate>Wed, 15 Jun 2022 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 20 Jun 2022 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
+        <item>
+            <title><![CDATA[Boost your MEV in Ethereum proof-of-stake]]></title>
+            <link>https://writings.flashbots.net/writings/mev-boost-call-for-testing</link>
+            <guid>mev-boost-call-for-testing</guid>
+            <pubDate>Mon, 20 Jun 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Calling all validators to test mev-boost.]]></description>
+        </item>
         <item>
             <title><![CDATA[Beginner's Guide to mev-boost]]></title>
             <link>https://writings.flashbots.net/writings/beginners-guide-mevboost</link>
