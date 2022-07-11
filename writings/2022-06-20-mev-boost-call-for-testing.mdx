@@ -1,0 +1,34 @@
+---
+slug: mev-boost-call-for-testing
+title: Boost your MEV in Ethereum proof-of-stake
+authors: [elopio, metachris]
+tags: [mev-boost]
+image: img/dall-e.png
+hide_table_of_contents: false
+---
+
+# Boost your MEV in Ethereum proof-of-stake
+
+Calling all validators to test [`mev-boost`](https://github.com/flashbots/mev-boost).
+
+<!--truncate-->
+
+From our [early explorations in Ethereum proof-of-stake](https://writings.flashbots.net/research/mev-eth2) we found that “MEV can increase validator rewards by 75.3%, or give an APR of 12.86% rather than a non-MEV APR of 7.35% from staking eth.” Any competitive validator will need access to MEV.
+
+mev-boost gives all validators the ability to participate in MEV extraction by selling their blockspace to specialized block builders. We developed it in collaboration with the Ethereum developers and researchers. For more information, see [Why run mev-boost?](https://writings.flashbots.net/writings/why-run-mevboost/)
+
+Today, `mev-boost` is ready for testing, and we need you! If you’re a solo validator or node operator, *please help us test on the Kiln and Ropsten networks*. Let us work together so the infrastructure is ready for the merge, and validators can profit from MEV from their first block.
+
+Follow this guide to run `mev-boost`, a consensus client and an execution client:
+
+https://github.com/flashbots/mev-boost/wiki/Testing
+
+Please test it and provide feedback as [issues](https://github.com/flashbots/mev-boost/issues). We will be sharing more guides as the other [Consensus Clients finish their implementations of the API](https://github.com/flashbots/mev-boost#consensus-clients-implementation-status). The roadmap, expected deliveries and estimated deadlines are described in [The Plan](https://github.com/flashbots/mev-boost/wiki/The-Plan-(tm)). Join us in the [`mev-boost` repository](https://github.com/flashbots/mev-boost/) while we explore the remaining [open research questions](https://github.com/flashbots/mev-boost/wiki/Research#open-questions) with all the relevant organizations in the ecosystem. If you have further questions, take a look at the [Frenquently Asked Questions](https://github.com/flashbots/mev-boost/wiki/Frequently-Asked-Questions).
+
+---
+
+We thank all the contributors to this project from the consensus clients, Ethereum Foundation, the [Eth2 Working Group](https://writings.flashbots.net/writings/announcing-eth2-working-group/), and other organizations from the ecosystem. In particular, we appreciate [lightclient](https://github.com/lightclient/) for his leadership on the specification definition.
+
+---
+
+Looking forward to the next steps in the plan, we will be prototyping the addition of more independent block builders. If you are a member of an organization interested in running a builder, [tell us more](https://github.com/flashbots/mev-boost/issues/145)!
