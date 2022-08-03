@@ -92,7 +92,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
           target: "_self"
         },
         items: [
-          {to: 'about', label: 'About', position: 'left'},
+          {href: "https://flashbots.net", label: 'About', position: 'left'},
           {to: 'writings', label: 'Writings', position: 'left'},
           {to: 'research', label: 'Research', position: 'left'},
           // {
