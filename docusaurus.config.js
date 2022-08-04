@@ -75,7 +75,13 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
         },
         theme: {
           customCss: require.resolve("./src/scss/custom.scss")
-        }
+        },
+        sitemap: {
+          changefreq: 'daily',
+          priority: 0.5,
+          // ignorePatterns: ['/tags/**'],
+          // filename: 'sitemap.xml',
+        },
       })
     ]
   ],
