@@ -3,33 +3,8 @@
  * bundles Infima by default. Infima is a CSS framework designed to
  * work well for content-centric websites.
  */
-
- @font-face {
-  font-family: CMU-Serif;
-  src: url('/static/fonts/cmunbx.ttf') format('truetype');
-  style: normal;
-  weight: 700; 
-  stretch: 100;
-}
-@font-face {
-  font-family: CMU-Serif;
-  src: url('/static/fonts/cmunci.ttf') format('truetype');
-  style: italic;
-  weight: 400; 
-  stretch: 100;
-}
-@font-face {
-  font-family: CMU-Serif;
-  src: url('/static/fonts/cmunrm.ttf') format('truetype');
-  style: normal;
-  weight: 700; 
-  stretch: 100;
-}
-
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-font-family-monospace: 'CMU-Serif';
-  --ifm-font-family-base: 'CMU-Serif';
   // Default
   // --ifm-color-primary: #25c2a0;
   // --ifm-color-primary-dark: rgb(33, 175, 144);
