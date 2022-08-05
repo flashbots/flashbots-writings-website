@@ -4,32 +4,8 @@
  * work well for content-centric websites.
  */
 
- @font-face {
-  font-family: CMU-Serif;
-  src: url('/static/fonts/cmunbx.ttf') format('truetype');
-  style: normal;
-  weight: 700; 
-  stretch: 100;
-}
-@font-face {
-  font-family: CMU-Serif;
-  src: url('/static/fonts/cmunci.ttf') format('truetype');
-  style: italic;
-  weight: 400; 
-  stretch: 100;
-}
-@font-face {
-  font-family: CMU-Serif;
-  src: url('/static/fonts/cmunrm.ttf') format('truetype');
-  style: normal;
-  weight: 700; 
-  stretch: 100;
-}
-
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-font-family-monospace: 'CMU-Serif';
-  --ifm-font-family-base: 'CMU-Serif';
   // Default
   // --ifm-color-primary: #25c2a0;
   // --ifm-color-primary-dark: rgb(33, 175, 144);
@@ -43,7 +19,7 @@
 
   --ifm-container-width-xl: 780px;
 
-  // Flashbots Blue: 
+  // Flashbots Blue:
   --ifm-color-primary: #052CA3;
   --ifm-color-primary-dark: #229402;
   --ifm-color-primary-darker: #118391;
@@ -70,6 +46,7 @@
   // --ifm-color-primary-lighter: #ffd669;
   // --ifm-color-primary-lightest: #ffe398;
 }
+
 html[data-theme='dark'] {
   --ifm-color-primary: #385FD6;
   //--ifm-color-primary: #ffc93a;
