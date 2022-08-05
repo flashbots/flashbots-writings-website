@@ -2,7 +2,15 @@
 
 This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
+
 ### Installation
+
+If you want to install the node packages from within a Docker container, then you can start it like this:
+```
+docker run -p 3000:3000 --rm -it -w /mnt -v $(pwd):/mnt node:16 /bin/bash
+```
+
+Install the dependencies:
 
 ```
 $ yarn
@@ -10,11 +18,16 @@ $ yarn
 
 ### Local Development
 
+Build the source:
+
 ```
+$ source .env.dev
 $ yarn start
 ```
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server. You can view it now at:
+
+http://localhost:3000
 
 ### Build
 
