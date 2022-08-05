@@ -2,11 +2,22 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://writings.flashbots.net/writings</id>
     <title>Flashbots Blog</title>
-    <updated>2022-06-20T00:00:00.000Z</updated>
+    <updated>2022-08-05T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://writings.flashbots.net/writings"/>
     <subtitle>Flashbots Blog</subtitle>
     <icon>https://writings.flashbots.net/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Understanding liveness risks from mev-boost]]></title>
+        <id>understanding-mev-boost-liveness-risks</id>
+        <link href="https://writings.flashbots.net/writings/understanding-mev-boost-liveness-risks"/>
+        <updated>2022-08-05T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Over the last few days, mev-boost has been a hot discussion topic in the community. We want to take this opportunity to highlight and educate the design and trust assumptions that make mev-boost possible as a merge-ready PBS solution.]]></summary>
+        <author>
+            <name>Hasu</name>
+            <uri>https://twitter.com/hasufl</uri>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Boost your MEV in Ethereum proof-of-stake]]></title>
         <id>mev-boost-call-for-testing</id>
