@@ -56,23 +56,23 @@ In this solution space, there are two categories: *local* and *global solutions*
 
 It seems that we need a *global solution.* In a global solution, validators look at the global history of the network, not just their own, to remove relays. The community is building two global solutions ahead of the merge.
 
-The first is a [relay monitor](https://github.com/flashbots/mev-boost/issues/142) operated by a trusted third party. This monitor watches the global performance of relays and can send a message a la “remove relay x now” to validators. So if any relay misbehaves, all validators who connect to the relay monitor will have their configs updated. Are there any new risks with this approach? We recall from earlier that an empty mev-boost config means that validators fall back to local block production. So the relay monitor can only temporarily remove relays from a validator’s config, not any new ones, or cause the validator to miss any slots.
+The first is a [relay monitor](https://github.com/flashbots/mev-boost/issues/142) operated by a trusted third party. This monitor watches the global performance of relays and can send a message a la “remove relay x now” to validators. So if any relay misbehaves, all validators who connect to the relay monitor will have their configs updated. Are there any new risks with this approach? We recall from earlier that an empty mev-boost config means that validators fall back to local block production. So the relay monitor can only temporarily remove relays from a validator’s config, not add any new ones, or cause the validator to miss any slots.
 
-The second solution, introduced in the call by [Alex Stokes](https://twitter.com/ralexstokes), is a so-called [circuit breaker](https://hackmd.io/@ralexstokes/BJn9N6Thc). It works similarly to a relay monitor but does not rely on a third-party service. The circuit breaker is part of the beacon node. It looks at the local view of the network, and if the node sees x out of y missed slots in a row, it will disconnect from the builder network and fall back to producing blocks locally. There is some nuance about picking a good x number because a small number would allow a large validator to miss slots on purpose to trigger the circuit breaker for the rest of the network and turn off their mev-boost. A large number could lead to many missed slots in a row.
+The second solution, introduced in the call by [Alex Stokes](https://twitter.com/ralexstokes), is the [circuit breaker](https://hackmd.io/@ralexstokes/BJn9N6Thc). It works similarly to a relay monitor but does not rely on a third-party service. The circuit breaker is part of the beacon node. It looks at the local view of the network, and if the node sees x out of y missed slots in a row, it will disconnect from the builder network and fall back to producing blocks locally. There is some nuance about picking a good number for x because a small number would allow a large validator to miss slots on purpose to trigger the circuit breaker for the rest of the network and turn off their mev-boost. A large number could lead to many missed slots in a row.
 
 The above and further, less-mature solutions are being discussed in this [GitHub issue](https://github.com/flashbots/mev-boost/issues/222). Eventually, Enshrined PBS will do away with relays entirely, but this is still a few years away.
 
 ## Why was this design chosen?
 
-Due to the commit-reveal scheme used in mev-boost, relays can fail to release blocks after making the winning bid. This attack vector has been known from the start and it is a calculated choice. But why was it chosen?
+Due to the commit-reveal scheme used in mev-boost, relays can fail to release blocks after making the winning bid. This attack vector has been known from the start and it is a calculated choice. Why did we choose it?
 
-The alternative would have been to continue with Flashbots’ pre-PoS design that we call “[Stage 1 PBS](https://writings.flashbots.net/writings/why-run-mevboost)”. In this system, block builders send full blocks to validators in cleartext, and validators have to open a DOS-sensitive RPC to block builders.
+The alternative would have been to continue with Flashbots’ pre-PoS design that we call “[Stage 1 PBS](https://writings.flashbots.net/writings/why-run-mevboost)”. In Stage 1 PBS, block builders send full blocks to validators in cleartext, and validators have to open a DOS-sensitive RPC to block builders.
 
-The advantage of that design has been that validators can always look at the block to verify that the block is valid and how much it pays the validator. If no builder sends a block in time, the validator can fall back to local block construction and there is no risk of ever missing a slot.
+The advantage of the Stage 1 design has been that validators can always look at the block to verify that the block is valid and how much it pays the validator. If no builder sends a block in time, the validator can fall back to local block construction and there is no risk of ever missing a slot.
 
 But the disadvantage is that block builders need to trust validators not to steal MEV from them, and validators need to trust block builders not to DoS attack them. The unfortunate consequence is that only trusted validators and builders can participate in the PBS market.
 
-So, while this design has nice properties against block withholding attacks, but it would have completely cut off solo stakers from MEV extraction. After public discussions with the Ethereum community and other key stakeholders, this cost was deemed too high and we settled in favor of a design that can include them.
+So, while the old design has nice properties against block withholding attacks, it would have completely cut off solo stakers from MEV extraction. After public discussions with the Ethereum community and other key stakeholders, this cost was deemed too high and we settled in favor of a design that can include them.
 
 ## Summary
 
