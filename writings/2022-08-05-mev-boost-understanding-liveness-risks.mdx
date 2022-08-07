@@ -15,7 +15,7 @@ First, it’s important to note that the reports of new issues or trust assumpti
 
 With this said, let's take a deep look at the mev-boost design, trust assumptions and why they were chosen, and how we mitigate liveness risks to Ethereum.
 
-# Block withholding attacks
+## Block withholding attacks
 
 To bring you up to speed, mev-boost is middleware that validators can run to outsource their block construction to a market of block builders. In the middle of builders and validators sit “relays”, which are in charge of facilitating smooth commerce between the two parties. The relay protects the builder from leaking any information about the block to the validators and ensures that even small validators can participate in the builder market. At the same time, the relay protects the validator from receiving blocks that are invalid, overstate their bid to the validator, or are missing entirely. (More on this later in “*Why was this design chosen?*”)
 
@@ -39,7 +39,7 @@ This attack is free for the relay because it never publishes the block and pays 
 
 Importantly, we are not concerned about 10% of the network connecting to a faulty relay, but only when a faulty relay is so popular that it creates systemic risk for the network. To recycle a famous saying, if 10% of validators miss their slot, it is their problem. If 100% of validators miss their slot, it is Ethereum’s problem.
 
-# Mapping the solution space
+## Mapping the solution space
 
 So, let’s say a popular relay is withholding blocks; how does the system recover? From first principles, the system recovers when *any* of the below steps happen:
 
@@ -60,7 +60,7 @@ The second solution, introduced in the call by [Alex Stokes](https://twitter.com
 
 The above and further, less-mature solutions are being discussed in this [GitHub issue](https://github.com/flashbots/mev-boost/issues/222). Eventually, Enshrined PBS will do away with relays entirely, but this is still a few years away.
 
-# Why was this design chosen?
+## Why was this design chosen?
 
 Due to the commit-reveal scheme used in mev-boost, relays can fail to release blocks after making the winning bid. This attack vector has been known from the start and it is a calculated choice. But why was it chosen?
 
@@ -72,11 +72,11 @@ But the disadvantage is that block builders need to trust validators not to stea
 
 So, while this design has nice properties against block withholding attacks, but it would have completely cut off solo stakers from MEV extraction. After public discussions with the Ethereum community and other key stakeholders, this cost was deemed too high and we settled in favor of a design that can include them.
 
-# Summary
+## Summary
 
 I hope this post helps you frame the trust assumptions of mev-boost, why they were chosen, and what mitigations will be in place to avoid liveness risk to Ethereum. The relay monitor will be ready for the merge. The circuit breakers are being developed and some consensus clients already have them implemented. Together with validators practicing good relay hygiene (only using trusted relays until further mitigations are in place, setting up downtime monitors for their slots), I think we are in a good position for the merge.
 
-# References
+## References
 
 - [mev-boost architecture](https://ethresear.ch/t/mev-boost-merge-ready-flashbots-architecture/11177)
 - [mev-boost homepage](https://boost.flashbots.net/)
