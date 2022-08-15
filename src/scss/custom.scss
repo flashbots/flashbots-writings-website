@@ -93,6 +93,13 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'CMU-Serif', Georgia, 'Times New Roman', Times, serif;
-  // font-weight: 400;
+  font-weight: 400;
   text-align: center;
+}
+
+.markdown > h2 {
+  margin: 6rem auto 4rem;
+}
+.markdown > h3 {
+  margin: 4rem auto 2rem;
 }

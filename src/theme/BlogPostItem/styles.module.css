@@ -6,21 +6,20 @@
  */
 
 .blogPostTitle {
-  font-size: 2rem;
-  padding-top: 2rem;
+  font-size: 2.75rem;
+  padding: 3rem 1rem 2rem;
   font-family: 'CMU-Serif', Georgia, 'Times New Roman', Times, serif;
 }
 .blogPostTitle:first-child {
   padding-top: 8rem;
 }
-/* .blogPostTitle a {
-  color: #0d0d0d;
-} */
-
+.blogPostTitle a {
+  font-size: 2rem;
+  /* color: #0d0d0d; */
+}
 .blogPostData {
   font-size: 0.9rem;
 }
-
 .blogPostDetailsFull {
   flex-direction: column;
 }
