@@ -8,6 +8,7 @@
 .blogPostTitle {
   font-size: 2rem;
   padding-top: 2rem;
+  font-family: 'CMU-Serif', Georgia, 'Times New Roman', Times, serif;
 }
 .blogPostTitle:first-child {
   padding-top: 8rem;
