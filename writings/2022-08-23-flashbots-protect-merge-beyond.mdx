@@ -1,0 +1,51 @@
+---
+slug: flashbots-protect-merge-and-beyond
+title: Flashbots Protect -- The Merge & Beyond
+authors: [angela]
+tags: [protect]
+# image: img/og_forest.jpg
+hide_table_of_contents: false
+---
+
+# Flashbots Protect -- The Merge & Beyond
+
+TL;DR: It has been a great year for Flashbots Protect! Post-merge, all transactions sent to Protect will have frontrunning and revert protection. But due to how mev-boost will be launched at the merge, Flashbots Protect will be down for at least 2 hours after the merge. If you rely on Flashbots Protect as a user or application developer then please plan accordingly.
+
+<!--truncate-->
+
+## Year in Review
+
+In October of last year, Flashbots [launched](https://medium.com/flashbots/announcing-flashbots-protect-9e039e9f0aa3) the public beta of Flashbots Protect, expanding the powerful benefits of bundles to users with just a change in RPC URL in their wallet of choice and to dapp and wallet developers with an easy-to-use SDK.
+
+Since its launch, Flashbots Protect has:
+
+* protected 100,000 IP addresses and 280,000 Ethereum addresses from frontrunning and sandwiches,
+* included 5,000,000 transactions on mainnet,
+* been integrated with MetaMask Swaps, [Rainbow](https://twitter.com/rainbowdotme/status/1552359075580706821?s=20&t=zBhwtvqaoyvB2AHUZpZmgQ) Swaps, NFT Aggregator [Gem](https://www.notion.so/2e27baa0a0aa48a8834d06e5403e7db0), [Alchemy](https://docs.alchemy.com/reference/eth-sendprivatetransaction), Quicknode, and more!
+
+## Downtime at the Merge
+
+Today Flashbots Protect as a service leverages mev-geth, a client that miners run to optimize their blocks for MEV extraction. After the merge, miners will be replaced by validators. Instead of mev-geth, validators will run mev-boost to optimize their blocks. mev-boost is open source middleware that allows validators to outsource the construction of their blocks to a competitive market of specialized entities called “block builders.” mev-boost was built by Flashbots as an implementation of [proposer-builder separation (PBS)](https://ethresear.ch/t/proposer-block-builder-separation-friendly-fee-market-designs/9725) for proof-of-stake (PoS) Ethereum.
+
+Flashbots will be a block builder and will use our builder to continue to offer the benefits of Flashbots Protect to users after the merge. However, mev-boost will go live after ~10 epochs have been finalized after the merge. As a result, there will be a 1 hour period of time where Flashbots Protect will be down. **Transactions sent to the Protect RPC during this 1 hour window after the merge will be dropped instantly and look like the following in MetaMask:**
+
+![dropped-tx-metamask.png](/img/dropped-tx-metamask.png)
+
+Furthermore, following the merge, there will be a stabilization period with many uncertainties—such as how fast validators will roll out mev-boost and how much competition there will be between builders. Due to these unknowns, we cannot determine beforehand how quickly the Flashbots builder will be able to include transactions, and therefore when we will turn on Flashbots Protect services. So, **Flashbots Protect will continue to drop transactions until we can guarantee transaction frontrunning and revert protection with a low time to inclusion**. We will announce the downtime and when we are live again through the[ #announcements channel in the Flashbots Discord](https://discord.gg/7hvTycdNcK) and[ various team Twitter](https://twitter.com/bertcmiller) accounts!
+
+To get your transaction included on-chain while Protect is down switch back your network to Ethereum Mainnet.
+
+
+## Post-merge Improvements
+
+Today [Flashbots Protect](https://docs.flashbots.net/flashbots-protect/overview) provides frontrunning protection, no cost for failed transactions, and priority in blocks, and [Fast Mode](https://docs.flashbots.net/flashbots-protect/rpc/fast-mode) provides only frontrunning protection for a faster time to inclusion. Post-merge, under the hood, we will add revert protection to Fast Mode and this will be the default for all transactions. In other words, **all transactions sent to Flashbots Protect RPC after the merge will have frontrunning and revert protection by default. **There are **no changes required** for users sending transactions to [https://rpc.flashbots.net](https://rpc.flashbots.net/fast) or [https://rpc.flashbots.net/fast](https://rpc.flashbots.net/fast). 
+
+But this is just the beginning. We are super excited by the cool UX features that being able to propose full blocks through mev-boost could enable—account abstraction, sponsored transactions, fee payment in popular ERC20 tokens, user MEV kickbacks, and more. Dapps and wallets who are interested in providing these features for your users, reach out!
+
+**New Users**: Try out Protect! Prepare for the merge and protect your trades from frontrunning and reverts by switching your RPC to Flashbots Protect in [3 easy steps](https://docs.flashbots.net/flashbots-protect/rpc/quick-start#how-to-use-flashbots-protect-rpc-in-metamask).
+
+**New Developers**: Add frontrunning and revert protection for your users! Follow the [guide](https://docs.flashbots.net/flashbots-auction/searchers/advanced/rpc-endpoint) in our documentation to integrate with our RPC endpoint.
+
+**Existing Users and Developers**: Plan for the downtime, but no changes are needed! Our documentation will update near the merge to reflect the changes above.
+
+If you have questions, send us a message in the #flashbots-protect channel in the [Flashbots Discord](https://discord.gg/7hvTycdNcK).
