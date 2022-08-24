@@ -4,9 +4,16 @@
         <title>Flashbots Blog</title>
         <link>https://writings.flashbots.net/writings</link>
         <description>Flashbots Blog</description>
-        <lastBuildDate>Wed, 17 Aug 2022 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 23 Aug 2022 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
+        <item>
+            <title><![CDATA[Flashbots Protect -- The Merge & Beyond]]></title>
+            <link>https://writings.flashbots.net/writings/flashbots-protect-merge-and-beyond</link>
+            <guid>flashbots-protect-merge-and-beyond</guid>
+            <pubDate>Tue, 23 Aug 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[TL;DR: It has been a great year for Flashbots Protect! Post-merge, all transactions sent to Protect will have frontrunning and revert protection. But due to how mev-boost will be launched at the merge, Flashbots Protect will be down for at least 1 hour after the merge. If you rely on Flashbots Protect as a user or application developer then please plan accordingly.]]></description>
+        </item>
         <item>
             <title><![CDATA[Open sourcing the Flashbots Relay]]></title>
             <link>https://writings.flashbots.net/writings/Flashbots-Relay-open-sourcing</link>

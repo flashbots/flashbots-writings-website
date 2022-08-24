@@ -2,11 +2,22 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://writings.flashbots.net/writings</id>
     <title>Flashbots Blog</title>
-    <updated>2022-08-17T00:00:00.000Z</updated>
+    <updated>2022-08-23T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://writings.flashbots.net/writings"/>
     <subtitle>Flashbots Blog</subtitle>
     <icon>https://writings.flashbots.net/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Flashbots Protect -- The Merge & Beyond]]></title>
+        <id>flashbots-protect-merge-and-beyond</id>
+        <link href="https://writings.flashbots.net/writings/flashbots-protect-merge-and-beyond"/>
+        <updated>2022-08-23T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[TL;DR: It has been a great year for Flashbots Protect! Post-merge, all transactions sent to Protect will have frontrunning and revert protection. But due to how mev-boost will be launched at the merge, Flashbots Protect will be down for at least 1 hour after the merge. If you rely on Flashbots Protect as a user or application developer then please plan accordingly.]]></summary>
+        <author>
+            <name>Angela Lu</name>
+            <uri>https://twitter.com/0xangelfish</uri>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Open sourcing the Flashbots Relay]]></title>
         <id>Flashbots-Relay-open-sourcing</id>
