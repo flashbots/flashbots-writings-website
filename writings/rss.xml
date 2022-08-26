@@ -4,9 +4,16 @@
         <title>Flashbots Blog</title>
         <link>https://writings.flashbots.net/writings</link>
         <description>Flashbots Blog</description>
-        <lastBuildDate>Tue, 23 Aug 2022 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 25 Aug 2022 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
+        <item>
+            <title><![CDATA[Searching Post-Merge]]></title>
+            <link>https://writings.flashbots.net/writings/searching-post-merge</link>
+            <guid>searching-post-merge</guid>
+            <pubDate>Thu, 25 Aug 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[If you're a searcher on Proof of Work (PoW) Ethereum and you're wondering how your experience will change as Ethereum switches to Proof of Stake (PoS), then this post is for you.]]></description>
+        </item>
         <item>
             <title><![CDATA[Flashbots Protect -- The Merge & Beyond]]></title>
             <link>https://writings.flashbots.net/writings/flashbots-protect-merge-and-beyond</link>

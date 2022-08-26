@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwrittings_website=self.webpackChunkwrittings_website||[]).push([[4252],{6535:function(s){s.exports=JSON.parse('{"allTagsPath":"/writings/tags","slug":"/writings/tags/pos","name":"pos","count":1,"permalink":"/writings/tags/pos"}')}}]);
