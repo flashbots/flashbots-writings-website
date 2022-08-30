@@ -3,32 +3,30 @@ slug: mev-supply-chain
 title: The MEV Supply Chain: a peek into the future of this industry
 authors: [thegostep]
 tags: [flashbots]
-image: /img/frontrunning-mev-crisis-1
 hide_table_of_contents: false
 ---
 
-At mev.day in Amsterdam, I opened the day by introducing a new framework for thinking about the fast moving MEV industry and how it will evolve in the future. I call this framework the MEV Supply Chain. You can find a recording of this presentation as well as the rest of mev.day here (light mode stage, 17 minutes in).
+# The MEV Supply Chain: a peek into the future of this industry
 
-What is the MEV Supply Chain?
+At [mev.day](mev.day) in Amsterdam, I opened the day by introducing a new framework for thinking about the fast moving MEV industry and how it will evolve in the future. I call this framework the MEV Supply Chain. You can find a recording of this presentation [here](https://www.youtube.com/watch?v=AuMkr5AnUvI) and the full mev.day recordings [here](https://flashbots.notion.site/flashbots/mev-day-836f88806995412dabc1c7bb7ce4e830).
+
+## What is the MEV Supply Chain?
 The MEV Supply Chain describes the chain of activity which helps users transform intentions into finalized state transitions in the presence of MEV. While the terminology is new, this supply chain actually exists in all blockchains regardless of the MEV mitigation technique or ordering rules they use. In fact, I would go as far as to say it exists in any market for user data, including traditional financial markets. But, this is a topic for a separate discussion. For today, let’s focus on blockchains.
 
+![mev-supply-chain](/img/mev-supply-chain.png)
 
-can you spot the sandwich?
+**User** - The user is anyone with an intention to enact a state transition on a blockchain. More abstractly, you can think of this as anyone with a specific preference on the future state of the world. An example of a specific user intent is swapping USDC for ETH at the best possible price. Since users don’t yet have their brains plugged directly into the metaverse, they need help to execute their intentions.
 
-User - The user is anyone with an intention to enact a state transition on a blockchain. More abstractly, you can think of this as anyone with a specific preference on the future state of the world. An example of a specific user intent is swapping USDC for ETH at the best possible price. Since users don’t yet have their brains plugged directly into the metaverse, they need help to execute their intentions.
+**Wallet** - The wallet is the user interface which helps the user encode their intent into a transaction that the blockchain can understand. Here, I group together everything at the application layer including dapp UI, wallet, and smart contract protocol as they work together to express user intent. Note: developers at this layer make decisions on behalf of their users on how to deal with MEV. One key decision they make is whether to route user transactions to a public transaction pool where they can be picked off by searchers indiscriminately, or to send them to a private routing system like [Flashbots Protect](https://docs.flashbots.net/flashbots-protect/overview/) which restricts what searchers can do with the transactions. You can find the mev.day panel discussion about dealing with MEV at the application layer [here](https://www.youtube.com/watch?v=3FHFOJqrJ4A).
 
-Wallet - The wallet is the user interface which helps the user encode their intent into a transaction that the blockchain can understand. Here, I group together everything at the application layer including dapp UI, wallet, and smart contract protocol as they work together to express user intent. Note: developers at this layer make decisions on behalf of their users on how to deal with MEV. One key decision they make is whether to route user transactions to a public transaction pool where they can be picked off by searchers indiscriminately, or to send them to a private routing system like Flashbots Protect which restricts what searchers can do with the transactions. You can find the mev.day panel discussion about dealing with MEV at the application layer here.
+**Searcher** - Searchers have a simple job: extract all the MEV possible for themselves. A searcher takes user transactions from all sources and converts them into complex transaction types like [bundles](https://docs.flashbots.net/flashbots-auction/searchers/advanced/understanding-bundles). This is an important role because the liquidity, arbitrage, and liquidations performed by searchers is what makes markets possible. However, in a dysfunctional supply chain, searchers can extract disproportionate value relative to the service they provide.
 
-Searcher - Searchers have a simple job: extract all the MEV possible for themselves. A searcher takes user transactions from all sources and converts them into complex transaction types like bundles. This is an important role because the liquidity, arbitrage, and liquidations performed by searchers is what makes markets possible. However, in a dysfunctional supply chain, searchers can extract disproportionate value relative to the service they provide.
+**Builder** - Builders have many names today, but their job is to aggregate transactions from various sources and construct a block. In Ethereum today, mining pools are performing the builder role. In a L2 execution system, the sequencer is the builder as they construct rollup payloads to submit to the L1.
 
-Builder - Builders have many names today, but their job is to aggregate transactions from various sources and construct a block. In Ethereum today, mining pools are performing the builder role. In a L2 execution system, the sequencer is the builder as they construct rollup payloads to submit to the L1.
+**Validator** - Validators perform consensus duties which include validating and finalizing blocks. Historically, builders and validators have been the same logical entity. The introduction of Block Proposer / Builder Separation (PBS for short) to the Ethereum roadmap and the development of rollup centric data availability chains aim to separate these roles. As Vitalik describes in his [Endgame post](https://vitalik.ca/general/2021/12/06/endgame.html), such a separation aims to maximize validator decentralization.
 
-Validator - Validators perform consensus duties which include validating and finalizing blocks. Historically, builders and validators have been the same logical entity. The introduction of Block Proposer / Builder Separation (PBS for short) to the Ethereum roadmap and the development of rollup centric data availability chains aim to separate these roles. As Vitalik describes in his Endgame post, such a separation aims to maximize validator decentralization.
-
-MEV Supply Chain - Utopia or Dystopia?
-In my last post, I trolled about the idea of the MEV Utopia and Dystopia and the characteristics that each future presents. Let’s see how we can apply this dichotomy to the MEV supply chain.
-
-
+## MEV Supply Chain - Utopia or Dystopia?
+In my last [post], I trolled about the idea of the MEV Utopia and Dystopia and the characteristics that each future presents. Let’s see how we can apply this dichotomy to the MEV supply chain.
 
 MEV can generally be thought of as originating from user interactions, whether directly or indirectly. A user submitting a large trade against a CEX can generate a direct arbitrage opportunity against multiple DEX and CEX on various domains. A user taking out a loan on a lending protocol creates an indirect liquidation opportunity at a future point in time.
 
@@ -36,15 +34,15 @@ I find the most useful heuristic for identifying if an MEV supply chain is tendi
 
 In the MEV Dystopia, the MEV generated by users is captured in the center of the supply chain. We can call this future Centralized Block Building.
 
+![mev-dystopia](/img/mev-dystopia.png)
 
-
-There are many paths to centralized block building. The most likely is for some sophisticated searchers with a monopoly on their strategy space to integrate up and down the supply chain in an attempt to obtain a competitive advantage in other strategies and increase barriers to entry. This kind of vertical integration is textbook anti-competitive behavior and we are already seeing it emerge in various domains leading to what we can describe as the “MEV MegaFund Blackbox”. Hasu gave a great talk at mev.day which explored this failure mode in depth.
+There are many paths to centralized block building. The most likely is for some sophisticated searchers with a monopoly on their strategy space to integrate up and down the supply chain in an attempt to obtain a competitive advantage in other strategies and increase barriers to entry. This kind of vertical integration is textbook anti-competitive behavior and we are already seeing it emerge in various domains leading to what we can describe as the “MEV MegaFund Blackbox”. Hasu gave a [great talk](https://www.youtube.com/watch?v=sYFuFLe9kp0) at mev.day which explored this failure mode in depth.
 
 In the MEV Utopia, all the MEV generated by users is returned to users, either in the form of direct cashbacks, gas fee subsidies, or network security subsidies. We can call this future Decentralized Block Building.
 
+![mev-utopia](/img/mev-utopia.png)
 
-
-Decentralized block building means each role is fulfilled by independent entities who compete in an open marketplace with low barriers to entry. The Flashbots Auction successfully introduced such a market between searchers and builders. In POW Ethereum there is little incentive for searchers to vertically integrate with miners while network security subsidies are maximized. Flashbots Protect and MEV-Boost extend this market to other layers of the supply chain.
+Decentralized block building means each role is fulfilled by independent entities who compete in an open marketplace with low barriers to entry. The [Flashbots Auction](https://docs.flashbots.net/flashbots-auction/overview) successfully introduced such a market between searchers and builders. In POW Ethereum there is little incentive for searchers to vertically integrate with miners while network security subsidies are maximized. [Flashbots Protect](https://docs.flashbots.net/flashbots-protect/overview/) and [MEV-Boost](https://github.com/flashbots/mev-boost) extend this market to other layers of the supply chain.
 
 It’s important to keep in mind utopias are often unreachable and reality lies somewhere between utopia and dystopia. My goal in framing the MEV supply chain using this dichotomy is to provide a simple heuristic through which you can evaluate the quickly evolving ecosystem. As users and developers, it’s your responsibility to use and build products which help the industry trend towards a decentralized utopian future rather than a centralized dystopian one.
 
