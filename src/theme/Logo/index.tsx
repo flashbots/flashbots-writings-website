@@ -34,7 +34,9 @@ const Logo = (props: Props): JSX.Element => {
   return (
     <Link
       className={styles.wrapper}
-      to={logoLink}
+      to={"https://flashtbots.net"}
+      target="_blank"
+      // to={logoLink}
       {...propsRest}
       {...(logo.target && {target: logo.target})}>
 
