@@ -5,7 +5,7 @@ This website is built using [Docusaurus 2](https://docusaurus.io/), a modern sta
 
 ### Installation
 
-If you want to install the node packages from within a Docker container (recommended for security), then you can start it like this:
+Install the node packages from within a Docker container (strongly recommended not only for security, but because installing all the packages manually is a huge waste of time), then you can start it like this:
 
 ```
 docker run -p 3000:3000 --rm -it -w /mnt -v $(pwd):/mnt node:16 /bin/bash
