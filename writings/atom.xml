@@ -92,6 +92,17 @@
         </author>
     </entry>
     <entry>
+        <title type="html"><![CDATA[The MEV Supply Chain - a peek into the future of this industry]]></title>
+        <id>mev-supply-chain</id>
+        <link href="https://writings.flashbots.net/writings/mev-supply-chain"/>
+        <updated>2022-05-02T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[At mev.day in Amsterdam, I opened the day by introducing a new framework for thinking about the fast moving MEV industry and how it will evolve in the future. I call this framework the MEV Supply Chain. You can find a recording of this presentation here.]]></summary>
+        <author>
+            <name>Stephane Gosselin</name>
+            <uri>https://twitter.com/thegostep</uri>
+        </author>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[Flashbots Transparency Report — Sept-Dec 2021]]></title>
         <id>transparency-21q4</id>
         <link href="https://writings.flashbots.net/writings/transparency-21q4"/>
@@ -131,7 +142,18 @@
         <updated>2021-11-30T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Flashbots has been critical to leveling the MEV playing field on Proof-of-Work (PoW) Ethereum (eth1), and aims to bring the same benefits to Proof-of-Stake (PoS) Ethereum (eth2). The adoption of Flashbots involves two distinct parties, block producers, and MEV searchers. In Ethereum, over 90% of miners have adopted Flashbots; however, as we approach eth2 and the transition to PoS, adoption will reset to 0. As such, for the health of the Ethereum ecosystem, it is imperative that validators also adopt an MEV solution for Ethereum post-merge. To assist in this adoption, we are pleased to announce the Flashbots Eth2 Working Group.]]></summary>
         <author>
-            <name>thegostep</name>
+            <name>Stephane Gosselin</name>
+            <uri>https://twitter.com/thegostep</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Ken Griffin and the MEV dystopia]]></title>
+        <id>ken-griffin-mev</id>
+        <link href="https://writings.flashbots.net/writings/ken-griffin-mev"/>
+        <updated>2021-11-22T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Like many others, when I learned that Ken Griffith beat out 17k crypto frens at purchasing the copy of the constitution, I couldn't help but laugh.]]></summary>
+        <author>
+            <name>Stephane Gosselin</name>
             <uri>https://twitter.com/thegostep</uri>
         </author>
     </entry>
@@ -208,7 +230,7 @@
         <updated>2021-04-12T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[The good, the bad, and the ugly of MEV.]]></summary>
         <author>
-            <name>thegostep</name>
+            <name>Stephane Gosselin</name>
             <uri>https://twitter.com/thegostep</uri>
         </author>
     </entry>
@@ -219,7 +241,7 @@
         <updated>2021-03-18T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Sandwiching, Fairness, and EIP-1559]]></summary>
         <author>
-            <name>thegostep</name>
+            <name>Stephane Gosselin</name>
             <uri>https://twitter.com/thegostep</uri>
         </author>
     </entry>
@@ -241,7 +263,7 @@
         <updated>2021-02-07T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[The first Flashbots bundle was mined in block 11550019 on Dec-29–2020 0422 PM UTC, kicking off what is poised to be the year of MEV.]]></summary>
         <author>
-            <name>thegostep</name>
+            <name>Stephane Gosselin</name>
             <uri>https://twitter.com/thegostep</uri>
         </author>
     </entry>
