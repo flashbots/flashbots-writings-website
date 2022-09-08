@@ -2,11 +2,22 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://writings.flashbots.net/research</id>
     <title>Flashbots Blog</title>
-    <updated>2022-01-17T00:00:00.000Z</updated>
+    <updated>2022-09-08T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://writings.flashbots.net/research"/>
     <subtitle>Flashbots Blog</subtitle>
     <icon>https://writings.flashbots.net/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Can First Come First Served-Based Transaction Ordering Prevent Front-Running?]]></title>
+        <id>fcfs-and-front-running</id>
+        <link href="https://writings.flashbots.net/research/fcfs-and-front-running"/>
+        <updated>2022-09-08T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Recently, consensus protocols have been proposed that aim to include transactions on a First Come First Served (FCFS) basis. In this article, we explore whether such FCFS-based ordering of transactions in consensus protocols can prevent front-running in permissionless blockchains.]]></summary>
+        <author>
+            <name>Robert Annessi</name>
+            <uri>https://annessi.net/</uri>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Speeding up the EVM (part 1)]]></title>
         <id>speeding-up-evm-part-1</id>

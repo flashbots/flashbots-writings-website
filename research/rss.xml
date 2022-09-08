@@ -4,9 +4,16 @@
         <title>Flashbots Blog</title>
         <link>https://writings.flashbots.net/research</link>
         <description>Flashbots Blog</description>
-        <lastBuildDate>Mon, 17 Jan 2022 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 08 Sep 2022 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
+        <item>
+            <title><![CDATA[Can First Come First Served-Based Transaction Ordering Prevent Front-Running?]]></title>
+            <link>https://writings.flashbots.net/research/fcfs-and-front-running</link>
+            <guid>fcfs-and-front-running</guid>
+            <pubDate>Thu, 08 Sep 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Recently, consensus protocols have been proposed that aim to include transactions on a First Come First Served (FCFS) basis. In this article, we explore whether such FCFS-based ordering of transactions in consensus protocols can prevent front-running in permissionless blockchains.]]></description>
+        </item>
         <item>
             <title><![CDATA[Speeding up the EVM (part 1)]]></title>
             <link>https://writings.flashbots.net/research/speeding-up-evm-part-1</link>
