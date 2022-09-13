@@ -4,9 +4,16 @@
         <title>Flashbots Blog</title>
         <link>https://writings.flashbots.net/writings</link>
         <description>Flashbots Blog</description>
-        <lastBuildDate>Thu, 25 Aug 2022 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 12 Sep 2022 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
+        <item>
+            <title><![CDATA[order flow, auctions and centralisation I - a warning]]></title>
+            <link>https://writings.flashbots.net/writings/order-flow-auctions-and-centralisation</link>
+            <guid>order-flow-auctions-and-centralisation</guid>
+            <pubDate>Mon, 12 Sep 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Tl;dr This post explores the alarming potential for exclusive order flow to render the builder market uncompetitive. A lack of competition in the builder market threatens to cause rent extraction, poor user experience, and entrenchment of builders with undue influence over network incentives. While cause for concern, the negative externalities of exclusive order flow can be mitigated or wholly avoided as presented in a series of articles, of which this article is the first.]]></description>
+        </item>
         <item>
             <title><![CDATA[Searching Post-Merge]]></title>
             <link>https://writings.flashbots.net/writings/searching-post-merge</link>
