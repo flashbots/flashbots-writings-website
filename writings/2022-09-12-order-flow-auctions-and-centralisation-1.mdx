@@ -12,7 +12,7 @@ hide_table_of_contents: false
 <!--truncate-->
 The gist of this article is captured in [a talk delivered at the MEV Workshop at SBC ‘22](https://www.youtube.com/watch?v=ilc3EoSMMDg).
 
-![Untitled](/img/OF.png)
+![mev utopia in danger meme](/img/OF.png)
 
 # Introduction
 
@@ -36,7 +36,7 @@ Consider a wallet trying to send exclusive order flow to a single builder. In or
 
 There are various reasons why a wallet might do this. The most obvious is contractual payment for order flow from the builder, but it might also be in exchange for certain features from the builder or because the wallet maintainer is too lazy to integrate with any builder apart from the largest, dominant builder that produces most blocks anyway. These motives and the ability to control order flow are not unique to wallets. For instance, DApp UI’s are in a very similar position. Lets call an agent that could play this role an “originator” for generality.
 
-![Untitled](/img/OF1.png)
+![positive feedback loop diagram](/img/OF1.png)
 
 *Diagram creds: Jon Charbonneau*
 
@@ -53,7 +53,7 @@ Consider the builder market centralising to a small number of builders, as [we e
 
 Hopefully, it is clear that the second scenario is the bad one as it sees the incumbent builders continue to retain the majority of MEV revenue, **violating the no-rent seeking property**. One may contend that the scenarios above did not take into account the payment that originators are receiving in exchange for their order flow. However, if an originator’s business model is selling EOF, switching and sending order flow to a small challenging builder would incur large latency penalties. This switching cost is likely to be reflected in the payment from incumbent builders to originators.
 
-![Untitled](/img/OF2.png)
+![order flow advantage boxes meme](/img/OF2.png)
 
 ### Additional Consequences
 
@@ -66,7 +66,7 @@ Forcing proposers to choose between being honest and earning high returns is bad
 
 With rent-seeking, disincentivised censorship resistance and missed opportunities for improvements in UX, clearly exclusive order flow can have a large detrimental impact on the network.
 
-![Untitled](/img/OF3.png)
+![wat do meme](/img/OF3.png)
 
 ### The path forward
 
@@ -94,3 +94,5 @@ Exclusive order flow presents a threat to PBS and, by extension, can be detrimen
 
 
 Special thanks to Stephane Gosselin and Alejo Salles for helpful feedback on this article.
+
+For discussions on this post, see [here](https://collective.flashbots.net/t/order-flow-auctions-and-centralisation-i-a-warning-v2/258?u=quintus)
