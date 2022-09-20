@@ -1,16 +1,16 @@
 ---
-slug: order-flow-auctions-and-centralisation 
+slug: order-flow-auctions-and-centralisation
 title: order flow, auctions and centralisation I - a warning
 authors: [quintus]
 tags: [flashbots, pbs, order-flow]
 image: /img/OF4.png
 hide_table_of_contents: false
 ---
-# Order flow, auctions and centralisation I: a warning 
+# Order flow, auctions and centralisation I: a warning
 
 **Tl;dr** This post explores the alarming potential for exclusive order flow to render the builder market uncompetitive. A lack of competition in the builder market threatens to cause rent extraction, poor user experience, and entrenchment of builders with undue influence over network incentives. While cause for concern, the negative externalities of exclusive order flow can be mitigated or wholly avoided as presented in a series of articles, of which this article is the first.
 <!--truncate-->
-The gist of this article is captured in [a talk delivered at the MEV Workshop at SBC ‘22](https://www.youtube.com/watch?v=ilc3EoSMMDg).
+*The gist of this article is captured in [a talk delivered at the MEV Workshop at SBC ‘22](https://www.youtube.com/watch?v=ilc3EoSMMDg). For discussions on this post, see [here.](https://collective.flashbots.net/t/order-flow-auctions-and-centralisation-i-a-warning/258)*
 
 ![mev utopia in danger meme](/img/OF.png)
 
@@ -42,7 +42,7 @@ There are various reasons why a wallet might do this. The most obvious is contra
 
 # The problem
 
-Exclusive order flow would allow a builder - or small group of colluding builders - to capture the builder market, making it effectively uncompetitive. As we will see, this would have significantly negative consequences on the builder market. 
+Exclusive order flow would allow a builder - or small group of colluding builders - to capture the builder market, making it effectively uncompetitive. As we will see, this would have significantly negative consequences on the builder market.
 
 ### Capturing the market
 
@@ -57,7 +57,7 @@ Hopefully, it is clear that the second scenario is the bad one as it sees the in
 
 ### Additional Consequences
 
-**UX**: Access to order flow gives builders a competitive advantage. If builders weren’t able to secure payment-for order flow (PFOF), they would be incentivised to compete on implementing user features to lure OF their way. The space of potential builder features is, as of yet, largely unexplored. Some of the ideas that have been floating around include account abstraction, backrunning-as-a-service, gasless cancellations, gasless orders, [pre-confirmations](https://www.youtube.com/watch?v=fAgrIdyWIqc) and state channels. If order flow does not respond to the implementation of new features because it is tied up in PFOF contracts or some other reason, there is no incentive for builders to implement these features. 
+**UX**: Access to order flow gives builders a competitive advantage. If builders weren’t able to secure payment-for order flow (PFOF), they would be incentivised to compete on implementing user features to lure OF their way. The space of potential builder features is, as of yet, largely unexplored. Some of the ideas that have been floating around include account abstraction, backrunning-as-a-service, gasless cancellations, gasless orders, [pre-confirmations](https://www.youtube.com/watch?v=fAgrIdyWIqc) and state channels. If order flow does not respond to the implementation of new features because it is tied up in PFOF contracts or some other reason, there is no incentive for builders to implement these features.
 
 It should be noted that having more order flow than another builder because of superior features is different from having more order flow because of PFOF. In the former case, the barrier to entry is implementing more features, in the latter the barrier to entry is payment and convincing originators to break contracts only to incur longer execution delays. In other words, exclusivity is not implied by features, but it is with PFOF.
 
@@ -82,7 +82,7 @@ We have established that control over order flow poses a significant risk to the
 
 </aside>
 
-**A proposed goal:** in order to synthesise several of the different ways of addressing the EOF problem that have been listed above and to outline a research direction, I propose a general goal which attempts to encapsulate what has been written above: 
+**A proposed goal:** in order to synthesise several of the different ways of addressing the EOF problem that have been listed above and to outline a research direction, I propose a general goal which attempts to encapsulate what has been written above:
 
 *Every order flows to every builder which supports its required features.*
 
@@ -94,5 +94,3 @@ Exclusive order flow presents a threat to PBS and, by extension, can be detrimen
 
 
 Special thanks to Stephane Gosselin and Alejo Salles for helpful feedback on this article.
-
-For discussions on this post, see [here](https://collective.flashbots.net/t/order-flow-auctions-and-centralisation-i-a-warning/258)
