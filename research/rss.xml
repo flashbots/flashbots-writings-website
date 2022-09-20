@@ -4,9 +4,23 @@
         <title>Flashbots Blog</title>
         <link>https://writings.flashbots.net/research</link>
         <description>Flashbots Blog</description>
-        <lastBuildDate>Thu, 08 Sep 2022 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 19 Sep 2022 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
+        <item>
+            <title><![CDATA[order flow, auctions and centralisation II - order flow auctions]]></title>
+            <link>https://writings.flashbots.net/research/order-flow-auctions-and-centralisation-II</link>
+            <guid>order-flow-auctions-and-centralisation-II</guid>
+            <pubDate>Mon, 19 Sep 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Tl;dr The first article of this series outlined the threat that exclusive order flow (EOF) poses to the builder market. This article argues that order flow auctions can address part of the EOF problem and explores meaningful differences between two auction design types, while identifying similarities that point to a more fundamental problem.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[order flow, auctions and centralisation I - a warning]]></title>
+            <link>https://writings.flashbots.net/research/order-flow-auctions-and-centralisation</link>
+            <guid>order-flow-auctions-and-centralisation</guid>
+            <pubDate>Mon, 12 Sep 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Tl;dr This post explores the alarming potential for exclusive order flow to render the builder market uncompetitive. A lack of competition in the builder market threatens to cause rent extraction, poor user experience, and entrenchment of builders with undue influence over network incentives. While cause for concern, the negative externalities of exclusive order flow can be mitigated or wholly avoided as presented in a series of articles, of which this article is the first.]]></description>
+        </item>
         <item>
             <title><![CDATA[Can First Come First Served-Based Transaction Ordering Prevent Front-Running?]]></title>
             <link>https://writings.flashbots.net/research/fcfs-and-front-running</link>

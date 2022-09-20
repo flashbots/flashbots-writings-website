@@ -2,11 +2,33 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://writings.flashbots.net/research</id>
     <title>Flashbots Blog</title>
-    <updated>2022-09-08T00:00:00.000Z</updated>
+    <updated>2022-09-19T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://writings.flashbots.net/research"/>
     <subtitle>Flashbots Blog</subtitle>
     <icon>https://writings.flashbots.net/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[order flow, auctions and centralisation II - order flow auctions]]></title>
+        <id>order-flow-auctions-and-centralisation-II</id>
+        <link href="https://writings.flashbots.net/research/order-flow-auctions-and-centralisation-II"/>
+        <updated>2022-09-19T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Tl;dr The first article of this series outlined the threat that exclusive order flow (EOF) poses to the builder market. This article argues that order flow auctions can address part of the EOF problem and explores meaningful differences between two auction design types, while identifying similarities that point to a more fundamental problem.]]></summary>
+        <author>
+            <name>Quintus Kilbourn</name>
+            <uri>https://twitter.com/0xQuintus</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[order flow, auctions and centralisation I - a warning]]></title>
+        <id>order-flow-auctions-and-centralisation</id>
+        <link href="https://writings.flashbots.net/research/order-flow-auctions-and-centralisation"/>
+        <updated>2022-09-12T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Tl;dr This post explores the alarming potential for exclusive order flow to render the builder market uncompetitive. A lack of competition in the builder market threatens to cause rent extraction, poor user experience, and entrenchment of builders with undue influence over network incentives. While cause for concern, the negative externalities of exclusive order flow can be mitigated or wholly avoided as presented in a series of articles, of which this article is the first.]]></summary>
+        <author>
+            <name>Quintus Kilbourn</name>
+            <uri>https://twitter.com/0xQuintus</uri>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Can First Come First Served-Based Transaction Ordering Prevent Front-Running?]]></title>
         <id>fcfs-and-front-running</id>

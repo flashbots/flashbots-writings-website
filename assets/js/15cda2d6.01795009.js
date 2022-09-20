@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwrittings_website=self.webpackChunkwrittings_website||[]).push([[5749],{4955:function(e){e.exports=JSON.parse('{"allTagsPath":"/research/tags","slug":"/research/tags/order-flow","name":"order-flow","count":2,"permalink":"/research/tags/order-flow"}')}}]);

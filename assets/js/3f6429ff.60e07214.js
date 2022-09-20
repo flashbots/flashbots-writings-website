@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwrittings_website=self.webpackChunkwrittings_website||[]).push([[7523],{3732:function(s){s.exports=JSON.parse('{"allTagsPath":"/research/tags","slug":"/research/tags/pbs","name":"pbs","count":2,"permalink":"/research/tags/pbs"}')}}]);
