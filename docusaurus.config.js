@@ -114,47 +114,51 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
       },
       footer: {
         style: 'light',
-        // links: [
-        //   {
-        //     title: 'Docs',
-        //     items: [
-        //       {
-        //         label: 'Tutorial',
-        //         to: '/docs/intro',
-        //       },
-        //     ],
-        //   },
-        //   {
-        //     title: 'Community',
-        //     items: [
-        //       {
-        //         label: 'Stack Overflow',
-        //         href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-        //       },
-        //       {
-        //         label: 'Discord',
-        //         href: 'https://discordapp.com/invite/docusaurus',
-        //       },
-        //       {
-        //         label: 'Twitter',
-        //         href: 'https://twitter.com/docusaurus',
-        //       },
-        //     ],
-        //   },
-        //   {
-        //     title: 'More',
-        //     items: [
-        //       {
-        //         label: 'Blog',
-        //         to: '/blog',
-        //       },
-        //       {
-        //         label: 'GitHub',
-        //         href: 'https://github.com/facebook/docusaurus',
-        //       },
-        //     ],
-        //   },
-        // ],
+        links: [
+          {
+            title: 'x',
+            items: [
+              {
+                label: 'Github',
+                href: 'https://github.com/flashbots',
+              },
+              {
+                label: 'Documentation',
+                href: 'https://docs.flashbots.net/',
+              },
+              {
+                label: 'Status',
+                href: 'https://status.flashbots.net/',
+              },
+            ],
+          },
+          {
+            title: 'x',
+            items: [
+              {
+                label: 'Calendar',
+                href: 'https://calendar.flashbots.net/',
+              },
+              {
+                label: 'Transparency reports',
+                href: 'https://writings.flashbots.net/writings/tags/transparency-report',
+              },
+            ],
+          },
+          {
+            title: 'x',
+            items: [
+              {
+                label: 'Discord',
+                href: 'http://discord.gg/flashbots',
+              },
+              {
+                label: 'YouTube',
+                href: 'https://www.youtube.com/channel/UCclbTgsnYUy3vmrptIqCmqQ',
+              },
+            ],
+          },
+        ],
         copyright: `Flashbots © ${new Date().getFullYear()}`,
       },
       // algolia: {
