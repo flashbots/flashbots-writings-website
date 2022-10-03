@@ -41,7 +41,7 @@
   --ifm-container-width-xl: 780px;
 
   // Flashbots Blue: 
-  --ifm-color-primary: #052CA3;
+  --ifm-color-primary: #3333ff;
   --ifm-color-primary-dark: #229402;
   --ifm-color-primary-darker: #118391;
   --ifm-color-primary-darkest: #007280;
@@ -68,7 +68,8 @@
   // --ifm-color-primary-lightest: #ffe398;
 }
 html[data-theme='dark'] {
-  --ifm-color-primary: #385FD6;
+  --ifm-color-primary: #808aff;
+  --ifm-background-surface-color: #1a1b1b;
   //--ifm-color-primary: #ffc93a;
   //--ifm-color-primary-dark: #ffc01b;
   //--ifm-color-primary-darker: #ffbc0b;
