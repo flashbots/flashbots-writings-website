@@ -103,3 +103,30 @@ h1, h2, h3, h4, h5, h6 {
 .markdown > h3 {
   margin: 4rem auto 2rem;
 }
+
+// Footer
+.footer {
+  background-color: transparent;
+  font-family: 'CMU-Serif', Georgia, 'Times New Roman', Times, serif;
+  padding: 1rem;
+}
+.footer__links {
+  padding: 6rem 0 4rem;
+}
+.row.footer__items {
+  justify-content: center;
+}
+a.footer__link-item {
+  color: var(--ifm-link-color);
+  line-height: 1.5;
+}
+// Add dash between links
+.footer__item::after {
+  content: "-";
+  color: black;
+  padding: 0 .5rem;
+}
+// Hide last dash
+.footer__item:last-child::after {
+  content: "";
+}
