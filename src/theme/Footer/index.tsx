@@ -37,14 +37,7 @@ function FooterLink({
             to: toUrl,
           })}
       {...props}>
-      {href && !isInternalUrl(href) ? (
-        <span>
-          {label}
-          <IconExternalLink />
-        </span>
-      ) : (
-        label
-      )}
+      {label}
     </Link>
   );
 }
@@ -76,16 +69,16 @@ function Footer(): JSX.Element | null {
       })}>
       <div className="container">
         {links && links.length > 0 && (
-          <div className="row footer__links">
+          <div className="col footer__links">
             {links.map((linkItem, i) => (
               <div key={i} className="col footer__col">
-                {linkItem.title != null ? (
+                {/* {linkItem.title != null ? (
                   <div className="footer__title">{linkItem.title}</div>
-                ) : null}
+                ) : null} */}
                 {linkItem.items != null &&
                 Array.isArray(linkItem.items) &&
                 linkItem.items.length > 0 ? (
-                  <ul className="footer__items">
+                  <ul className="row footer__items">
                     {linkItem.items.map((item, key) =>
                       item.html ? (
                         <li
