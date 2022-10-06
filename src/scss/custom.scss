@@ -105,6 +105,12 @@ h1, h2, h3, h4, h5, h6 {
   margin: 4rem auto 2rem;
 }
 
+// Align writings' hero with website's hero
+.margin-top--md,
+.margin-vert--md {
+  margin-top: 2.75rem!important;
+}
+
 // Footer
 .footer {
   background-color: transparent;
