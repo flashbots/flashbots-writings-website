@@ -71,7 +71,7 @@ function Footer(): JSX.Element | null {
         {links && links.length > 0 && (
           <div className="col footer__links">
             {links.map((linkItem, i) => (
-              <div key={i} className="col footer__col">
+              <div key={i}>
                 {/* {linkItem.title != null ? (
                   <div className="footer__title">{linkItem.title}</div>
                 ) : null} */}

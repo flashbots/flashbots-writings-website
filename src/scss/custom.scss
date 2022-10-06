@@ -118,8 +118,11 @@ h1, h2, h3, h4, h5, h6 {
   }
   &__link-item {
     color: var(--ifm-link-color);
-    line-height: 1.5;
-    font-size: 1.1em;
+    line-height: 1.75;
+    font-size: 1.1rem;
+  }
+  &__item {
+    display: flex;
   }
   // Add dash between links
   &__item::after {
