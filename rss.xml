@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Flashbots Blog</title>
+        <link>https://writings.flashbots.net/</link>
+        <description>Flashbots Blog</description>
+        <lastBuildDate>Mon, 19 Sep 2022 00:00:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <item>
+            <title><![CDATA[order flow, auctions and centralisation II - order flow auctions]]></title>
+            <link>https://writings.flashbots.net/order-flow-auctions-and-centralisation-II</link>
+            <guid>order-flow-auctions-and-centralisation-II</guid>
+            <pubDate>Mon, 19 Sep 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Tl;dr The first article of this series outlined the threat that exclusive order flow (EOF) poses to the builder market. This article argues that order flow auctions can address part of the EOF problem and explores meaningful differences between two auction design types, while identifying similarities that point to a more fundamental problem.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[order flow, auctions and centralisation I - a warning]]></title>
+            <link>https://writings.flashbots.net/order-flow-auctions-and-centralisation</link>
+            <guid>order-flow-auctions-and-centralisation</guid>
+            <pubDate>Mon, 12 Sep 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Tl;dr This post explores the alarming potential for exclusive order flow to render the builder market uncompetitive. A lack of competition in the builder market threatens to cause rent extraction, poor user experience, and entrenchment of builders with undue influence over network incentives. While cause for concern, the negative externalities of exclusive order flow can be mitigated or wholly avoided as presented in a series of articles, of which this article is the first.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Can First Come First Served-Based Transaction Ordering Prevent Front-Running?]]></title>
+            <link>https://writings.flashbots.net/fcfs-and-front-running</link>
+            <guid>fcfs-and-front-running</guid>
+            <pubDate>Thu, 08 Sep 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Recently, consensus protocols have been proposed that aim to include transactions on a First Come First Served (FCFS) basis. In this article, we explore whether such FCFS-based ordering of transactions in consensus protocols can prevent front-running in permissionless blockchains.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Searching Post-Merge]]></title>
+            <link>https://writings.flashbots.net/searching-post-merge</link>
+            <guid>searching-post-merge</guid>
+            <pubDate>Thu, 25 Aug 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[If you're a searcher on Proof of Work (PoW) Ethereum and you're wondering how your experience will change as Ethereum switches to Proof of Stake (PoS), then this post is for you.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Flashbots Protect -- The Merge & Beyond]]></title>
+            <link>https://writings.flashbots.net/flashbots-protect-merge-and-beyond</link>
+            <guid>flashbots-protect-merge-and-beyond</guid>
+            <pubDate>Tue, 23 Aug 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[TL;DR: It has been a great year for Flashbots Protect! Post-merge, all transactions sent to Protect will have frontrunning and revert protection. But due to how mev-boost will be launched at the merge, Flashbots Protect will be down for at least 1 hour after the merge. If you rely on Flashbots Protect as a user or application developer then please plan accordingly.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Open sourcing the Flashbots Relay]]></title>
+            <link>https://writings.flashbots.net/Flashbots-Relay-open-sourcing</link>
+            <guid>Flashbots-Relay-open-sourcing</guid>
+            <pubDate>Wed, 17 Aug 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[In response to recent developments around legal requirements for relay providers in their home jurisdictions, we have decided to accelerate the release of our relay code as open source.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Understanding liveness risks from mev-boost]]></title>
+            <link>https://writings.flashbots.net/understanding-mev-boost-liveness-risks</link>
+            <guid>understanding-mev-boost-liveness-risks</guid>
+            <pubDate>Fri, 05 Aug 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Over the last few days, mev-boost has been a hot discussion topic in the community. We want to take this opportunity to highlight and educate the design and trust assumptions that make mev-boost possible as a merge-ready PBS solution.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Boost your MEV in Ethereum proof-of-stake]]></title>
+            <link>https://writings.flashbots.net/mev-boost-call-for-testing</link>
+            <guid>mev-boost-call-for-testing</guid>
+            <pubDate>Mon, 20 Jun 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Calling all validators to test mev-boost.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Beginner's Guide to mev-boost]]></title>
+            <link>https://writings.flashbots.net/beginners-guide-mevboost</link>
+            <guid>beginners-guide-mevboost</guid>
+            <pubDate>Wed, 15 Jun 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Understanding mev-boost as an iteration on the original Flashbots auction, and how it paves the way for full in-protocol PBS]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Why run mev-boost?]]></title>
+            <link>https://writings.flashbots.net/why-run-mevboost</link>
+            <guid>why-run-mevboost</guid>
+            <pubDate>Tue, 07 Jun 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[This article explains the benefits of mev-boost to the network and to validators, node operators, and staking pools.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[The MEV Supply Chain - a peek into the future of this industry]]></title>
+            <link>https://writings.flashbots.net/mev-supply-chain</link>
+            <guid>mev-supply-chain</guid>
+            <pubDate>Mon, 02 May 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[At mev.day in Amsterdam, I opened the day by introducing a new framework for thinking about the fast moving MEV industry and how it will evolve in the future. I call this framework the MEV Supply Chain. You can find a recording of this presentation here.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Speeding up the EVM (part 1)]]></title>
+            <link>https://writings.flashbots.net/speeding-up-evm-part-1</link>
+            <guid>speeding-up-evm-part-1</guid>
+            <pubDate>Mon, 17 Jan 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Thanks to Alejo Salles, Hongbo Zhang, Alex Obadia, and Kushal Babel for feedback and review of this post.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Flashbots Transparency Report — Sept-Dec 2021]]></title>
+            <link>https://writings.flashbots.net/transparency-21q4</link>
+            <guid>transparency-21q4</guid>
+            <pubDate>Mon, 17 Jan 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[Hi everyone, it's been a while! Here is a double-edition of our latest transparency report. As you can imagine, we've been busy.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[How To Light Up The Dark Forest - A Walkthrough of Building A Cryptopunk MEV Inspector]]></title>
+            <link>https://writings.flashbots.net/the-anatomy-of-an-inspector</link>
+            <guid>the-anatomy-of-an-inspector</guid>
+            <pubDate>Wed, 15 Dec 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[A step-by-step walkthrough of how to add a new MEV inspector using a recently added cryptopunk snipers inspector as an example.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Why Building the Most Profitable Block is Important]]></title>
+            <link>https://writings.flashbots.net/on-the-most-profitable-block</link>
+            <guid>on-the-most-profitable-block</guid>
+            <pubDate>Sun, 12 Dec 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[Central to the security of Ethereum is that every miner, and soon validator, can produce the most profitable block possible. Why is this? Why has Flashbots made it a goal to democratize access to the most profitable blocks? How are we doing so? This blog post answers these questions and more.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[On the Formalization of MEV]]></title>
+            <link>https://writings.flashbots.net/formalization-mev</link>
+            <guid>formalization-mev</guid>
+            <pubDate>Sat, 04 Dec 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[Thanks to Phil Daian, Alex Obadia, and Mahimna Kelkar for plenty of discussions on the topic.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Unity is Strength - A Formalization of Cross-Domain Maximal Extractable Value]]></title>
+            <link>https://writings.flashbots.net/cross-domain-mev</link>
+            <guid>cross-domain-mev</guid>
+            <pubDate>Fri, 03 Dec 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[The multi-chain future is upon us. Modular architectures are coming to maturity across the ecosystem]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Announcing the Flashbots Eth2 Working Group]]></title>
+            <link>https://writings.flashbots.net/announcing-eth2-working-group</link>
+            <guid>announcing-eth2-working-group</guid>
+            <pubDate>Tue, 30 Nov 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[Flashbots has been critical to leveling the MEV playing field on Proof-of-Work (PoW) Ethereum (eth1), and aims to bring the same benefits to Proof-of-Stake (PoS) Ethereum (eth2). The adoption of Flashbots involves two distinct parties, block producers, and MEV searchers. In Ethereum, over 90% of miners have adopted Flashbots; however, as we approach eth2 and the transition to PoS, adoption will reset to 0. As such, for the health of the Ethereum ecosystem, it is imperative that validators also adopt an MEV solution for Ethereum post-merge. To assist in this adoption, we are pleased to announce the Flashbots Eth2 Working Group.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Ken Griffin and the MEV dystopia]]></title>
+            <link>https://writings.flashbots.net/ken-griffin-mev</link>
+            <guid>ken-griffin-mev</guid>
+            <pubDate>Mon, 22 Nov 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[Like many others, when I learned that Ken Griffith beat out 17k crypto frens at purchasing the copy of the constitution, I couldn't help but laugh.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[MEV-Boost -- Merge ready Flashbots Architecture]]></title>
+            <link>https://writings.flashbots.net/mev-boost</link>
+            <guid>mev-boost</guid>
+            <pubDate>Wed, 03 Nov 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[This document outlines the design for a marketplace for block construction (often referred to as block proposer / block builder separation or PBS) compatible with the upcoming Ethereum merge fork. This trust based solution closely resembles the current Flashbots auction design with modifications to enable solo staker participation without introducing changes to Ethereum consensus. This solution aims to bridge the gap to a permissionless PBS design which should be strongly considered for the cleanup fork in order to improve decentralization.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Announcing Flashbots Protect]]></title>
+            <link>https://writings.flashbots.net/announcing-protect</link>
+            <guid>announcing-protect</guid>
+            <pubDate>Wed, 06 Oct 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[Today Flashbots and our community are excited to launch a public beta of Flashbots Protect, a new product line focused on allowing everyday users and developers to easily submit transactions to Flashbots.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Flashbots Transparency Report — July & August 2021]]></title>
+            <link>https://writings.flashbots.net/transparency-july-august</link>
+            <guid>transparency-july-august</guid>
+            <pubDate>Tue, 21 Sep 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[Flashbots’ last two months have been packed.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[On the Design of MEV Marketplaces]]></title>
+            <link>https://writings.flashbots.net/design-mev-marketplaces</link>
+            <guid>design-mev-marketplaces</guid>
+            <pubDate>Wed, 04 Aug 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[The beating heart of every blockchain is how space is allocated within a block. In less than 24 hours, Ethereum will undergo a historic change to how blockspace is allocated as transaction inclusion rules drastically change with the activation of EIP-1559. However, EIP-1559 does not affect miners’ ability to reorder, insert, or censor transactions, and as such it largely does not have an impact on MEV (Maximal Extractable Value).]]></description>
+        </item>
+        <item>
+            <title><![CDATA[MEV and EIP-1559]]></title>
+            <link>https://writings.flashbots.net/mev-1559</link>
+            <guid>mev-1559</guid>
+            <pubDate>Mon, 19 Jul 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[The incorporation of EIP-1559 in the London hardfork brings a major restructuring of the Ethereum fee mechanism, aiming to allow for easier fee estimation by users and consolidate ETH as the base currency of the network by burning part of the transaction fees. This post analyzes some of the consequences of this EIP under the light of the MEV (Maximal Extractable Value) phenomenon, that is, the permissionless extraction of value by the reordering, addition, or censoring of transactions.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Flashbots on Reorgs]]></title>
+            <link>https://writings.flashbots.net/flashbots-reorgs</link>
+            <guid>flashbots-reorgs</guid>
+            <pubDate>Fri, 16 Jul 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[There has been a lot of discussion in the Ethereum community recently about chain-reorgs-as-a-service, and how it relates to MEV, the ETH2 merge, and other important ecosystem developments.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Flashbots Transparency Report — May & June 2021]]></title>
+            <link>https://writings.flashbots.net/transparency-may-june</link>
+            <guid>transparency-may-june</guid>
+            <pubDate>Mon, 28 Jun 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[In May and June 2021 Flashbots strengthened and moved forward our network, successfully releasing v0.2 and with it improved auction pricing as well as bundle merging.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[MEV in eth2 - an early exploration]]></title>
+            <link>https://writings.flashbots.net/mev-eth2</link>
+            <guid>mev-eth2</guid>
+            <pubDate>Wed, 09 Jun 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[Ethereum will soon transition from a Proof of Work (PoW) to a Proof of Stake (PoS) consensus protocol. This transition has been worked on for years and is happening in multiple steps. The first step in December 2020 consisted in launching the beacon chain. It is now live, and, at the time of writing, has more than 160k validators or an equivalent of ~5m ETH staked on it.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[MEV-SGX -- A sealed bid MEV auction design]]></title>
+            <link>https://writings.flashbots.net/mev-sgx</link>
+            <guid>mev-sgx</guid>
+            <pubDate>Mon, 31 May 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[While Flashbots Alpha has been and continues to be successful it offers incomplete trust guarantees. It is not permissionless because miners who adopt it have to be whitelisted by MEV-Relay in order to be forwarded bundles. It is not completely private because bundles can be seen by miners prior to inclusion on-chain. Lastly, Flashbots Alpha offers no finality protection against chain reorgs. While finality is important, we are focusing first on permissionless and complete privacy as the next design goals to achieve.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Quantifying Realized Extractable Value]]></title>
+            <link>https://writings.flashbots.net/quantifying-rev</link>
+            <guid>quantifying-rev</guid>
+            <pubDate>Sun, 16 May 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[Maximal (formerly Miner) Extractable Value ($\textrm$) is the value that can be extracted from a blockchain by any agent without special permissions. Considering this permissionless nature, any agent with transaction ordering rights will be in a privileged position to perform the extraction. In Proof of Work blockchains, it is miners who determine transaction ordering within a block, hence the former "miner" term. In practice, bot operators seek to extract $\textrm{MEV}$ by either paying high fees to increase the likelihood that their transactions are mined, or by fine-tuning their gas price choices in order to "time" their transactions right, as is the case when backrunning an oracle update to perform a liquidation.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Flashbots Transparency Report — April 2021]]></title>
+            <link>https://writings.flashbots.net/transparency-april</link>
+            <guid>transparency-april</guid>
+            <pubDate>Thu, 13 May 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[April 2021 was a month of tremendous adoption, experimentation and learning from the community for Flashbots.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Flashbots Transparency Report — March 2021]]></title>
+            <link>https://writings.flashbots.net/transparency-march</link>
+            <guid>transparency-march</guid>
+            <pubDate>Mon, 12 Apr 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[The good, the bad, and the ugly of MEV.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Flashbots Transparency Report — February 2021]]></title>
+            <link>https://writings.flashbots.net/transparency-february</link>
+            <guid>transparency-february</guid>
+            <pubDate>Thu, 18 Mar 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[Sandwiching, Fairness, and EIP-1559]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Quantifying MEV—Introducing MEV-Explore v0]]></title>
+            <link>https://writings.flashbots.net/quantifying-mev</link>
+            <guid>quantifying-mev</guid>
+            <pubDate>Mon, 22 Feb 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[We took the first deep look at MEV and released our findings through MEV-Explore, a public dashboard and live MEV transactions explorer.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Flashbots Transparency Report — January 2021]]></title>
+            <link>https://writings.flashbots.net/transparency-january</link>
+            <guid>transparency-january</guid>
+            <pubDate>Sun, 07 Feb 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[The first Flashbots bundle was mined in block 11550019 on Dec-29–2020 0422 PM UTC, kicking off what is poised to be the year of MEV.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Flashbots -- Frontrunning the MEV crisis]]></title>
+            <link>https://writings.flashbots.net/ethr-frontrunning-mev-crisis</link>
+            <guid>ethr-frontrunning-mev-crisis</guid>
+            <pubDate>Mon, 23 Nov 2020 00:00:00 GMT</pubDate>
+            <description><![CDATA[Flashbots is a research and development organization formed to mitigate the negative externalities and existential risks posed by miner-extractable value (MEV) to smart-contract blockchains. We propose a permissionless, transparent, and fair ecosystem for MEV extraction to preserve the ideals of Ethereum.]]></description>
+        </item>
+        <item>
+            <title><![CDATA[Flashbots—Frontrunning the MEV Crisis]]></title>
+            <link>https://writings.flashbots.net/frontrunning-mev-crisis</link>
+            <guid>frontrunning-mev-crisis</guid>
+            <pubDate>Mon, 23 Nov 2020 00:00:00 GMT</pubDate>
+            <description><![CDATA[Flashbots is a research and development organization formed to mitigate the negative externalities and existential risks posed by miner-extractable value (MEV) to smart-contract blockchains. We propose a permissionless, transparent, and fair ecosystem for MEV extraction to reinforce the Ethereum ideals.]]></description>
+        </item>
+    </channel>
+</rss>

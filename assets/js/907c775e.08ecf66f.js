@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkwrittings_website=self.webpackChunkwrittings_website||[]).push([[9196],{3202:function(s){s.exports=JSON.parse('{"allTagsPath":"/research/tags","slug":"/research/tags/flashbots","name":"flashbots","count":3,"permalink":"/research/tags/flashbots"}')}}]);

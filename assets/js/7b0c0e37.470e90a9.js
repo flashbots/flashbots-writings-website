@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkwrittings_website=self.webpackChunkwrittings_website||[]).push([[5218],{9195:function(s){s.exports=JSON.parse('{"allTagsPath":"/writings/tags","slug":"/writings/tags/reorgs","name":"reorgs","count":1,"permalink":"/writings/tags/reorgs"}')}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwrittings_website=self.webpackChunkwrittings_website||[]).push([[3033],{707:function(t){t.exports=JSON.parse('{"allTagsPath":"/tags","slug":"/tags/transparency-report","name":"transparency report","count":7,"permalink":"/tags/transparency-report"}')}}]);
