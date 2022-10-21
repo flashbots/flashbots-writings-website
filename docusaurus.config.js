@@ -123,7 +123,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
               },
               {
                 label: 'Transparency reports',
-                href: 'https://writings.flashbots.net/writings/tags/transparency-report',
+                href: 'https://writings.flashbots.net/tags/transparency-report',
               },
             ],
           },

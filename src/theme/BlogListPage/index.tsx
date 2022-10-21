@@ -107,13 +107,7 @@ function BlogListPage(props: Props): JSX.Element {
     >
       <div className={styles.header}>
         <h1>
-          {
-            location.pathname.indexOf("/research") >= 0 ?  (<>
-              Research
-            </>) : (<>
-              Writings
-            </>)
-          }
+          Writings & Research
         </h1>
         <p>A collection of articles and papers from Flashbots.</p>
       </div>

@@ -18,7 +18,7 @@ We released [v0.4](https://docs.flashbots.net/flashbots-auction/releases/alpha-v
 
 The research that was started in the previous months on Ethereum 2.0 was productized, culminating in the release of our design of the Flashbots Auction for Ethereum 2.0, [MEV-Boost](https://ethresear.ch/t/mev-boost-merge-ready-flashbots-architecture/11177), and in the creation of the [Flashbots Eth2.0 Working Group](https://medium.com/flashbots/announcing-the-flashbots-eth2-working-group-599b2b92634b).
 
-In addition, some of the research we had been working on internally saw the light of day, such as our work on [MEV formalization](https://writings.flashbots.net/research/formalization-mev) and on [cross-domain MEV](https://arxiv.org/pdf/2112.01472.pdf).
+In addition, some of the research we had been working on internally saw the light of day, such as our work on [MEV formalization](https://writings.flashbots.net/formalization-mev) and on [cross-domain MEV](https://arxiv.org/pdf/2112.01472.pdf).
 
 ## Flashbots Auction
 
@@ -71,7 +71,7 @@ The Data team has been focused on rewriting mev-inspect from Rust to Python to m
 
 [mev-inspect-py](https://github.com/flashbots/mev-inspect-py) comes with many improvements, including several orders of magnitude faster analysis of blocks and a much smoother contributor flow.
 
-In order to encourage others to collaborate, resources have also been pubished such as a [step-by-step walkthrough](https://writings.flashbots.net/writings/the-anatomy-of-an-inspector/) by Robert Miller of how to add a new MEV inspector using as an example a cryptopunk snipers MEV inspector, and a walkthrough of the mev-inspect-py codebase you can watch [here](https://youtu.be/Fuw891c4vA8).
+In order to encourage others to collaborate, resources have also been pubished such as a [step-by-step walkthrough](https://writings.flashbots.net/the-anatomy-of-an-inspector/) by Robert Miller of how to add a new MEV inspector using as an example a cryptopunk snipers MEV inspector, and a walkthrough of the mev-inspect-py codebase you can watch [here](https://youtu.be/Fuw891c4vA8).
 
 Thanks to the many awesome community contributors to Inspect for PRs such as [this one](https://github.com/flashbots/mev-inspect-py/pull/210) by tmilukin and that [one](https://github.com/flashbots/mev-inspect-py/pull/109) by mazzafish, and to the users trying it out and giving us feedback on what isn't work for them!
 
@@ -80,7 +80,7 @@ In the coming months, we will be updating mev-explore by replacing its backend w
 ## Flashbots Research
 As we continued research on Proof of Stake Ethereum (FRP-15), we also turned our attention to MEV on Layer 2s and other chains (FRP-16). Out of this work, we released the first paper out of Flashbots Research on December 2nd called [_Unity is Strength: A Formalization of Cross-Domain Maximal Extractable Value_](https://arxiv.org/abs/2112.01472). The paper formalizes a definition of cross-domain MEV in a multi-chain future, as well as possible negative externalities that could arise from cross-domain MEV extraction.
 
-As a companion post to the paper, Flashbots researcher Alejo Salles published [_On the Formalization of MEV_](https://writings.flashbots.net/research/formalization-mev). The post presents formal definitions of MEV that improve on issues encountered in previous works and community misconceptions. It also paves the way for a more systematic approach in studying MEV by highlighting many of the subtleties involved in giving a robust MEV formalization.
+As a companion post to the paper, Flashbots researcher Alejo Salles published [_On the Formalization of MEV_](https://writings.flashbots.net/formalization-mev). The post presents formal definitions of MEV that improve on issues encountered in previous works and community misconceptions. It also paves the way for a more systematic approach in studying MEV by highlighting many of the subtleties involved in giving a robust MEV formalization.
 
 We ran a research workshop on the paper which you can watch [here](https://youtu.be/uR0Z0nWXeFU), and were happy to see Vitalik Buterin use the paper in [_Endgame_](https://vitalik.ca/general/2021/12/06/endgame.html) to reason about block builder centralization in a 'many rollups' world.
 
