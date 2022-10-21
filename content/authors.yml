@@ -28,6 +28,11 @@ fireball:
   url: https://github.com/taarushv
   image_url: https://avatars.githubusercontent.com/u/17141788?v=4
 
+ra:
+  name: Robert Annessi
+  title: Research @Flashbots
+  url: https://annessi.net/
+
 hasu:
   name: Hasu
   title: Strategy lead
@@ -43,6 +48,24 @@ kristof:
     title: Research @Nethermind
     url: https://twitter.com/kristofgazso?lang=en
     image_url: https://pbs.twimg.com/profile_images/1326269994074779648/840HwaDE_400x400.jpg
+
+lakshman:
+  name: Lakshman Sankar
+  title: Researcher
+  url: https://twitter.com/lakshmansankar
+  image_url: https://pbs.twimg.com/profile_images/1432425822707650565/bKxdVmeR_400x400.jpg
+
+vaibhav:
+  name: Vaibhav Chellani
+  title: Movr
+  url: https://twitter.com/vaibhavchellani
+  image_url: https://pbs.twimg.com/profile_images/1432425822707650565/bKxdVmeR_400x400.jpg
+
+tarun:
+  name: Tarun Chitra
+  title: Gauntlet Network
+  url: https://twitter.com/tarunchitra
+  image_url: https://pbs.twimg.com/profile_images/1432425822707650565/bKxdVmeR_400x400.jpg
 
 metachris:
   name: Chris Hager
