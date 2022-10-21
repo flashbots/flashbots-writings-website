@@ -66,7 +66,7 @@ The above and further, less-mature solutions are being discussed in this [GitHub
 
 Due to the commit-reveal scheme used in mev-boost, relays can fail to release blocks after making the winning bid. This attack vector has been known from the start and it is a calculated choice. Why did we choose it?
 
-The alternative would have been to continue with Flashbots’ pre-PoS design that we call “[Stage 1 PBS](https://writings.flashbots.net/writings/why-run-mevboost)”. In Stage 1 PBS, block builders send full blocks to validators in cleartext, and validators have to open a DOS-sensitive RPC to block builders.
+The alternative would have been to continue with Flashbots’ pre-PoS design that we call “[Stage 1 PBS](https://writings.flashbots.net/why-run-mevboost)”. In Stage 1 PBS, block builders send full blocks to validators in cleartext, and validators have to open a DOS-sensitive RPC to block builders.
 
 The advantage of the Stage 1 design has been that validators can always look at the block to verify that the block is valid and how much it pays the validator. If no builder sends a block in time, the validator can fall back to local block construction and there is no risk of ever missing a slot.
 
@@ -82,7 +82,7 @@ I hope this post helps you frame the trust assumptions of mev-boost, why they we
 
 - [mev-boost architecture](https://ethresear.ch/t/mev-boost-merge-ready-flashbots-architecture/11177)
 - [mev-boost homepage](https://boost.flashbots.net/)
-- [Why run mev-boost?](https://writings.flashbots.net/writings/why-run-mevboost/)
+- [Why run mev-boost?](https://writings.flashbots.net/why-run-mevboost/)
 - [liveness mitigations GitHub issue](https://github.com/flashbots/mev-boost/issues/222)
 - [relay monitor](https://github.com/flashbots/mev-boost/issues/142)
 - [circuit breaker proposal](https://hackmd.io/@ralexstokes/BJn9N6Thc)

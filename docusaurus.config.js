@@ -38,22 +38,6 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
           defaults: false, //  Adds support for dotenv-defaults. If set to true, uses ./.env.defaults
       }
     ],
-    [
-      '@docusaurus/plugin-content-blog',
-      {
-        id: 'research',
-        blogTitle: "Research",
-        routeBasePath: '/research',
-        path: './research',
-        postsPerPage: "ALL",
-        feedOptions: {
-          type: "all"
-          // copyright: `Copyright © ${new Date().getFullYear()} Flashbots, .`,
-        },
-        remarkPlugins: [math],
-        rehypePlugins: [katex],
-      },
-    ],
   ],
   presets: [
     [
@@ -62,9 +46,9 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
       ({
         docs: false,
         blog: {
-          blogTitle: "Writings",
-          path: "./writings",
-          routeBasePath: "/writings",
+          blogTitle: "Writings & Research",
+          path: "./content",
+          routeBasePath: "/",
           postsPerPage: "ALL",
           feedOptions: {
             type: "all"
@@ -99,8 +83,6 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
         },
         items: [
           {href: "https://flashbots.net", label: 'About', position: 'left'},
-          {to: 'writings', label: 'Writings', position: 'left'},
-          {to: 'research', label: 'Research', position: 'left'},
           // {
           //   type: 'localeDropdown',
           //   position: 'right',
@@ -141,7 +123,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
               },
               {
                 label: 'Transparency reports',
-                href: 'https://writings.flashbots.net/writings/tags/transparency-report',
+                href: 'https://writings.flashbots.net/tags/transparency-report',
               },
             ],
           },
