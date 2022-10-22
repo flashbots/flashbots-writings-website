@@ -107,7 +107,7 @@ function BlogListPage(props: Props): JSX.Element {
     >
       <div className={styles.header}>
         <h1>
-          Writings & Research
+          Writings
         </h1>
         <p>A collection of articles and papers from Flashbots.</p>
       </div>
