@@ -74,6 +74,12 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       hideableSidebar: true,
+      metadata: [
+        {name: 'twitter:card', content: 'summary_large_image'},
+        {name: 'twitter:title', content: 'Flashbots Writings'},
+        {name: 'twitter:description', content: 'A collection of articles and papers from Flashbots.'},
+        {name: 'twitter:image', content: 'img/tw-card.jpg'}
+      ],
       navbar: {
         title: "Flashbots",
         logo: {
