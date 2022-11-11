@@ -1,0 +1,74 @@
+---
+slug: mev-for-the-next-trillion
+title: MEV for the Next Trillion, It's Time to Get Serious…
+authors: [flashbots]
+tags: [flashbots]
+hide_table_of_contents: false
+---
+
+*This post is adapted from (Phil Daian’s talk)[https://youtu.be/ACXAzLy3iWY] on Oct 14, 2022 at Devcon VI in Bogota, Colombia. A transcript of the talk is available (here)[https://www.notion.so/flashbots/MEV-for-the-Next-Trillion-It-s-Time-to-Get-Serious-b851b55f10ae4f5bbf17a14bdb6c2cde].*
+
+**Tl;dr:**
+Flashbots exists to fight the centralizing impacts of MEV by producing open access and open source tools and lead the field of MEV research.
+We believe in a censorship resistant Ethereum and the way to protect it is through true decentralization and geographic diversity.
+In order to truly mitigate the negative externalities of MEV and maximize welfare, we need new tools that are built on the principles of privacy and decentralization. 
+Flashbots is introducing SUAVE - the Single Unifying Auction for Value Expression, which will enable programmable privacy and fully decentralized block-building with maximal competition and geographic diversity. 
+Please join us in building SUAVE to support the decentralized future. We want to hear from you, and we want to build with you!
+
+The term MEV, short for Maximal Extractable Value, was originally introduced in the 2019 paper (Flashboys 2.0)[https://arxiv.org/abs/1904.05234] by Daian et al. as *"the total amount of Ether miners can extract from manipulation of transactions within a given timeframe, which may include multiple blocks’”*. Ever since then, we’ve seen multiple different attempts at a formalization of this nascent research field.
+
+MEV is fundamental, like financial potential energy that runs through any distributed system secured by economic incentives. On Ethereum it poses concrete, measurable, consensus-layer security risks, and threatens its decentralization. 
+
+How do we get to a place where we prevent these risks, preserve decentralization and ensure that MEV doesn’t entrench actors into our systems which are not aligned with user fairness? The answer lies in playing the long game and build system designed to further all three of the founding goals of Flashbots: **Illuminate, Democratize, Distribute**.  
+
+Let’s take a step back and evaluate where we are today.
+
+### **Illuminate the dark forest**
+Understanding the intricate details of the (dark forest)[https://www.paradigm.xyz/2020/08/ethereum-is-a-dark-forest] is key to ensuring MEV can be harnessed for good and does not destabilize Ethereum, so we illuminate it with open data and public research. 
+
+
+*Open data*: Insights from our dashboard (MEV-explore)[https://explore.flashbots.net/] and the (Transparency Dashboard)[https://transparency.flashbots.net/] have been cited in most of the MEV research and publications in the past 2 years and our open-sourced (MEV-inspect)[https://github.com/flashbots/mev-inspect-py] have enabled many community-maintained (MEV dashboards on Dune)[https://dune.com/blog/flashbots-data]. Post Merge, we’re seeing an explosion of a variety of community maintained dashboards on MEV-boost and PBS using our relay Data API. 
+
+
+*Public research*: We believe that you cannot illuminate without research. Flashbots is committed to our research and development dual-engine approach. We make our research publicly available and organize research conferences, workshops and roundtables to catalyze interdisciplinary collaboration.
+
+### **Democratize MEV extraction**
+Flashbots democratizes MEV extraction by building open source and publicly accessible tools.
+Flashbots enabled anyone to send transaction bundles directly for inclusion without needing to become or know the miners/validators. 
+
+We have been very successful in our mission to democratize MEV extraction, almost too successful. Flashbots’ adoption outpaced our effort in building the competitive ecosystems we're striving towards. We run centralized infrastructure today: our MEV-boost Relay and our block builder. In the meantime, we do our best to evaluate and manage risk related to US regulations on OFAC. 
+
+There has been, and remains, both significant risk and ambiguity around the application of OFAC sanctions to data and communications infrastructure. Particularly in the web3 space, where much of the early naming conventions and applications have been framed in (likely overly) financial terms for what is really data processing.  We’ve tried to navigate that ambiguity thoughtfully, while also trying to thoughtfully manage the risk for our collective members.  Like nearly everyone trying to navigate decades-old regulation in this dynamically developing space, there is little relevant guidance to rely on, but we are operating in good faith, with good intentions— for the Flashbots collective and the broader community.
+
+Flashbots does not intend to impose our utility functions on the Ethereum network. So, the next thing we need to do is ensure global cooperation on these systems and as much diversity of participation with different utility functions.
+
+On the one hand, we believe the MEV-boost relay will no longer exist in two or three years. It will be replaced by in-protocol PBS or more sophisticated interfaces. 
+
+On the other hand, block building centralization is extremely concerning because of the entrenched incentives at that layer of the stack. So how do we avoid the dystopia of block building centralization? 
+Open sourcing
+Open competition
+Open orderflow
+
+### **Distribute MEV benefits**
+The third goal of Flashbots is to redistribute MEV to the community. Our first two goals have so far taken priority and it's now time we collectively start building systems to distribute the benefits of MEV.
+
+
+We enabled anyone to submit transaction bundles through Flashbots Auction.Flashbots Protect expanded access by providing simple ways for users and developers to integrate. In turn, the benefits of the Flashbots auction (frontrunning protection, no cost for failed transactions, priority in blocks) became more accessible by a much wider set of stakeholders, including non-technical users. We intend to deliver much more to distribute the benefit of MEV. We have a much, much richer set of features soon to come on this front. 
+
+Decentralizing Flashbots
+Adoption of Flashbots has outpaced our ability to open source our tools and decentralize our influence. Before the Merge, the Flashbots relay on proof-of-work Ethereum resembled a vertically-integrated block builder where it would plug directly into the miners who ran MEV-geth. Before the switch to PoS, more than 90% of the Ethereum network hashrate were running mev-geth and receiving transaction bundles from Flashbots with a majority of blocks containing Flashbots bundles.
+
+In the less than two months since the Merge, MEV-Boost has reached the same level of adoption as mev-geth achieved in 2 years with almost 90% adoption from validators.
+
+The extended transaction supply chain of MEV-Boost enables a separation of interest and specialization of skills. It reduced the barrier to entry for new block builders by enabling an open market with validators. Together, these features protect block building from becoming capital-intensive and legally demanding, flaws of the counterpart industry in Tradfi. 
+
+MEV-Boost is a direct attack on any centralized, vertically integrated block building entity, to let new block builders and new specialized entities that wanted to participate in the MEV game to freely enter and openly compete. 
+
+### **Decentralize Power in MEV**
+Flashbots is introducing SUAVE (Single Unifying Auction for Value Expression)
+an MEV-aware, privacy-first encrypted mempool for users and wallets.
+a turnkey decentralized block builder for rollups/layer 2s/sidechains.
+progressive decentralization.
+SUAVE will enable programmable privacy and fully decentralized block-building with maximal competition and geographic diversity.
+
+We encourage you to read up on what we’re doing and get involved. This blog was drafted in summary of Phil Daian’s presentation at DevCon in October. In the coming weeks, we will publish more on SUAVE and are excited to hear from the community. And if you are not familiar with our research and documentation, please see (here)[https://writings.flashbots.net/], (here)[https://docs.flashbots.net], and our community forum (here)[https://collective.flashbots.net/]. 
