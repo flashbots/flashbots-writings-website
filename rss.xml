@@ -4,15 +4,15 @@
         <title>Flashbots Blog</title>
         <link>https://writings.flashbots.net/</link>
         <description>Flashbots Blog</description>
-        <lastBuildDate>Fri, 11 Nov 2022 10:58:19 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 11 Oct 2022 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <item>
             <title><![CDATA[MEV for the Next Trillion, It's Time to Get Serious…]]></title>
             <link>https://writings.flashbots.net/mev-for-the-next-trillion</link>
             <guid>mev-for-the-next-trillion</guid>
-            <pubDate>Fri, 11 Nov 2022 10:58:19 GMT</pubDate>
-            <description><![CDATA[This post is adapted from (Phil Daian’s talk)[https//www.notion.so/flashbots/MEV-for-the-Next-Trillion-It-s-Time-to-Get-Serious-b851b55f10ae4f5bbf17a14bdb6c2cde].]]></description>
+            <pubDate>Tue, 11 Oct 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[This post is adapted from Phil Daian’s talk on Oct 14, 2022 at Devcon VI in Bogota, Colombia. A transcript of the talk is available here.]]></description>
         </item>
         <item>
             <title><![CDATA[order flow, auctions and centralisation II - order flow auctions]]></title>
