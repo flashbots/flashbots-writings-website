@@ -4,9 +4,16 @@
         <title>Flashbots Blog</title>
         <link>https://writings.flashbots.net/</link>
         <description>Flashbots Blog</description>
-        <lastBuildDate>Tue, 11 Oct 2022 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 18 Nov 2022 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
+        <item>
+            <title><![CDATA[Open sourcing the Flashbots Builder]]></title>
+            <link>https://writings.flashbots.net/open-sourcing-the-flashbots-builder</link>
+            <guid>open-sourcing-the-flashbots-builder</guid>
+            <pubDate>Fri, 18 Nov 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[A competitive, geographically diverse, and transparent builder ecosystem is critical for the health of Ethereum. Flashbots has open sourced our leading builder in order to help this ecosystem grow further.]]></description>
+        </item>
         <item>
             <title><![CDATA[MEV for the Next Trillion, It's Time to Get Serious…]]></title>
             <link>https://writings.flashbots.net/mev-for-the-next-trillion</link>

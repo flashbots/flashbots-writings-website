@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwrittings_website=self.webpackChunkwrittings_website||[]).push([[5991],{3885:function(e){e.exports=JSON.parse('{"permalink":"/","page":1,"postsPerPage":38,"totalPages":1,"totalCount":38,"previousPage":null,"nextPage":null,"blogDescription":"Blog","blogTitle":"Writings"}')}}]);

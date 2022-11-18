@@ -2,11 +2,22 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://writings.flashbots.net/</id>
     <title>Flashbots Blog</title>
-    <updated>2022-10-11T00:00:00.000Z</updated>
+    <updated>2022-11-18T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://writings.flashbots.net/"/>
     <subtitle>Flashbots Blog</subtitle>
     <icon>https://writings.flashbots.net/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Open sourcing the Flashbots Builder]]></title>
+        <id>open-sourcing-the-flashbots-builder</id>
+        <link href="https://writings.flashbots.net/open-sourcing-the-flashbots-builder"/>
+        <updated>2022-11-18T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[A competitive, geographically diverse, and transparent builder ecosystem is critical for the health of Ethereum. Flashbots has open sourced our leading builder in order to help this ecosystem grow further.]]></summary>
+        <author>
+            <name>Flashbots</name>
+            <uri>https://flashbots.net</uri>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[MEV for the Next Trillion, It's Time to Get Serious…]]></title>
         <id>mev-for-the-next-trillion</id>
