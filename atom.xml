@@ -2,11 +2,30 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://writings.flashbots.net/</id>
     <title>Flashbots Blog</title>
-    <updated>2022-11-18T00:00:00.000Z</updated>
+    <updated>2022-11-22T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://writings.flashbots.net/"/>
     <subtitle>Flashbots Blog</subtitle>
     <icon>https://writings.flashbots.net/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[The Cost of Resilience]]></title>
+        <id>the-cost-of-resilience</id>
+        <link href="https://writings.flashbots.net/the-cost-of-resilience"/>
+        <updated>2022-11-22T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[tl;dr]]></summary>
+        <author>
+            <name>Elaine Hu</name>
+            <uri>https://twitter.com/elenahoolu</uri>
+        </author>
+        <author>
+            <name>Alejo Salles</name>
+            <uri>https://twitter.com/fiiiu_</uri>
+        </author>
+        <author>
+            <name>Hasu</name>
+            <uri>https://twitter.com/hasufl</uri>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Open sourcing the Flashbots Builder]]></title>
         <id>open-sourcing-the-flashbots-builder</id>
