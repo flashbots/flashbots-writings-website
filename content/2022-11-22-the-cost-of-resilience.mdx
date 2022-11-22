@@ -30,7 +30,7 @@ Fortunately, other builders and relays have started to emerge and take increasin
 
 # The Solution
 
-Now, validators can sidestep this question by running mev-boost with the [new](https://github.com/flashbots/mev-boost#mev-boost-cli-arguments) `[min-bid]` [parameter](https://github.com/flashbots/mev-boost#mev-boost-cli-arguments). What this parameter does is only accept blocks from relays if they bid above a chosen value, otherwise a locally-built block is proposed. This leverages the fact that the profit increase coming from mev-boost is not that large for most blocks. Validators can thus forfeit a small amount of profit in exchange for making the network more resilient, while keeping the door open for high-MEV opportunities.
+Now, validators can sidestep this question by running mev-boost with the [new](https://github.com/flashbots/mev-boost#mev-boost-cli-arguments) `min-bid` [parameter](https://github.com/flashbots/mev-boost#mev-boost-cli-arguments). What this parameter does is only accept blocks from relays if they bid above a chosen value, otherwise a locally-built block is proposed. This leverages the fact that the profit increase coming from mev-boost is not that large for most blocks. Validators can thus forfeit a small amount of profit in exchange for making the network more resilient, while keeping the door open for high-MEV opportunities.
 
 ![resilience_1.png](/img/resilience_1.png)
 
