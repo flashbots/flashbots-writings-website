@@ -12,7 +12,7 @@
         <id>the-cost-of-resilience</id>
         <link href="https://writings.flashbots.net/the-cost-of-resilience"/>
         <updated>2022-11-22T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[tl;dr]]></summary>
+        <summary type="html"><![CDATA[A new mev-boost feature allows validators to maximize Ethereum’s censorship resistance by building low-MEV blocks locally while still outsourcing the building of high-MEV blocks.]]></summary>
         <author>
             <name>Elaine Hu</name>
             <uri>https://twitter.com/elenahoolu</uri>

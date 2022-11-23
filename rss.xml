@@ -12,7 +12,7 @@
             <link>https://writings.flashbots.net/the-cost-of-resilience</link>
             <guid>the-cost-of-resilience</guid>
             <pubDate>Tue, 22 Nov 2022 00:00:00 GMT</pubDate>
-            <description><![CDATA[tl;dr]]></description>
+            <description><![CDATA[A new mev-boost feature allows validators to maximize Ethereum’s censorship resistance by building low-MEV blocks locally while still outsourcing the building of high-MEV blocks.]]></description>
         </item>
         <item>
             <title><![CDATA[Open sourcing the Flashbots Builder]]></title>
