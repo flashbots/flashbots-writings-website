@@ -94,7 +94,7 @@ If you run an Ethereum validator and are willing to incur a small opportunity co
 mev-boost -min-bid <x> -relay ...
 ```
 
-where `x` is the minimum accepted ETH-denominated profit amount from blocks coming from the relays. As we saw on the table in the previous section, setting `x = 0.05` incurs a per-block opportunity cost of 0.011 ETH, which decreases the annual return for proposer by only 0.2% in APR. This small decrease in yield has a sizeable effect in network resilience: if all validators connecting to compliant relays adopted this threshold, the 1 block inclusion probability for non-compliant transactions would increase from the current 28% to coarsely 53%. Larger voluntary forfeitures of profit would of course entail even greater increases in network resilience.
+where `x` is the minimum accepted ETH-denominated profit amount from blocks coming from the relays. As we saw on the table in the previous section, setting `x = 0.05` incurs a per-block opportunity cost of 0.011 ETH, which decreases the annual return for proposer by only 0.1% in APR. This small decrease in yield has a sizeable effect in network resilience: if all validators connecting to compliant relays adopted this threshold, the 1 block inclusion probability for non-compliant transactions would increase from the current 28% to coarsely 53%. Larger voluntary forfeitures of profit would of course entail even greater increases in network resilience.
 
 We encourage validators to update mev-boost and help reinforce Flashbots ongoing commitment to building open and decentralized infrastructure in line with Ethereum's goals.
 
