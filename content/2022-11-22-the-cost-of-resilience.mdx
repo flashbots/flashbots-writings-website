@@ -55,9 +55,9 @@ The question now is how much profit would validators be forfeiting by choosing t
 
 The opportunity cost of setting a minimum bid value is the cumulative difference in block profit between blocks using Flashbots mev-boost relay and blocks built locally. The larger the minimum bid, the more blocks will be locally built, and the larger the opportunity cost:
 
-![resilience_4.jpg](/img/resilience_4.jpg)
+![resilience_4.jpg](/img/resilience_4.png)
 
-As we see from the graph, the opportunity cost can get quite high for large values of the `min-bid` parameter, which mean that most blocks would be built locally. However, as we pointed out, we are mostly concerned with low-profit blocks, which can get us a long way towards network resilience. Looking at only block profits below 0.11 ETH, which account for ~73% of all mev-boost blocks, we see the following opportunity cost, together with the implied approximate APR for each setting of the parameter:
+As we see from the graph, the opportunity cost can get quite high for large values of the `min-bid` parameter, which means that most blocks would be built locally. However, as we pointed out, we are mostly concerned with low-profit blocks, which can get us a long way towards network resilience. Looking at only block profits below 0.11 ETH, which account for ~73% of all mev-boost blocks, we see the following opportunity cost, together with the implied approximate APR for each setting of the parameter:
 
 ![resilience_5.png](/img/resilience_5.png)
 
@@ -78,8 +78,8 @@ The following table summarizes our results for different values of the `min-bid`
 | Minimum bid value | 0 ETH | 0.02 ETH | 0.05 ETH | 0.10 ETH | 0.24 ETH |
 | --- | --- | --- | --- | --- | --- |
 | Cumulative % of blocks ≤ min bid value | n.a. | 5% | 35% | 70% | 90% |
-| Opportunity cost per block | 0 ETH | 0.003 ETH | 0.01 ETH | 0.03 ETH | 0.09 ETH |
-| Approximate proposer APR % | 4.7% | 4.7% | 4.6% | 4.3% | 3.1% |
+| Opportunity cost per block | 0 ETH | 0.003 ETH | 0.007 ETH | 0.01 ETH | 0.01 ETH |
+| Approximate proposer APR % | 6.5% | 6.4% | 6.3% | 6.3% | 6.2% |
 | non-OFAC inclusion rate after 1 block | 0% | 5% | 35% | 70% | 90% |
 
 
