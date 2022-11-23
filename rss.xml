@@ -4,9 +4,16 @@
         <title>Flashbots Blog</title>
         <link>https://writings.flashbots.net/</link>
         <description>Flashbots Blog</description>
-        <lastBuildDate>Tue, 22 Nov 2022 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 23 Nov 2022 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
+        <item>
+            <title><![CDATA[The Future of MEV is SUAVE]]></title>
+            <link>https://writings.flashbots.net/the-future-of-mev-is-suave</link>
+            <guid>the-future-of-mev-is-suave</guid>
+            <pubDate>Wed, 23 Nov 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[After successfully isolating the centralizing effects of MEV to the block builder role, we turn ourselves toward a new challenge - to decentralize block building itself.]]></description>
+        </item>
         <item>
             <title><![CDATA[The Cost of Resilience]]></title>
             <link>https://writings.flashbots.net/the-cost-of-resilience</link>

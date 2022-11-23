@@ -2,11 +2,22 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://writings.flashbots.net/</id>
     <title>Flashbots Blog</title>
-    <updated>2022-11-22T00:00:00.000Z</updated>
+    <updated>2022-11-23T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://writings.flashbots.net/"/>
     <subtitle>Flashbots Blog</subtitle>
     <icon>https://writings.flashbots.net/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[The Future of MEV is SUAVE]]></title>
+        <id>the-future-of-mev-is-suave</id>
+        <link href="https://writings.flashbots.net/the-future-of-mev-is-suave"/>
+        <updated>2022-11-23T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[After successfully isolating the centralizing effects of MEV to the block builder role, we turn ourselves toward a new challenge - to decentralize block building itself.]]></summary>
+        <author>
+            <name>Flashbots</name>
+            <uri>https://flashbots.net</uri>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[The Cost of Resilience]]></title>
         <id>the-cost-of-resilience</id>
