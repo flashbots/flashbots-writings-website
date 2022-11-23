@@ -55,7 +55,7 @@ The question now is how much profit would validators be forfeiting by choosing t
 
 The opportunity cost of setting a minimum bid value is the cumulative difference in block profit between blocks using Flashbots mev-boost relay and blocks built locally. The larger the minimum bid, the more blocks will be locally built, and the larger the opportunity cost:
 
-![resilience_4.png](/img/resilience_4.png)
+![resilience_4.jpg](/img/resilience_4.jpg)
 
 As we see from the graph, the opportunity cost can get quite high for large values of the `min-bid` parameter, which mean that most blocks would be built locally. However, as we pointed out, we are mostly concerned with low-profit blocks, which can get us a long way towards network resilience. Looking at only block profits below 0.11 ETH, which account for ~73% of all mev-boost blocks, we see the following opportunity cost, together with the implied approximate APR for each setting of the parameter:
 
