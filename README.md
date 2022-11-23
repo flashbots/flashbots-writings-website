@@ -43,7 +43,8 @@ Changed to the `main` branch are automatically deployed by CI.
 5. Place the `<!--truncate-->` tag around after the first paragraph. All content before that tag will be visible on https://writings.flashbots.net
 6. To preview, install the dependencies as described above and run `yarn start`
 7. Make sure the meta tags and front-matter is in order, and that the post has a nice description and image:
-  * For SEO and previews/sharing, it is recommended to add an image. You can get free images from [https://unsplash.com](unsplash.com) and other pages, but also consider generating an image with [Dall-E](https://labs.openai.com/) and [Stable Diffusion](https://beta.dreamstudio.ai/dream). Try to make the image less than 200kb.
-  * Think about a good introduction paragraph, as it will be used in social previews. It will either use the first part of the post, or you can manually set it with the `description: ...` front matter.
-7. Once satisfied, create a PR. once merged CI auto deploys it (edited)
+   * For SEO and previews/sharing, it is recommended to add an image. You can get free images from [https://unsplash.com](unsplash.com) and other pages, but also consider generating an image with [Dall-E](https://labs.openai.com/) and [Stable Diffusion](https://beta.dreamstudio.ai/dream).
+   * The image should be 1200x630px and less than 400kb.
+   * Think about a good introduction paragraph, as it will be used in social previews. It will either use the first part of the post, or you can manually set it with the `description: ...` front matter.
+7. Once satisfied, create a PR. Once the PR is merged, the [Github CI system](https://github.com/flashbots/flashbots-writings-website/actions) will automatically deploy it.
 8. Check the sharing meta tags using https://www.opengraph.xyz, and update the content meta tags as needed
