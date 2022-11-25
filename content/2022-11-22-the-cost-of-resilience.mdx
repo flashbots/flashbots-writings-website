@@ -65,13 +65,13 @@ We see again how the opportunity cost increases with the value of `min-bid`, but
 
 # Effects on Transaction Inclusion
 
-With around [72% of Ethereum blocks](https://www.inclusion.watch/) are now built in an OFAC-compatible way, this means that some transactions experience delays in getting included on chain. In particular, the probability of one of these transactions to be included after one block is around 28%, corresponding to the validators who either build blocks locally or get profitable blocks from non-compliant relays. If all validators were using mev-boost and connecting only to compliant relays, the inclusion rate would of course fall down to 0.
+Around [72% of Ethereum blocks](https://www.inclusion.watch/) are now built in an OFAC-compatible way. This means that some transactions experience delays in getting included on chain. In particular, the probability of one of these transactions to be included after one block is around 28%, corresponding to the validators who either build blocks locally or get profitable blocks from non-OFAC compatible relays. If all validators were using mev-boost and connecting only to OFAC-compatible relays, the inclusion rate would of course fall down to 0.
 
-Let's look at the inclusion rate of these transactions for different values of `min-bid`, focusing only on mev-boost instances connected to compliant relays:
+Let's look at the inclusion rate of these transactions for different values of `min-bid`, focusing only on mev-boost instances connected to OFAC-compatible relays:
 
 ![resilience_6.png](/img/resilience_6.png)
 
-As mentioned, the default value of 0 would prevent any transaction from being included. For relatively small values of `min-bid`, however, we see how non-compliant transactions have a large chance of inclusion even after very few blocks. As an example, setting a value of `min-bid` of 0.05 ETH would bring the inclusion probability after one block from 0 to 35%. Clearly, a majority of validators opting into this feature would go a long way towards increasing the network's resilience.
+As mentioned, the default value of 0 would prevent any transaction from being included. For relatively small values of `min-bid`, however, we see how non-OFAC compatible transactions have a large chance of inclusion even after very few blocks. As an example, setting a value of `min-bid` of 0.05 ETH would bring the inclusion probability after one block from 0 to 35%. Clearly, a majority of validators opting into this feature would go a long way towards increasing the network's resilience.
 
 The following table summarizes our results for different values of the `min-bid` parameter:
 
@@ -94,7 +94,7 @@ If you run an Ethereum validator and are willing to incur a small opportunity co
 mev-boost -min-bid <x> -relay ...
 ```
 
-where `x` is the minimum accepted ETH-denominated profit amount from blocks coming from the relays. As we saw on the table in the previous section, setting `x = 0.05` incurs a per-block opportunity cost of 0.011 ETH, which decreases the annual return for proposer by only 0.1% in APR. This small decrease in yield has a sizeable effect in network resilience: if all validators connecting to compliant relays adopted this threshold, the 1 block inclusion probability for non-compliant transactions would increase from the current 28% to coarsely 53%. Larger voluntary forfeitures of profit would of course entail even greater increases in network resilience.
+where `x` is the minimum accepted ETH-denominated profit amount from blocks coming from the relays. As we saw on the table in the previous section, setting `x = 0.05` incurs a per-block opportunity cost of 0.011 ETH, which decreases the annual return for proposer by only 0.1% in APR. This small decrease in yield has a sizeable effect in network resilience: if all validators connecting to OFAC-compatible relays adopted this threshold, the 1 block inclusion probability for non-OFAC compatible transactions would increase from the current 28% to coarsely 53%. Larger voluntary forfeitures of profit would of course entail even greater increases in network resilience.
 
 We encourage validators to update mev-boost and help reinforce Flashbots ongoing commitment to building open and decentralized infrastructure in line with Ethereum's goals.
 
@@ -105,4 +105,5 @@ _Thank you to metachris, Kailin, and Xin for contributions to this post :)_
 ---
 
 [^1] Two data sources are used in in this analysis: payloads delivered through the [Flashbots MEV-Boost relay](https://boost-relay.flashbots.net/) and included on chain ranging from block number `15537940` to `15947320`, and the Flashbots mempool builder (`0xa1defa..`), which provides reference mempool block values.
+
 [^2] The combined data with block value from mempool and from MEV-Boost can be downloaded from [here](https://drive.google.com/file/d/1wvdO_DbrMu3_Ivld6IeTbGh7QsxjXluC/view).
