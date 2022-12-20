@@ -1,5 +1,5 @@
 ---
-slug: geth-in-sgx
+slug: geth-inside-sgx
 title: "Running Geth within SGX: Our Experience, Learnings and Code"
 authors: [metachris, frieder]
 tags: [privacy, sgx]
@@ -11,7 +11,6 @@ description: We are happy to publish our efforts and a number of key learnings a
 At Flashbots, we are exploring trusted execution environments (TEEs) such as SGX, as well as other privacy technologies such as Multi-Party Computation and Homomorphic Encryption, as important building blocks for trustless collaboration along the transaction supply chain. This is particularly relevant for applications such as decentralized block building and sharing private orderflow.
 
 Today we are happy to publish our efforts and a number of key learnings about running Geth inside SGX, for others to reuse, experiment with, and build upon.
-
 
 <!--truncate-->
 
@@ -42,7 +41,10 @@ To address this, we experimented with using different libOS frameworks, but ulti
 
 ### Initial Sync
 
-The initial sync process of the chain can take quite a long time, and currently requires up to 800GB of storage. We chose to copy the encrypted database, rather than run the sync within SGX.
+The initial sync process of the chain can take quite a long time, and currently requires up to 800GB of storage.
+
+We chose to copy the unencrypted database from the host into SGX, rather than run the sync within SGX. Copying the database on startup
+also encrypts the data, which takes about 3 hours because of the data size and cryptographic operations.
 
 ### Information Leakage
 
@@ -61,8 +63,6 @@ Luckily, not all of the 1TB need to be accessed by the application at once, a lo
 Our initial attempt was to run geth on a 384GB machine with 256GB EPC (SGX protected) memory and 1TB swap, and it worked well (~150 mgasps [million gas per second]). But those machines are costly and hard to come by (Azure only).
 
 We found a trick though: you can use a server with large regular memory and treat it as buffer space. We ended up running on a machine with 500 GBs RAM, 1TB of SSD swap and 64 GBs of protected memory, which are much cheaper and more widely available. It performed at around 130 mgasps which is good enough.
-
-On startup, the state DB is copied from the host system into the enclave, which also encrypts the data. This operation takes about 3 hours because of the data size and cryptographic operations.
 
 While this approach does have some limitations, we have found it to be a viable option for running Geth within SGX.
 
@@ -84,6 +84,13 @@ By publishing our code and learnings, we hope to provide a reference implementat
 - Explore possible IO leakage and implications
 - Verify attestations on-chain
 
+## Thanks
+
+Special shoutout to [Mateusz Morusiewicz](https://twitter.com/mmrosum) and [Tomasz K. Stańczak](https://twitter.com/tkstanczak) for their support and creativity in making this happen and solving a bunch of problems along the way,
+as well as to [Alejo Salles](https://twitter.com/fiiiu_) and [Robert Miller](https://twitter.com/bertcmiller) for reviewing the draft of this post.
+
 ## References
 
 You can find our code for running Geth inside SGX at [github.com/flashbots/geth-sgx-gramine](https://github.com/flashbots/geth-sgx-gramine)
+
+Join us in the forum, to discuss and collaborate, at https://collective.flashbots.net/t/running-geth-within-sgx-our-experience-learnings-and-code-flashbots/938
