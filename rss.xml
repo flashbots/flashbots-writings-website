@@ -4,9 +4,16 @@
         <title>Flashbots Blog</title>
         <link>https://writings.flashbots.net/</link>
         <description>Flashbots Blog</description>
-        <lastBuildDate>Wed, 23 Nov 2022 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 20 Dec 2022 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
+        <item>
+            <title><![CDATA[Running Geth within SGX: Our Experience, Learnings and Code]]></title>
+            <link>https://writings.flashbots.net/geth-in-sgx</link>
+            <guid>geth-in-sgx</guid>
+            <pubDate>Tue, 20 Dec 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[We are happy to publish our efforts and a number of key learnings about running Geth inside SGX, for others to reuse, experiment with, and build upon.]]></description>
+        </item>
         <item>
             <title><![CDATA[The Future of MEV is SUAVE]]></title>
             <link>https://writings.flashbots.net/the-future-of-mev-is-suave</link>
