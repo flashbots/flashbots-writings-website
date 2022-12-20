@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwrittings_website=self.webpackChunkwrittings_website||[]).push([[8255],{2664:t=>{t.exports=JSON.parse('{"allTagsPath":"/tags","slug":"/tags/protect","name":"protect","count":2,"permalink":"/tags/protect"}')}}]);

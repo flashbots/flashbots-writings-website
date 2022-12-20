@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkwrittings_website=self.webpackChunkwrittings_website||[]).push([[959],{5837:function(s){s.exports=JSON.parse('{"allTagsPath":"/tags","slug":"/tags/pbs","name":"pbs","count":2,"permalink":"/tags/pbs"}')}}]);

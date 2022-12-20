@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwrittings_website=self.webpackChunkwrittings_website||[]).push([[6148],{8095:a=>{a.exports=JSON.parse('{"allTagsPath":"/tags","slug":"/tags/roadmap","name":"roadmap","count":1,"permalink":"/tags/roadmap"}')}}]);

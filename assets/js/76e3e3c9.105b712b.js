@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwrittings_website=self.webpackChunkwrittings_website||[]).push([[1282],{3779:t=>{t.exports=JSON.parse('{"allTagsPath":"/tags","slug":"/tags/orderflow-auction","name":"orderflow auction","count":1,"permalink":"/tags/orderflow-auction"}')}}]);
