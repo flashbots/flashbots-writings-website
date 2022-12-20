@@ -9,8 +9,8 @@
         <generator>https://github.com/jpmonette/feed</generator>
         <item>
             <title><![CDATA[Running Geth within SGX: Our Experience, Learnings and Code]]></title>
-            <link>https://writings.flashbots.net/geth-in-sgx</link>
-            <guid>geth-in-sgx</guid>
+            <link>https://writings.flashbots.net/geth-inside-sgx</link>
+            <guid>geth-inside-sgx</guid>
             <pubDate>Tue, 20 Dec 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[We are happy to publish our efforts and a number of key learnings about running Geth inside SGX, for others to reuse, experiment with, and build upon.]]></description>
         </item>

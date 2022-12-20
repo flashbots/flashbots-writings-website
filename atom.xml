@@ -9,8 +9,8 @@
     <icon>https://writings.flashbots.net/img/favicon.ico</icon>
     <entry>
         <title type="html"><![CDATA[Running Geth within SGX: Our Experience, Learnings and Code]]></title>
-        <id>geth-in-sgx</id>
-        <link href="https://writings.flashbots.net/geth-in-sgx"/>
+        <id>geth-inside-sgx</id>
+        <link href="https://writings.flashbots.net/geth-inside-sgx"/>
         <updated>2022-12-20T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[We are happy to publish our efforts and a number of key learnings about running Geth inside SGX, for others to reuse, experiment with, and build upon.]]></summary>
         <author>
