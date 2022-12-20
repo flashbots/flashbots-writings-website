@@ -2,10 +2,11 @@
 
 This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
+The live version is hosted at https://writings.flashbots.net
 
-### Installation
+### Getting started
 
-Install the node packages from within a Docker container (strongly recommended not only for security, but because installing all the packages manually is a huge waste of time), then you can start it like this:
+It's recommended to install the Node.js packages from within a Docker container (installing npm packages can compromise your machine because it can execute arbitrary scripts). You can start the Docker container like this:
 
 ```
 docker run -p 3000:3000 --rm -it -w /mnt -v $(pwd):/mnt node:16 /bin/bash
@@ -16,8 +17,6 @@ Install the dependencies:
 ```
 $ yarn
 ```
-
-### Local Development
 
 Build the source:
 
@@ -30,7 +29,7 @@ This command starts a local development server and opens up a browser window. Mo
 
 http://localhost:3000
 
-To serve a finally built version (which includes all the meta tags):
+To serve a finally built version (i.e. to double-check the meta tags before publishing):
 
 ```
 $ yarn build
@@ -39,7 +38,7 @@ $ yarn serve
 
 ### Deployment
 
-Changed to the `main` branch are automatically deployed by CI.
+Create a pull-request to the main branch. All changes to the `main` branch are automatically deployed by CI to Github Pages.
 
 ### Steps to publish a new post
 
