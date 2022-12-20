@@ -20,7 +20,7 @@ quintus:
   name: Quintus Kilbourn
   title: Researcher
   url: https://twitter.com/0xQuintus
-  image_url: https://pbs.twimg.com/profile_images/1556350725789204480/rAznqxk0_400x400.jpg  
+  image_url: https://pbs.twimg.com/profile_images/1556350725789204480/rAznqxk0_400x400.jpg
 
 fireball:
   name: Taarush Vemulapalli
@@ -126,3 +126,7 @@ elaine:
   title: Data @Flashbots
   url: https://twitter.com/elenahoolu
   image_url: https://pbs.twimg.com/profile_images/1544050561657540609/lCtVnAS5_400x400.jpg
+
+frieder:
+  name: Frieder Paape
+
