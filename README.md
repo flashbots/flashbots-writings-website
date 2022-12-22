@@ -38,7 +38,7 @@ $ yarn serve
 
 ### Deployment
 
-Create a pull-request to the main branch. All changes to the `main` branch are automatically deployed by CI to Github Pages.
+Create a pull-request to the main branch. All changes to the `main` branch are automatically published via Vercel.
 
 ### Steps to publish a new post
 
