@@ -20,8 +20,11 @@ $ yarn
 
 Build the source:
 
+First create a copy of `.env.dev` at the root of the project and name it `.env`
+Linux: `cp .env.dev .env`
+Windows: `copy .env.dev .env`
+
 ```
-$ source .env.dev
 $ yarn start
 ```
 
