@@ -26,6 +26,7 @@
     "@svgr/webpack": "^5.5.0",
     "@typescript-eslint/eslint-plugin": "^4.15.2",
     "@typescript-eslint/parser": "^4.15.2",
+    "@vercel/analytics": "^0.1.8",
     "clsx": "1.1.1",
     "dayjs": "^1.10.7",
     "disqus-react": "^1.1.2",
