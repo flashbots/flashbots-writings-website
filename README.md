@@ -6,12 +6,6 @@ The live version is hosted at https://writings.flashbots.net
 
 ### Getting started
 
-It's recommended to install the Node.js packages from within a Docker container (installing npm packages can compromise your machine because it can execute arbitrary scripts). You can start the Docker container like this:
-
-```
-docker run -p 3000:3000 --rm -it -w /mnt -v $(pwd):/mnt node:16 /bin/bash
-```
-
 Install the dependencies:
 
 ```
@@ -20,8 +14,11 @@ $ yarn
 
 Build the source:
 
+First create a copy of `.env.dev` at the root of the project and name it `.env`
+Linux: `cp .env.dev .env`
+Windows: `copy.env.dev .env`
+
 ```
-$ source .env.dev
 $ yarn start
 ```
 
