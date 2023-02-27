@@ -4,9 +4,16 @@
         <title>Flashbots Blog</title>
         <link>https://writings.flashbots.net/</link>
         <description>Flashbots Blog</description>
-        <lastBuildDate>Tue, 20 Dec 2022 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 27 Feb 2023 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
+        <item>
+            <title><![CDATA[Backrunning Private Transactions Using Multi-Party Computation]]></title>
+            <link>https://writings.flashbots.net/backrunning-private-txs-MPC</link>
+            <guid>backrunning-private-txs-MPC</guid>
+            <pubDate>Mon, 27 Feb 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[This article examines the use of secure multi-party computation in allowing searchers to backrun users’ transactions while preserving transaction and search strategy confidentiality.]]></description>
+        </item>
         <item>
             <title><![CDATA[Running Geth within SGX: Our Experience, Learnings and Code]]></title>
             <link>https://writings.flashbots.net/geth-inside-sgx</link>
