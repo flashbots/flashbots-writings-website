@@ -4,9 +4,16 @@
         <title>Flashbots Blog</title>
         <link>https://writings.flashbots.net/</link>
         <description>Flashbots Blog</description>
-        <lastBuildDate>Mon, 27 Feb 2023 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 03 Mar 2023 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
+        <item>
+            <title><![CDATA[Block Building inside SGX]]></title>
+            <link>https://writings.flashbots.net/block-building-inside-sgx</link>
+            <guid>block-building-inside-sgx</guid>
+            <pubDate>Fri, 03 Mar 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[We are excited to announce that Flashbots is running a block builder inside an SGX enclave, and open-sourcing all the components.]]></description>
+        </item>
         <item>
             <title><![CDATA[Backrunning Private Transactions Using Multi-Party Computation]]></title>
             <link>https://writings.flashbots.net/backrunning-private-txs-MPC</link>
