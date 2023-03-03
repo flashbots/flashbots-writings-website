@@ -96,6 +96,7 @@ At the time of writing, the geth database requires about 1TB of storage.
 - Exploring designs for a scalable SGX infrastructure in public, potentially paving the way for [distributed building designs](https://github.com/flashbots/mev-boost/issues/139).
 - End-to-end reproducible builds.
 - Performance improvements, in particular around system startup and block merging.
+- Explore impact and mitigation of covert-channel attacks (leaking private information through resource usage patterns) as well as side-channel attacks and other vulnerabilities.
 - Mutual TLS & mutual attestation, allowing multiple SGX enclaves to establish a trusted connection by mutually verifying their SGX proofs.
 - SGX'izing further parts of the stack for e2e transaction confidentiality (i.e. mev-boost relay, searcher stack, bundle relay, ...).
 - Exploring other TEE systems besides SGX (i.e. AMD SEV, ARM, Nvidia H100+ coprocessors, etc.)
