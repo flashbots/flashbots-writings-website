@@ -1,0 +1,113 @@
+---
+slug: block-building-inside-sgx
+title: Block Building inside SGX
+authors: [metachris, frieder]
+tags: [privacy, sgx]
+image: /img/posts/sgx-og.jpg
+hide_table_of_contents: false
+description: We are excited to announce that Flashbots is running a block builder inside an SGX enclave, and open-sourcing all the components.
+---
+
+We are excited to announce that Flashbots is successfully running a block builder inside an SGX enclave, a trusted execution environment (TEE) developed by [Intel](https://www.intel.com/content/www/us/en/architecture-and-technology/software-guard-extensions.html). The SGX block builder is now live on the Ethereum Sepolia testnet, and soon on mainnet!
+
+![SGX Builder Logo](/img/posts/sgx-og.jpg)
+
+Our previous work on [running Geth inside SGX](https://writings.flashbots.net/geth-inside-sgx) demonstrated the technical feasibility of this approach. Now, we’ve made the next step towards block building inside encrypted enclaves, and want to share our key learnings and challenges, as well as the all the [code and tooling](https://github.com/flashbots/geth-sgx-gramine) for running a block builder inside SGX.
+
+<!--truncate-->
+
+Implementing block building inside encrypted enclaves brings us one step closer toward transaction confidentiality and decentralization of the block building role.
+
+Running a block building algorithm inside an enclave ensures that block builders, as well other infrastructure providers, can no longer see the contents of user transactions,
+and run verifiable block construction algorithms on them, ensuring economically efficient blocks without compromising on user privacy.
+
+Looking to the future, builders inside SGX can make blocks that are provably valid and truthfully report their bid size, possibly obviating the need for mev-boost relays.
+
+Furthermore, it is an important step toward curbing the risks of exclusive orderflow by allowing transactions to be private yet accessible to all block builders operating inside enclaves.
+
+## Our Sepolia SGX Builder
+
+The Flashbots SGX builder on Sepolia uses the public key `0x9817fc7d....`, and the block extra_data `Illuminate Dmocrtz Dstrib Prtct`.
+
+- Delivered blocks can be found through the [relay data API](https://boost-relay-sepolia.flashbots.net/relay/v1/data/bidtraces/proposer_payload_delivered?builder_pubkey=0x9817fc7d5eb7ae1390f0fd64fd94a7d74c669c2fa5b5ef87605177329553853c957c11210537524a895e046d494491b7)
+- Example block here: [sepolia.etherscan.io/block/3013275](https://sepolia.etherscan.io/block/3013275)
+
+## Code & Tooling
+
+The code and tooling required to run an SGX builder is available in this repository: [github.com/flashbots/geth-sgx-gramine](https://github.com/flashbots/geth-sgx-gramine).
+
+- See also the [builder quickstart in the README](https://github.com/flashbots/geth-sgx-gramine#builder-quickstart)
+- And an overview of all the changes in [the pull-request](https://github.com/flashbots/geth-sgx-gramine/pull/9)
+
+
+## Hardware
+
+We're using [Azure DCsv3 Series](https://learn.microsoft.com/en-us/azure/virtual-machines/dcv3-series) hardware, specifically:
+
+* For Sepolia: [Standard_DC2s_v3](https://azureprice.net/vm/Standard_DC2s_v3) instances, with 2 cores and 16GB memory + 64GB SSD Swapfile.
+* For Mainnet: [Standard_DC48s_v3](https://azureprice.net/vm/Standard_DC48s_v3) instances, which have 48 Cores, 384GB Memory + 2TB Premium SSD Disk for Swap.
+
+## Code Details
+
+The SGX builder release includes several improvements and additions to the original geth-inside-SGX codebase:
+
+- Fully working [Flashbots block builder](https://github.com/flashbots/builder) (branch [`capella-test`](https://github.com/flashbots/builder/tree/capella-test))
+- [Remote attestation](https://en.wikipedia.org/wiki/Trusted_Computing#Remote_attestation) support, allowing anyone to verify the SGX proof:
+    - A remote-attestation TLS (RA-TLS) certificate is created on startup, which embeds the SGX attestation report.
+    - See [here](https://github.com/CCC-Attestation/meetings/blob/main/materials/ShanweiCen_Interoperable_ATLS.pdf) and [here](https://github.com/gramineproject/gramine/pull/1039) for more information about RA-TLS, as well as the [patch for adding it to the builder](https://github.com/flashbots/geth-sgx-gramine/pull/9/files#diff-c0fdcc479c0e7e75defff1b32dbc6d01e39a7d248d4dbcb6709220b85e68c88b) codebase.
+    - RA-TLS is used by several SGX projects including Gramine, Open Enclave and Inclavare Containers.
+- Support for [EDMM](https://gramine.readthedocs.io/en/stable/sgx-intro.html#term-edmm) (enclave dynamic memory management) via an update to [Gramine 1.4](https://github.com/gramineproject/gramine/releases/tag/v1.4). EDMM obviates the need to reserve and write all memory on startup, which has the potential to significantly speed up the startup process.
+- [Guide](https://github.com/flashbots/geth-sgx-gramine#attest-enclave) for attesting the certificate of an SGX builder
+- Reproducible builder Docker image, arriving at a reproducible [MRENCLAVE](https://www.intel.com/content/www/us/en/developer/articles/technical/introduction-to-intel-sgx-sealing.html) value when rebuilding the builder Docker image.
+
+
+## Challenges
+
+### Geth state size
+
+At the time of writing, the geth database requires about 1TB of storage.
+
+- The database needs to be encrypted and copied into the enclave on every startup. Given the full mainnet geth database with about one terabyte, the startup process takes about 4.5 hours.
+- This also means it takes a long time to reproduce bugs.
+- Gramine is crashing at 1TB of state in the enclave (we’ve opened a [bug report](https://github.com/gramineproject/gramine/issues/1207))
+- A promising direction is this [geth PBSS patch](https://github.com/ethereum/go-ethereum/pull/26274) (auto-pruning storage) which might be able to reduce the state size to about 150GB (see also [this post](https://nodereal.io/blog/en/geth-path-based-storage-model-and-newly-inline-state-prune/) for more details)
+
+### Merging performance and additional latencies
+- The SGX builder currently performs at around ~150 mgasps, which is about half the performance of a non-SGX builder.
+    - mgasps means "Million Gas Per Second", measured whenever a new block is processed by geth, providing a good indicator for performance.
+    - Practically, this means that the SGX builder can only do half the simulations of a non-SGX builder running the same block construction algorithm.
+- A likely culprit for this degradation is the way Golang handles syscalls. Instead of using the libc syscall interface, Golang calls directly into the kernel. This produces additional execution overhead when running inside an SGX enclave. Possible improvements could be made by building geth with [gccgo](https://go.dev/doc/install/gccgo)
+
+### Allowing public access to the builder & preventing spam
+- Public users want to connect directly to the code inside the enclave (via TLS), to be able to verify the system is running inside SGX and the code is exactly what they expect.
+- This also means the request content cannot be inspected by any part of the outside infrastructure, which would simplify TLS termination, rate-limiting, spam prevention, load-balancing and reputation management.
+- In the current single-SGX-instance setup, the single builder instance would receive all the user connections, terminate the SSL connections, and process the request. However, the builder wants to focus on building, not on terminating TLS connections or dealing with spam.
+- A stopgap solution that’s still permissionless could be applying heavy network-based rate-limiting.
+- In order to achieve a scalable SGX infrastructure, we’ll publicly explore architectures for end-to-end SGX designs that can deal with outside requests in a scalable fashion, and prevent spam through pre-simulation.
+
+### Reproducible builds
+- We achieved reproducible SGX-builds for the builder application itself, but the Gramine base as well as certain system libraries aren’t yet reproducible and the upstream releases need to be trusted. We are working with the teams towards for end-to-end reproducible builds.
+- More information on reproducible Gramine builds are [here](https://github.com/gramineproject/gramine/issues/153) and [here](https://github.com/flashbots/geth-sgx-gramine/issues/4)).
+
+## Future Work
+
+- Running a SGX builder on Mainnet (soon™️).
+- Allowing users to submit bundles directly to the SGX builder.
+- Exploring designs for a scalable SGX infrastructure in public, potentially paving the way for [distributed building designs](https://github.com/flashbots/mev-boost/issues/139).
+- End-to-end reproducible builds.
+- Performance improvements, in particular around system startup and block merging.
+- Mutual TLS & mutual attestation, allowing multiple SGX enclaves to establish a trusted connection by mutually verifying their SGX proofs.
+- SGX'izing further parts of the stack for e2e transaction confidentiality (i.e. mev-boost relay, searcher stack, bundle relay, ...).
+- Exploring other TEE systems besides SGX (i.e. AMD SEV, ARM, Nvidia H100+ coprocessors, etc.)
+
+## Thanks
+
+Thanks to [konVera](https://konvera.io) for the great collaboration on this project, as well as to [Mateusz Morusiewicz](https://twitter.com/mmrosum) and [Tomasz K. Stańczak](https://twitter.com/tkstanczak) for the work towards making this happen.
+Also thanks to [Kailin Rutherford](https://twitter.com/imkailin), Robert Annessi, [Alexo](https://twitter.com/ObadiaAlex), [Bert](https://twitter.com/bertcmiller) and [Tina Z](https://twitter.com/tzhen) for reviewing drafts of this post.
+
+## References
+
+* You can find our code and tooling for running a builder inside SGX at [github.com/flashbots/geth-sgx-gramine](https://github.com/flashbots/geth-sgx-gramine).
+* See also the first post in the SGX series: [Running Geth inside SGX](https://writings.flashbots.net/geth-inside-sgx).
+* [On distributed block building](https://github.com/flashbots/mev-boost/issues/139) (and exploring the builder design space, broadly) by Alex Stokes.
+* **Join us in the forum to discuss and collaborate! https://collective.flashbots.net**
