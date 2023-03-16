@@ -1,28 +1,40 @@
-import React, { useCallback, useMemo } from "react"
+import React, { useCallback, useEffect, useMemo, useState } from "react"
 import styles from  './styles.module.scss';
 import axios from 'axios';
+import CommentIconUrl from './comment-icon.png';
+import Link from "@docusaurus/Link";
 
 interface IForumWidget {
   target: string
 }
 
 const ForumWidget = ({ target }: IForumWidget) => {
-  const commentAmount = useMemo(async () => {
-    const res = await axios.get(`${target}.json`);
+  const [commentAmount, setCommentAmount] = useState("?")
+
+  const fetchReplyCount = useCallback(async () => {
+    const res = await axios.get(`${target}.json`, {
+      headers:{
+        'Accept': 'application/json'
+      }
+    });
     const {
       posts_count
     } = res.data
-    return posts_count
+    setCommentAmount(posts_count)
   }, [target])
 
-  return (<div className={styles.root}>
-    <div>
-      <img src="./comment-icon.png" alt="comment icon" />
+  useEffect(() => {
+    fetchReplyCount()
+  }, [target])
+
+  return (<Link to={target} className={styles.root}>
+    <div className={styles.icon}>
+      <img src={CommentIconUrl} alt="comment icon" />
     </div>
     <span>
       {commentAmount}
     </span>
-  </div>)
+  </Link>)
 }
 
 export default ForumWidget
