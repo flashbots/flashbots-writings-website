@@ -13,6 +13,7 @@ import BlogPostItem from '@theme/BlogPostItem';
 import type {Props} from '@theme/BlogTagsPostsPage';
 import Translate, {translate} from '@docusaurus/Translate';
 import {ThemeClassNames, usePluralForm} from '@docusaurus/theme-common';
+import { Context } from '@theme/useFrontMatter';
 
 // Very simple pluralization: probably good enough for now
 function useBlogPostsPlural() {
@@ -46,38 +47,39 @@ export default function BlogTagsPostsPage(props: Props): JSX.Element {
   );
 
   return (
-    <BlogLayout
-      title={title}
-      wrapperClassName={ThemeClassNames.wrapper.blogPages}
-      pageClassName={ThemeClassNames.page.blogTagPostListPage}
-      searchMetadatas={{
-        // assign unique search tag to exclude this page from search results!
-        tag: 'blog_tags_posts',
-      }}
-      // sidebar={sidebar}
-      >
-      <header className="margin-bottom--md">
-        <h1>{title}</h1>
+      <BlogLayout
+        title={title}
+        wrapperClassName={ThemeClassNames.wrapper.blogPages}
+        pageClassName={ThemeClassNames.page.blogTagPostListPage}
+        searchMetadatas={{
+          // assign unique search tag to exclude this page from search results!
+          tag: 'blog_tags_posts',
+        }}
+        // sidebar={sidebar}
+        >
+        <header className="margin-bottom--md">
+          <h1>{title}</h1>
 
-        <Link href={"/"}>
-          <Translate
-            id="theme.tags.tagsPageLink"
-            description="The label of the link targeting the tag list page">
-            Back to overview
-          </Translate>
-        </Link>
-      </header>
+          <Link href={"/"}>
+            <Translate
+              id="theme.tags.tagsPageLink"
+              description="The label of the link targeting the tag list page">
+              Back to overview
+            </Translate>
+          </Link>
+        </header>
 
-      {items.map(({content: BlogPostContent}) => (
-        <BlogPostItem
-          key={BlogPostContent.metadata.permalink}
-          frontMatter={BlogPostContent.frontMatter}
-          assets={BlogPostContent.assets}
-          metadata={BlogPostContent.metadata}
-          truncated>
-          <BlogPostContent />
-        </BlogPostItem>
-      ))}
-    </BlogLayout>
+        {items.map(({content: BlogPostContent}) => (
+          <Context.Provider key={BlogPostContent.metadata.permalink} value={BlogPostContent.frontMatter}>
+            <BlogPostItem
+              frontMatter={BlogPostContent.frontMatter}
+              assets={BlogPostContent.assets}
+              metadata={BlogPostContent.metadata}
+              truncated>
+              <BlogPostContent />
+            </BlogPostItem>
+          </Context.Provider>
+        ))}
+      </BlogLayout>
   );
 }

@@ -20,6 +20,7 @@ import {MainHeading} from '@theme/Heading';
 
 import styles from './styles.module.css';
 import {ThemeClassNames} from '@docusaurus/theme-common';
+import { Context } from '@theme/useFrontMatter';
 
 export default function DocItem(props: Props): JSX.Element {
   const {content: DocContent, versionMetadata} = props;
@@ -47,7 +48,7 @@ export default function DocItem(props: Props): JSX.Element {
     canRenderTOC && (windowSize === 'desktop' || windowSize === 'ssr');
 
   return (
-    <>
+    <Context.Provider value={props.content.frontMatter}>
       <Seo {...{title, description, keywords, image}} />
 
       <div className="row">
@@ -113,6 +114,6 @@ export default function DocItem(props: Props): JSX.Element {
           </div>
         )}
       </div>
-    </>
+    </Context.Provider>
   );
 }
