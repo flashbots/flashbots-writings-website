@@ -25,6 +25,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
       crossorigin: "anonymous"
     }
   ],
+  themes: ['docusaurus-theme-frontmatter'],
   plugins: [
     'docusaurus-plugin-sass',
     [

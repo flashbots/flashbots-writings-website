@@ -20,6 +20,7 @@ import styles from './styles.module.css';
 import TagsListInline from '@theme/TagsListInline';
 import BlogPostAuthors from '@theme/BlogPostAuthors';
 import dayjs from 'dayjs';
+import ForumWidget from "@site/src/components/ForumWidget/ForumWidget";
 
 // Very simple pluralization: probably good enough for now
 function useReadingTimePlural() {
@@ -70,6 +71,21 @@ function BlogPostItem(props: Props): JSX.Element {
 
     return (
       <header>
+        <div className={clsx(styles.blogPostData, 'margin-hori--md')}>
+          <span>
+            <time dateTime={date} itemProp="datePublished">
+              { dayjs(date).format("DD.MM.YY") }
+            </time>
+
+            {typeof readingTime !== 'undefined' && (
+              <>
+                {' · '}
+                {readingTimePlural(readingTime)}
+              </>
+            )}
+          </span>
+          <ForumWidget target="https://collective.flashbots.net/t/block-building-inside-sgx/1373"></ForumWidget>
+        </div>
         <TitleHeading className={styles.blogPostTitle} itemProp="headline">
           {isBlogPostPage ? (
             title
@@ -79,18 +95,6 @@ function BlogPostItem(props: Props): JSX.Element {
             </Link>
           )}
         </TitleHeading>
-        <div className={clsx(styles.blogPostData, 'margin-vert--md')}>
-          <time dateTime={date} itemProp="datePublished">
-            { dayjs(date).format("DD.MM.YY") }
-          </time>
-
-          {typeof readingTime !== 'undefined' && (
-            <>
-              {' · '}
-              {readingTimePlural(readingTime)}
-            </>
-          )}
-        </div>
         <BlogPostAuthors authors={authors} assets={assets} />
       </header>
     );
