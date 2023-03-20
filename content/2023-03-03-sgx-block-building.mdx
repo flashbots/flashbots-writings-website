@@ -72,6 +72,7 @@ At the time of writing, the geth database requires about 1TB of storage.
 - This also means it takes a long time to reproduce bugs.
 - Gramine is crashing at 1TB of state in the enclave (we’ve opened a [bug report](https://github.com/gramineproject/gramine/issues/1207))
 - A promising direction is this [geth PBSS patch](https://github.com/ethereum/go-ethereum/pull/26274) (auto-pruning storage) which might be able to reduce the state size to about 150GB (see also [this post](https://nodereal.io/blog/en/geth-path-based-storage-model-and-newly-inline-state-prune/) for more details)
+- **Edit:** We [made it work](https://github.com/flashbots/geth-sgx-gramine/pull/10) by keeping the ancient database outside the enclave, halving the state required inside (to ~500GB).
 
 ### Merging performance and additional latencies
 - The SGX builder currently performs at around ~150 mgasps, which is about half the performance of a non-SGX builder.
@@ -113,3 +114,10 @@ Also thanks to [Kailin Rutherford](https://twitter.com/imkailin), Robert Annessi
 * See also the first post in the SGX series: [Running Geth inside SGX](https://writings.flashbots.net/geth-inside-sgx).
 * [On distributed block building](https://github.com/flashbots/mev-boost/issues/139) (and exploring the builder design space, broadly) by Alex Stokes.
 * **Join us in the forum to discuss and collaborate!** [collective.flashbots.net/t/block-building-inside-sgx/1373](https://collective.flashbots.net/t/block-building-inside-sgx/1373)
+
+## Updates
+
+**2023-03-14**: We successfully run a mainnet SGX builder by separating the ancient database from the SGX state database.
+
+* More details in the [pull-request: geth-sgx-gramine#10](https://github.com/flashbots/geth-sgx-gramine/pull/10)
+* The SGX builder landed the first block on mainnet: https://etherscan.io/block/16813125
