@@ -3,12 +3,12 @@ slug: searching-on-mev-share
 title: Searching On MEV-Share
 authors: [brock, shea]
 tags: [mev-share]
-image: /img/posts/sgx-og.jpg
+image: /img/simple-blind-arbitrage-screenshot.png
 hide_table_of_contents: false
-description: MEV-Share is a new paradigm for searchers. It unlocks new sources of orderflow and introduces more expressive features in bundles. This short guide will get you up to speed on new ways of searching and explain how to upgrade your strategies to leverage MEV-Share.
+description: MEV-Share is a new paradigm for searchers. It unlocks new orderflow, features, and searching strategies. This short guide will get you up to speed on new ways of searching and explain how to upgrade your strategies to leverage MEV-Share.
 ---
 
-MEV-Share is a new paradigm for searchers. It unlocks new sources of orderflow and introduces more expressive features in bundles. This short guide will get you up to speed on new ways of searching and explain how to upgrade your strategies to leverage MEV-Share.
+MEV-Share is a new paradigm for searchers. It unlocks new orderflow, features, and searching strategies. This short guide will get you up to speed on new ways of searching and explain how to upgrade your strategies to leverage MEV-Share.
 
 ![Simple Blind Arbitrage Code](/img/simple-blind-arbitrage-screenshot.png)
 
@@ -17,13 +17,13 @@ MEV-Share is a new paradigm for searchers. It unlocks new sources of orderflow a
 *TL;DR*
 
 - *Searching on MEV-Share is a brief introductory guide to get searchers up to speed with MEV-Share. It explains the new features of MEV-Share and gives instructions and examples of searching strategies.*
-- *Searchers can access new orderflow from the Flashbots MEV-Share Matchmaker at [https://mev-share.flashbots.net](https://mev-share.flashbots.net). (Open the link in your browser to see active transactions!) This includes all transactions that are sent to Flashbots Protect, which is approximately 3 percent of all Ethereum transactions.*
-- *To search on MEV-Share, you can start with Flashbots’ [example arbitrage bot](https://github.com/flashbots/simple-blind-arbitrage) or create your own strategies using a client library like [matchmaker-ts](https://github.com/flashbots/matchmaker-ts).*
+- *Searchers can access new orderflow from the Flashbots MEV-Share Matchmaker at [https://mev-share.flashbots.net](https://mev-share.flashbots.net) (open the link in your browser to see active transactions)! This includes all transactions that are sent to Flashbots Protect, which is approximately 3 percent of all Ethereum transactions.*
+- *To search on MEV-Share, you can use Flashbots’ [example arbitrage bot](https://github.com/flashbots/simple-blind-arbitrage) or create your own strategies using a client library like [matchmaker-ts](https://github.com/flashbots/matchmaker-ts).*
 - *Share your ideas and learn about future updates by joining the #mev-share channel in the [Flashbots discord](https://discord.gg/flashbots)!*
 
 ---
 
-Last month Flashbots [announced](https://collective.flashbots.net/t/announcing-mev-share-beta/1650) MEV-Share beta. The rollout was a first step towards introducing programmable privacy to the MEV supply chain — enabling users to decide how, when, and by who their transactions are executed. Today, searchers can [subscribe](https://docs.flashbots.net/flashbots-mev-share/searchers/getting-started) to the Flashbots Matchmaker to search on programmably private orderflow. This includes all transactions sent to Flashbots Protect. But what does searching on programmably private orderflow really mean for searchers? And how can searchers bootstrap strategies in this new paradigm? 
+Last month Flashbots [announced](https://collective.flashbots.net/t/announcing-mev-share-beta/1650) the beta release of MEV-Share. The rollout was a first step towards introducing programmable privacy to the MEV supply chain — enabling users to decide how, when, and by who their transactions are executed. Today, searchers can [subscribe](https://docs.flashbots.net/flashbots-mev-share/searchers/getting-started) to the Flashbots Matchmaker to search on programmably private orderflow. This includes all transactions sent to Flashbots Protect. But what does searching on programmably private orderflow really mean for searchers? And how can searchers bootstrap strategies in this new paradigm? 
 
 *Searching on MEV-Share* is a brief introductory guide to get searchers up to speed with MEV-Share. **We’ll explain the new ideas behind MEV-Share, how they differ from MEV-Boost and MEV-Geth, and how to think about designing searching strategies. We’ll also touch on some new features of MEV-Share and give examples of how to use them.**
 
@@ -31,7 +31,7 @@ Last month Flashbots [announced](https://collective.flashbots.net/t/announcing-m
 
 [MEV-Share](https://github.com/flashbots/mev-share) is a protocol that allows users to selectively share information about their transactions with searchers. This enables users to keep sensitive information private while still allowing searchers to execute strategies such as blind backruns, Uniswap v2 and v3 arbitrage, and more. Flashbots runs a service called the Flashbots Matchmaker that implements the MEV-Share protocol. All transactions sent to Flashbots Protect are automatically routed through the Flashbots Matchmaker.
 
-Today, **around 3 percent of all Ethereum transactions flow through Flashbots Protect***, giving searchers access to an increasingly valuable source of orderflow**.** Furthermore, MEV-Share is a proto-SUAVE implementation which will give searchers early to MEV-Share a better understanding of how MEV market dynamics will evolve as the MEV supply chain decentralizes. 
+Today, **around 3 percent of all Ethereum transactions flow through Flashbots Protect***, giving searchers the ability to search on increasingly valuable source of private orderflow**.** Furthermore, MEV-Share is a proto-SUAVE implementation which will give searchers early to MEV-Share a better understanding of how MEV market dynamics will evolve as the MEV supply chain decentralizes. 
 
 > **On April 30th, 32,011 / 974,972 (3.28%) of transactions that were included on Ethereum Mainnet originated from Flashbots Protect (source: Flashbots Protect and [https://etherscan.io/chart/tx](https://etherscan.io/chart/tx))*
 
@@ -40,12 +40,12 @@ Today, **around 3 percent of all Ethereum transactions flow through Flashbots Pr
 ### How to use MEV-Share
 
 Ethereum users **connect to the Flashbots Matchmaker** via **Flashbots Protect.**
-- Users can specify what information to share about their transactions. By default, only the transaction hash and supported pool/pair addresses are shared. Currently, the Flashbots Matchmaker supports **Uniswap v2/v3, Balancer, and Curve**. All other data (calldata, logs, etc.) are hidden from searchers unless the user specifies otherwise.
+- Users can specify what information to share about their transactions. By default, only the transaction hash and supported pool/pair addresses are shared. Currently, the Flashbots Matchmaker supports sharing the pool/pair addresses on **Uniswap v2/v3, Balancer, and Curve**. All other data (calldata, logs, etc.) are hidden from searchers unless the user specifies otherwise.
 
-Searchers **listen for information about pending transactions** via the Matchmaker’s [SSE endpoint](https://mev-share.flashbots.net/). Searchers use this information to craft partial bundles, which they send to the [Flashbots Matchmaker](https://relay.flashbots.net/) via the `mev_sendBundle` endpoint.
+Searchers **listen for information about pending transactions** via the Matchmaker’s [SSE endpoint](https://mev-share.flashbots.net/). Searchers use this information to craft partial bundles, which they send via the `mev_sendBundle` API to `https://relay.flashbots.net` where it is routed to the Flashbots Matchmaker.
 - Searchers include partial transactions in their bundles because they only have access to the transaction *hash*, not the full *signature*. Searchers simply place the transaction hash in their bundle, rather than a signed transaction.
 
-The Flashbots Matchmaker then **replaces the partial transactions** (hashes) in searchers’ bundles with the original signed transactions, and sends the bundles (now fully comprised of signed transactions) to block builders.
+The Flashbots Matchmaker then **replaces the transaction hashes** in searchers’ partial bundles with the original signed transactions, and sends the bundles (now fully comprised of signed transactions) to block builders.
 
 ### How is MEV-Share different from MEV-Boost or MEV-Geth?
 
@@ -188,7 +188,7 @@ We hope this post kickstarts your curiosity about searching on MEV-Share. While 
 - [MEV-Share Beta Release](https://collective.flashbots.net/t/announcing-mev-share-beta/1650/)
 - [Flashbots MEV-Share Docs](https://docs.flashbots.net/flashbots-mev-share/overview)
 - [MEV-Share Protocol Specification](https://github.com/flashbots/mev-share)
-- https://github.com/flashbots/simple-blind-arbitrage
+- [simple-blind-arbitrage bot] https://github.com/flashbots/simple-blind-arbitrage
 - [matchmaker-ts client](https://github.com/flashbots/matchmaker-ts)
 - [Flashbots Forum](https://collective.flashbots.net/)
 - [Flashbots Discord](https://discord.gg/flashbots)
