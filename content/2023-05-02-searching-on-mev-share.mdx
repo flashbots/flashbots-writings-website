@@ -148,7 +148,7 @@ Users and searchers can also specify which builders have permission to receive t
 
 Searchers can also specify their own set of builders if they want to further restrict which builders receive their bundles. The `builders` parameter on a bundle will be the **intersection** of the lists specified by all the user(s) and searcher(s) who contributed transactions to the bundle.
 
-Wallet users specify their preferred builders in the Protect RPC URL as query params. Searchers specify builders in the [`mev_sendBundle` call](https://github.com/flashbots/mev-share/blob/main/specs/bundles/v0.1.md#privacy).
+Wallet users specify their preferred builders in the Protect RPC URL as query params. Searchers specify builders in the `privacy` parameter of their [`mev_sendBundle` call](https://github.com/flashbots/mev-share/blob/main/specs/bundles/v0.1.md#privacy).
 
 ## Searching Strategies
 
