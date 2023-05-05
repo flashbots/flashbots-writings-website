@@ -1,0 +1,16 @@
+name: Check for broken links
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 10 * * *'
+
+jobs:
+  check-for-broken-links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '16.x'
+      - run: npm install -g linkinator
+      - run: linkinator https://writings.flashbots.net/ --recurse --timeout 2000 --concurrency 100 -s 'https://hackmd.io/_uploads.*','https://www.linkedin.com.*','https://dune.com/.*','http://relay.flashbots.net/','https://pdaian.com.*','https://www.microsoft.com/en-us/research/publication/forerunner-constraint-based-speculative-transaction-execution-for-ethereum/'

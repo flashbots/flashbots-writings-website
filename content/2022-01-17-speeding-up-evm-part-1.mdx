@@ -3,7 +3,7 @@ slug: speeding-up-evm-part-1
 title: Speeding up the EVM (part 1)
 authors: [sxysun]
 tags: [optimization]
-image: /img/frontrunning-mev-crisis-1
+image: /img/frontrunning-mev-crisis-1.png
 hide_table_of_contents: false
 ---
 # Speeding up the Ethereum Virtual Machine (part 1)
@@ -60,13 +60,13 @@ The following graph (taken from the [Clockwork Finance paper](https://arxiv.org/
 
 Today, MEV opportunities are much more complex and typical validators (miners) see more than 10 MEV-emitting transactions per block.
 
-Since block building and bundle profit optimization is an [NP-complete](https://stanford.edu/~guillean/papers/flashbots-mev.pdf) problem, and we have so many MEV bundles to consider so that brute force is not realistic,[^5] it is difficult for [block builders](https://github.com/flashbots/pm/issues/98) to produce optimal full blocks efficiently (or, before the introduction of proposer builder separation, [mega](https://twitter.com/bertcmiller/status/1442548316735148037)-[bundles](https://docs-staging.flashbots.net/flashbots-auction/miners/mev-geth-spec/v04)).
+Since block building and bundle profit optimization is an [NP-complete](https://angeris.github.io/papers/flashbots-mev.pdf) problem, and we have so many MEV bundles to consider so that brute force is not realistic,[^5] it is difficult for [block builders](https://github.com/flashbots/pm/issues/98) to produce optimal full blocks efficiently (or, before the introduction of proposer builder separation, [mega](https://twitter.com/bertcmiller/status/1442548316735148037)-[bundles](https://docs.flashbots.net/flashbots-auction/releases/alpha-v0.6)).
 
 [^5]: Default mev-geth release only merges 3 bundles per block, and over the past year on average there are 5 bundles per block, which is much less than the total number of profitable bundles per block.
 
 A study on EVM parallelization can help with this increasingly challenging bundle merging problem. As essentially, _the dual problem of parallelization algorithm design is understanding how [clashes](https://hackmd.io/hvOkCzxRQu6pJCmcLVzQaQ) take place in searcher bundles_: they both require knowing a transaction's shared data access information. Moreover, a parallel EVM helps full block builders (and MEV searchers) do more simulations, therefore producing more profitable bundles (as we previously mentioned, producing the most profitable block is an NPC problem, so an important way to be competitive and push the extraction limit is to do more state-space searches, i.e. simulations[^13]).
 
-[^13]: It is true that many traditionally discussed NP hard problems have very good approximation algorithms and we probably will see the same happen in the block building game: builders try to optimize for algorithmic heuristics (or network structures so they can see more searcher bundles and have lower propagation latency) more rather than putting all the effort into pure simulation speed. 
+[^13]: It is true that many traditionally discussed NP hard problems have very good approximation algorithms and we probably will see the same happen in the block building game: builders try to optimize for algorithmic heuristics (or network structures so they can see more searcher bundles and have lower propagation latency) more rather than putting all the effort into pure simulation speed.
 
 ## A breakdown of the parallelization problem
 
@@ -136,7 +136,7 @@ Ultimately, it all depends on how refined our $\kappa$ is and how refined we wan
 
 Of course, within those four situations, there are many complexities. For example: ``{(w), (w)}``. In this situation, it is possible that we have $txn_i$ first reads $s'$ and then changes it, but the value assigned to $s'$ always equals that of $txn_j$'s assignment because of how the smart contract was written. So this effectively reduces to the ``{(r), (r)}`` case. Or this could easily go the other way and reduce to ``{(w), (r)}``,  ``{(w), (w)}``, or ``{(r), (w)}``. And even then it could be that the writer somehow doesn't change the storage's value or that the reader doesn't affect state change in the EVM (e.g. reading some value to be 2 while it was originally 1, but the only use for that storage reading was only a `require` checking if the variable is positive).
 
-The point of those examples is just to say that there are lots of specific classes of situations where our parallelization algorithm doesn't work optimally.[^11]  So this means depending on the exact structure of $\kappa$, there are lots of long-tail optimizations for us to devise vastly different parallelization algorithms for optimal performance. We will come back to exact optimizations for this in the next post. 
+The point of those examples is just to say that there are lots of specific classes of situations where our parallelization algorithm doesn't work optimally.[^11]  So this means depending on the exact structure of $\kappa$, there are lots of long-tail optimizations for us to devise vastly different parallelization algorithms for optimal performance. We will come back to exact optimizations for this in the next post.
 
 [^11]: In fact, due to [impossibility results](https://en.wikipedia.org/wiki/Rice%27s_theorem), there will always be sub-optimal situations and it is impossible to eliminate them.
 
@@ -156,4 +156,4 @@ In this post, we explored the landscape of Ethereum scalability solutions and di
 5. Erigon, https://github.com/ledgerwatch/erigon
 6. Searching for EVM Parallelism, https://www.youtube.com/watch?v=4FknO8ooqhE
 7. Rainblock, https://www.usenix.org/conference/atc21/presentation/ponnapalli
-8. Forerunner, https://www.microsoft.com/en-us/research/publication/forerunner-constraint-based-speculative-transaction-execution-for-ethereum/ -->
+-->

@@ -7,8 +7,7 @@ on:
   pull_request:
 
 jobs:
-  build:
-    if: github.event_name != 'push'
+  build-and-check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
@@ -17,14 +16,13 @@ jobs:
           node-version: '16.14'
       - name: Test Build
         env:
-          REACT_APP_TARGET_URL: "http://not-writings.flashbots.net"
-          REACT_APP_BASE_URL: "/writings/"
+          REACT_APP_TARGET_URL: "https://writings.flashbots.net/"
+          REACT_APP_BASE_URL: "/"
         run: |
-          if [ -e yarn.lock ]; then
           yarn install --frozen-lockfile
-          elif [ -e package-lock.json ]; then
-          npm ci
-          else
-          npm i
-          fi
-          npm run build
+          yarn build
+      - name: Check for broken links
+        run: |
+          cd build
+          npm install -g linkinator
+          linkinator "**/*.html" --recurse --timeout 2000 --concurrency 100 -s 'https://hackmd.io/_uploads.*','https://www.linkedin.com.*','https://dune.com/.*','http://relay.flashbots.net/','https://pdaian.com.*','https://www.microsoft.com/en-us/research/publication/forerunner-constraint-based-speculative-transaction-execution-for-ethereum/'
