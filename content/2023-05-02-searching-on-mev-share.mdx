@@ -61,7 +61,7 @@ The most obvious difference is that pending transactions are not shown in the cl
 
 MEV-Share introduces several exciting features that give searchers more control over how their bundles are handled.
 
-The bulk of the excitement is in the [`mev_sendBundle` endpoint](https://github.com/flashbots/mev-share/blob/main/specs/mev_sendBundle.md). We’ll describe its features in the following subsections. See the [mev-share](https://github.com/flashbots/mev-share) protocol repository for the canonical definition of the endpoint, and check out the [Flashbots MEV-Share docs](https://docs.flashbots.net/flashbots-mev-share/overview) for implementation-specific details from Flashbots.
+The bulk of the excitement is in the [`mev_sendBundle` endpoint](https://github.com/flashbots/mev-share/blob/main/specs/bundles/v0.1.md). We’ll describe its features in the following subsections. See the [mev-share](https://github.com/flashbots/mev-share) protocol repository for the canonical definition of the endpoint, and check out the [Flashbots MEV-Share docs](https://docs.flashbots.net/flashbots-mev-share/overview) for implementation-specific details from Flashbots.
 
 For reference, this is the current `mev_sendBundle` definition. Note that fields with a “?” are optional.
 
@@ -107,7 +107,7 @@ For reference, this is the current `mev_sendBundle` definition. Note that fields
 
 ### Pre-Inclusion Predicates
 
-Pre-inclusion predicates (specified in the [`inclusion` parameter](https://github.com/flashbots/mev-share/blob/main/specs/mev_sendBundle.md#inclusion) of `mev_sendBundle`) define requirements for a bundle to be placed in a block. They are evaluated *before* the bundle is considered for placement in a block. These parameters are specifically designed to be low-compute, allowing builders to efficiently filter for eligible bundles.
+Pre-inclusion predicates (specified in the [`inclusion` parameter](https://github.com/flashbots/mev-share/blob/main/specs/bundles/v0.1.md#inclusion) of `mev_sendBundle`) define requirements for a bundle to be placed in a block. They are evaluated *before* the bundle is considered for placement in a block. These parameters are specifically designed to be low-compute, allowing builders to efficiently filter for eligible bundles.
 
 Searchers can specify `block` and `maxBlock` to indicate the block(s) in which their bundle can land. `maxBlock` is a convenient way to specify a *range* of blocks with only one RPC request, as opposed to sending one for each block, which is the case with MEV-Boost.
 
@@ -132,7 +132,7 @@ This example specifies that the bundle should target the next 5 blocks, starting
 
 ### Post-Inclusion Predicates
 
-Post-inclusion predicates (specified in the [`validity` parameter](https://github.com/flashbots/mev-share/blob/main/specs/mev_sendBundle.md#validity) of `mev_sendBundle`) define requirements for a bundle to be included in a block on-chain. They are evaluated *after* a bundle is placed in a prospective block by a block builder. These parameters define restrictions that can only be evaluated in the context of a block, where the transactions of a bundle have been assigned a specific block position, resulting in an EVM state unique to that bundle.
+Post-inclusion predicates (specified in the [`validity` parameter](https://github.com/flashbots/mev-share/blob/main/specs/bundles/v0.1.md#validity) of `mev_sendBundle`) define requirements for a bundle to be included in a block on-chain. They are evaluated *after* a bundle is placed in a prospective block by a block builder. These parameters define restrictions that can only be evaluated in the context of a block, where the transactions of a bundle have been assigned a specific block position, resulting in an EVM state unique to that bundle.
 
 Post-inclusion predicates give searchers (and matchmakers) hard guarantees about the conditions under which their bundles are allowed to be included in a block — such as the minimum MEV **refund** a bundle’s transactions should earn, and where the refund is sent. We expect more parameters to be added in the future, to further enhance the granularity of these preferences.
 
@@ -140,7 +140,7 @@ Post-inclusion predicates give searchers (and matchmakers) hard guarantees about
 
 One of the most exciting features in MEV-Share is bundle composition, which allows searchers to share data about their own bundles and earn more MEV. **Bundles that share data can be included in other bundles**, enabling searchers to collaborate and build more complex strategies. For example, you could backrun another searcher’s backrun to clean up an inefficient trade, or take advantage of the new price incurred by the first backrun to execute another strategy. In this sense, bundle composition enables searchers to participate in collaborative block-building.
 
-To make a bundle composable, just specify hints in the [`privacy` parameter](https://github.com/flashbots/mev-share/blob/main/specs/mev_sendBundle.md#privacy) of `mev_sendBundle`. Doing so will share data about your bundle’s transactions with other searchers, allowing them to include your bundle in theirs. 
+To make a bundle composable, just specify hints in the [`privacy` parameter](https://github.com/flashbots/mev-share/blob/main/specs/bundles/v0.1.md#privacy) of `mev_sendBundle`. Doing so will share data about your bundle’s transactions with other searchers, allowing them to include your bundle in theirs. 
 
 ### Builder Selection
 
@@ -148,7 +148,7 @@ Users and searchers can also specify which builders have permission to receive t
 
 Searchers can also specify their own set of builders if they want to further restrict which builders receive their bundles. The `builders` parameter on a bundle will be the **intersection** of the lists specified by all the user(s) and searcher(s) who contributed transactions to the bundle.
 
-Wallet users specify their preferred builders in the Protect RPC URL as query params. Searchers specify builders in the [`mev_sendBundle` call](https://github.com/flashbots/mev-share/blob/main/specs/mev_sendBundle.md#privacy).
+Wallet users specify their preferred builders in the Protect RPC URL as query params. Searchers specify builders in the `privacy` parameter of their [`mev_sendBundle` call](https://github.com/flashbots/mev-share/blob/main/specs/bundles/v0.1.md#privacy).
 
 ## Searching Strategies
 
