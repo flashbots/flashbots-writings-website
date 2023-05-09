@@ -7,21 +7,21 @@
 
 .blogPostTitle {
   font-size: 2.75rem;
-  padding: 3rem 1rem 2rem;
+  line-height: 1;
+  padding: 3rem 1rem 0;
   font-family: 'CMU-Serif', Georgia, 'Times New Roman', Times, serif;
 }
 .blogPostTitle:first-child {
   padding-top: 8rem;
 }
 .blogPostTitle a {
-  font-size: 2rem;
-  /* color: #0d0d0d; */
+  font-size: 2.25rem;
 }
 .blogPostData {
   font-size: 0.9rem;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
 }
 .blogPostDetailsFull {
   flex-direction: column;

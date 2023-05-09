@@ -5,7 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-.authorCol {
-  max-width: inherit !important;
-  flex-grow: 1 !important;
+.authors {
+  justify-content: center;
+}
+.author {
+  width: fit-content;
+  margin: 0 1rem;
 }

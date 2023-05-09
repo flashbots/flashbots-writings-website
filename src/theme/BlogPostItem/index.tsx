@@ -72,6 +72,16 @@ function BlogPostItem(props: Props): JSX.Element {
 
     return (
       <header>
+        <TitleHeading className={styles.blogPostTitle} itemProp="headline">
+          {isBlogPostPage ? (
+            title
+          ) : (
+            <Link itemProp="url" to={permalink}>
+              {title}
+            </Link>
+          )}
+        </TitleHeading>
+        <BlogPostAuthors authors={authors} assets={assets} />
         <div className={clsx(styles.blogPostData, 'margin-hori--md')}>
           <span>
             <time dateTime={date} itemProp="datePublished">
@@ -87,16 +97,6 @@ function BlogPostItem(props: Props): JSX.Element {
           </span>
           <ForumWidget/>
         </div>
-        <TitleHeading className={styles.blogPostTitle} itemProp="headline">
-          {isBlogPostPage ? (
-            title
-          ) : (
-            <Link itemProp="url" to={permalink}>
-              {title}
-            </Link>
-          )}
-        </TitleHeading>
-        <BlogPostAuthors authors={authors} assets={assets} />
       </header>
     );
   };

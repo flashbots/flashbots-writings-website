@@ -14,7 +14,7 @@ import styles from './styles.module.css';
 function BlogPostAuthor({author}: Props): JSX.Element {
   const {name, title, url, imageURL} = author;
   return (
-    <div className="avatar margin-bottom--sm">
+    <div className="avatar">
       {/* {imageURL && (
         <Link className="avatar__photo-link avatar__photo" href={url}>
           <img className={styles.image} src={imageURL} alt={name} />
