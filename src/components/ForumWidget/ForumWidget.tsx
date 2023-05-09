@@ -13,7 +13,7 @@ const ForumWidget = () => {
     forum_link
   } = useFrontMatter<ForumFrontmatter>();
 
-  const [commentAmount, setCommentAmount] = useState("?")
+  const [commentAmount, setCommentAmount] = useState(-1)
 
   const fetchReplyCount = useCallback(async () => {
     const res = await axios.get(`${forum_link}.json`, {
@@ -28,7 +28,7 @@ const ForumWidget = () => {
   }, [forum_link])
 
   useEffect(() => {
-    if (forum_link && commentAmount === "?") {
+    if (forum_link && commentAmount === -1) {
       fetchReplyCount()
     }
   }, [forum_link])
@@ -42,7 +42,12 @@ const ForumWidget = () => {
           </svg>
         </div>
         <span>
-          {commentAmount} replies
+          { 
+            commentAmount > 0 && `${commentAmount} replies`
+          }
+          {
+            commentAmount <= 0 && "Leave a reply"
+          }
         </span>
       </Link> : <></>
   )
