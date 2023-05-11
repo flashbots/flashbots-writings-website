@@ -20,6 +20,8 @@ import styles from './styles.module.css';
 import TagsListInline from '@theme/TagsListInline';
 import BlogPostAuthors from '@theme/BlogPostAuthors';
 import dayjs from 'dayjs';
+import ForumWidget from "@site/src/components/ForumWidget/ForumWidget";
+import { Context } from '@theme/useFrontMatter';
 
 // Very simple pluralization: probably good enough for now
 function useReadingTimePlural() {
@@ -79,74 +81,80 @@ function BlogPostItem(props: Props): JSX.Element {
             </Link>
           )}
         </TitleHeading>
-        <div className={clsx(styles.blogPostData, 'margin-vert--md')}>
-          <time dateTime={date} itemProp="datePublished">
-            { dayjs(date).format("DD.MM.YY") }
-          </time>
-
-          {typeof readingTime !== 'undefined' && (
-            <>
-              {' · '}
-              {readingTimePlural(readingTime)}
-            </>
-          )}
-        </div>
         <BlogPostAuthors authors={authors} assets={assets} />
+        <div className={clsx(styles.blogPostData, 'margin-hori--md')}>
+          <span>
+            <time dateTime={date} itemProp="datePublished">
+              { dayjs(date).format("DD.MM.YY") }
+            </time>
+
+            {typeof readingTime !== 'undefined' && (
+              <>
+                {' · '}
+                {readingTimePlural(readingTime)}
+              </>
+            )}
+          </span>
+          <ForumWidget/>
+        </div>
       </header>
     );
   };
 
   return (
-    <article
-      className={!isBlogPostPage ? 'margin-bottom--lg' : undefined}
-      itemProp="blogPost"
-      itemScope
-      itemType="http://schema.org/BlogPosting">
-      {renderPostHeader()}
+    <Context.Provider value={props.frontMatter}>
 
-      {image && (
-        <meta itemProp="image" content={withBaseUrl(image, {absolute: true})} />
-      )}
+      <article
+        className={!isBlogPostPage ? 'margin-bottom--lg' : undefined}
+        itemProp="blogPost"
+        itemScope
+        itemType="http://schema.org/BlogPosting">
+        {renderPostHeader()}
 
-      <div className="markdown" itemProp="articleBody">
-        <MDXProvider components={MDXComponents}>{children}</MDXProvider>
-      </div>
-   
-      {/* {(tags.length > 0 || truncated) && (
-        <footer
-          className={clsx('row docusaurus-mt-lg', {
-            [styles.blogPostDetailsFull]: isBlogPostPage,
-          })}>
-          {tags.length > 0 && (
-            <div className={clsx('col', {'col--9': !isBlogPostPage})}>
-              <TagsListInline tags={tags} />
-            </div>
-          )}
+        {image && (
+          <meta itemProp="image" content={withBaseUrl(image, {absolute: true})} />
+        )}
 
-          {isBlogPostPage && editUrl && (
-            <div className="col margin-top--sm">
-              <EditThisPage editUrl={editUrl} />
-            </div>
-          )}
+        <div className="markdown" itemProp="articleBody">
+          <MDXProvider components={MDXComponents}>{children}</MDXProvider>
+        </div>
+    
+        {/* {(tags.length > 0 || truncated) && (
+          <footer
+            className={clsx('row docusaurus-mt-lg', {
+              [styles.blogPostDetailsFull]: isBlogPostPage,
+            })}>
+            {tags.length > 0 && (
+              <div className={clsx('col', {'col--9': !isBlogPostPage})}>
+                <TagsListInline tags={tags} />
+              </div>
+            )}
 
-          {!isBlogPostPage && truncated && (
-            <div className="col col--3 text--right">
-              <Link
-                to={metadata.permalink}
-                aria-label={`Read more about ${title}`}>
-                <b>
-                  <Translate
-                    id="theme.blog.post.readMore"
-                    description="The label used in blog post item excerpts to link to full blog posts">
-                    Read More
-                  </Translate>
-                </b>
-              </Link>
-            </div>
-          )}
-        </footer>
-      )} */}
-    </article>
+            {isBlogPostPage && editUrl && (
+              <div className="col margin-top--sm">
+                <EditThisPage editUrl={editUrl} />
+              </div>
+            )}
+
+            {!isBlogPostPage && truncated && (
+              <div className="col col--3 text--right">
+                <Link
+                  to={metadata.permalink}
+                  aria-label={`Read more about ${title}`}>
+                  <b>
+                    <Translate
+                      id="theme.blog.post.readMore"
+                      description="The label used in blog post item excerpts to link to full blog posts">
+                      Read More
+                    </Translate>
+                  </b>
+                </Link>
+              </div>
+            )}
+          </footer>
+        )} */}
+      </article>
+    </Context.Provider>
   );
 }
 

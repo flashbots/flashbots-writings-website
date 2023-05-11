@@ -19,9 +19,9 @@ export default function BlogPostAuthors({authors, assets}: Props): JSX.Element {
     return <></>;
   }
   return (
-    <div className="row margin-top--md margin-bottom--sm">
+    <div className={clsx('row margin-top--md margin-bottom--lg margin-left--xl margin-right--xl', styles.authors)}>
       {authors.map((author, idx) => (
-        <div className={clsx('col col--6', styles.authorCol)} key={idx}>
+        <div className={clsx('row', styles.author)} key={idx}>
           <BlogPostAuthor
             author={{
               ...author,

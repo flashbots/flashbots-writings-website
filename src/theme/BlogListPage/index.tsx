@@ -20,6 +20,7 @@ import clsx from "clsx"
 import styles from "./styles.module.scss"
 
 import Searchbar from "../../components/Searchbar/Searchbar"
+import { Context } from '@theme/useFrontMatter';
 
 const POST_PER_PAGE = 10
 
@@ -69,7 +70,6 @@ function BlogListPage(props: Props): JSX.Element {
   const { blogDescription, blogTitle, permalink } = metadata
   const isBlogOnlyMode = permalink === "/"
   const title = isBlogOnlyMode ? siteTitle : blogTitle
-
   const tags = extractTags(props)
 
   const [page, setPage] = useState(0)
@@ -91,40 +91,39 @@ function BlogListPage(props: Props): JSX.Element {
     totalPages: Math.ceil(metadata.totalCount / POST_PER_PAGE)
   }), [metadata, page])
 
-
   const [searchFilter, setSearchFilter] = useState("")
   return (
-    <BlogLayout
-      title={title}
-      description={blogDescription}
-      wrapperClassName={clsx(ThemeClassNames.wrapper.blogPages, styles.blogPageRoot)}
-      pageClassName={ThemeClassNames.page.blogListPage}
-      searchMetadatas={{
-        // assign unique search tag to exclude this page from search results!
-        tag: "blog_posts_list"
-      }}
-      // sidebar={sidebar}
-    >
-      <div className={styles.header}>
-        <h1>
-          Writings
-        </h1>
-        <p>A collection of articles and papers from Flashbots.</p>
-      </div>
-      <TagsListInline tags={tags} />
-      <Searchbar setValue={setSearchFilter}/>
-      {currentPage.filter(item => searchFilter === "" || item.content.frontMatter.title.toLowerCase().includes(searchFilter.toLowerCase())).map(({ content: BlogPostContent }) => (
-        <BlogPostItem
-          key={BlogPostContent.metadata.permalink}
-          frontMatter={BlogPostContent.frontMatter}
-          assets={BlogPostContent.assets}
-          metadata={BlogPostContent.metadata}
-          truncated={BlogPostContent.metadata.truncated}>
-          <BlogPostContent />
-        </BlogPostItem>
-      ))}
-      <BlogListPaginator metadata={settings} />
-    </BlogLayout>
+      <BlogLayout
+        title={title}
+        description={blogDescription}
+        wrapperClassName={clsx(ThemeClassNames.wrapper.blogPages, styles.blogPageRoot)}
+        pageClassName={ThemeClassNames.page.blogListPage}
+        searchMetadatas={{
+          // assign unique search tag to exclude this page from search results!
+          tag: "blog_posts_list"
+        }}
+        // sidebar={sidebar}
+      >
+        <div className={styles.header}>
+          <h1>
+            Writings
+          </h1>
+          <p>A collection of articles and papers from Flashbots.</p>
+        </div>
+        <TagsListInline tags={tags} />
+        <Searchbar setValue={setSearchFilter}/>
+        {currentPage.filter(item => searchFilter === "" || item.content.frontMatter.title.toLowerCase().includes(searchFilter.toLowerCase())).map(({ content: BlogPostContent }) => (
+          <BlogPostItem
+            key={BlogPostContent.metadata.permalink}
+            frontMatter={BlogPostContent.frontMatter}
+            assets={BlogPostContent.assets}
+            metadata={BlogPostContent.metadata}
+            truncated={BlogPostContent.metadata.truncated}>
+            <BlogPostContent />
+          </BlogPostItem>
+        ))}
+        <BlogListPaginator metadata={settings} />
+      </BlogLayout>
   )
 }
 

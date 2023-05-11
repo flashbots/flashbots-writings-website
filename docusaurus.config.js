@@ -25,6 +25,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
       crossorigin: "anonymous"
     }
   ],
+  themes: ['docusaurus-theme-frontmatter'],
   plugins: [
     'docusaurus-plugin-sass',
     [
@@ -76,7 +77,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
       hideableSidebar: true,
       metadata: [
         {name: 'twitter:card', content: 'summary_large_image'},
-        {name: 'twitter:title', content: 'Flashbots Writings'},
+        {name: 'twitter:title', content: 'Writings'},
         {name: 'twitter:description', content: 'A collection of articles and papers from Flashbots.'},
         {name: 'twitter:image', content: 'img/tw-card.jpg'}
       ],

@@ -14,6 +14,7 @@ import type {Props} from '@theme/BlogPostPage';
 import {ThemeClassNames} from '@docusaurus/theme-common';
 // import { DiscussionEmbed } from 'disqus-react';
 import styles from './styles.module.css';
+import { Context } from '@theme/useFrontMatter';
 
 function BlogPostPage(props: Props): JSX.Element {
   const {content: BlogPostContents, sidebar} = props;
@@ -33,66 +34,68 @@ function BlogPostPage(props: Props): JSX.Element {
   const image = assets.image ?? frontMatter.image;
 
   return (
-    <BlogLayout
-      wrapperClassName={ThemeClassNames.wrapper.blogPages}
-      pageClassName={ThemeClassNames.page.blogPostPage}
-      sidebar={sidebar}
-      toc={
-        !hideTableOfContents && BlogPostContents.toc
-          ? BlogPostContents.toc
-          : undefined
-      }>
-      <Seo
-        // TODO refactor needed: it's a bit annoying but Seo MUST be inside BlogLayout
-        // otherwise  default image (set by BlogLayout) would shadow the custom blog post image
-        title={title}
-        description={description}
-        keywords={keywords}
-        image={image}>
-        <meta property="og:type" content="article" />
-        <meta property="article:published_time" content={date} />
+    <Context.Provider value={props.content.frontMatter}>
+      <BlogLayout
+        wrapperClassName={ThemeClassNames.wrapper.blogPages}
+        pageClassName={ThemeClassNames.page.blogPostPage}
+        sidebar={sidebar}
+        toc={
+          !hideTableOfContents && BlogPostContents.toc
+            ? BlogPostContents.toc
+            : undefined
+        }>
+        <Seo
+          // TODO refactor needed: it's a bit annoying but Seo MUST be inside BlogLayout
+          // otherwise  default image (set by BlogLayout) would shadow the custom blog post image
+          title={title}
+          description={description}
+          keywords={keywords}
+          image={image}>
+          <meta property="og:type" content="article" />
+          <meta property="article:published_time" content={date} />
 
-        {/* TODO double check those article metas array syntaxes, see https://ogp.me/#array */}
-        {authors.some((author) => author.url) && (
-          <meta
-            property="article:author"
-            content={authors
-              .map((author) => author.url)
-              .filter(Boolean)
-              .join(',')}
-          />
+          {/* TODO double check those article metas array syntaxes, see https://ogp.me/#array */}
+          {authors.some((author) => author.url) && (
+            <meta
+              property="article:author"
+              content={authors
+                .map((author) => author.url)
+                .filter(Boolean)
+                .join(',')}
+            />
+          )}
+          {tags.length > 0 && (
+            <meta
+              property="article:tag"
+              content={tags.map((tag) => tag.label).join(',')}
+            />
+          )}
+        </Seo>
+
+        <BlogPostItem
+          frontMatter={frontMatter}
+          assets={assets}
+          metadata={metadata}
+          isBlogPostPage>
+          <BlogPostContents />
+        </BlogPostItem>
+
+        {(nextItem || prevItem) && (
+          <BlogPostPaginator nextItem={nextItem} prevItem={prevItem} />
         )}
-        {tags.length > 0 && (
-          <meta
-            property="article:tag"
-            content={tags.map((tag) => tag.label).join(',')}
+        {/* <section className={styles.comments}>
+          <DiscussionEmbed
+            shortname='flashbots-writings-1'
+            config={{
+              url: siteUrl + permalink,
+              identifier: disqusId,
+              title: title,
+            }}
           />
-        )}
-      </Seo>
+        </section> */}
 
-      <BlogPostItem
-        frontMatter={frontMatter}
-        assets={assets}
-        metadata={metadata}
-        isBlogPostPage>
-        <BlogPostContents />
-      </BlogPostItem>
-
-      {(nextItem || prevItem) && (
-        <BlogPostPaginator nextItem={nextItem} prevItem={prevItem} />
-      )}
-      {/* <section className={styles.comments}>
-        <DiscussionEmbed
-          shortname='flashbots-writings-1'
-          config={{
-            url: siteUrl + permalink,
-            identifier: disqusId,
-            title: title,
-          }}
-        />
-      </section> */}
-
-    </BlogLayout>
+      </BlogLayout>
+    </Context.Provider>
   );
 }
 
