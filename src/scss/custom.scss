@@ -141,3 +141,8 @@ h1, h2, h3, h4, h5, h6 {
     content: "";
   }
 }
+
+// Fix katex math equation overflowing text width
+.katex-display {
+  overflow-x: scroll;
+}
