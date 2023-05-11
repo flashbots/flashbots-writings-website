@@ -13,4 +13,4 @@ jobs:
         with:
           node-version: '16.x'
       - run: npm install -g linkinator
-      - run: linkinator https://writings.flashbots.net/ --recurse --timeout 5000 -s 'https://hackmd.io/_uploads.*','https://www.linkedin.com.*','https://dune.com/.*','http://relay.flashbots.net/','https://pdaian.com.*','https://www.microsoft.com/en-us/research/publication/forerunner-constraint-based-speculative-transaction-execution-for-ethereum/','https://.*etherscan.io/.*','https://.*cloudflare.com/.*','https://twitter.com.*'
+      - run: linkinator https://writings.flashbots.net/ --recurse --timeout 3000 --concurrency 20 -s 'https://hackmd.io/_uploads.*','https://www.linkedin.com.*','https://dune.com/.*','http://relay.flashbots.net/','https://pdaian.com.*','https://www.microsoft.com/en-us/research/publication/forerunner-constraint-based-speculative-transaction-execution-for-ethereum/','https://.*etherscan.io/.*','https://.*cloudflare.com/.*','https://twitter.com.*'
