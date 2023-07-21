@@ -1,0 +1,20 @@
+---
+slug: open-sourcing-flashbots-mev-share-node
+title: Open sourcing the Flashbots MEV-Share Node
+authors: [shea, vitaliy]
+tags: [mev-share]
+hide_table_of_contents: false
+---
+
+Orderflow originators should be able to see and control how their transactions are processed by other actors in the MEV supply chain. Flashbots has open sourced our implementation of a [MEV-Share Node](https://github.com/flashbots/mev-share-node) in order to bring more transparency to orderflow auctions and their guarantees.
+
+Transparency among orderflow processors enables other parties — including users, wallets, application developers, searchers, and builders — to make more educated decisions about what they integrate with and share.
+
+We encourage all teams to develop their orderflow auctions in the open, and we advise the community to work with OFAs that follow the norms of free and open source software.
+
+The Flashbots Node is one of several open source references and tools for MEV-Share, including:
+1. [Protocol specifiction](https://github.com/flashbots/mev-share)
+2. [Client library](https://github.com/flashbots/mev-share-client-ts)
+3. [Example](https://github.com/flashbots/simple-blind-arbitrage) [bots](https://github.com/flashbots/simple-limit-order-bot)
+
+Join us in building a more decentralized and transparent MEV supply chain.
