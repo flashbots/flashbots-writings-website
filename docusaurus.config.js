@@ -128,8 +128,8 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
             title: 'x',
             items: [
               {
-                label: 'Calendar',
-                href: 'https://calendar.flashbots.net/',
+                label: 'The MEV Letter',
+                href: 'https://collective.flashbots.net/tag/the-mev-letter',
               },
               {
                 label: 'Transparency reports',
@@ -147,6 +147,10 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
               {
                 label: 'YouTube',
                 href: 'https://www.youtube.com/channel/UCclbTgsnYUy3vmrptIqCmqQ',
+              },
+              {
+              label: 'Calendar',
+                href: 'https://calendar.flashbots.net',
               },
             ],
           },
