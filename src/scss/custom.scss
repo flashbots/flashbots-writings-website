@@ -146,3 +146,34 @@ h1, h2, h3, h4, h5, h6 {
 .katex-display {
   overflow-x: scroll;
 }
+
+/* Top banner */
+div[role=banner] { 
+  height: 32px;
+
+  >div {
+    /* For every banner */
+    height: 32px;
+    padding: 0px;
+    border: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* For the current banner */
+    column-gap: 8px;
+    background-image: linear-gradient(6deg, #73c2fa, 60%, #1c1c1c 100%);
+    color: white;
+
+    a {
+      font-family: "CMU-Serif";
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;  
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
