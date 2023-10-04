@@ -37,7 +37,7 @@ const ForumWidget = () => {
   }, [forum_link])
 
   return (
-    forum_link !== undefined ? 
+    forum_link ? 
       <Link to={forum_link} className={styles.root}>
         <div className={styles.icon}>
           <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
