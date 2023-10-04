@@ -24,7 +24,10 @@ const ForumWidget = () => {
     const {
       posts_count
     } = res.data
-    setCommentAmount(posts_count)
+    // Discourse topics don't have a separate count just for replies so we must
+    // get the full count of posts and subtract one, for the original post
+    // https://meta.discourse.org/t/how-to-get-accurate-reply-count-through-api/144267/2
+    setCommentAmount(posts_count - 1)
   }, [forum_link])
 
   useEffect(() => {
