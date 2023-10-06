@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from "react"
+import React, { forwardRef } from "react"
 import clsx from "clsx"
 import Translate from "@docusaurus/Translate"
 import Tag from "@theme/Tag"
@@ -13,9 +13,9 @@ import type { Props } from "@theme/TagsListInline"
 
 import styles from "./styles.module.css"
 
-export default function TagsListInline({ tags }: Props) {
+const TagsListInline = forwardRef(function TagsListInline({ tags }: Props, tagsListRef: React.RefObject<HTMLDivElement>) {
   return (
-    <>
+    <div className={styles.tagsFilter} ref={tagsListRef}>
       <span>
         <Translate
           id="theme.tags.tagsListLabel"
@@ -37,6 +37,8 @@ export default function TagsListInline({ tags }: Props) {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   )
-}
+})
+
+export default TagsListInline
