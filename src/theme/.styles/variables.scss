@@ -1,5 +1,4 @@
 @use 'sass:math';
-$desktop-max-width: 80em;
 
 // random bg seed: 2192
 $transparent: rgba(255, 255, 255, 0);
@@ -34,8 +33,6 @@ article {
 
 main {
   font-size: 1.15em !important;
-  padding-left: 4vw !important;
-  padding-right: 4vw !important;
 }
  
 .layoutDefaults_src-theme-Layout-styles-module {

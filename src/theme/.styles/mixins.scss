@@ -1,14 +1,8 @@
 @import "./variables.scss";
 
 @mixin standardLayout {
-  max-width: $desktop-max-width;
-  width: 100%;
-  padding: 0 12px;
+  padding: 0;
   margin: 0 auto;
-  @media screen and (max-width: $desktop-max-width) {
-    width: 95vw;
-    max-width: 670px;
-  }
   background-color: var(--ifm-background-surface-color);
 }
 
