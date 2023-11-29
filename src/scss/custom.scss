@@ -146,3 +146,8 @@ h1, h2, h3, h4, h5, h6 {
 .katex-display {
   overflow-x: scroll;
 }
+
+.container {
+  max-width: var(--ifm-container-width-xl);
+  width: 88vw;
+}
