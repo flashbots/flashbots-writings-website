@@ -147,6 +147,10 @@ h1, h2, h3, h4, h5, h6 {
   overflow-x: scroll;
 }
 
+.pagination-nav__item {
+  cursor: pointer;
+}
+
 .container {
   max-width: var(--ifm-container-width-xl);
   width: 88vw;

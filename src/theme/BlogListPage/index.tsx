@@ -49,11 +49,15 @@ const extractTags = ({ items }: Props) => {
   }))
 }
 
-const paginate = function (array: Array<any>[], index: number, size: number): any[] {
+const paginate = function (array: Array<any>[], index: number, size: number, tagsListRef: React.RefObject<HTMLDivElement>): any[] {
   // transform values
   index = Math.abs(index);
   index = index > 0 ? index - 1 : index;
   size = size < 1 ? 1 : size;
+
+  if (tagsListRef.current) {
+    tagsListRef.current.scrollIntoView()
+  }
   // filter
   return [...(array.filter((value, n) => {
       return (n >= (index * size)) && (n < ((index+1) * size))
@@ -71,12 +75,12 @@ function BlogListPage(props: Props): JSX.Element {
   const isBlogOnlyMode = permalink === "/"
   const title = isBlogOnlyMode ? siteTitle : blogTitle
   const tags = extractTags(props)
-
+  const tagsListRef = React.useRef(null)
   const [page, setPage] = useState(0)
 
   const currentPage = useMemo(() => {
     // @ts-ignore: Readonly prevents mutation calls
-    return paginate([...items], page + 1, POST_PER_PAGE)
+    return paginate([...items], page + 1, POST_PER_PAGE, tagsListRef)
   }, [items, page])
 
   // @ts-ignore: Destructuring doesn't ensure type fulfillment
@@ -110,7 +114,7 @@ function BlogListPage(props: Props): JSX.Element {
           </h1>
           <p>A collection of articles and papers from Flashbots.</p>
         </div>
-        <TagsListInline tags={tags} />
+        <TagsListInline tags={tags} ref={tagsListRef}/>
         <Searchbar setValue={setSearchFilter}/>
         {currentPage.filter(item => searchFilter === "" || item.content.frontMatter.title.toLowerCase().includes(searchFilter.toLowerCase())).map(({ content: BlogPostContent }) => (
           <BlogPostItem
