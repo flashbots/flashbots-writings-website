@@ -25,6 +25,7 @@ import NavbarItem, { Props as NavbarItemConfig } from "@theme/NavbarItem"
 import Logo from "@theme/Logo"
 import IconMenu from "@theme/IconMenu"
 import IconCloseThin from "@theme/IconCloseThin"
+import Banner from '../../components/Banner/Banner'
 
 import styles from "./styles.module.scss"
 
@@ -238,79 +239,82 @@ function Navbar(): JSX.Element {
   const hasSearchNavbarItem = items.some((item) => item.type === "search")
   const { leftItems, rightItems } = splitNavItemsByPosition(items)
   return (
-    <nav
-      ref={navbarRef}
-      className={clsx(styles.navRoot, "navbar", "navbar--fixed-top", {
-        "navbar--dark": style === "dark",
-        "navbar--primary": style === "primary",
-        "navbar-sidebar--show": mobileSidebar.shown,
-        [styles.navbarHideable]: hideOnScroll,
-        [styles.navbarHidden]: hideOnScroll && !isNavbarVisible
-      })}>
-      <div className={clsx(styles.navbarInner, "navbar__inner")}>
-        <div className={clsx("navbar__items", styles.fixFlex)}>
-          {(items?.length > 0 || activeDocPlugin) && (
-            <button
-              aria-label="Navigation bar toggle"
-              className="navbar__toggle clean-btn"
-              type="button"
-              tabIndex={0}
-              onClick={mobileSidebar.toggle}
-              onKeyDown={mobileSidebar.toggle}>
-              <IconMenu />
-            </button>
-          )}
-          <Logo
-            className="navbar__brand"
-            imageClassName={clsx("navbar__logo", styles.logo)}
-            titleClassName={clsx("navbar__title", styles.title)}
-          />
-        </div>
-        <div className={clsx("navbar__items navbar__items--right", styles.fixFlex, styles.navItems)}>
-        {leftItems.map((item, i) => (
-            <NavbarItem {...item}
-              key={i} />
-          ))}
-          {rightItems.map((item, i) => (
-            <NavbarItem {...item}
-              key={i} />
-          ))}
-          {!colorModeToggle.disabled && (
-            <Toggle
-              className={styles.toggle}
-              checked={colorModeToggle.isDarkTheme}
-              onChange={colorModeToggle.toggle}
+    <div className={styles.combinedNavigation}>
+      <Banner />
+      <nav
+        ref={navbarRef}
+        className={clsx(styles.navRoot, "navbar", "navbar--fixed-top", {
+          "navbar--dark": style === "dark",
+          "navbar--primary": style === "primary",
+          "navbar-sidebar--show": mobileSidebar.shown,
+          [styles.navbarHideable]: hideOnScroll,
+          [styles.navbarHidden]: hideOnScroll && !isNavbarVisible
+        })}>
+        <div className={clsx(styles.navbarInner, "navbar__inner")}>
+          <div className={clsx("navbar__items", styles.fixFlex)}>
+            {(items?.length > 0 || activeDocPlugin) && (
+              <button
+                aria-label="Navigation bar toggle"
+                className="navbar__toggle clean-btn"
+                type="button"
+                tabIndex={0}
+                onClick={mobileSidebar.toggle}
+                onKeyDown={mobileSidebar.toggle}>
+                <IconMenu />
+              </button>
+            )}
+            <Logo
+              className="navbar__brand"
+              imageClassName={clsx("navbar__logo", styles.logo)}
+              titleClassName={clsx("navbar__title", styles.title)}
             />
-          )}
-          {!hasSearchNavbarItem && <SearchBar />}
-        </div>
-        {/* <div className={
-          clsx("navbar__items", styles.fixFlex, styles.customNav)
-        }>
+          </div>
+          <div className={clsx("navbar__items navbar__items--right", styles.fixFlex, styles.navItems)}>
           {leftItems.map((item, i) => (
-            <NavbarItem {...item}
-              key={i} />
-          ))}
-          {rightItems.map((item, i) => (
-            <NavbarItem {...item}
-              key={i} />
-          ))}
-        </div> */}
-      </div>
+              <NavbarItem {...item}
+                key={i} />
+            ))}
+            {rightItems.map((item, i) => (
+              <NavbarItem {...item}
+                key={i} />
+            ))}
+            {!colorModeToggle.disabled && (
+              <Toggle
+                className={styles.toggle}
+                checked={colorModeToggle.isDarkTheme}
+                onChange={colorModeToggle.toggle}
+              />
+            )}
+            {!hasSearchNavbarItem && <SearchBar />}
+          </div>
+          {/* <div className={
+            clsx("navbar__items", styles.fixFlex, styles.customNav)
+          }>
+            {leftItems.map((item, i) => (
+              <NavbarItem {...item}
+                key={i} />
+            ))}
+            {rightItems.map((item, i) => (
+              <NavbarItem {...item}
+                key={i} />
+            ))}
+          </div> */}
+        </div>
 
-      <div
-        role="presentation"
-        className="navbar-sidebar__backdrop"
-        onClick={mobileSidebar.toggle}
-      />
-
-      {mobileSidebar.shouldRender && (
-        <NavbarMobileSidebar
-          sidebarShown={mobileSidebar.shown}
-          toggleSidebar={mobileSidebar.toggle}
+        <div
+          role="presentation"
+          className="navbar-sidebar__backdrop"
+          onClick={mobileSidebar.toggle}
         />
-      )}
-    </nav>
+
+        {mobileSidebar.shouldRender && (
+          <NavbarMobileSidebar
+            sidebarShown={mobileSidebar.shown}
+            toggleSidebar={mobileSidebar.toggle}
+          />
+        )}
+      </nav>
+    </div>
   )
 }
 

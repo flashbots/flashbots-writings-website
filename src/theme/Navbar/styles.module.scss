@@ -80,3 +80,9 @@ Hide toggle in small viewports
 .navItems {
   font-family: 'CMU-Serif', Georgia, 'Times New Roman', Times, serif;
 }
+
+.combinedNavigation {
+  position: sticky;
+  top: 0px;
+  z-index: var(--ifm-z-index-fixed);
+}
