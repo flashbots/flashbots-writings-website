@@ -116,6 +116,10 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
                 href: 'https://github.com/flashbots',
               },
               {
+                label: 'Forum',
+                href: 'https://collective.flashbots.net/',
+              },
+              {
                 label: 'Documentation',
                 href: 'https://docs.flashbots.net/',
               },
@@ -150,7 +154,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
                 href: 'https://www.youtube.com/channel/UCclbTgsnYUy3vmrptIqCmqQ',
               },
               {
-              label: 'Calendar',
+                label: 'Calendar',
                 href: 'https://calendar.flashbots.net',
               },
             ],
