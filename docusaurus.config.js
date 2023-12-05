@@ -136,6 +136,10 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
                 label: 'Transparency reports',
                 href: 'https://writings.flashbots.net/tags/transparency-report',
               },
+              {
+                label: 'Calendar',
+                href: 'https://calendar.flashbots.net',
+              },
             ],
           },
           {
@@ -146,12 +150,12 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
                 href: 'http://discord.gg/flashbots',
               },
               {
-                label: 'YouTube',
-                href: 'https://www.youtube.com/channel/UCclbTgsnYUy3vmrptIqCmqQ',
+                label: 'Forum',
+                href: 'https://collective.flashbots.net/',
               },
               {
-              label: 'Calendar',
-                href: 'https://calendar.flashbots.net',
+                label: 'YouTube',
+                href: 'https://www.youtube.com/channel/UCclbTgsnYUy3vmrptIqCmqQ',
               },
             ],
           },
