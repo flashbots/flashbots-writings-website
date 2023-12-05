@@ -116,6 +116,10 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
                 href: 'https://github.com/flashbots',
               },
               {
+                label: 'Forum',
+                href: 'https://collective.flashbots.net/',
+              },
+              {
                 label: 'Documentation',
                 href: 'https://docs.flashbots.net/',
               },
@@ -136,10 +140,6 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
                 label: 'Transparency reports',
                 href: 'https://writings.flashbots.net/tags/transparency-report',
               },
-              {
-                label: 'Calendar',
-                href: 'https://calendar.flashbots.net',
-              },
             ],
           },
           {
@@ -150,12 +150,12 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
                 href: 'http://discord.gg/flashbots',
               },
               {
-                label: 'Forum',
-                href: 'https://collective.flashbots.net/',
-              },
-              {
                 label: 'YouTube',
                 href: 'https://www.youtube.com/channel/UCclbTgsnYUy3vmrptIqCmqQ',
+              },
+              {
+                label: 'Calendar',
+                href: 'https://calendar.flashbots.net',
               },
             ],
           },
