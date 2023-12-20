@@ -58,3 +58,5 @@ Create a pull-request to the main branch. All changes to the `main` branch are a
    * Think about a good introduction paragraph, as it will be used in social previews. It will either use the first part of the post, or you can manually set it with the `description: ...` front matter.
 7. Once satisfied, create a PR. Once the PR is merged, the [Github CI system](https://github.com/flashbots/flashbots-writings-website/actions) will automatically deploy it.
 8. Check the sharing meta tags using https://www.opengraph.xyz, and update the content meta tags as needed
+
+(If you are embedding Dune Dashboards in your post, please follow the instructions here: https://github.com/flashbots/flashbots-writings-website/pull/138)
