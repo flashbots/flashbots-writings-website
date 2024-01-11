@@ -121,7 +121,7 @@ Breaking it down, that’s:
 
 To understand the complexities of a single transaction being processed, it is important to understand each of the four sequential order-by-order auctions involved, and how they coordinate a network of specialized searchers to drive price improvement for users. We will start with the first auction, which occurs at the intent level before a transaction is created, and end in an auction for a full Ethereum block.
 
-### **Solver Auction**
+### Solver auction
 
 Pioneered by Cowswap, and later adopted in different flavors by 1inch Fusion and Uniswap X, solver auctions evolved from aggregators by outsourcing the job of optimally routing a trade to a competitive market. The ability to compete and profit from only optimizing trade routing without needing to compete on frontends and liquidity products incentivized the rise of a new class of specialized searchers called “solvers”.
 
@@ -156,7 +156,7 @@ The rising adoption of solver auctions and increasingly competitive market of so
 
 Next, we will zoom into advancements that lower the barrier to entry to market make on retail order flow, a key source of liquidity in driving competitive prices for higher liquidity token pairs.
 
-### **Market Maker Auction**
+### Market maker auction
 
 Previously, the primary way to access market maker liquidity was through RFQs built by aggregators such as 1inch and 0x. But, this came with the restriction that only the aggregator’s own routing algorithm could access the liquidity of their integrated market makers. Restricting order flow access to RFQs raised the barrier to entry for market makers, who have to spend resources integrating each RFQ API to access each project’s order flow. Then, [Hashflow](https://docs.hashflow.com/hashflow/market-making/getting-started-api-v3) developed an RFQ that allowed any project or solver to tap into its market maker liquidity.
 
@@ -183,7 +183,7 @@ Market makers that integrate with solvers through Hashflow have two other benefi
 
 Ultimately, enabling market makers to quote for more pairs on more order flow sources increases competition and drives price improvement for users.
 
-### **Order flow Auction (OFA)**
+### Order flow auction
 
 Solver and market maker auctions aim to provide the most competitive quote for the user to sign. Once the end user signs the transaction, the entity responsible for transaction inclusion, such as a wallet or a solver, has the option to send the transaction to an order flow auction.
 
@@ -237,7 +237,7 @@ Order flow auctions rely on searcher competition to find more arbitrage opportun
 
 **Figure 12 and 13** show searcher profit margins clustering towards 0 over time on both order flow auctions. This further supports [observations](https://libmev.com/bundles?presetRange=%2290D%22&mevTypeLabels=%5B%22Arbitrage%22%2C%22Sandwich%22%5D&contractFilters=%5B%220x6b75d8af000000e20b7a7ddf000ba900b4009a80%22%5D) in the last few years of the tendency of atomic arbitrage markets to approach near-zero searcher profit margins as opportunities become known and competition heightens.
 
-### **Block Auction**
+### Block auction
 
 As we saw in the starting [example](https://etherscan.io/tx/0xf49a2c544b85b28f037596e0b5d6db0c10ea0986a8d89c371720d6cc62e36a43), block builder Builder0x69 was able to include five MEV-Blocker backruns for a user trading HAY for ETH: two 1inch Limit Order <\> Uniswap V3 atomic arbitrages, two Uniswap V3 <\> Uniswap V1 atomic arbitrages, and one signal arbitrage for a total refund of 0.4 ETH.
 
@@ -245,7 +245,7 @@ Retail user outcomes are aligned across auctions by the requirement that transac
 
 More broadly, we can view the block auction (also called [mev-boost auction](https://docs.flashbots.net/flashbots-mev-boost/introduction)) as a competition by block builders to merge non-conflicting searcher preferences very quickly. One year ago, Flashbots [open-sourced our production block builder](https://writings.flashbots.net/open-sourcing-the-flashbots-builder) to lower the barrier to entry and drive competition towards faster bundle merging and simulation. Today, there are [41 builders](https://www.relayscan.io/overview?t=7d) actively competing in the block auction.
 
-### **temp**
+### Decentralization and competition today
 
 We have shown how each of the four auctions lower the barrier to entry, democratize access to retail order flow, and increase competition. Together, the four auctions create a market structure where:
 
@@ -271,7 +271,7 @@ Ultimately, **Figure 14** and **15** show [global, competitive, and cooperative 
 
 With the increase in the amount of orders flowing through solver auctions, it is important to consider the impacts on defi’s market structure of the solver mechanisms we design. Frontends who control large amounts of order flow can quickly and dramatically shift market structures, and therefore also the decentralization of the network.
 
-### Defending Decentralization
+### Fighting the inertia of centralization.
 
 Contrary to atomic arbitrage which gets more competitive and decentralized over time (**Figure 12** and **13**), market making has historically been an aggressive centralizing force in both tradfi and in defi as well. The natural centralizing force is due to economies of scale and the transferability of their edge, such as in latency infrastructure and asset pricing models, from the existing markets they operate to dominate in other ones.
 
@@ -316,7 +316,7 @@ The capital and resource requirements to stake and integrate each system directl
 
 The dominance of these two market making teams across every vertical in the order flow processing network support historical observations on the propensity of financial systems to centralize over time and just how powerful economies of scale can be. Decentralization in defi is far from guaranteed, so we must be intentional about the market structure that our mechanisms create.
 
-### Not all solver mechanisms are created equal.
+### Not all mechanisms are created equal.
 
 We showed earlier in **Figure 16** that Cowswap’s solver market has a higher number of solvers and is less dominated by market makers. Despite having more order flow, which theoretically increases incentive to integrate, the distribution of power on 1inch Fusion is much more centralized.
 
@@ -374,7 +374,7 @@ In designing mechanisms that favor a handful of market makers, Uniswap X fails t
 </Caption>
 </p>
 
-### Privacy-aware Mechanism Design
+### Privacy is powerful.
 
 The information privacy of trades is particularly important in upholding the execution quality in order-by-order auctions. Even market makers themselves highlight this — in Citadel’s [comment letter](https://www.citadelsecurities.com/wp-content/uploads/sites/2/2023/03/Citadel-Securities-Response-to-the-Auctions-Proposal-Final.pdf#page=17) to SEC proposed rule 615, they list two concerns with trade privacy in order-by-order auctions and describe their adverse effects on execution quality:
 
@@ -403,19 +403,25 @@ All data and query code is open-source, and methodology, including project-speci
 
 As the number of centralized off-chain MEV systems increase, trust should be accompanied with easy and legible access to the information required to understand the properties of the mechanism and the data to analyze the execution quality received. The detail in visualization and depth in analysis of offchain solver and order flow auctions in this work is only possible with the hard work by the CoW Protocol and 1inch Labs team in publishing and maintaining Cowswap, MEV-Blocker, and 1inch Fusion data sets.
 
-## Shooting Stars
+## Shooting Stars: Defi's Potential and Opportunities
 
-![We hold the future of defi in the palm of our hands. Don’t let its diminutive size fool you — shooting stars appear tiny too. From your first trade to the last, defi shines with radiant fruit and luminous clarity. PERISHABLE, KEEP DECENTRALIZED. Nutrition Facts: 0 calories. Source: Blue Bottle Coffee](/img/posts/illuminate-the-order-flow/IMG_9965.jpg)
-
-<Caption>
+<p style={{ textAlign: "center" }}>
+  <br />
+  <img
+    src="/img/posts/illuminate-the-order-flow/IMG_9965.jpg"
+    alt="We hold the future of defi in the palm of our hands. Don’t let its diminutive size fool you — shooting stars appear tiny too. From your first trade to the last, defi shines with radiant fruit and luminous clarity. PERISHABLE, KEEP DECENTRALIZED. Nutrition Facts: 0 calories. Source: Blue Bottle Coffee."
+    style={{ width: "70%" }}
+  />
+  <Caption>
   We hold the future of defi in the palm of our hands. Don’t let its diminutive
   size fool you — shooting stars appear tiny too. From your first trade to the
   last, defi shines with radiant fruit and luminous clarity. PERISHABLE, KEEP
-  DECENTRALIZED. Nutrition Facts: 0 calories. Source:{" "}
+  DECENTRALIZED. Source:{" "}
   <a href="https://bluebottlecoffee.com/us/eng">Blue Bottle</a> Coffee
 </Caption>
+</p>
 
-Having illuminated and compared the defi and tradfi landscapes, several salient points emerge. The permissionless and decentralized genesis of defi has created a unique orderflow processing landscape with the potential to address known tradfi market failures. Despite this opportunity, a number of key challenges exist to realize the true potential of defi in achieving its goals of robustness and decentralization.
+Having illuminated and compared the defi and tradfi landscapes, several salient points emerge. The permissionless and decentralized genesis of defi has created a unique orderflow processing landscape with the potential to address known tradfi market failures. Despite this opportunity, a number of key challenges exist to realize the true potential of defi in achieving its goals of robustness and decentralization. 
 
 **MEV mechanism designers looking to disrupt MEV mechanism designers**, think carefully about the state of the market, and about how your actions and products affect the ability of this market to reach its full potential.
 
