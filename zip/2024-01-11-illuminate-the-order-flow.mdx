@@ -27,7 +27,7 @@ In this post, we cast light on the state of defi order and transaction flow toda
 
 We will argue that the SEC, Citadel, and Flashbots (among many others) have been perfectly aligned on their identification of market failures and desired market outcomes from the beginning. We will outline a number of problems identified by tradfi market participants themselves with the payment for order flow ("PFOF") landscape, and argue that defi has a meaningful chance of addressing these market failures directly.
 
-We will show that defi's order flow landscape represents a nascent and fragile opportunity, showcasing a decentralized version of a robust order flow processing network using centralized infrastructure. We will argue that permissionless networks of searchers and liquidity provision can create competitive order execution, escaping tradfi’s reliance on a handful of sophisticated market makers to do so. We will argue that what defi needs to truly fulfill its vision and promise is to maintain the existing decentralization in this market, while also increasing competition and the ability to decentralize infrastructure at every layer of the stack.
+We will show that defi's order flow landscape represents a nascent and fragile opportunity, showcasing a decentralized version of a robust order flow processing network using centralized infrastructure. We will argue that with the right mechanisms, permissionless networks of searchers and liquidity provision can create competitive order execution, escaping tradfi’s reliance on a handful of sophisticated market makers to do so. We will argue that what defi needs to truly fulfill its vision and promise is to maintain the existing decentralization in this market, while also increasing competition and the ability to decentralize infrastructure at every layer of the stack.
 
 In doing so, crypto seeks to take one step towards the primitives of a fair, robust, antifragile, and decentralized financial system.
 
@@ -101,7 +101,7 @@ The data we will present is collected from the Ethereum blockchain on November 1
 
 **Figure 6.** November volume in different token pair categories by Ethereum frontends. ETH/BTC represents ETH and BTC paired with USDC/USDT/DAI. Peg includes popular stablecoin pairs such as USDC/USDT and pegged pairs such as stETH/WETH.[²](#superscript-2) Long-tail includes all other pairs.
 
-**Figures 5 and 6** show that different frontends cater to different user profiles. Telegram bot users trade in smaller sizes up to $10k almost exclusively on long-tail tokens they are sniping. Aggregators and solver auctions such as 1inch API and 1inch Fusion, Cowswap, and Uniswap X are preferred by traders trading larger sizes from 10k to above $1M on ETH/BTC and pegged token pairs.
+**Figures 5 and 6** show that different frontends cater to different user profiles. Telegram bot users trade in smaller sizes up to $10k almost exclusively on long-tail tokens they are sniping. Aggregators and solver systems such as 1inch API and 1inch Fusion, Cowswap, and Uniswap X are preferred by traders trading larger sizes from 10k to above $1M on ETH/BTC and pegged token pairs.
 
 More generally, **Figure 6** shows that out of $14B in retail trade volume on Ethereum in November 2023, 50% is trading long-tail token pairs on Ethereum, 23% is trading ETH/BTC token pairs, and 27% is trading pegged token pairs.
 
@@ -111,11 +111,11 @@ On October 13, 2023, [kyoro.eth](https://twitter.com/kyotometa) [sold](https:/
 
 Breaking it down, that’s:
 
-1 solver auction + 12 Cowswap solvers + ≥ 1 aggregator + ≥ 3 decentralized exchanges
+1 solver system + 12 Cowswap solvers + ≥ 1 aggregator + ≥ 3 decentralized exchanges
 
-≥ 3 passive liquidity providers of HAY-WETH + 1 order flow auction
+- ≥ 3 passive liquidity providers of HAY-WETH + 1 order flow auction
 
-≥ 4 atomic searchers + ≥ 1 signal searcher + 2 1inch limit order users + 7 block builders
+- ≥ 4 atomic searchers + ≥ 1 signal searcher + 2 1inch limit order users + 7 block builders
 
 ≥ 35 entities involved in helping kyoro.eth get a great price on their trade!
 
@@ -123,7 +123,7 @@ To understand the complexities of a single transaction being processed, it is im
 
 ### **Solver Auction**
 
-Pioneered by Cowswap, and later adopted in different flavors by 1inch Fusion and Uniswap X, solver auctions evolved from aggregators by outsourcing the job of optimally routing a trade to a competitive market. The ability to compete and profit from only optimizing trade routing without needing to compete on frontends and liquidity products incentivized the rise of a new class of specialized searchers called “solvers”.
+Pioneered by Cowswap, and later adopted in different flavors by 1inch Fusion and Uniswap X, solver systems evolved from aggregators by outsourcing the job of optimally routing a trade to a competitive market. The ability to compete and profit from only optimizing trade routing without needing to compete on frontends and liquidity products incentivized the rise of a new class of specialized searchers called “solvers”.
 
 ![Interact with this sankey diagram on [orderflow.art](https://orderflow.art/?isOrderflow=false&metaAggregator=Uniswap+X&metaAggregator=Cowswap&metaAggregator=1inch+Fusion&solver=1inch+Labs&solver=The+T&solver=Seawise&solver=Arctic+Bastion&solver=PropellerSwap&solver=Gnosis_ParaSwap&solver=Laertes&solver=Barter&solver=Quasilabs&solver=Seasolver&solver=Otex&solver=Gnosis_1inch&solver=Copium_Capital&solver=Enso&solver=Gnosis_0x&solver=Rizzolver&solver=PLM&solver=0x51c...06c&solver=0x730...5e8&solver=SCP&solver=Wintermute&solver=0x328...8bb&solver=Airswap+Router&solver=1inch+Router&timeframe=All&startTime=1698811200&endTime=1701363599).](/img/posts/illuminate-the-order-flow/Screenshot_2023-12-29_at_7.06.40_PM.png)
 
@@ -135,11 +135,9 @@ Pioneered by Cowswap, and later adopted in different flavors by 1inch Fusion and
   .
 </Caption>
 
-**Figure 7.** A sankey diagram that illustrates where solvers source liquidity for transactions that were sent to solver auctions Cowswap, 1inch Fusion, and Uniswap X. Entity height reflects the trade volume of landed transactions that moved through each entity in the month of November 2023. Transaction flow: frontend → solver auction → solver → liquidity aggregator → liquidity source.
+**Figure 7.** A sankey diagram that illustrates where solvers source liquidity for transactions that were sent to solver systems Cowswap, 1inch Fusion, and Uniswap X. Entity height reflects the trade volume of landed transactions that moved through each entity in the month of November 2023. Transaction flow: frontend → solver system → solver → liquidity aggregator → liquidity source.
 
-Competing on routing trades involves integrating many liquidity sources and splitting the trade amounts optimally across those liquidity sources. **Figure 7** shows the three solver auctions together have 22 solvers that accessed over 33 liquidity sources. **Figure 7** also shows solvers source liquidity across both automated market makers (AMM), most notably Uniswap V3, and private market makers (PMM), most notably Wintermute and SCP.
-
-In contrast to tradfi’s NBBO requirement for price improvement, which fails to account for optimal trade routing and misses private liquidity, defi’s version of an NBBO in solver systems is maintained by a competitive market of 22 solvers optimizing trade routes across [hundreds of public and private liquidity sources](https://help.1inch.io/en/articles/4585125-what-are-liquidity-sources-and-how-many-of-them-does-1inch-aggregate-from#h_cb89899f48).
+Competing on routing trades involves integrating many liquidity sources and splitting the trade amounts optimally across those liquidity sources. **Figure 7** shows the three solver systems together have 22 solvers that accessed over 33 liquidity sources. **Figure 7** also shows solvers source liquidity across both automated market makers (AMM), most notably Uniswap V3, and private market makers (PMM), most notably Wintermute and SCP.
 
 **Figure 7** also shows that $14M of Cowswap user orders were matched with 1inch user limit orders in landed transactions in November 2023. To win the solver auction, 1inch limit orders must have provided a better price than private market makers, supporting the SEC’s stance in proposed rule 615 that expanding market access to fill retail order flow can drive better user outcomes.
 
@@ -148,11 +146,11 @@ In contrast to tradfi’s NBBO requirement for price improvement, which fails to
   aspectRatio="16/9"
 />
 
-**Figure 8.** Retail trading volume over the last 3 years by frontend category: DEX Frontends, Telegram Bots, in-app Wallet Swaps, Aggregator API Integrators, and Solver Auctions. Solver auctions include Cowswap, 1inch Fusion, and Uniswap X.
+**Figure 8.** Retail trading volume over the last 3 years by frontend category: DEX Frontends, Telegram Bots, in-app Wallet Swaps, Aggregator API Integrators, and Solver Systems. Solver systems include Cowswap, 1inch Fusion, and Uniswap X.
 
-**Figure 8** shows the growth in percentage of order flow volume moving through solver auctions over time. In November 2023, $3.67B (26.3%) in retail trading volume moved through one of the three major solver auctions.
+**Figure 8** shows the growth in percentage of order flow volume moving through solver systems over time. In November 2023, $3.67B (26.3%) in retail trading volume moved through one of the three major solver systems.
 
-The rising adoption of solver auctions and increasingly competitive market of solvers also lowers the barrier to adoption for innovative new liquidity projects. Solvers are directly incentivized to integrate as many liquidity sources as possible in order to provide more competitive quotes and win the solver auction. So, for the upcoming wave of Uniswap V4 hooks, developers will only need one of thirteen Cowswap solvers to integrate to compete to fill $1.5B in volume (10.5% of Ethereum’s retail order flow from **Figure 2**). As solvers sophisticate over time, defi will also be able to support higher ceilings of complexity for liquidity mechanisms that routers today cannot support.
+The growing adoption of solver systems and increasingly competitive market of solvers also lowers the barrier to adoption for innovative new liquidity projects. Solvers are directly incentivized to integrate as many liquidity sources as possible in order to provide more competitive quotes and win the solver auction. So, for the upcoming wave of Uniswap V4 hooks, developers will only need one of thirteen Cowswap solvers to integrate to compete to fill $1.5B in volume (10.5% of Ethereum’s retail order flow from **Figure 2**). As solvers sophisticate over time, defi will also be able to support higher ceilings of complexity for liquidity mechanisms that routers today cannot support.
 
 Next, we will zoom into advancements that lower the barrier to entry to market make on retail order flow, a key source of liquidity in driving competitive prices for higher liquidity token pairs.
 
@@ -257,7 +255,7 @@ Ultimately, the four sequential auctions showcase a decentralized and cooperativ
 
 ![Screenshot 2023-12-27 at 8.21.32 AM.png](/img/posts/illuminate-the-order-flow/Screenshot_2023-12-27_at_8.21.32_AM.png)
 
-**Figure 14.** _Retail Trade Volume_ A sankey graph that displays the flow of transactions from frontend, solver auctions, solvers, order flow auctions, and finally to builders for inclusion.[⁴](#superscript-4)
+**Figure 14.** _Retail Trade Volume_ A \*\*sankey graph that displays the flow of transactions from frontend, solver systems, solvers, order flow auctions, and finally to builders for inclusion.[⁴](#superscript-4)
 
 ![Screenshot 2023-12-27 at 8.23.00 AM.png](/img/posts/illuminate-the-order-flow/Screenshot_2023-12-27_at_8.23.00_AM.png)
 
@@ -269,7 +267,7 @@ Ultimately, **Figure 14** and **15** show [global, competitive, and cooperative 
 
 ## There’s more work to be done.
 
-With the increase in the amount of orders flowing through solver auctions, it is important to consider the impacts on defi’s market structure of the solver mechanisms we design. Frontends who control large amounts of order flow can quickly and dramatically shift market structures, and therefore also the decentralization of the network.
+With the increase in the amount of orders flowing through solver systems, it is important to consider the impacts on defi’s market structure of the solver mechanisms we design. Frontends who control large amounts of order flow can quickly and dramatically shift market structures, and therefore also the decentralization of the network.
 
 ### Defending Decentralization
 
@@ -289,7 +287,7 @@ Contrary to atomic arbitrage which gets more competitive and decentralized over 
 
 **Figure 16** shows that market makers SCP (PLM on Cowswap) and Wintermute (Rizzolver on 1inch Fusion) fill over 75% of ETH/BTC trade volume on the top four order flow sources on Ethereum: Uniswap, 1inch, Metamask, and Cowswap. Cowswap is the exception of the four, where SCP’s Solver PLM only fills 40% _directly_, which could be due to more sophisticated solver competition on Cowswap.
 
-To understand the relationship between volume and profit, we estimate market making profits on solver auctions through direct integration as solvers and indirect integration via Hashflow for ETH-USDC, the most popular trading pair on Ethereum, and LINK-USDC, the most popular trading pair outside of ETHBTC and pegged token pairs. Profits are estimated using markouts against centralized spot exchange Binance, often considered crypto’s venue of price discovery where the [fair value](https://frontier.tech/a-tale-of-two-arbitrages) of high liquidity assets can be estimated.
+To understand the relationship between volume and profit, we estimate market making profits on solver systems through direct integration as solvers and indirect integration via Hashflow for ETH-USDC, the most popular trading pair on Ethereum, and LINK-USDC, the most popular trading pair outside of ETHBTC and pegged token pairs. Profits are estimated using markouts against centralized spot exchange Binance, often considered crypto’s venue of price discovery where the [fair value](https://frontier.tech/a-tale-of-two-arbitrages) of high liquidity assets can be estimated.
 
 <DuneDashboard
   source="https://dune.com/embeds/3314013/5550314"
@@ -311,10 +309,23 @@ Cowswap is the only order flow source where it is possible to compare the profit
 
 1. _To bypass fees charged by intermediaries:_ Hashflow and RFQs charge market makers a “dynamic fee” for filling user trades through their API. Market makers are charged on a per-order basis, such as 30 bps on risk trades (eg USDC-WETH) and 10 bps on stables (eg USDC-USDT), but charge lower fees from market makers if it would change an order’s route from sourcing AMM liquidity to PMM liquidity. Effectively, indirectly integrated market makers have to quote at least 10-30 bps better to compete with directly integrated market makers.
 2. _To obtain control over the execution (known as last look):_ In Uniswap X, directly integrated market makers can choose not to fill user orders when the price moves against them. But, in the case of indirect integration, a separate entity controls the execution of the trade, forcing market makers to quote wider, or less competitively to account for cases when the price changes against them.
+3. _To fill the most profitable leg of an order_: Filling user trades directly as a solver, as opposed to backrunning the transaction on an OFA is more efficient and gets a better price.
 
 The capital and resource requirements to stake and integrate each system directly to access such market making advantages can only be afforded by large teams such as SCP and Wintermute. Similarly, running a block builder also [creates](https://arxiv.org/pdf/2311.09083.pdf) market making advantages that can only be afforded by SCP and Wintermute. Named beaverbuild and rsync builder respectively, SCP and Wintermute run the two most dominant block builders on Ethereum, who together built over [66% of MEV-Boost blocks](https://mevboost.pics/) in the first week of January 2024.
 
 The dominance of these two market making teams across every vertical in the order flow processing network support historical observations on the propensity of financial systems to centralize over time and just how powerful economies of scale can be. Decentralization in defi is far from guaranteed, so we must be intentional about the market structure that our mechanisms create.
+
+<p style={{ textAlign: "center" }}>
+  <br />
+  <img
+    src="/img/posts/illuminate-the-order-flow/Screenshot_2023-12-19_at_8.49.32_PM.png"
+    alt="You see this world? There’s more work to be done."
+    style={{ width: "50%" }}
+  />
+  <Caption>
+    <em>You see this world? There’s more work to be done.</em>
+  </Caption>
+</p>
 
 ### Not all solver mechanisms are created equal.
 
@@ -354,15 +365,9 @@ We show in earlier sections the role that democratized access to order flow has 
 
 In designing mechanisms that favor a handful of market makers, Uniswap X fails to leverage the price improvement that a permissionless network of searchers can provide on both high and lower liquidity token symbols. Instead, Uniswap creates a system that biases towards the risk preferences of incumbents, ultimately underserving defi’s, and Uniswap’s own, core userbase, who itself represents $2.8B (40% in **Figure 6**) of Ethereum’s retail long-tail token trading volume in November 2023.
 
-<p style={{ textAlign: "center" }}>
-  <br />
-  <img
-    src="/img/posts/illuminate-the-order-flow/rev-1-BAR-TT3-0050_High_Res_JPEG.avif"
-    alt="YNO, Uniswap, you have to pick decentralization, I just gave you a choice so
-    you can feel some sense of control. You have to fix the rip yourself."
-    style={{ width: "70%" }}
-  />
-  <Caption>
+![NO, Uniswap, you have to pick decentralization, I just gave you a choice so you can feel some sense of control. You have to fix the rip yourself._ Source: [https://www.youtube.com/watch?v=jpZo16cw46I](https://www.youtube.com/watch?v=jpZo16cw46I)](/img/posts/illuminate-the-order-flow/rev-1-BAR-TT3-0050_High_Res_JPEG.avif)
+
+<Caption>
   <em>
     NO, Uniswap, you have to pick decentralization, I just gave you a choice so
     you can feel some sense of control. You have to fix the rip yourself.
@@ -372,7 +377,6 @@ In designing mechanisms that favor a handful of market makers, Uniswap X fails t
     https://www.youtube.com/watch?v=jpZo16cw46I
   </a>
 </Caption>
-</p>
 
 ### Privacy-aware Mechanism Design
 
@@ -381,9 +385,9 @@ The information privacy of trades is particularly important in upholding the exe
 1. _trading ahead:_ “(Auction messages) would include detailed information regarding the characteristics of the retail order, including the stock, the direction (buy or sell), and the auction limit price. As a result, all market participants would be aware of the relevant characteristics of the retail order prior to that order actually being executed, and would be freely permitted to trade ahead of the retail order on the basis of that information _even though the execution of the retail order is not certain_. The Proposal thus creates a mechanism that effectively licenses and encourages others to trade ahead of retail orders. Information leakage significantly increases the likelihood that prices move against the retail investor while the order is delayed for 100 to 300 milliseconds in the auction (particularly for larger orders and orders in less liquid stocks).”
 2. _failed auctions:_ “The auction mechanism can fail to result in an execution, in which case the retail order would need to be routed to an exchange or another auction. In the event this occurs, one should expect the retail investor to receive far worse execution quality, as the market is fully aware of the auction failure and will take that into account (as well as the price impact from the information leakage and trading ahead that has occurred) when determining whether, and at what price, to fill the order … Retail orders in less liquid stocks should be expected to receive worse execution quality as failed auctions would be more impactful for these orders.”
 
-Citadel recognizes that trading ahead and failed auctions is particularly impactful for large trades and long-tail trading. In defi, solver auction frontends are the most popular venues for both user profiles. Uniswap, Cowswap, and 1inch make up $3.8B (40%, 10%, and 5% in **Figure 6**) in Ethereum’s retail long-tail token trading volume in November 2023. And Uniswap, Cowswap, and 1inch Fusion and API frontends processed 154, 189, and 752 trades over $1M, together representing 75% of the retail order flow market, in November 2023 (**Figure 5**).
+Citadel recognizes that trading ahead and failed auctions is particularly impactful for large trades and long-tail trading. In defi, solver system frontends are the most popular venues for both user profiles. Uniswap, Cowswap, and 1inch make up $3.8B (40%, 10%, and 5% in **Figure 6**) in Ethereum’s retail long-tail token trading volume in November 2023. And Uniswap, Cowswap, and 1inch Fusion and API frontends processed 154, 189, and 752 trades over $1M, together representing 75% of the retail order flow market, in November 2023 (**Figure 5**).
 
-Yet, solver auction mechanisms today fail to address these significant information shortcomings, which are particularly impactful to protecting the execution quality of their core userbases.
+Yet, solver system mechanisms today fail to address these significant information shortcomings, which are particularly impactful to protecting the execution quality of their core userbases.
 
 Cowswap and 1inch Fusion are designed as open limit order books, where anyone can see the token pair, the direction (buy or sell), and the limit price of user orders. The realized adverse execution effects of on-chain open limit order books are currently under-researched, but probabilistic trading ahead as described by Citadel is very much possible today.
 
