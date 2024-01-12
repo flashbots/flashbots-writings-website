@@ -3,8 +3,9 @@ slug: illuminate-the-order-flow
 title: Illuminating Ethereum's Order Flow Landscape
 authors: [angela]
 tags: [data, order-flow]
+image: /img/posts/illuminate-the-order-flow/orderflow-art-title.png
 hide_table_of_contents: false
-description: PLACEHOLDER
+description: In this post, we cast light on the state of defi order and transaction flow today. We will show how defi has distinguished itself from the traditional order flow market, and discuss the challenges to achieving our shared dream of systems that remain decentralized while maximally benefiting the user.
 ---
 
 import DuneDashboard from "@site/src/components/DuneDashboard/DuneDashboard";
@@ -27,9 +28,9 @@ In this post, we cast light on the state of defi order and transaction flow toda
 
 We will argue that the SEC, Citadel, and Flashbots (among many others) have been perfectly aligned on their identification of market failures and desired market outcomes from the beginning. We will outline a number of problems identified by tradfi market participants themselves with the payment for order flow ("PFOF") landscape, and argue that defi has a meaningful chance of addressing these market failures directly.
 
-We will show that defi's order flow landscape represents a nascent and fragile opportunity, showcasing a decentralized version of a robust order flow processing network using centralized infrastructure. We will argue that permissionless networks of searchers and liquidity provision can create competitive order execution, escaping tradfi’s reliance on a handful of sophisticated market makers to do so. We will argue that what defi needs to truly fulfill its vision and promise is to maintain the existing decentralization in this market, while also increasing competition and the ability to decentralize infrastructure at every layer of the stack.
+We will show that defi's order flow landscape represents a nascent and fragile opportunity, showcasing a decentralized version of a robust order flow processing network using centralized infrastructure. We will argue that permissionless networks of searchers and liquidity provision can create competitive order execution, escaping tradfi’s reliance on a handful of sophisticated market makers. We will argue that what defi needs to truly fulfill its vision and promise is to maintain the existing decentralization in this market, while also increasing competition and the ability to decentralize infrastructure at every layer of the stack.
 
-In doing so, crypto seeks to take one step towards the primitives of a fair, robust, antifragile, and decentralized financial system.
+In doing so, crypto seeks to take one step towards the primitives of a fair, robust, anti-fragile, and decentralized financial system.
 
 ## SEC Proposed Rule 615: The Enchanting Prelude to Defi
 
@@ -125,7 +126,7 @@ To understand the complexities of a single transaction being processed, it is im
 
 Pioneered by Cowswap, and later adopted in different flavors by 1inch Fusion and Uniswap X, solver auctions evolved from aggregators by outsourcing the job of optimally routing a trade to a competitive market. The ability to compete and profit from only optimizing trade routing without needing to compete on frontends and liquidity products incentivized the rise of a new class of specialized searchers called “solvers”.
 
-![Interact with this sankey diagram on [orderflow.art](https://orderflow.art/?isOrderflow=false&metaAggregator=Uniswap+X&metaAggregator=Cowswap&metaAggregator=1inch+Fusion&solver=1inch+Labs&solver=The+T&solver=Seawise&solver=Arctic+Bastion&solver=PropellerSwap&solver=Gnosis_ParaSwap&solver=Laertes&solver=Barter&solver=Quasilabs&solver=Seasolver&solver=Otex&solver=Gnosis_1inch&solver=Copium_Capital&solver=Enso&solver=Gnosis_0x&solver=Rizzolver&solver=PLM&solver=0x51c...06c&solver=0x730...5e8&solver=SCP&solver=Wintermute&solver=0x328...8bb&solver=Airswap+Router&solver=1inch+Router&timeframe=All&startTime=1698811200&endTime=1701363599).](/img/posts/illuminate-the-order-flow/Screenshot_2023-12-29_at_7.06.40_PM.png)
+![Interact with this sankey diagram on [orderflow.art](https://orderflow.art/?isOrderflow=false&metaAggregator=Uniswap+X&metaAggregator=Cowswap&metaAggregator=1inch+Fusion&solver=1inch+Labs&solver=The+T&solver=Seawise&solver=Arctic+Bastion&solver=PropellerSwap&solver=Gnosis_ParaSwap&solver=Laertes&solver=Barter&solver=Quasilabs&solver=Seasolver&solver=Otex&solver=Gnosis_1inch&solver=Copium_Capital&solver=Enso&solver=Gnosis_0x&solver=Rizzolver&solver=PLM&solver=0x51c...06c&solver=0x730...5e8&solver=SCP&solver=Wintermute&solver=0x328...8bb&solver=Airswap+Router&solver=1inch+Router&timeframe=All&startTime=1698811200&endTime=1701363599).](/img/posts/illuminate-the-order-flow/solver-auction-sankey.png)
 
 <Caption>
   Interact with this sankey diagram on{" "}
@@ -139,7 +140,7 @@ Pioneered by Cowswap, and later adopted in different flavors by 1inch Fusion and
 
 Competing on routing trades involves integrating many liquidity sources and splitting the trade amounts optimally across those liquidity sources. **Figure 7** shows the three solver auctions together have 22 solvers that accessed over 33 liquidity sources. **Figure 7** also shows solvers source liquidity across both automated market makers (AMM), most notably Uniswap V3, and private market makers (PMM), most notably Wintermute and SCP.
 
-In contrast to tradfi’s NBBO requirement for price improvement, which fails to account for optimal trade routing and misses private liquidity, defi’s version of an NBBO in solver systems is maintained by a competitive market of 22 solvers optimizing trade routes across [hundreds of public and private liquidity sources](https://help.1inch.io/en/articles/4585125-what-are-liquidity-sources-and-how-many-of-them-does-1inch-aggregate-from#h_cb89899f48).
+In contrast to tradfi’s NBBO requirement for price improvement, which fails to account for optimal trade routing and misses private liquidity, defi’s version of an NBBO in solver auctions is maintained by a competitive market of 22 solvers optimizing trade routes across [hundreds of public and private liquidity sources](https://help.1inch.io/en/articles/4585125-what-are-liquidity-sources-and-how-many-of-them-does-1inch-aggregate-from#h_cb89899f48).
 
 **Figure 7** also shows that $14M of Cowswap user orders were matched with 1inch user limit orders in landed transactions in November 2023. To win the solver auction, 1inch limit orders must have provided a better price than private market makers, supporting the SEC’s stance in proposed rule 615 that expanding market access to fill retail order flow can drive better user outcomes.
 
@@ -160,7 +161,7 @@ Next, we will zoom into advancements that lower the barrier to entry to market m
 
 Previously, the primary way to access market maker liquidity was through RFQs built by aggregators such as 1inch and 0x. But, this came with the restriction that only the aggregator’s own routing algorithm could access the liquidity of their integrated market makers. Restricting order flow access to RFQs raised the barrier to entry for market makers, who have to spend resources integrating each RFQ API to access each project’s order flow. Then, [Hashflow](https://docs.hashflow.com/hashflow/market-making/getting-started-api-v3) developed an RFQ that allowed any project or solver to tap into its market maker liquidity.
 
-![Interact with this sankey diagram on [orderflow.art](https://orderflow.art/?isOrderflow=false&ofa=1inch+RFQ&ofa=0x+RFQ&ofa=Other+RFQ&ofa=Airswap+RFQ&ofa=Hashflow&timeframe=All&startTime=1698811200&endTime=1701363599).](/img/posts/illuminate-the-order-flow/Screenshot_2023-12-30_at_3.34.04_PM.png)
+![Interact with this sankey diagram on [orderflow.art](https://orderflow.art/?isOrderflow=false&ofa=1inch+RFQ&ofa=0x+RFQ&ofa=Other+RFQ&ofa=Airswap+RFQ&ofa=Hashflow&timeframe=All&startTime=1698811200&endTime=1701363599).](/img/posts/illuminate-the-order-flow/market-maker-auction-sankey.png)
 
 <Caption>
   Interact with this sankey diagram on{" "}
@@ -193,8 +194,8 @@ Before order flow auctions, increased competition between searchers in [the bund
 
 OFAs [MEV-Blocker](https://mevblocker.io/) and [Flashbots Protect](https://docs.flashbots.net/flashbots-protect/mev-share) (running the [MEV-Share](https://docs.flashbots.net/flashbots-protect/mev-share) OFA protocol) have published transactions seen at their RPC endpoints on [Dune](https://dune.com/home), which enables us to observe who the primary users of OFAs are and evaluate the competitiveness of their price quotes.
 
-<DuneDashboard source="https://dune.com/embeds/3165485/5283009" />
-<DuneDashboard source="https://dune.com/embeds/3165471/5282982" />
+<DuneDashboard source="https://dune.com/embeds/3348226/5611115" />
+<DuneDashboard source="https://dune.com/embeds/3348225/5611114" />
 
 **Figure 10.** Number of retail order flow transactions received at MEV-Blocker and Flashbots Protect RPC endpoints, categorized by project. Both represents transactions received by both OFAs.
 
@@ -245,7 +246,7 @@ Retail user outcomes are aligned across auctions by the requirement that transac
 
 More broadly, we can view the block auction (also called [mev-boost auction](https://docs.flashbots.net/flashbots-mev-boost/introduction)) as a competition by block builders to merge non-conflicting searcher preferences very quickly. One year ago, Flashbots [open-sourced our production block builder](https://writings.flashbots.net/open-sourcing-the-flashbots-builder) to lower the barrier to entry and drive competition towards faster bundle merging and simulation. Today, there are [41 builders](https://www.relayscan.io/overview?t=7d) actively competing in the block auction.
 
-### Decentralization and competition today
+### Decentralization and competition
 
 We have shown how each of the four auctions lower the barrier to entry, democratize access to retail order flow, and increase competition. Together, the four auctions create a market structure where:
 
@@ -255,17 +256,33 @@ We have shown how each of the four auctions lower the barrier to entry, democrat
 
 Ultimately, the four sequential auctions showcase a decentralized and cooperative process of arriving at global consensus on a financial state. We use sankey diagrams to visualize this process for November 2023.
 
-![Screenshot 2023-12-27 at 8.21.32 AM.png](/img/posts/illuminate-the-order-flow/Screenshot_2023-12-27_at_8.21.32_AM.png)
+![Screenshot 2023-12-27 at 8.21.32 AM.png](/img/posts/illuminate-the-order-flow/retail-trade-volume-sankey-nov-2023.png)
 
-**Figure 14.** _Retail Trade Volume_ A sankey graph that displays the flow of transactions from frontend, solver auctions, solvers, order flow auctions, and finally to builders for inclusion.[⁴](#superscript-4)
+<Caption>
+  Interact with this sankey diagram on{" "}
+  <a href="https://orderflow.art/?isOrderflow=true&endTime=1701363599">
+    orderflow.art
+  </a>
+  .
+</Caption>
 
-![Screenshot 2023-12-27 at 8.23.00 AM.png](/img/posts/illuminate-the-order-flow/Screenshot_2023-12-27_at_8.23.00_AM.png)
+**Figure 14.** _Retail Trade Volume_ A sankey graph that displays the flow of transactions from frontend, solver auctions, solvers, order flow auctions, and finally to builders for inclusion in November 2023.[⁴](#superscript-4)
 
-**Figure 15.** _Retail Liquidity Impact_ A sankey graph that focuses on displaying the liquidity sourced for each user order.[⁴](#superscript-4)
+![Screenshot 2023-12-27 at 8.23.00 AM.png](/img/posts/illuminate-the-order-flow/retail-liquidity-impact-sankey-nov-2023.png)
+
+<Caption>
+  Interact with this sankey diagram on{" "}
+  <a href="https://orderflow.art/?isOrderflow=false&endTime=1701363599">
+    orderflow.art
+  </a>
+  .
+</Caption>
+
+**Figure 15.** _Retail Liquidity Impact_ A sankey graph that focuses on displaying the liquidity sourced for each user order in November 2023.[⁴](#superscript-4)
 
 **Figure 14** and **15** show 33 solvers, 12 market makers, 90 OFA backrunners, and 41 block builders involved in facilitating and optimizing user trades across [12,000 token pairs](https://dune.com/queries/3342839). Defi’s size and number in tokens traded demonstrate the extent of global user desires that a few players in a few zones of trust are unable or unwilling to serve. And defi’s execution quality show the eagerness, effectiveness, and diversity of searchers that will show up to fulfill such user preferences when you build systems that empower them to do so.
 
-Ultimately, **Figure 14** and **15** show [global, competitive, and cooperative systems](https://collective.flashbots.net/t/decentralized-crypto-needs-you-to-be-a-geographical-decentralization-maxi/1385) can be achieved in highly financialized contexts, and that they are _insanely great_.
+Ultimately, **Figure 14** and **15** show [global, competitive, and cooperative systems](https://collective.flashbots.net/t/decentralized-crypto-needs-you-to-be-a-geographical-decentralization-maxi/1385) can be achieved in highly financialized contexts, and that they are _fantastically beneficial_ for users.
 
 ## There’s more work to be done.
 
@@ -397,14 +414,13 @@ Experimentation in permissionless, albeit centralized, privacy APIs, and investi
 
 Today, we launch along with this blog post [orderflow.art](https://orderflow.art/?isOrderflow=true), a dashboard that visualizes Ethereum’s order flow processing landscape using sankey diagrams. [Orderflow.art](http://Orderflow.art) supports filtering by transaction hash, so users can trace what projects and searchers were involved in the execution of their trade. Filtering by token pair and entity is also available to empower the community to characterize and observe the origins of the order flow of entities such as Flashbots Protect and Flashbots Builder.
 
-In illluminating order flow, we seek to educate users and frontend projects on the untapped price improvements and monetization opportunities of their trades, simplify the discovery and evaluation processes of MEV opportunities for searchers and liquidity projects, and monitor the decentralization of the market as a collective.
+In illuminating order flow, we seek to educate users and frontend projects on the untapped price improvements and monetization opportunities of their trades, simplify the discovery and evaluation processes of MEV opportunities for searchers and liquidity projects, and monitor the decentralization of the market as a collective.
 
 All data and query code is open-source, and methodology, including project-specific handling, is documented [here](https://www.notion.so/Orderflow-art-Methodology-3043d2671f3043e6afb2e6bc39932446?pvs=21).
 
-As the number of centralized off-chain MEV systems increase, trust should be accompanied with easy and legible access to the information required to understand the properties of the mechanism and the data to analyze the execution quality received. The detail in visualization and depth in analysis of offchain solver and order flow auctions in this work is only possible with the hard work by the CoW Protocol and 1inch Labs team in publishing and maintaining Cowswap, MEV-Blocker, and 1inch Fusion data sets.
+As the number of centralized off-chain MEV systems increase, trust should be accompanied with easy and legible access to the information required to understand the properties of the mechanism and the data to analyze the execution quality received. The detail in visualization and depth in analysis of off-chain solver and order flow auctions in this work is only possible with the hard work by the CoW Protocol and 1inch Labs team in publishing and maintaining Cowswap, MEV-Blocker, and 1inch Fusion data sets.
 
 ## Shooting Stars: Defi's Potential and Opportunities
-
 <p style={{ textAlign: "center" }}>
   <br />
   <img
@@ -426,6 +442,8 @@ Having illuminated and compared the defi and tradfi landscapes, several salient 
 **MEV mechanism designers looking to disrupt MEV mechanism designers**, think carefully about the state of the market, and about how your actions and products affect the ability of this market to reach its full potential.
 
 With a few careful iterations, we believe the future is bright for permissionless and decentralized defi. We urge you to join us in both illuminating and building this future.
+
+_Special thanks to Phil Daian, Xinyuan Sun, Reid Yager, and the permissionless and decentralized network of searchers for discussion and review._
 
 ---
 
@@ -462,9 +480,9 @@ It may seem like the optimal decision is to send transactions to both order flow
 
 _Sankey Methodology_:
 
-_Retail Trade Volume_: The width of the flow shows volume of liquidity sourced by successful transactions in November 2023 on the Ethereum blockchain. Volume is duplicated after the solver vertical when a solver is routing the trade through multiple liquidity sources. For example, when a $100 LINK-USDC trade is routed by first hopping through a LINK-ETH Uniswap V3 pool, then a ETH-USDC Curve pool, $100 is counted as volume for Uniswap V3 and $100 is counted as volume for Curve. Because the volume before the solver vertical remains deduplicated, an entity with outflow > inflow can be identified as a routing player that executes trades across multiple available sources of liquidity.
+_Retail Trade Volume_: The width of the flow shows the trade volume of successful transactions originated from a frontend in November 2023 on the Ethereum blockchain. Volume is deduplicated via on-chain entry-point, so when Metamask routes an $100 user order through 1inch, the $100 is only counted as Metamask’s user volume.
 
-_Retail Liquidity Impact_: The width of the flow shows the trade volume of successful transactions originated from a frontend in November 2023 on the Ethereum blockchain. Volume is deduplicated via on-chain entry-point, so when Metamask routes an $100 user order through 1inch, the $100 is only counted as Metamask’s user volume.
+_Retail Liquidity Impact_: The width of the flow shows volume of liquidity sourced by successful transactions in November 2023 on the Ethereum blockchain. Volume is duplicated after the solver vertical when a solver is routing the trade through multiple liquidity sources. For example, when a $100 LINK-USDC trade is routed by first hopping through a LINK-ETH Uniswap V3 pool, then a ETH-USDC Curve pool, $100 is counted as volume for Uniswap V3 and $100 is counted as volume for Curve. Because the volume before the solver vertical remains deduplicated, an entity with outflow > inflow can be identified as a routing player that executes trades across multiple available sources of liquidity.
 
 <Superscript number="5" />
 
