@@ -5,6 +5,7 @@ authors: [angela]
 tags: [data, order-flow]
 image: /img/posts/illuminate-the-order-flow/orderflow-art-title.png
 hide_table_of_contents: false
+date: 2024-01-17 00:00-05:00
 description: In this post, we cast light on the state of defi order and transaction flow today. We will show how defi has distinguished itself from the traditional order flow market, and discuss the challenges to achieving our shared dream of systems that remain decentralized while maximally benefiting the user.
 ---
 
@@ -90,15 +91,15 @@ The data we will present is collected from the Ethereum blockchain on November 1
   aspectRatio="1/1"
 />
 
-**Figure 2, 3, and 4.** Percentage marketshare of 38 tracked Ethereum frontends[¹](#superscript-1) by volume, transaction count, and users from November 1, 2023 to November 30, 2023.
+**Figure 2, 3, and 4.** Percentage market share of 38 tracked Ethereum frontends[¹](#superscript-1) by volume, transaction count, and users from November 1, 2023 to November 30, 2023.
 
 **Figure 2** shows [$14B](https://dune.com/queries/3295603) of Ethereum DEX volume in November 2023 originated from transactions that called frontend router contracts directly, a method which we estimate the majority to be retail, nontoxic order flow.
 
-**Figures 2-4** shows order flow on Ethereum is dominated by Uniswap’s website app and wallet, who processed $4.03B in volume over 2.2M transactions by 370K users in the month of November, representing 29%, 44%, 44% of the market respectively. This is followed by 1inch’s Frontend and API integrators, who traded $3.9B in volume across 310k users. **Figure 3** shows telegram bots [Maestro](https://www.maestrobots.com/) and [Banana Gun](https://bananagun.io/) have the highest transaction counts after Uniswap and **Figure 4** shows Uniswap’s user count is followed by popular in-app swaps in Metamask and Coinbase Wallet.
+**Figures 2-4** shows order flow on Ethereum is dominated by Uniswap’s website app and wallet, who processed $4.03B in volume over 2.2M transactions by 370K users in the month of November, representing 29%, 44%, 44% of the market respectively. This is followed by 1inch’s frontend and API integrators, who traded $3.9B in volume across 310k users. **Figure 3** shows telegram bots [Maestro](https://www.maestrobots.com/) and [Banana Gun](https://bananagun.io/) have the highest transaction counts after Uniswap and **Figure 4** shows Uniswap’s user count is followed by popular in-app swaps in Metamask and Coinbase Wallet.
 
 <DuneDashboard source="https://dune.com/embeds/3295720/5517827" /> <DuneDashboard source="https://dune.com/embeds/3295741/5517896" />
 
-**Figure 5.** Percentage marketshare of transaction count in various trade size buckets from <$100 to >$1M by each frontend from November 1, 2023 to November 30, 2023.
+**Figure 5.** Percentage market share of transaction count in various trade size buckets from <$100 to >$1M by each frontend from November 1, 2023 to November 30, 2023.
 
 **Figure 6.** November volume in different token pair categories by Ethereum frontends. ETH/BTC represents ETH and BTC paired with USDC/USDT/DAI. Peg includes popular stablecoin pairs such as USDC/USDT and pegged pairs such as stETH/WETH.[²](#superscript-2) Long-tail includes all other pairs.
 
@@ -182,7 +183,7 @@ Market makers that integrate with solvers through Hashflow have two other benefi
 1. _Bypasses solver stake requirements_: To become a solver, Cowswap requires solvers to stake [750K](https://snapshot.org/#/cow.eth/proposal/0x267edf7a0bd3c771cfca763322f011ee106d8d5158612c11da29183260d1dba7), 1.5M COW tokens (~$350k in current prices) and 500k cUSDC. 1inch Fusion requires resolvers to have at least [5% of "unicorn power"](https://snapshot.org/#/1inch.eth/proposal/0x09d04402e676a034398615391c34df0e30a515518f93df802f29c131707f9b63) (~$350k in current prices). Integrating with solvers allows market makers to bypass stake requirements on Cowswap and Fusion in order to compete for its $4B in November 2023 volume (**Figure 2**).
 2. _Access to more trades_: Without implementing routing algorithms, market makers can only respond to user quotes if the requests match the set of token pairs they quote. Outsourcing routing to a competitive market of solvers increases the surface area of opportunities for the pairs that market makers can quote. In this [transaction](https://etherscan.io/tx/0xb4ed2c8d8c623e3da6bc798ade9928b539405a1f26dc41bd21ba4fb3912a9e12), a Cowswap user is trading 2.1M wstETH → USDT, and solver Barter splits the trade into 2.1M wstETH → WETH on Kyberswap, then 1.6M WETH → USDC *and* 500k WETH → USDT with Wintermute via Hashflow, and then 1.6M USDC → USDT on Maverick.
 
-Ultimately, enabling market makers to quote for more pairs on more order flow sources increases competition and drives price improvement for users.
+Enabling market makers to quote for more pairs on more order flow sources increases competition and drives price improvement for users.
 
 ### Order flow auction
 
@@ -190,7 +191,7 @@ Solver and market maker auctions aim to provide the most competitive quote for t
 
 Order flow auctions were introduced as a feature on top of private RPCs following increased usage for [sandwich and revert protection](https://docs.flashbots.net/flashbots-protect/overview) in the last year. In November 2023, [2M (41%)](https://dune.com/queries/3338713/5594289) retail order flow transactions representing [$6.3B (45%)](https://dune.com/queries/3338703) in volume flowed through private RPC endpoints.
 
-Before order flow auctions, increased competition between searchers in [the bundle auction](https://docs.flashbots.net/flashbots-auction/overview#how-does-it-work) increased the percentage of searcher profit bid to the validator. Atomic and [signal searchers](https://frontier.tech/a-tale-of-two-arbitrages) profit from backrunning transactions when trade routing is suboptimal or when a price signal is not accounted for, respectively. By introducing another auction before the bundle auction, order flow auctions redirect the profit previously captured by validators to users. This is accomplished by auctioning off the transaction slots right behind the user transaction to searchers that want to best capture the backrun opportunity.
+Before order flow auctions, increased competition between searchers in [the bundle auction](https://docs.flashbots.net/flashbots-auction/overview#how-does-it-work) increased the percentage of searcher profit bid to the validator. Atomic and [signal searchers](https://frontier.tech/a-tale-of-two-arbitrages) profit from backrunning transactions when trade routing is suboptimal or when a price signal is not accounted for, respectively. By introducing another auction before the bundle auction, order flow auctions redirect profit previously captured by validators to users. This is accomplished by auctioning off the transaction slots right behind the user transaction to searchers that want to best capture the backrun opportunity.
 
 OFAs [MEV-Blocker](https://mevblocker.io/) and [Flashbots Protect](https://docs.flashbots.net/flashbots-protect/mev-share) (running the [MEV-Share](https://docs.flashbots.net/flashbots-protect/mev-share) OFA protocol) have published transactions seen at their RPC endpoints on [Dune](https://dune.com/home), which enables us to observe who the primary users of OFAs are and evaluate the competitiveness of their price quotes.
 
@@ -201,9 +202,9 @@ OFAs [MEV-Blocker](https://mevblocker.io/) and [Flashbots Protect](https://docs.
 
 **Figure 11.** Retail order flow volume received by MEV-Blocker and Flashbots Protect RPC endpoints, categorized by project. Both represents volume received by both OFAs.
 
-**Figure 10** shows MEV Blocker’s largest order flow source by transaction count is [Uniswap’s Mobile Wallet](https://support.uniswap.org/hc/en-us/articles/18814993155853-What-is-Swap-Protection-). And although Cowswap’s transaction count is not high, **Figure 11** shows Cowswap makes up $1.5B (59%) of volume flowing through MEV-Blocker. **Figure 10** also shows Flashbots Protect’s largest exclusive order flow source by transaction count is Telegram Bot Unibot. **Figure 11** shows imToken wallet, the highest volume contributor to Flashbots Protect, sends $159M (15%) of volume.
+**Figure 10** shows MEV Blocker’s largest order flow source by transaction count is [Uniswap’s Mobile Wallet](https://support.uniswap.org/hc/en-us/articles/18814993155853-What-is-Swap-Protection-). And although Cowswap’s transaction count is not high, **Figure 11** shows Cowswap makes up $1.5B (59%) of volume flowing through MEV-Blocker. **Figure 10** also shows Flashbots Protect’s largest exclusive order flow source by transaction count is telegram bot Unibot. **Figure 11** shows imToken wallet, the highest volume contributor to Flashbots Protect, sends $159M (15%) of volume.
 
-Telegram bot users primarily trade tokens with liquidity only on Uniswap V2. But, sometimes the tokens traded have liquidity elsewhere. When Telegram Bot routers miss these liquidity sources, arbitrage opportunities are created. The highest refund received by a Unibot telegram bot user was [0.255 ETH](https://etherscan.io/tx/0xbff557608e6919a14f0a59926cb0438c784666630cceb0fae8daedcd6e2a5881) ($592 at the time) on December 22, 2023[.](https://etherscan.io/tx/0xbff557608e6919a14f0a59926cb0438c784666630cceb0fae8daedcd6e2a5881) User 0xc3f7 was [swapping 0.8 ETH](https://etherscan.io/tx/0xf39715ea7f7934ee772a5c3f2dc9a8cfdacd4209ca072522ed65be7496283ecb) ($1800) to the Omnicat token, and the [backrun](https://etherscan.io/tx/0x283241f23a16ad6651974b8b8373844e014d3ef5fe45f527c67ed76915163473) atomically arbitraged Uniswap V2 <\> V3 pools of the OmniCat token. From July to December 2023, Unibot telegram bot users have received [3.6 ETH across 230 backruns](https://dune.com/queries/3333212), with an average refund of 0.016 ETH (around ~$35 in current prices).
+Telegram bot users primarily trade tokens with liquidity only on Uniswap V2. But, sometimes the tokens traded have liquidity elsewhere. When telegram bot routers miss these liquidity sources, arbitrage opportunities are created. The highest refund received by a Unibot telegram bot user was [0.255 ETH](https://etherscan.io/tx/0xbff557608e6919a14f0a59926cb0438c784666630cceb0fae8daedcd6e2a5881) ($592 at the time) on December 22, 2023[.](https://etherscan.io/tx/0xbff557608e6919a14f0a59926cb0438c784666630cceb0fae8daedcd6e2a5881) User 0xc3f7 was [swapping 0.8 ETH](https://etherscan.io/tx/0xf39715ea7f7934ee772a5c3f2dc9a8cfdacd4209ca072522ed65be7496283ecb) ($1800) to the Omnicat token, and the [backrun](https://etherscan.io/tx/0x283241f23a16ad6651974b8b8373844e014d3ef5fe45f527c67ed76915163473) atomically arbitraged Uniswap V2 <\> V3 pools of the OmniCat token. From July to December 2023, Unibot telegram bot users have received [3.6 ETH across 230 backruns](https://dune.com/queries/3333212), with an average refund of 0.016 ETH (around ~$35 in current prices).
 
 On the other hand, **Figure 7** shows Cowswap has 13 solvers competing to access 33 liquidity sources and optimally split user trades across them. Yet, their solver transactions have still been backrun [7,700 times](https://dune.com/queries/3035874/5046992) since launch in April 2023, with a cumulative refund of [376 ETH](https://dune.com/queries/3035874/5046992) ($845k in current prices).
 
@@ -219,7 +220,7 @@ Order flow auction refunds are also an additional source of monetization for sol
 
 **_Searcher Competition on OFAs_**
 
-Searcher integration with MEV-Blocker and MEV-share is permissionless, making the OFA the lowest barrier to entry point in the entire order flow network, and therefore, also likely the most competitive.
+Searcher integration with MEV-Blocker and MEV-Share is permissionless, making the OFA the lowest barrier to entry point in the entire order flow network, and therefore, also likely the most competitive.
 
 MEV-Blocker and MEV-Share achieve permissionless integration by using privacy-based mechanisms that protect user trade execution and guard against searcher misbehavior. Integration at any other point in the order flow network requires stake, KYC, or trust relationships to disincentivize misbehavior. MEV-Blocker implements transaction privacy by removing transaction signatures and emitting additional fake transactions to backrunning searchers. MEV-Share implements [programmable privacy](https://collective.flashbots.net/t/mev-share-programmably-private-orderflow-to-share-mev-with-users/1264), such as only revealing to backrunning searchers the pool the user is trading on (eg USDC-WETH Uniswap V3) but not the limit price or the direction of the trade.
 
