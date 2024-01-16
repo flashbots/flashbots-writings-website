@@ -51,15 +51,15 @@ Robinhood is one of the largest and most well-known brokers that use PFOF to mon
 
 <Caption>
   Source: Robinhood Q3 2023{" "}
-  <a href="https://cdn.robinhood.com/assets/robinhood/legal/RHS%20SEC%20Rule%20606%20and%20607%20Disclosure.pdf">
+  <a href="https://cdn.robinhood.com/assets/robinhood/legal/RHS%20SEC%20Rule%20606%20and%20607%20Disclosure.pdf#page=8">
     Rule 606
   </a>{" "}
   Report.
 </Caption>
 
-**Figure 1.** Percentage of non-directed orders received by various wholesalers on Robinhood. Orders are segmented by S&P 500 stocks, Non-S&P 500 stocks, and options.
+**Figure 1.** Percentage of non-directed orders received by various wholesalers on Robinhood. Orders are segmented by S&P 500 stocks, non-S&P 500 stocks, and options.
 
-**Figure 1** shows there are at most four wholesale market makers per order type on Robinhood. Out of the four market makers, Citadel fills 30% of S&P 500 orders, 30% of non-S&P orders, and 37% of option orders. Virtu fills 45% of S&P 500 orders and 28% of Non-S&P Orders.
+**Figure 1** shows there are at most four wholesale market makers per order type on Robinhood. Out of the four market makers, Citadel fills 29% of S&P 500 orders, 36% of non-S&P orders, and 37% of option orders. Virtu fills 45% of S&P 500 orders and 28% of non-S&P Orders.
 
 A market structure that has resulted in retail users trading against Citadel and Virtu doesn’t seem great for users, and the SEC doesn’t think so either. The SEC [lists two primary criticisms](https://www.sec.gov/files/rules/proposed/2022/34-96495.pdf) with PFOF market structure:
 
@@ -95,11 +95,13 @@ The data we will present is collected from the Ethereum blockchain on November 1
 
 **Figure 2** shows [$14B](https://dune.com/queries/3295603) of Ethereum DEX volume in November 2023 originated from transactions that called frontend router contracts directly, a method which we estimate the majority to be retail, nontoxic order flow.
 
-**Figures 2-4** shows order flow on Ethereum is dominated by Uniswap’s website app and wallet, who processed $4.03B in volume over 2.2M transactions by 370K users in the month of November, representing 29%, 44%, 44% of the market respectively. This is followed by 1inch’s frontend and API integrators, who traded $3.9B in volume across 310k users. **Figure 3** shows telegram bots [Maestro](https://www.maestrobots.com/) and [Banana Gun](https://bananagun.io/) have the highest transaction counts after Uniswap and **Figure 4** shows Uniswap’s user count is followed by popular in-app swaps in Metamask and Coinbase Wallet.
+**Figures 2-4** shows order flow on Ethereum is dominated by Uniswap’s website app and wallet, who processed $4.03B in volume over 2.2M transactions by 370K users in the month of November, representing 29%, 44%, 47% of the market respectively. This is followed by 1inch’s frontend and API integrators, who traded $3.9B in volume across 68k users. **Figure 3** shows telegram bots [Maestro](https://www.maestrobots.com/) (750k transactions, 15%) and [Banana Gun](https://bananagun.io/) (537k transactions, 10%) have the highest transaction counts after Uniswap. **Figure 4** shows Uniswap’s user count is followed by popular in-app wallet swap platforms Metamask (90k users, 11%) and Coinbase Wallet (55k users, 7%).
 
-<DuneDashboard source="https://dune.com/embeds/3295720/5517827" /> <DuneDashboard source="https://dune.com/embeds/3295741/5517896" />
+<DuneDashboard source="https://dune.com/embeds/3295720/5517827" /> 
 
 **Figure 5.** Percentage market share of transaction count in various trade size buckets from <$100 to >$1M by each frontend from November 1, 2023 to November 30, 2023.
+
+<DuneDashboard source="https://dune.com/embeds/3295741/5517896" />
 
 **Figure 6.** November volume in different token pair categories by Ethereum frontends. ETH/BTC represents ETH and BTC paired with USDC/USDT/DAI. Peg includes popular stablecoin pairs such as USDC/USDT and pegged pairs such as stETH/WETH.[²](#superscript-2) Long-tail includes all other pairs.
 
@@ -109,17 +111,17 @@ More generally, **Figure 6** shows that out of $14B in retail trade volume on Et
 
 ## Decentralized Block Building (A Centralized MVP)
 
-On October 13, 2023, [kyoro.eth](https://twitter.com/kyotometa) [sold](https://etherscan.io/tx/0xf49a2c544b85b28f037596e0b5d6db0c10ea0986a8d89c371720d6cc62e36a43) HAY, [a token Hayden Adams launched](https://twitter.com/haydenzadams/status/1715440623480652025) five years ago to test Uniswap V1, for 2.7 ETH using Cowswap. Twelve Cowswap solvers competed to find an optimal route, and Laertes won by routing to aggregator 0x Protocol, who’s trade route hopped through Uniswap V1, Uniswap V2, and Uniswap V3 HAY-WETH pools. Solver Laertes then submitted the transaction to order flow auction MEV-Blocker, which received 18 bids from searchers to backrun the transaction. MEV-Blocker sent the backruns to 7 block builders who competed to merge them, and Builder0x69 won the block after merging four atomic backruns, two of which filled open 1inch user limit orders, and [one signal backrun](https://etherscan.io/tx/0x76f903fe9298f7d5cf5158503b33350c033f824b59a31b0afafa44d6eb2a73a6) from a searcher willing to hold inventory of HAY. Ultimately, Builder0x69 and searcher backruns returned a total of 0.4 ETH (~$900 at current market price) in recaptured MEV to the refund address specified by Cowswap.
+On October 13, 2023, [kyoro.eth](https://twitter.com/kyotometa) [sold](https://etherscan.io/tx/0xf49a2c544b85b28f037596e0b5d6db0c10ea0986a8d89c371720d6cc62e36a43) HAY, [a token Hayden Adams launched](https://twitter.com/haydenzadams/status/1715440623480652025) five years ago to test Uniswap V1, for 2.7 ETH using Cowswap. Twelve Cowswap solvers competed to find an optimal route, and solver Laertes won by routing to aggregator 0x Protocol, who’s trade route hopped through Uniswap V1, Uniswap V2, and Uniswap V3 HAY-WETH pools. Solver Laertes then submitted the transaction to order flow auction MEV-Blocker, which received 18 bids from searchers to backrun the transaction. MEV-Blocker sent the backruns to 7 block builders who competed to merge them, and Builder0x69 won the block after merging four atomic backruns, two of which filled open 1inch user limit orders, and [one signal backrun](https://etherscan.io/tx/0x76f903fe9298f7d5cf5158503b33350c033f824b59a31b0afafa44d6eb2a73a6) from a searcher willing to hold inventory of HAY. Ultimately, Builder0x69 and searcher backruns returned a total of 0.4 ETH (~$900 at current market price) in recaptured MEV to the refund address specified by Cowswap.
 
 Breaking it down, that’s:
 
-1 solver auction + 12 Cowswap solvers + ≥ 1 aggregator + ≥ 3 decentralized exchanges
+1 solver auction + 12 Cowswap solvers + ≥ 1 aggregator + ≥ 3 decentralized exchanges 
 
-≥ 3 passive liquidity providers of HAY-WETH + 1 order flow auction
+\+ ≥ 3 passive liquidity providers of HAY-WETH + 1 order flow auction
 
-≥ 4 atomic searchers + ≥ 1 signal searcher + 2 1inch limit order users + 7 block builders
+\+ ≥ 4 atomic searchers + ≥ 1 signal searcher + 2 1inch limit order users + 7 block builders
 
-≥ 35 entities involved in helping kyoro.eth get a great price on their trade!
+≥ _**35 entities involved in helping kyoro.eth get a great price on their trade!**_
 
 To understand the complexities of a single transaction being processed, it is important to understand each of the four sequential order-by-order auctions involved, and how they coordinate a network of specialized searchers to drive price improvement for users. We will start with the first auction, which occurs at the intent level before a transaction is created, and end in an auction for a full Ethereum block.
 
@@ -176,7 +178,7 @@ Previously, the primary way to access market maker liquidity was through RFQs bu
 
 **Figure 9** shows the orders flow sources of RFQs built by aggregators 1inch, 0x, and Airswap are constrained to their own frontends and aggregation API integrators. On the other hand, Hashflow’s order flow sources range from solvers on Cowswap, 1inch Fusion, and Uniswap X, wallets such as OKX, meta-aggregators such as [Defillama](https://swap.defillama.com/), Odos and OpenOcean, and even 1inch Labs, who is both a solver on 1inch Fusion and 1inch API.
 
-In November 2023, through one API integration with Hashflow, eight market makers competed to fill over $1.45B (45% from **Figure 6**) of ETH/BTC volume on Ethereum across Cowswap, 1inch Fusion and API integrators, and Paraswap. In realized market maker volume filled, **Figure 9** shows Hashflow market makers filled $637M, almost twice as much as 0x and 1inch RFQ market makers filled.
+In November 2023, through one API integration with Hashflow, eight market makers competed to fill over $1.45B (45% from **Figure 6**) of ETH/BTC volume on Ethereum across Cowswap, 1inch Fusion and API integrators, and Paraswap. In realized market maker volume filled, **Figure 9** shows Hashflow market makers filled $374M, more than double the volume 0x and 1inch RFQ market makers filled.
 
 Market makers that integrate with solvers through Hashflow have two other benefits:
 
