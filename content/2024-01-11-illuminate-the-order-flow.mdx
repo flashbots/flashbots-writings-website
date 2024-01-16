@@ -29,7 +29,7 @@ In this post, we cast light on the state of defi order and transaction flow toda
 
 We will argue that the SEC, Citadel, and Flashbots (among many others) have been perfectly aligned on their identification of market failures and desired market outcomes from the beginning. We will outline a number of problems identified by tradfi market participants themselves with the payment for order flow ("PFOF") landscape, and argue that defi has a meaningful chance of addressing these market failures directly.
 
-We will show that defi's order flow landscape represents a nascent and fragile opportunity, showcasing a decentralized version of a robust order flow processing network using centralized infrastructure. We will argue that permissionless networks of searchers and liquidity provision can create competitive order execution, escaping tradfi’s reliance on a handful of sophisticated market makers. We will argue that what defi needs to truly fulfill its vision and promise is to maintain the existing decentralization in this market, while also increasing competition and the ability to decentralize infrastructure at every layer of the stack.
+We will show that Ethereum's order flow landscape represents a nascent and fragile opportunity, showcasing a decentralized version of a robust order flow processing network using centralized infrastructure. We will argue that permissionless networks of searchers and liquidity provision can create competitive order execution, escaping tradfi’s reliance on a handful of sophisticated market makers to do so. We will argue that what defi needs to truly fulfill its vision and promise is to maintain the existing decentralization in this market, while also increasing competition and the ability to decentralize infrastructure at every layer of the stack.
 
 In doing so, crypto seeks to take one step towards the primitives of a fair, robust, anti-fragile, and decentralized financial system.
 
@@ -80,15 +80,15 @@ The data we will present is collected from the Ethereum blockchain on November 1
 
 <DuneDashboard
   source="https://dune.com/embeds/3295088/5516700"
-  aspectRatio="1/1"
+  aspectRatio="16/9"
 />
 <DuneDashboard
   source="https://dune.com/embeds/3295088/5516698"
-  aspectRatio="1/1"
+  aspectRatio="16/9"
 />
 <DuneDashboard
   source="https://dune.com/embeds/3295088/5516699"
-  aspectRatio="1/1"
+  aspectRatio="16/9"
 />
 
 **Figure 2, 3, and 4.** Percentage market share of 38 tracked Ethereum frontends[¹](#superscript-1) by volume, transaction count, and users from November 1, 2023 to November 30, 2023.
@@ -97,11 +97,11 @@ The data we will present is collected from the Ethereum blockchain on November 1
 
 **Figures 2-4** shows order flow on Ethereum is dominated by Uniswap’s website app and wallet, who processed $4.03B in volume over 2.2M transactions by 370K users in the month of November, representing 29%, 44%, 47% of the market respectively. This is followed by 1inch’s frontend and API integrators, who traded $3.9B in volume across 68k users. **Figure 3** shows telegram bots [Maestro](https://www.maestrobots.com/) (750k transactions, 15%) and [Banana Gun](https://bananagun.io/) (537k transactions, 10%) have the highest transaction counts after Uniswap. **Figure 4** shows Uniswap’s user count is followed by popular in-app wallet swap platforms Metamask (90k users, 11%) and Coinbase Wallet (55k users, 7%).
 
-<DuneDashboard source="https://dune.com/embeds/3295720/5517827" /> 
+<DuneDashboard source="https://dune.com/embeds/3295720/5517827" aspectRatio="4/3" /> 
 
 **Figure 5.** Percentage market share of transaction count in various trade size buckets from <$100 to >$1M by each frontend from November 1, 2023 to November 30, 2023.
 
-<DuneDashboard source="https://dune.com/embeds/3295741/5517896" />
+<DuneDashboard source="https://dune.com/embeds/3295741/5517896" aspectRatio="4/3" />
 
 **Figure 6.** November volume in different token pair categories by Ethereum frontends. ETH/BTC represents ETH and BTC paired with USDC/USDT/DAI. Peg includes popular stablecoin pairs such as USDC/USDT and pegged pairs such as stETH/WETH.[²](#superscript-2) Long-tail includes all other pairs.
 
@@ -182,7 +182,7 @@ In November 2023, through one API integration with Hashflow, eight market makers
 
 Market makers that integrate with solvers through Hashflow have two other benefits:
 
-1. _Bypasses solver stake requirements_: To become a solver, Cowswap requires solvers to stake [750K](https://snapshot.org/#/cow.eth/proposal/0x267edf7a0bd3c771cfca763322f011ee106d8d5158612c11da29183260d1dba7), 1.5M COW tokens (~$350k in current prices) and 500k cUSDC. 1inch Fusion requires resolvers to have at least [5% of "unicorn power"](https://snapshot.org/#/1inch.eth/proposal/0x09d04402e676a034398615391c34df0e30a515518f93df802f29c131707f9b63) (~$350k in current prices). Integrating with solvers allows market makers to bypass stake requirements on Cowswap and 1inch Fusion in order to compete for its $3B in November 2023 volume (**Figure 2**).
+1. _Bypasses solver stake requirements_: To become a solver, Cowswap requires solvers to stake [750K](https://snapshot.org/#/cow.eth/proposal/0x267edf7a0bd3c771cfca763322f011ee106d8d5158612c11da29183260d1dba7), 1.5M COW tokens (~$415k in current prices) and 500k cUSDC. 1inch Fusion requires resolvers to have at least [5% of "unicorn power"](https://snapshot.org/#/1inch.eth/proposal/0x09d04402e676a034398615391c34df0e30a515518f93df802f29c131707f9b63), which is ~1M 1inch tokens (~$435k in current prices) locked up for two years. Integrating with solvers allows market makers to bypass stake requirements on Cowswap and 1inch Fusion in order to compete for its $3B in November 2023 volume (**Figure 2**).
 2. _Access to more trades_: Without implementing routing algorithms, market makers can only respond to user quotes if the requests match the set of token pairs they quote. Outsourcing routing to a competitive market of solvers increases the surface area of opportunities for the pairs that market makers can quote. In this [transaction](https://etherscan.io/tx/0xb4ed2c8d8c623e3da6bc798ade9928b539405a1f26dc41bd21ba4fb3912a9e12), a Cowswap user is trading 2.1M wstETH → USDT, and solver Barter splits the trade into 2.1M wstETH → WETH on Kyberswap, then 1.6M WETH → USDC *and* 500k WETH → USDT with Wintermute via Hashflow, and then 1.6M USDC → USDT on Maverick.
 
 Enabling market makers to quote for more pairs on more order flow sources increases competition and drives price improvement for users.
@@ -197,10 +197,11 @@ Before order flow auctions, increased competition between searchers in [the bund
 
 OFAs [MEV-Blocker](https://mevblocker.io/) and [Flashbots Protect](https://docs.flashbots.net/flashbots-protect/mev-share) (running the [MEV-Share](https://docs.flashbots.net/flashbots-protect/mev-share) OFA protocol) have published transactions seen at their RPC endpoints on [Dune](https://dune.com/home), which enables us to observe who the primary users of OFAs are and evaluate the competitiveness of their price quotes.
 
-<DuneDashboard source="https://dune.com/embeds/3348226/5611115" />
-<DuneDashboard source="https://dune.com/embeds/3348225/5611114" />
+<DuneDashboard source="https://dune.com/embeds/3348226/5611115" aspectRatio="4/3" />
 
 **Figure 10.** Number of retail order flow transactions received at MEV-Blocker and Flashbots Protect RPC endpoints, categorized by project. Both represents transactions received by both OFAs.
+
+<DuneDashboard source="https://dune.com/embeds/3348225/5611114" aspectRatio="4/3" />
 
 **Figure 11.** Retail order flow volume received by MEV-Blocker and Flashbots Protect RPC endpoints, categorized by project. Both represents volume received by both OFAs.
 
@@ -307,9 +308,9 @@ Contrary to atomic arbitrage which gets more competitive and decentralized over 
 
 **Figure 16.** A sankey diagram that illustrates the flow in volume of ETH/BTC trades from Cowswap, 1inch Fusion, Uniswap X, and Metamask Swaps from November 2023.
 
-**Figure 16** shows that market makers SCP (PLM on Cowswap) and Wintermute (Rizzolver on 1inch Fusion) fill over 75% of ETH/BTC trade volume on the top four order flow sources on Ethereum: Uniswap, 1inch, Metamask, and Cowswap. Cowswap is the exception of the four, where SCP’s Solver PLM only fills 40% _directly_, which could be due to more sophisticated solver competition on Cowswap.
+**Figure 16** shows that market makers SCP (PLM on Cowswap) and Wintermute (Rizzolver on 1inch Fusion) fill over 75% of ETH/BTC trade volume on the top four order flow sources on Ethereum: Uniswap, 1inch, Metamask, and Cowswap. Cowswap is the exception of the four, where SCP’s Solver PLM only fills 40% _directly_, which could be due to Cowswap's mechanism design and/or more solver competition.
 
-To understand the relationship between volume and profit, we estimate market making profits on solver auctions through direct integration as solvers and indirect integration via Hashflow for ETH-USDC, the most popular trading pair on Ethereum, and LINK-USDC, the most popular trading pair outside of ETHBTC and pegged token pairs. Profits are estimated using markouts against centralized spot exchange Binance, often considered crypto’s venue of price discovery where the [fair value](https://frontier.tech/a-tale-of-two-arbitrages) of high liquidity assets can be estimated.
+To understand the relationship between volume and profit, we estimate market making profits on solver auctions through direct market maker integration as a solver and indirect integration via Hashflow for ETH-USDC, the most popular trading pair on Ethereum, and LINK-USDC, the most popular trading pair outside of ETHBTC and pegged token pairs. Profits are estimated using markouts against centralized spot exchange Binance, often considered crypto’s venue of price discovery where the [fair value](https://frontier.tech/a-tale-of-two-arbitrages) of high liquidity assets can be estimated.
 
 <DuneDashboard
   source="https://dune.com/embeds/3314013/5550314"
@@ -330,7 +331,7 @@ To understand the relationship between volume and profit, we estimate market mak
 Cowswap is the only order flow source where it is possible to compare the profit differences between direct and indirect integration, where SCP is directly integrated as a solver and Wintermute quotes via Hashflow. While it is difficult to draw conclusions given limited data and imperfect knowledge of market making strategies, we posit strong incentives for market makers to integrate as close to the frontend as possible, including:
 
 1. _To bypass fees charged by intermediaries:_ Hashflow and RFQs charge market makers a “dynamic fee” for filling user trades through their API. Market makers are charged on a per-order basis, such as 30 bps on risk trades (eg USDC-WETH) and 10 bps on stables (eg USDC-USDT), but charge lower fees from market makers if it would change an order’s route from sourcing AMM liquidity to PMM liquidity. Effectively, indirectly integrated market makers have to quote at least 10-30 bps better to compete with directly integrated market makers.
-2. _To obtain control over the execution (known as last look):_ In Uniswap X, directly integrated market makers can choose not to fill user orders when the price moves against them. But, in the case of indirect integration, a separate entity controls the execution of the trade, forcing market makers to quote wider, or less competitively to account for cases when the price changes against them.
+2. _To obtain control over the execution (known as last look):_ In Uniswap X, directly integrated market makers can choose not to fill user orders when the price moves against them. But, in the case of indirect integration, a separate entity controls the execution of the trade, forcing market makers to quote wider, or less competitively, to account for cases when the price changes against them.
 
 The capital and resource requirements to stake and integrate each system directly to access such market making advantages can only be afforded by large teams such as SCP and Wintermute. Similarly, running a block builder also [creates](https://arxiv.org/pdf/2311.09083.pdf) market making advantages that can only be afforded by SCP and Wintermute. Named beaverbuild and rsync builder respectively, SCP and Wintermute run the two most dominant block builders on Ethereum, who together built over [66% of MEV-Boost blocks](https://mevboost.pics/) in the first week of January 2024.
 
@@ -387,9 +388,9 @@ In designing mechanisms that favor a handful of market makers, Uniswap X fails t
     NO, Uniswap, you have to pick decentralization, I just gave you a choice so
     you can feel some sense of control. You have to fix the rip yourself.
   </em>{" "}
-  Source:{" "}
+  Source: {" "}
   <a href="https://www.youtube.com/watch?v=jpZo16cw46I">
-    https://www.youtube.com/watch?v=jpZo16cw46I
+    Barbie Movie
   </a>
 </Caption>
 </p>
@@ -401,7 +402,7 @@ The information privacy of trades is particularly important in upholding the exe
 1. _trading ahead:_ “(Auction messages) would include detailed information regarding the characteristics of the retail order, including the stock, the direction (buy or sell), and the auction limit price. As a result, all market participants would be aware of the relevant characteristics of the retail order prior to that order actually being executed, and would be freely permitted to trade ahead of the retail order on the basis of that information _even though the execution of the retail order is not certain_. The Proposal thus creates a mechanism that effectively licenses and encourages others to trade ahead of retail orders. Information leakage significantly increases the likelihood that prices move against the retail investor while the order is delayed for 100 to 300 milliseconds in the auction (particularly for larger orders and orders in less liquid stocks).”
 2. _failed auctions:_ “The auction mechanism can fail to result in an execution, in which case the retail order would need to be routed to an exchange or another auction. In the event this occurs, one should expect the retail investor to receive far worse execution quality, as the market is fully aware of the auction failure and will take that into account (as well as the price impact from the information leakage and trading ahead that has occurred) when determining whether, and at what price, to fill the order … Retail orders in less liquid stocks should be expected to receive worse execution quality as failed auctions would be more impactful for these orders.”
 
-Citadel recognizes that trading ahead and failed auctions is particularly impactful for large trades and long-tail trading. In defi, solver auction frontends are the most popular venues for both user profiles. Uniswap, Cowswap, and 1inch make up $3.8B (40%, 10%, and 5% in **Figure 6**) in Ethereum’s retail long-tail token trading volume in November 2023. And Uniswap, Cowswap, and 1inch Fusion and API frontends processed 154, 189, and 752 trades over $1M, together representing 75% of the retail order flow market, in November 2023 (**Figure 5**).
+Citadel recognizes that trading ahead and failed auctions is particularly impactful for large trades and long-tail trading. In defi, solver auction frontends are the most popular venues for both user profiles. Uniswap, Cowswap, and 1inch make up $3.8B (40%, 10%, and 5% in **Figure 6**) in Ethereum’s retail long-tail token trading volume in November 2023. And Uniswap, Cowswap, and 1inch Fusion and API frontends processed 154, 189, and 752 trades of sizes over $1M, together representing 75% of the retail order flow market, in November 2023 (**Figure 5**).
 
 Yet, solver auction mechanisms today fail to address these significant information shortcomings, which are particularly impactful to protecting the execution quality of their core userbases.
 
@@ -466,8 +467,6 @@ _Estimation Details_:
 
 - Pink represents Uniswap’s Universal Router Volume, which is the default for trades that originate from Uniswap’s website app and wallet. However, trades originating from other unknown frontends can also use Uniswap’s Universal Router, so $900M in volume is not exclusive to Uniswap’s official frontends. _We therefore expect for each frontend, this number will represent an overestimate of their volume._
 - Some 1inch API integrators don’t have their own routers; their first on-chain entry point is 1inch’s Aggregation Router, so we label these websites and wallets collectively as 1inch API integrators (blue).
-
-See [Orderflow.art Methodology](https://www.notion.so/Orderflow-art-Methodology-3043d2671f3043e6afb2e6bc39932446?pvs=21) for project-specific methodology and edge case documentation, as well as links to open-sourced raw data and code.
 
 <Superscript number="2" />
 

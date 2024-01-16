@@ -2,8 +2,8 @@
   --dashboard-border-color: var(--ifm-color-emphasis-200);
   --dashboard-aspect-ratio: 16/13;
   --dashboard-container-padding: 0.2rem;
-  --dashboard-border-radius: 0.5em;
-  --dashboard-border-width: 0.17em;
+  --dashboard-border-radius: 5px;
+  --dashboard-border-width: 1px;
   --dashboard-iframe-radius: calc(var(--dashboard-border-radius) - var(--dashboard-border-width))
 }
 
