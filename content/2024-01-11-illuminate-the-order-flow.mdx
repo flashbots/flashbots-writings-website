@@ -91,7 +91,7 @@ The data we will present is collected from the Ethereum blockchain on November 1
   aspectRatio="16/9"
 />
 
-**Figure 2, 3, and 4.** Percentage market share of 38 tracked Ethereum frontends[¹](#superscript-1) by volume, transaction count, and users from November 1, 2023 to November 30, 2023.
+**Figure 2, 3, and 4.** Percentage market share of 45 tracked Ethereum frontends[¹](#superscript-1) by volume, transaction count, and users from November 1, 2023 to November 30, 2023.
 
 **Figure 2** shows [$14B](https://dune.com/queries/3295603) of Ethereum DEX volume in November 2023 originated from transactions that called frontend router contracts directly, a method which we estimate the majority to be retail, nontoxic order flow.
 
@@ -461,7 +461,7 @@ frontend a user trade originated from.
 
 Searcher (eg market maker or sandwiching) volume is removed in this method as all major searchers use their own contracts to interact with pools directly. We deduplicate volume by only counting the _first_ on-chain entry point, so when Metamask’s meta-aggregator routes an $100 user order through 1inch, the $100 is only counted as Metamask’s user volume.
 
-_Identification of 38 frontends_: Frontends are identified using a mix of sending test transactions on widely known frontends and by identifying router contracts in a list of top Ethereum contracts by gas used.
+_Identification of 45 frontends_: Frontends are identified using a mix of sending test transactions on widely known frontends and by identifying router contracts in a list of top Ethereum contracts by gas used.
 
 _Estimation Details_:
 
