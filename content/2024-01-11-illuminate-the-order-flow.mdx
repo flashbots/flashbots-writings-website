@@ -5,7 +5,7 @@ authors: [angela]
 tags: [data, order-flow]
 image: /img/posts/illuminate-the-order-flow/orderflow-art-title.png
 hide_table_of_contents: false
-date: 2024-01-17 00:00-05:00
+date: 2024-01-17
 description: In this post, we cast light on the state of defi order and transaction flow today. We will show how defi has distinguished itself from the traditional order flow market, and discuss the challenges to achieving our shared dream of systems that remain decentralized while maximally benefiting the user.
 ---
 
@@ -252,13 +252,13 @@ More broadly, we can view the block auction (also called [mev-boost auction](htt
 
 ### Decentralization and competition
 
-We have shown how each of the four auctions lower the barrier to entry, democratize access to retail order flow, and increase competition. Together, the four auctions create a market structure where:
+We have shown how each of the four auctions lower the barrier to entry, democratize access to retail order flow, and increase competition. Together, the four sequential order-by-order auctions create a market structure where:
 
 - Anyone with economically meaningful information can express it into the block building process before a user trade executes.
 - Rather than having few big entities do more, there are increasingly high degrees of searcher specialization that cooperate on routing, providing liquidity, and bundle merging to produce a block.
 - And competition among this network of specialized searchers is effectively harnessed towards price improvement for users on an order-by-order basis.
 
-Ultimately, the four sequential auctions showcase a decentralized and cooperative process of arriving at global consensus on a financial state. We use sankey diagrams to visualize this process for November 2023.
+Ultimately, the sequential order-by-order auctions showcase a decentralized and cooperative process of arriving at global consensus on a financial state. We use sankey diagrams to visualize this process for November 2023.
 
 ![Screenshot 2023-12-27 at 8.21.32 AM.png](/img/posts/illuminate-the-order-flow/retail-trade-volume-sankey-nov-2023.png)
 
@@ -310,7 +310,7 @@ Contrary to atomic arbitrage which gets more competitive and decentralized over 
 
 **Figure 16** shows that market makers SCP (PLM on Cowswap) and Wintermute (Rizzolver on 1inch Fusion) fill over 75% of ETH/BTC trade volume on the top four order flow sources on Ethereum: Uniswap, 1inch, Metamask, and Cowswap. Cowswap is the exception of the four, where SCP’s Solver PLM only fills 40% _directly_, which could be due to Cowswap's mechanism design and/or more solver competition.
 
-To understand the relationship between volume and profit, we estimate market making profits on solver auctions through direct market maker integration as a solver and indirect integration via Hashflow for ETH-USDC, the most popular trading pair on Ethereum, and LINK-USDC, the most popular trading pair outside of ETHBTC and pegged token pairs. Profits are estimated using markouts against centralized spot exchange Binance, often considered crypto’s venue of price discovery where the [fair value](https://frontier.tech/a-tale-of-two-arbitrages) of high liquidity assets can be estimated.
+To understand the relationship between volume and profit, we estimate market making profits on solver auctions through direct market maker integration as a solver and indirect integration via Hashflow. We look at ETH-USDC, the most popular trading pair on Ethereum, and LINK-USDC, the most popular trading pair outside of ETHBTC and pegged token pairs. Profits are estimated using markouts against centralized spot exchange Binance, often considered crypto’s venue of price discovery where the [fair value](https://frontier.tech/a-tale-of-two-arbitrages) of high liquidity assets can be estimated.
 
 <DuneDashboard
   source="https://dune.com/embeds/3314013/5550314"
@@ -333,9 +333,9 @@ Cowswap is the only order flow source where it is possible to compare the profit
 1. _To bypass fees charged by intermediaries:_ Hashflow and RFQs charge market makers a “dynamic fee” for filling user trades through their API. Market makers are charged on a per-order basis, such as 30 bps on risk trades (eg USDC-WETH) and 10 bps on stables (eg USDC-USDT), but charge lower fees from market makers if it would change an order’s route from sourcing AMM liquidity to PMM liquidity. Effectively, indirectly integrated market makers have to quote at least 10-30 bps better to compete with directly integrated market makers.
 2. _To obtain control over the execution (known as last look):_ In Uniswap X, directly integrated market makers can choose not to fill user orders when the price moves against them. But, in the case of indirect integration, a separate entity controls the execution of the trade, forcing market makers to quote wider, or less competitively, to account for cases when the price changes against them.
 
-The capital and resource requirements to stake and integrate each system directly to access such market making advantages can only be afforded by large teams such as SCP and Wintermute. Similarly, running a block builder also [creates](https://arxiv.org/pdf/2311.09083.pdf) market making advantages that can only be afforded by SCP and Wintermute. Named beaverbuild and rsync builder respectively, SCP and Wintermute run the two most dominant block builders on Ethereum, who together built over [66% of MEV-Boost blocks](https://mevboost.pics/) in the first week of January 2024.
+The capital and resource requirements to stake and integrate each system directly to access such market making advantages can only be afforded by large teams such as SCP and Wintermute. Similarly, running a block builder also [creates](https://arxiv.org/pdf/2311.09083.pdf) market making advantages that can only be afforded by SCP and Wintermute. Named beaverbuild and rsync builder respectively, SCP and Wintermute run the two most dominant block builders on Ethereum, who together built [61% of MEV-Boost blocks](https://mevboost.pics/) in the first two weeks of January 2024.
 
-The dominance of these two market making teams across every vertical in the order flow processing network support historical observations on the propensity of financial systems to centralize over time and just how powerful economies of scale can be. Decentralization in defi is far from guaranteed, so we must be intentional about the market structure that our mechanisms create.
+The dominance of these two market making teams across every vertical in the order flow processing network support historical observations in tradfi on the propensity of financial systems to centralize over time and just how powerful economies of scale can be. Decentralization in defi is far from guaranteed, so we must be intentional about the market structure that our mechanisms create.
 
 ### Not all mechanisms are created equal.
 
@@ -361,19 +361,19 @@ Data on Uniswap X also shows centralization of power and profit within a handful
 
 **Figure 19** shows that in November, 90% of volume on Uniswap X was filled by four incumbent market makers, with the top market maker Wintermute filling 60%.
 
-Having three times as much order flow power as Cowswap and 1inch (**Figure 2**), Uniswap X’s design choices are particularly impactful. Uniswap X’s design auctions off an exclusive fill period for each user order to a group of whitelisted solvers, where the winning solver is required to fill 90% of the order auctions they win. This design repeats many of the mistakes that centralized tradfi market structure:
+Having three times as much order flow power as Cowswap and 1inch Fusion (**Figure 2**), Uniswap’s design choices are particularly impactful. Uniswap X’s design auctions off an exclusive fill period for each user order to a group of whitelisted solvers, where the winning solver is required to fill 90% of the order auctions they win. This design repeats many of the mistakes we discussed earlier that centralized tradfi market structure:
 
 1. Segmentation of retail flow away from passive liquidity providers and directly to a permissioned set of market makers. This change actively centralizes power within a handful of incumbent market makers and taxes the profitability, and therefore incentive, to provide passive liquidity.
 2. Mechanisms that regulate misbehavior in aggregate erode incentives to provide each individual user with the best possible price. In only requiring >90% of orders to be filled in aggregate, market makers will choose not to fill when the price changes against them and increase the percentage in other ways, such as still filling when the loss is small.
 
-The degradation of passive liquidity as a result of segmenting up to 25% of retail order flow on Ethereum will:
+The degradation of passive liquidity as a result of segmenting up to 30% of retail order flow on Ethereum will:
 
-- Result in less competitive user quotes over time for Uniswap traders, as increased trade impact from less depth of passive liquidity further lowers the minimum that market makers must quote.
-- Further negatively impact non-Uniswap traders, such as users not located within the countries of Uniswap’s geographically regulated frontend, who cannot trade against whitelisted market makers and face larger price impact in the permissionless passive liquidity pools.
+1. Result in less competitive user quotes over time for Uniswap traders, as increased trade impact from less depth of passive liquidity further lowers the minimum that market makers must quote.
+2. Further negatively impact non-Uniswap traders, such as users not located within the countries of Uniswap’s geographically regulated frontend, who cannot trade against whitelisted market makers and face larger price impact in the permissionless passive liquidity pools.
 
 We show in earlier sections the role that democratized access to order flow has in driving better user outcomes, and the range and diversity of both user and searcher risk preferences. We prove the existence of signal traders willing to take inventory of lower liquidity token symbols, such as MEV-Blocker searcher [0xa1c](https://etherscan.io/tx/0x76f903fe9298f7d5cf5158503b33350c033f824b59a31b0afafa44d6eb2a73a6) taking inventory of HAY and [jaredfromsubway.eth](https://etherscan.io/tokenholdings?a=0x6b75d8af000000e20b7a7ddf000ba900b4009a80), who manages inventory of more than 3,000 low liquidity tokens worth over $1M in aggregate. In contrast, SCP and Wintermute market make [75](https://etherscan.io/tokenholdings?a=0xa69babef1ca67a37ffaf7a485dfff3382056e78c) and [53 tokens](https://etherscan.io/address/0x51c72848c68a965f66fa7a88855f9f7784502a7f) respectively.
 
-In designing mechanisms that favor a handful of market makers, Uniswap X fails to leverage the price improvement that a permissionless network of searchers can provide on both high and lower liquidity token symbols. Instead, Uniswap creates a system that biases towards the risk preferences of incumbents, ultimately underserving defi’s, and Uniswap’s own, core userbase, who itself represents $2.8B (40% in **Figure 6**) of Ethereum’s retail long-tail token trading volume in November 2023.
+In designing mechanisms that favor a handful of market makers, Uniswap X fails to leverage the price improvement that a permissionless network of searchers can provide on both high and lower liquidity token pairs. Instead, Uniswap creates a system that biases towards the risk preferences of incumbents, ultimately underserving defi’s, and Uniswap’s own, core userbase, who itself represents $2.8B (40% in **Figure 6**) of Ethereum’s retail long-tail token trading volume in November 2023.
 
 <p style={{ textAlign: "center" }}>
   <br />
@@ -402,17 +402,17 @@ The information privacy of trades is particularly important in upholding the exe
 1. _trading ahead:_ “(Auction messages) would include detailed information regarding the characteristics of the retail order, including the stock, the direction (buy or sell), and the auction limit price. As a result, all market participants would be aware of the relevant characteristics of the retail order prior to that order actually being executed, and would be freely permitted to trade ahead of the retail order on the basis of that information _even though the execution of the retail order is not certain_. The Proposal thus creates a mechanism that effectively licenses and encourages others to trade ahead of retail orders. Information leakage significantly increases the likelihood that prices move against the retail investor while the order is delayed for 100 to 300 milliseconds in the auction (particularly for larger orders and orders in less liquid stocks).”
 2. _failed auctions:_ “The auction mechanism can fail to result in an execution, in which case the retail order would need to be routed to an exchange or another auction. In the event this occurs, one should expect the retail investor to receive far worse execution quality, as the market is fully aware of the auction failure and will take that into account (as well as the price impact from the information leakage and trading ahead that has occurred) when determining whether, and at what price, to fill the order … Retail orders in less liquid stocks should be expected to receive worse execution quality as failed auctions would be more impactful for these orders.”
 
-Citadel recognizes that trading ahead and failed auctions is particularly impactful for large trades and long-tail trading. In defi, solver auction frontends are the most popular venues for both user profiles. Uniswap, Cowswap, and 1inch make up $3.8B (40%, 10%, and 5% in **Figure 6**) in Ethereum’s retail long-tail token trading volume in November 2023. And Uniswap, Cowswap, and 1inch Fusion and API frontends processed 154, 189, and 752 trades of sizes over $1M, together representing 75% of the retail order flow market, in November 2023 (**Figure 5**).
+Citadel recognizes that trading ahead and failed auctions is particularly impactful for large trades and long-tail trading. In defi, solver auction frontends are the most popular venues for both user profiles. Uniswap, Cowswap, and 1inch Fusion make up $3.8B (40%, 10%, and 5% in **Figure 6**) in Ethereum’s retail long-tail token trading volume in November 2023. And Uniswap, Cowswap, and 1inch Fusion and API frontends processed 75% of trades over $1M (154, 189, and 752 trades respectively) in November 2023 (**Figure 5**).
 
 Yet, solver auction mechanisms today fail to address these significant information shortcomings, which are particularly impactful to protecting the execution quality of their core userbases.
 
 Cowswap and 1inch Fusion are designed as open limit order books, where anyone can see the token pair, the direction (buy or sell), and the limit price of user orders. The realized adverse execution effects of on-chain open limit order books are currently under-researched, but probabilistic trading ahead as described by Citadel is very much possible today.
 
-In Uniswap X, additional pricing signals are revealed at each stage of the auction: when an exclusive period is granted, when the winning market maker chooses not to fill, and when the auction fails outright. If a market maker won the exclusive fill period, all other market participants can anticipate the trade will be executed in the next block, and can frontrun on both centralized exchanges and decentralized exchanges on-chain. If the winning market maker chooses not to fill or the auction fails outright, market participants will price in that information when the order is re-routed to solver or market maker auctions, or routed to the subsequent OFA and block auctions, likely resulting in a worse quote than originally signed.
+In Uniswap X, additional pricing signals are revealed at each stage of the auction: when an exclusive period is granted, when the winning market maker chooses not to fill, and when the auction fails outright. If a market maker won the exclusive fill period, all other market participants can anticipate the trade will be executed in the next block, and can frontrun the market maker on both off-chain centralized exchanges and on-chain decentralized exchanges. If the winning market maker chooses not to fill or the auction fails outright, market participants will price in that information when the order is re-routed to solver or market maker auctions, or routed to the subsequent OFA and block auctions, likely resulting in a worse quote than originally signed.
 
 Existing solutions to trading ahead and failed auctions (also referred to as pre-trade and post-trade privacy) in defi involve adding centralized entities that are trusted to uphold privacy guarantees. This is the case for OFAs MEV-Blocker and MEV-Share described above, as well as the block auction, where the privacy of searcher bundles are upheld by trust in block builders to facilitate the sealed-bid auction faithfully and keep failed bundles private forever.
 
-Experimentation in permissionless, albeit centralized, privacy APIs, and investing in the privacy infrastructure that will one day decentralize such APIs is one of the most important research and development problems in defi execution today.
+Experimentation in permissionless, albeit centralized, privacy APIs and investing in the privacy infrastructure that will one day decentralize such APIs is one of the most important research and development problems in upleveling execution quality in defi and maximizing the competitive potential of order-by-order auctions in comparison to PFOF wholesaling market structures.
 
 ## Orderflow.art
 
@@ -420,7 +420,7 @@ Today, we launch along with this blog post [orderflow.art](https://orderflow.art
 
 In illuminating order flow, we seek to educate users and frontend projects on the untapped price improvements and monetization opportunities of their trades, simplify the discovery and evaluation processes of MEV opportunities for searchers and liquidity projects, and monitor the decentralization of the market as a collective.
 
-All data and query code is open-source, and methodology, including project-specific handling, is documented [here](https://www.notion.so/Orderflow-art-Methodology-3043d2671f3043e6afb2e6bc39932446?pvs=21).
+All data presented in the blog post and dashboard along with their query code is open-source and accessible on Dune by directly clicking on the embeds. Sankey methodology, code, and data, including project-specific handling, is documented and accessible [here](https://www.notion.so/Orderflow-art-Methodology-3043d2671f3043e6afb2e6bc39932446?pvs=21).
 
 As the number of centralized off-chain MEV systems increase, trust should be accompanied with easy and legible access to the information required to understand the properties of the mechanism and the data to analyze the execution quality received. The detail in visualization and depth in analysis of off-chain solver and order flow auctions in this work is only possible with the hard work by the CoW Protocol and 1inch Labs team in publishing and maintaining Cowswap, MEV-Blocker, and 1inch Fusion data sets.
 
