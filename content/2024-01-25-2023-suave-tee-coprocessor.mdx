@@ -23,12 +23,12 @@ For our purposes, a TEE coprocessor is a system that runs adjacent to an ordinar
 
 By the end of the post, the functionality we’ll end up with is similar to Secret Network and other TEE-based smart contracts like Oasis, Phala, Obscuro, as well as earlier research papers like [Ekiden](https://arxiv.org/pdf/1804.05141.pdf) and [State for the Stateless](https://eprint.iacr.org/2017/201). All of these share the same high level design: take an ordinary blockchain, but make the smart contract VM run inside a TEE. Now you have a smart contract system with confidentiality of some kind. There’s actually a [Systemization of Knowledge paper](https://arxiv.org/abs/2203.08548) including 20+ variations of this throughout academia and industry.
 
-However, the path we take to build add TEE to smart contracts is different than all these related projects. Specifically our codebase is simpler, because as much as possible is done in Solidity itself, and because we attach to an existing entirely unmodified blockchain.
+However, the path we take to add TEE to smart contracts is different than all these related projects. Specifically our codebase is simpler, because as much as possible is done in Solidity itself, and because we attach to an existing entirely unmodified blockchain.
 
 ### Illuminating the TEE Coprocessor with a minimalist speedrun
 The design approach we take is optimized for *observability*. Nearly everything is written in Solidity. You'll see that we only modify a tiny bit of Rust code in the REVM crate, and the rest is just smart contracts. We want to have the trusted compute base be Solidity as much as possible to promote visibility. Actually, these precompiles expose a whole SGX framework to the Solidity developer, with local private storage and remote attestation.
 
-What we are going to do is add some extra precompiles to extend the ordinary EVM. These precompiles won't actually be recognized by validators and clients of the underlying blockchain itself. It will look like a contract with a bunch of useless view functions that fail. However, these precompiles will be meaningful to TEE nodes running SGX enclaves, called Kettles... these are the compute nodes that actually carry out the computation of the "coprocessor" system as a whole. 
+What we are going to do is add some extra precompiles to extend the ordinary EVM. These precompiles won't actually be recognized by validators and clients of the underlying blockchain itself. It will look like a contract with a bunch of useless view functions that fail. However, these precompiles will be meaningful to TEE nodes running SGX enclaves, called Kettles... these are the compute nodes that actually carry out the computation of the "coprocessor" system as a whole.
 
 ### Smart contract programming with the Sirrah coprocessor
 
@@ -95,7 +95,7 @@ contract LeakyAuction is AuctionBase {
 }
 ```
 
-The main problem here is pre-trade privacy. Bids are in plaintext, so the "Second Price" aspect is not at all secure against front running. Whoever goes last can influence the outcome price, griefing the winner. Put another way, the point of privacy in a second price auction is to prevent shill bidding... we don't want the auctioneer peeking at the winner's bid and raising the price to $1 below their offer. 
+The main problem here is pre-trade privacy. Bids are in plaintext, so the "Second Price" aspect is not at all secure against front running. Whoever goes last can influence the outcome price, griefing the winner. Put another way, the point of privacy in a second price auction is to prevent shill bidding... we don't want the auctioneer peeking at the winner's bid and raising the price to $1 below their offer.
 
 Now, if we had a TEE coprocessor, we could extend our smart contract to use some extra features.
 Instead of plaintext orders, the client can submit encrypted orders to the `xPub` public key:
@@ -132,7 +132,7 @@ function finalize() public coprocessor {
   applyOnchain(secondPrice_) {
   	secondPrice = secondPrice_;
 	emit Concluded(secondPrice);
-  }	 
+  }
 }
  ```
 
@@ -140,20 +140,20 @@ The most whimsical feature here is the `applyOnchain` codeblock. The idea is tha
 
 We've seen enough of the coprocessor programming model to know where we're headed. Now let's dive into how to implement this using TEEs.
 
-## How do you build a TEE coprocessor? 
+## How do you build a TEE coprocessor?
 Here’s an outline of the steps we'll take to implement the auction application described above:
 
 1. **Run REVM in an enclave.** The basic implementation is a fork of REVM that can run in an SGX enclave. We use the Gramine framework, but other frameworks like Oclum or Fortanix would work about as well. We will include several additional precompiles that we need to build the coprocessor. Specifically we need the ability to generate and store the private key `xPriv`.
 
 2. **Include a light client in the enclave.** We have to ensure the TEE coprocessor only executes EVM in a valid context corresponding to the actual blockchain state. We are using the Helios light client running in Gramine, and adapted to handle Proof-of-Authority (rather than Proof-of-Stake).
 
-3. **Add remote attestation to Solidity.** We need to use the remote attestation feature of TEE so that our smart contracts can verify that a message came from a TEE.  To do this, we add a new precompile so that Solidity code is allowed to generate a remote attestation. It's a bit like Gramine for Solidity, since we are exposing a fairly low level interface directly to the smart contract environment. While generating an attestation requires an SGX processor, verifying the attestation occurs entirely on-chain. The remote attestation is just a certificate chain, and the verifier is written in Solidity. We specifically use the Automata-V3-DCAP repository, which is an open source Solidity library for verifying these.
+3. **Add remote attestation to Solidity.** We need to use the remote attestation feature of TEE so that our smart contracts can verify that a message came from a TEE.  To do this, we add a new precompile so that Solidity code is allowed to generate a remote attestation. It's a bit like Gramine for Solidity, since we are exposing a fairly low level interface directly to the smart contract environment. While generating an attestation requires an SGX processor, verifying the attestation occurs entirely on-chain. The remote attestation is just a certificate chain, and the verifier is written in Solidity. We specifically use the [Automata-V3-DCAP](https://github.com/automata-network/automata-dcap-v3-attestation) repository, which is an open source Solidity library for verifying these.
 
 4. **Finish the Auction Application.** We’ll finish out the application by writing Solidity code to finalize the auction, carrying out the decryption on the TEE coprocessor and writing the response back on-chain.
 
 ![sirrah key manager](../static/img/sirrah-auction.png)
 
-We’ll next go through each of these steps in more detail. 
+We’ll next go through each of these steps in more detail.
 
 ## 1. Running EVM in a TEE
 
@@ -163,7 +163,7 @@ A TEE is an isolated process environment. It's a feature supported by many Intel
 The most important TEE feature we use is remote attestation. This means the TEE can produce a chain of certificates signed by the root of trust (the manufacturer, Intel). You can verify this certificate to check if a given message was actually produced by a TEE. We'll come back to this later.
 
 
-### What’s Gramine? 
+### What’s Gramine?
 Gramine is the framework we use for adapting existing code to run in an SGX enclave.
 Really it does two things. The first is that it can package up all the binaries of the dependencies into a single root hash.
 Specifically this is a “manifest file,” and with Gramine you basically point it to copy any of the built dependencies and system libraries. Comes with examples for Rust.
@@ -202,7 +202,7 @@ fn sgxattest_random(input: &[u8], gas_limit: u64) -> PrecompileResult {
 }
 ```
 
-We also need to store the key, persisting it locally. 
+We also need to store the key, persisting it locally.
 ```rust
     function Suave.volatileSet(bytes32 tag, bytes32 value) external coprocessor;
     function Suave.volatileGet(bytes32 tag) external coprocessor returns(bytes32);
@@ -228,7 +228,7 @@ fn sgxattest_volatile_set(input: &[u8], gas_limit: u64, env: &Env) -> Precompile
 Note that this means the precompile has a side effect on the coprocessor. Although `coprocessor` blocks are like `views` in that they do not have side effects on the on-chain state, they still modify the local storage of the coprocessor. This is volatile storage in the sense that it is persistent between calls, but it’s limited to the lifetime of this process.
 
 A final mechanism we expose is sealing keys. These are persistent keys that persist even if the TEE process restarts. The sealed key will be the same. It is bound to the particular CPU, and to the particular enclave. In our implementation, a unique sealing key is derived for each *caller*.
-  
+
 
 ## 2. Light Client in an TEE
 
@@ -244,9 +244,9 @@ In contrast to the Helios consensus, Sirrah is designed for the Clique Proof-of-
 While it was easy to import Helios execution layer verification methods into the kettle to do real-time verification of state, this also means we are still depending on a large part of Helios which is not required to run within SGX, namely all code which uses (asynchronous) network communication. To make this code work in Gramine, we had to enable the "insecure" eventfd system and switch to multi-threaded execution. It is possible that this exposes additional attack surfaces which is why in a future version we want to limit the kettles exposure to Helios to only the verification logic, providing it with pre-fetched state and verification proofs for each transaction.
 
 ## 3. Adding Remote Attestation to Solidity
-We’ve used the enclave to generate decryption keys. How can we be sure that we have a public key that was in fact generated this way? 
+We’ve used the enclave to generate decryption keys. How can we be sure that we have a public key that was in fact generated this way?
 
-This is where remote attestation comes in. 
+This is where remote attestation comes in.
 ```solidity
  function Suave.attestSgx(bytes32 appData) external coprocessor returns (bytes memory att);
  function Suave.verifySgx(address caller, bytes32 appData, bytes memory att) public view returns (bool);
@@ -268,7 +268,7 @@ fn sgxattest_run(input: &[u8], gas_limit: u64, env: &Env) -> PrecompileResult {
     } else {
         // Write some user report data
         let mut f = match File::create("/dev/attestation/user_report_data")?;
-	// User report data = Hash( Caller || Application input) 
+	// User report data = Hash( Caller || Application input)
 	let domain_sep = env.msg.caller;
 	let message : &[u8] = &ethers_core::abi::encode(&[Token::Address(H160(domain_sep.0.0)),
 							  Token::Bytes(input.to_vec())]);
@@ -286,7 +286,7 @@ This example uses Gramine, so we’ll explain how remote attestation works there
 ### Bootstrapping a key
 We can now put together these components together and initialize the contract, generating the private key in the Kettle.
 ```solidity
-    function offchain_Bootstrap() public 
+    function offchain_Bootstrap() public
     returns(bytes memory _xPub, bytes memory att) {
 	bytes32 xPriv_ = Sirrah.localRandom();
 	_xPub = PKE.derivePubKey(xPriv_);
@@ -298,9 +298,9 @@ We can now put together these components together and initialize the contract, g
 In the next step we’ll have to verify this on-chain.
 
 ### On-chain verification of Remote Attestations
-So far we have described how to bootstrap a key and generate key off-chain. Verifying attestations is the next task. This doesn’t require anything special from the EVM, just some good old-fashioned Solidity coding. Here’s a [(forum post)](https://collective.flashbots.net/t/demystifying-remote-attestation-by-taking-it-on-chain/2629/2) about two projects, RAVE from Pu ffer Finance, and Automata-DCAP-v3-Attestation that do this. There’s even a [contest](https://github.com/amiller/sgx-epid-contest/) to illustrate how verification of EPID transactions work. 
+So far we have described how to bootstrap a key and generate key off-chain. Verifying attestations is the next task. This doesn’t require anything special from the EVM, just some good old-fashioned Solidity coding. Here’s a [(forum post)](https://collective.flashbots.net/t/demystifying-remote-attestation-by-taking-it-on-chain/2629/2) about two projects, RAVE from Pu ffer Finance, and Automata-DCAP-v3-Attestation that do this. There’s even a [contest](https://github.com/amiller/sgx-epid-contest/) to illustrate how verification of EPID transactions work.
 
-// The main thing we do is make a development environment that separates “verifying” attestations from creating them. Basically we are running a webservice, Attestations on Demand, that let you configure the 64-byte user data to whatever you want. Basically this is a convenient way of generating realistic test cases for the verifier, without actually having to run your own SGX node. 
+// The main thing we do is make a development environment that separates “verifying” attestations from creating them. Basically we are running a webservice, Attestations on Demand, that let you configure the 64-byte user data to whatever you want. Basically this is a convenient way of generating realistic test cases for the verifier, without actually having to run your own SGX node.
 
 Here's an excerpt from the key manager code to install the public key:
 ```solidity
@@ -354,7 +354,7 @@ function onchain_Finalize(uint256 secondPrice_, bytes memory att) public {
 This concludes the speedrun! An end-to-end auction demo using TEE for privacy.
 
 Let’s count the lines of code:
-- `SpeedrunAuction.sol`: 139 lines 
+- `SpeedrunAuction.sol`: 139 lines
 	Can you believe it? This is pretty much the entire application, including the bootstrapping the auction logic itself.
 - `Andromeda.sol`: 61 lines Just type annotations around the precompile “STATICCALL”s
 - `suave-andromeda-revm/src/precompiles/sgxattest.rs` 185 lines  for the implementation of the precompiles themselves
@@ -367,7 +367,7 @@ Let’s count the lines of code:
 We finished the MVP demo, but the code repository contains a little bit more demonstration of the “payoff” of doing everything in Solidity for so much of the system. We can now improve the key manager process just by modifying the Solidity code. Basically we provide a module that is roughly similar to how Secret Network handles keys for different contracts across multiple SGX compute nodes. It has the following features:
 A key is bootstrapped initially by a single node, but thereafter it is shared to other SGX nodes that join the network.
 Remote attestation is expensive on-chain, so we only do it once when a new node registers. Subsequent “signed messages” from that node can just use inexpensive digital signatures, the on-chain registry basically maps addresses to the attestation collected previously.
-Furthermore many applications can share the same key distribution. Each application gets access to its own hardened derived key, just like bitcoin wallet derivation. 
+Furthermore many applications can share the same key distribution. Each application gets access to its own hardened derived key, just like bitcoin wallet derivation.
 Here’s a high level depiction:
 
 ![sirrah key manager](../static/img/sirrah-keymanager.png)
@@ -383,7 +383,7 @@ It may sound like a tough task, but Solidity is actually fairly efficient for al
 
 ### Providing an Explicit Privacy Model
 
-Our threat model is an *analysis oriented Kettle operator* that runs a modified version of everything except the enclave, and is trying to leak as much alpha from observing the MEVM execution as possible. We mentioned the point of our example is to keep the bids sealed. But what actually else is leaked during EVM execution? 
+Our threat model is an *analysis oriented Kettle operator* that runs a modified version of everything except the enclave, and is trying to leak as much alpha from observing the MEVM execution as possible. We mentioned the point of our example is to keep the bids sealed. But what actually else is leaked during EVM execution?
 
 Actually, many operations like SHA3 have a fundamentally variable amount of data they process… this in particular operates on a variable length string read from “memory”. It’s charged gas accordingly too, the gas gost being 30 gas + 6 gas for each word (rounded up). We could redact the gas used counter…. but the more important thing is the actual size of the data is only limited by the max gas parameter of the transaction. We can’t “Pad” every SHA3 to this max possible size.
 
