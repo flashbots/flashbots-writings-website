@@ -9,7 +9,7 @@ date: 2024-01-25 00:00
 description: "Get in losers, we are attaching a TEE to a blockchain. All in under 2k lines of code, mostly Solidity"
 ---
 
-This post presents Sirrah, a minimalist demo of extending a blockchain with confidential computing using Trusted Execution Environments (TEEs). We'll cover the development end-to-end: starting from Gramine-SGX and ordinary REVM, and ending with MEV-aware auction application... and a timelock encryption demo that you [can try right now](http://timelock.sirrah.suave.flashbots.net:5173/).
+This post presents Sirrah, a minimalist demo of extending a blockchain with confidential computing using Trusted Execution Environments (TEEs). We'll cover the development end-to-end: starting from Gramine-SGX and ordinary REVM, and ending with MEV-aware auction application... and a timelock encryption demo that you [can try right now](https://timelock.sirrah.suave.flashbots.net/).
 
 <!--truncate-->
 
@@ -416,5 +416,5 @@ This is inspired by the "Vigil.sol" application on Oasis (which is no coincidenc
 Basically the flow is similar to the auction, but instead of uploading an encrypted bid, you post an encrypted message to the blockchain to the public key associated with this `Timelock.sol` smart contract.
 The contract lives on the Rigil testnet [https://explorer.rigil.suave.flashbots.net/address/0x685816...26dDD6](https://explorer.rigil.suave.flashbots.net/address/0x6858162E579DFC66a623AE1bA357d67BF026dDD6).
 The encrypted message can only be decrypted by a TEE kettle, after the encrypted message is timestamped on-chain and a fixed duration passes (about one minute).
-You can try it out with the [demo's front-end webapp](http://timelock.sirrah.suave.flashbots.net:5173/).
+You can try it out with the [demo's front-end webapp](https://timelock.sirrah.suave.flashbots.net/).
 Note that you will need a web3 provider like Metamask, and to point it to [the Rigil testnet](https://github.com/flashbots/suave-specs/tree/main/specs/rigil), and probably visit the [Rigil faucet](https://faucet.rigil.suave.flashbots.net/).
