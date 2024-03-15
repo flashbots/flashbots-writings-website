@@ -31,7 +31,7 @@ export const bannerConfig: BannerOptions = {
     - bannerContent: "Banner content!"
     - bannerContent: (<span>Banner content! <a href='https://example.com' target='_blank' rel='noreferrer'>Link</a></span>)
   */
-  bannerContent: null,
+  bannerContent: <>⚡️ <a href='https://ethglobal.com/events/london2024/prizes/flashbots' target='_blank' rel='noreferrer'>In London? Curious about SUAVE? Join the SUAVE-hackathon this weekend!</a> ⚡️</>,
 
   /*
   backgroundColor: Single, solid background color for the banner
@@ -42,7 +42,7 @@ export const bannerConfig: BannerOptions = {
     - backgroundColor: null
     - backgroundColor: "#023047"
   */
-  backgroundColor: null,
+  backgroundColor: "#1B2A37",
 
   /*
   textColor: Single, solid text color for the banner
@@ -53,7 +53,7 @@ export const bannerConfig: BannerOptions = {
     - textColor: null
     - textColor: "#ffb703"
   */
-  textColor: null,
+  textColor: "#EDD050",
 
   /*
   startDate: Date and time (UTC) when the banner should start appearing on the website
@@ -77,7 +77,7 @@ export const bannerConfig: BannerOptions = {
     - endDate: null
     - endDate: "2007-02-01 00:00Z"
   */
-  endDate: null,
+  endDate: "2024-03-18 00:00Z",
 
   /*
   customCSS: Determines whether to use a custom CSS instead instead of the color options
