@@ -16,6 +16,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
   favicon: "img/favicon.ico",
   organizationName: "flashbots", // Usually your GitHub org/user name.
   projectName: "writings-website", // Usually your repo name.
+  trailingSlash: false,
   stylesheets: [
     {
       href: "https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css",
