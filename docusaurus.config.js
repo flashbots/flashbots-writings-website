@@ -133,8 +133,25 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
             title: 'x',
             items: [
               {
+                label: 'What Is MEV',
+                href: 'https://docs.flashbots.net/new-to-mev',
+              },
+              {
+                label: 'MEV Protection',
+                href: 'https://docs.flashbots.net/flashbots-protect/overview',
+              },
+              {
                 label: 'The MEV Letter',
                 href: 'https://collective.flashbots.net/tag/the-mev-letter',
+              },
+            ],
+          },
+          {
+            title: 'x',
+            items: [
+              {
+                label: 'Ethereum Block Building',
+                href: 'https://docs.flashbots.net/flashbots-mev-boost/block-builders',
               },
               {
                 label: 'Transparency reports',
