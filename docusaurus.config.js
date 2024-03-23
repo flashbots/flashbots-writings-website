@@ -89,11 +89,11 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
           target: "_self"
         },
         items: [
-          {href: "https://flashbots.net", label: 'About', position: 'left'},
+          {href: "https://www.flashbots.net/", label: 'About', position: 'left'},
           {href: "https://docs.flashbots.net/", label: 'Docs', position: 'left'},
           {href: "https://boost.flashbots.net/", label: 'MEV-Boost', position: 'left'},
           {href: "https://collective.flashbots.net/", label: 'Forum', position: 'left'},
-          {href: "https://jobs.flashbots.net/", label: 'Join us', position: 'left'},
+          {href: "https://www.flashbots.net/jobs/", label: 'Join us', position: 'left'},
           // {
           //   type: 'localeDropdown',
           //   position: 'right',
