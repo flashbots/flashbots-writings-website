@@ -1,9 +1,13 @@
 {
   "redirects": [
-    { 
-      "source": "/test",
-      "destination": "/", 
+    {
+      "source": "/writings",
+      "destination": "",
       "permanent": true
+    },
+    {
+      "source": "/(writings|research)/:path*",
+      "destination": "/:path*"
     }
   ]
 }
