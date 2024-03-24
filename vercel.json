@@ -3,7 +3,12 @@
     {
       "source": "/(writings|research)/:path*",
       "destination": "/:path*",
-      "permanent": true
+      "statusCode": 301
+    },
+    {
+      "source": "/the-cost-of-resiliencea",
+      "destination": "/the-cost-of-resilience",
+      "statusCode": 301
     }
   ],
   "cleanUrls": true,
