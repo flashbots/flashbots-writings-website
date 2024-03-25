@@ -9,8 +9,6 @@ description: A new mev-boost feature allows validators to maximize Ethereum’s 
 forum_link: https://collective.flashbots.net/t/the-cost-of-resilience/756
 ---
 
-# The Cost of Resilience
-
 _tl;dr_
 - A new mev-boost feature allows validators to maximize Ethereum’s censorship resistance by building low-MEV blocks locally while still outsourcing the building of high-MEV blocks.
 - Using this feature carries an opportunity cost—the price of resilience.
@@ -19,7 +17,7 @@ _tl;dr_
 
 <!--truncate-->
 
-# Network Resilience
+## Network Resilience
 
 Flashbots has recently become a target of public scrutiny after OFAC broadened the set of sanctioned addresses to include smart contracts for the first time, affecting many users of the Ethereum network. While Flashbots has tried to navigate both the risk and ambiguity around the application of OFAC sanctions to data and communications infrastructure in web3 since the beginning, this was less fraught before the merge, when relays were sending bundles to mining pools, who were then responsible of assembling full blocks locally. The market moving to full block submission established the full separation between block builders and validators, who can no longer add individual transactions to a block.
 
@@ -30,7 +28,7 @@ The question then arises of what can we do to address the issue today, while def
 Fortunately, other builders and relays have started to emerge and take increasingly larger shares of the market, and we are actively providing support to teams interested in running other relays. As of last week, we have [open sourced our builder](https://writings.flashbots.net/open-sourcing-the-flashbots-builder), so anyone can now easily run a builder too. From the validators’ perspective, however, the question remains: run mev-boost and comply with the regulations that their trusted relays adopt, or build blocks only locally, potentially forfeiting 100+ ETH profit opportunities?
 
 
-# The Solution
+## The Solution
 
 Now, validators can sidestep this question by running mev-boost with the [new](https://github.com/flashbots/mev-boost#mev-boost-cli-arguments) `min-bid` [parameter](https://github.com/flashbots/mev-boost#mev-boost-cli-arguments). What this parameter does is only accept blocks from relays if they bid above a chosen value, otherwise a locally-built block is proposed. This leverages the fact that the profit increase coming from mev-boost is not that large for most blocks. Validators can thus forfeit a small amount of profit in exchange for making the network more resilient, while keeping the door open for high-MEV opportunities.
 
@@ -38,7 +36,7 @@ Now, validators can sidestep this question by running mev-boost with the [new](h
 
 As depicted, the new `min-bid` parameter allows validators to escape the tradeoff between profit maximization and network resilience. In what follows, we explore the cost that validators incur by opting into this feature.
 
-# Block Profit Distribution
+## Block Profit Distribution
 
 We start by looking at the cumulative distribution of block profits, for both blocks coming from the Flashbots relay, and locally built blocks, all data post-merge[^1]:
 
@@ -52,7 +50,7 @@ The asymmetry in this distribution again shows us how mev-boost blocks are gener
 
 The question now is how much profit would validators be forfeiting by choosing to set a positive value for the `min-bid` parameter.
 
-# Opportunity Cost
+## Opportunity Cost
 
 The opportunity cost of setting a minimum bid value is the cumulative difference in block profit between blocks using Flashbots mev-boost relay and blocks built locally. The larger the minimum bid, the more blocks will be locally built, and the larger the opportunity cost:
 
@@ -64,7 +62,7 @@ As we see from the graph, the opportunity cost can get quite high for large valu
 
 We see again how the opportunity cost increases with the value of `min-bid`, but at the same time the projected APR falls only very slowly. This leads to the question of whether forfeiting a small amount of profit can make a difference in terms of transaction inclusion, which we look at next.
 
-# Effects on Transaction Inclusion
+## Effects on Transaction Inclusion
 
 Around [72% of Ethereum blocks](https://www.inclusion.watch/) are now built in an OFAC-compatible way. This means that some transactions experience delays in getting included on chain. In particular, the probability of one of these transactions to be included after one block is around 28%, corresponding to the validators who either build blocks locally or get profitable blocks from non-OFAC compatible relays. If all validators were using mev-boost and connecting only to OFAC-compatible relays, the inclusion rate would of course fall down to 0.
 
@@ -85,7 +83,7 @@ The following table summarizes our results for different values of the `min-bid`
 
 
 
-# Wat Do?
+## Wat Do?
 
 While censorship resistance ultimately needs to be tackled at the protocol level, we can today leverage the fact that most blocks are low-profit, such that the difference in profit between local and relay-built blocks is not that large.
 
