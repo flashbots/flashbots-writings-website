@@ -17,13 +17,11 @@ import useKeyboardNavigation from '@theme/hooks/useKeyboardNavigation';
 import {ThemeClassNames} from '@docusaurus/theme-common';
 import './styles.css';
 import styles from  './styles.module.scss';
-import { useRedirect } from '../../components/useRedirect';
 import { Analytics } from '@vercel/analytics/react';
 
 function Layout(props: Props): JSX.Element {
   const {children, noFooter, wrapperClassName, pageClassName} = props;
   useKeyboardNavigation();
-  useRedirect()
 
   return (
     <LayoutProviders>
