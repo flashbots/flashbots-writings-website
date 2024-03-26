@@ -61,7 +61,7 @@ The following graph (taken from the [Clockwork Finance paper](https://arxiv.org/
 
 Today, MEV opportunities are much more complex and typical validators (miners) see more than 10 MEV-emitting transactions per block.
 
-Since block building and bundle profit optimization is an [NP-complete](https://angeris.github.io/papers/flashbots-mev.pdf) problem, and we have so many MEV bundles to consider so that brute force is not realistic,[^5] it is difficult for [block builders](https://github.com/flashbots/pm/issues/98) to produce optimal full blocks efficiently (or, before the introduction of proposer builder separation, [mega](https://twitter.com/bertcmiller/status/1442548316735148037)-[bundles](https://docs.flashbots.net/flashbots-auction/releases/alpha-v0.6)).
+Since block building and bundle profit optimization is an [NP-complete](https://angeris.github.io/papers/flashbots-mev.pdf) problem, and we have so many MEV bundles to consider so that brute force is not realistic,[^5] it is difficult for [block builders](https://github.com/flashbots/pm/issues/98) to produce optimal full blocks efficiently (or, before the introduction of proposer builder separation, [mega-bundles](https://twitter.com/bertcmiller/status/1442548316735148037)).
 
 [^5]: Default mev-geth release only merges 3 bundles per block, and over the past year on average there are 5 bundles per block, which is much less than the total number of profitable bundles per block.
 
