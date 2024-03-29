@@ -1,4 +1,5 @@
 require("dotenv").config()
+const mermaid = require("mdx-mermaid")
 const math = require("remark-math")
 const katex = require("rehype-katex")
 const lightCodeTheme = require("prism-react-renderer/themes/github")
@@ -55,7 +56,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
             type: "all"
             // copyright: `Copyright © ${new Date().getFullYear()} Flashbots, .`,
           },
-          remarkPlugins: [math],
+          remarkPlugins: [math,mermaid],
           rehypePlugins: [katex],
         },
         theme: {
