@@ -1,4 +1,5 @@
 require("dotenv").config()
+const mermaid = require("mdx-mermaid")
 const math = require("remark-math")
 const katex = require("rehype-katex")
 const lightCodeTheme = require("prism-react-renderer/themes/github")
@@ -56,7 +57,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
             type: "all"
             // copyright: `Copyright © ${new Date().getFullYear()} Flashbots, .`,
           },
-          remarkPlugins: [math],
+          remarkPlugins: [math,mermaid],
           rehypePlugins: [katex],
         },
         theme: {
@@ -90,11 +91,11 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
           target: "_self"
         },
         items: [
-          {href: "https://flashbots.net", label: 'About', position: 'left'},
+          {href: "https://www.flashbots.net", label: 'About', position: 'left'},
           {href: "https://docs.flashbots.net/", label: 'Docs', position: 'left'},
           {href: "https://boost.flashbots.net/", label: 'MEV-Boost', position: 'left'},
           {href: "https://collective.flashbots.net/", label: 'Forum', position: 'left'},
-          {href: "https://jobs.flashbots.net/", label: 'Join us', position: 'left'},
+          {href: "https://www.flashbots.net/jobs", label: 'Join us', position: 'left'},
           // {
           //   type: 'localeDropdown',
           //   position: 'right',
@@ -134,8 +135,25 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
             title: 'x',
             items: [
               {
+                label: 'What Is MEV',
+                href: 'https://docs.flashbots.net/new-to-mev',
+              },
+              {
+                label: 'MEV Protection',
+                href: 'https://docs.flashbots.net/flashbots-protect/overview',
+              },
+              {
                 label: 'The MEV Letter',
                 href: 'https://collective.flashbots.net/tag/the-mev-letter',
+              },
+            ],
+          },
+          {
+            title: 'x',
+            items: [
+              {
+                label: 'Ethereum Block Building',
+                href: 'https://docs.flashbots.net/flashbots-mev-boost/block-builders',
               },
               {
                 label: 'Transparency reports',
