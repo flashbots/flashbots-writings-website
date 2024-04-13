@@ -80,8 +80,8 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
         {name: 'twitter:card', content: 'summary_large_image'},
         {name: 'twitter:title', content: 'Writings'},
         {name: 'twitter:description', content: 'A collection of articles and papers from Flashbots.'},
-        {name: 'twitter:image', content: 'img/tw-card.jpg'}
       ],
+      image: 'img/tw-card.jpg',
       navbar: {
         title: "Flashbots",
         logo: {
