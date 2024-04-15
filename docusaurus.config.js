@@ -77,8 +77,18 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
     ({
       hideableSidebar: true,
       metadata: [
+        {name: 'description', content: 'A collection of articles and papers from Flashbots.'},
+        // Facebook Meta Tags
+        {property: 'og:url', content: 'https://writings.flashbots.net/'},
+        {property: 'og:type', content: 'website'},
+        {property: 'og:title', content: 'Flashbots Writings'},
+        {property: 'og:description', content: 'A collection of articles and papers from Flashbots.'},
+        {property: 'og:image', content: 'img/tw-card.jpg'},
+        // Twitter Meta Tags
+        {property: 'twitter:domain', content: 'flashbots.net'},
+        {property: 'twitter:url', content: 'https://writings.flashbots.net/'},
         {name: 'twitter:card', content: 'summary_large_image'},
-        {name: 'twitter:title', content: 'Writings'},
+        {name: 'twitter:title', content: 'Flashbots Writings'},
         {name: 'twitter:description', content: 'A collection of articles and papers from Flashbots.'},
       ],
       image: 'img/tw-card.jpg',
