@@ -77,9 +77,10 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
     ({
       hideableSidebar: true,
       metadata: [
+        {name: 'description', content:'Testing new titles'},
         {name: 'twitter:card', content: 'summary_large_image'},
-        {name: 'twitter:title', content: 'Writings'},
-        {name: 'twitter:description', content: 'A collection of articles and papers from Flashbots.'},
+        {name: 'twitter:title', content: 'Testing new titles'},
+        {name: 'twitter:description', content: 'Testing new titles'},
       ],
       image: 'img/tw-card.jpg',
       navbar: {
