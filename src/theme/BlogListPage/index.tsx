@@ -67,13 +67,8 @@ const paginate = function (array: Array<any>[], index: number, size: number, tag
 
 
 function BlogListPage(props: Props): JSX.Element {
-  const { metadata, items, location } = props
-  const {
-    siteConfig: { title: siteTitle }
-  } = useDocusaurusContext()
-  const { blogDescription, blogTitle, permalink } = metadata
-  const isBlogOnlyMode = permalink === "/"
-  const title = isBlogOnlyMode ? siteTitle : blogTitle
+  const { metadata, items } = props
+  const { blogDescription } = metadata
   const tags = extractTags(props)
   const tagsListRef = React.useRef(null)
   const [page, setPage] = useState(0)
@@ -98,7 +93,6 @@ function BlogListPage(props: Props): JSX.Element {
   const [searchFilter, setSearchFilter] = useState("")
   return (
       <BlogLayout
-        title={title}
         description={blogDescription}
         wrapperClassName={clsx(ThemeClassNames.wrapper.blogPages, styles.blogPageRoot)}
         pageClassName={ThemeClassNames.page.blogListPage}
