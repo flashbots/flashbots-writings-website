@@ -85,7 +85,7 @@ function BlogPostItem(props: Props): JSX.Element {
         <div className={clsx(styles.blogPostData, 'margin-hori--md')}>
           <span>
             <time dateTime={date} itemProp="datePublished">
-              { dayjs(date).format("DD.MM.YY") }
+              { dayjs(date).format("YYYY-MM-DD") }
             </time>
 
             {typeof readingTime !== 'undefined' && (
