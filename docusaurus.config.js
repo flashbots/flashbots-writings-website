@@ -77,7 +77,6 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
       hideableSidebar: true,
       metadatas: [
         {name: 'twitter:description', content: "A collection of articles and papers from Flashbots."},
-        {name: 'twitter:title', content: "Flashbots Writings"},
       ],
       image: 'img/tw-card.jpg',
       navbar: {
