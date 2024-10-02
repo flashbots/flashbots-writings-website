@@ -1,0 +1,55 @@
+.logoGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  align-items: center;
+  justify-items: center;
+}
+
+.logoGrid img {
+  max-width: 100%;
+  height: auto;
+}
+
+.LogoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 30px;
+  justify-items: center;
+  align-items: start;
+  padding: 20px;
+}
+
+.logo-item {
+  width: 100%;
+  max-width: 150px;
+
+  figure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.logo-image-container {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.logo-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+figcaption {
+  font-size: 14px;
+  margin: 0;
+  line-height: 1.2;
+  text-align: center;
+}
