@@ -4,6 +4,9 @@
   gap: 20px;
   align-items: center;
   justify-items: center;
+  background-color: #2c2c2c; // Slightly lighter than the logo containers
+  padding: 20px;
+  border-radius: 12px; // Optional: adds rounded corners to the entire grid
 }
 
 .logoGrid img {
@@ -39,6 +42,8 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;
+  background-color: #1e1e1e; // Dark background color
+  border-radius: 8px; // Optional: adds rounded corners
 }
 
 .logo-image {
@@ -52,4 +57,5 @@ figcaption {
   margin: 0;
   line-height: 1.2;
   text-align: center;
+  color: #ffffff; // White text for better visibility on dark background
 }
