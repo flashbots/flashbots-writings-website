@@ -313,19 +313,22 @@ Moreover, wallets have started to capture the value of their order flow.
 14. Pai, M. and Resnick, M., [Structural Advantages for Integrated Builders in MEV-Boost](https://arxiv.org/pdf/2311.09083).
 15. Oz, B., Sui, D., Thiery, T., and Matthes, F., 2024. [Who Wins Ethereum Block Building Auctions and Why?](https://arxiv.org/pdf/2407.13931)
 
-## Account Abstraction
+### Account Abstraction
 
 The implementation of Account Abstraction, particularly through ERC-4337, is revolutionizing user interactions with blockchain networks by introducing smart contract wallets and new entities like Bundlers and Paymasters. These developments are not only enhancing user experience but also creating new opportunities and challenges in transaction processing and fee structures.
 
-### ERC-4337
+#### ERC-4337
 
 The key goals of account abstraction are to remove the need for all users to have an EOA and to allow users to use smart contract wallets as their primary account. Account abstraction accomplishes this by separating account management and transaction execution from EOAs. Account abstraction uses new entities: 1) the Bundler, to initiate transactions and 2) the Paymaster, to determine the gas payment policies.
 
-![Figure 13. [ERC-4337 workflow stream](/img/state_of_wallets_figures/figure_13_erc-4337_workflow_stream.png)
+<Figure
+  src="/img/state_of_wallets_figures/figure_13_erc-4337_workflow_stream.png"
+  number={13}
+  caption="ERC-4337 workflow stream"
+  captionUrl="https://www.alchemy.com/overviews/what-is-account-abstraction"
+/>
 
-Figure 13. [ERC-4337 workflow stream](https://www.alchemy.com/overviews/what-is-account-abstraction).
-
-[ERC-4337](https://eips.ethereum.org/EIPS/eip-4337) introduces two new parties - the Bundler and the Paymaster.
+[ERC-4337](https://eips.ethereum.org/EIPS/eip-4337) introduces two new parties - the Bundler and the Paymaster:
 
 - Bundler - The Bundler assembles multiple user operations into a transaction, similar to a block builder, and submits the transaction to the entry point contract for execution. More importantly, Bundlers have EOAs that allow them to initiate transactions abstracting away the need for users to have an EOA wallet. Current bundlers include Skandha, Alchemy, Rundler, Voltaire, Alto, Stackup, and Infinitism.
 
@@ -349,13 +352,14 @@ Figure 13. [ERC-4337 workflow stream](https://www.alchemy.com/overviews/what-is-
   caption="Weekly Paymaster Gas Spend"
   captionUrl="https://www.bundlebear.com/overview/all"
 />
-Future Implications
+
+#### Future Implications
 
 Under ERC-4337, the Bundler is in a similar position to todayʻs block builder and can execute exclusive order flow deals with smart contract wallets. Exclusive order flow is more important to Bundlers because they compete for the highest priority fee and losing Bundlers pay for the gas cost of reverting UserOperation.
 
 Because the UserOperation mempool is public, UserOperations are susceptible to MEV from front-running and sandwich attacks. Bundlers can capture a portion of this MEV since they order and batch the UserOperations into a bundle transaction. Searchers could run Bundlers to extract MEV from the public UserOperation mempool. Bundlers and Builders could integrate to obtain additional order flow.
 
-References:
+#### References
 
 1. [ERC-4337: Account Abstraction via Entry Point Contract Specification](https://ethereum-magicians.org/t/erc-4337-account-abstraction-via-entry-point-contract-specification/7160)
 2. [ERC-4337: Account Abstraction Using Alt Mempool](https://eips.ethereum.org/EIPS/eip-4337)
