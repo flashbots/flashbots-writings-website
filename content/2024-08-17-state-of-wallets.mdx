@@ -38,7 +38,7 @@ The intensifying competition for order flow has heightened the importance of use
 
 This trend underscores the evolving relationships between users, wallets, and DeFi applications in the blockchain ecosystem. It highlights how the battle for order flow is reshaping the wallet landscape and influencing the strategies of major players in the DeFi space.
 
-![Figure 1. Overview of Ethereum wallet ecosytem](/static/img/state_of_wallets_figures/figure_1_overview_of_ethereum_wallet_ecosystem.png)
+![Figure 1. Overview of Ethereum wallet ecosytem](/img/state_of_wallets_figures/figure_1_overview_of_ethereum_wallet_ecosystem.png)
 
 Figure 1. Overview of Ethereum wallet ecosytem
 
@@ -96,7 +96,7 @@ Compared to EOAs, smart contract wallets have a small gas overhead mainly due to
 A transactionʻs life cycle begins on the left-hand side of the order flow Sankey with on-chain frontends and ends on the right-hand side with block builders.
 
 
-![Figure 2. Edited Orderflow.art Sankey from September 30, 2024](/static/img/state_of_wallets_figures/figure_2_orderflow_sankey.png)
+![Figure 2. Edited Orderflow.art Sankey from September 30, 2024](/img/state_of_wallets_figures/figure_2_orderflow_sankey.png)
 
 Figure 2. Edited Orderflow.art Sankey from September 30, 2024
 
@@ -119,15 +119,15 @@ Order Flow Originators (OFOs) are the first on-chain applications that interact 
 5. **Order Flow Auctions**:  OFAs include solver batch auctions (e.g., CoWSwap), RFQ systems (e.g., Uniswap X), and execution auctions (e.g., MEV-Blocker). OFAs have been gaining trading volume market share at the expense of DEX Frontends (Figure 3) and are typically used for larger trades (Figure 5).
 
 
-![Figure 3. Frontend Trading Volume (3 years), Dune Analytics. September 30, 2024.](/static/img/state_of_wallets_figures/figure_3._frontend_trading_volume.png)
+![Figure 3. Frontend Trading Volume (3 years), Dune Analytics. September 30, 2024.](/img/state_of_wallets_figures/figure_3._frontend_trading_volume.png)
 
 Figure 3. Frontend Trading Volume (3 years), Dune Analytics. September 30, 2024.
 
-![Figure 4. Frontend Transaction Count (3 years), Dune Analytics. September 30, 2024.](/static/img/state_of_wallets_figures/figure_4._frontend_transaction_count.png)
+![Figure 4. Frontend Transaction Count (3 years), Dune Analytics. September 30, 2024.](/img/state_of_wallets_figures/figure_4._frontend_transaction_count.png)
 
 Figure 4. Frontend Transaction Count (3 years), Dune Analytics. September 30, 2024.
 
-![Figure 5. Frontend Trade Sizes (7 days), Dune Analytics. September 30, 2024.](/static/img/state_of_wallets_figures/figure_5_frontend_trade_sizes.png)
+![Figure 5. Frontend Trade Sizes (7 days), Dune Analytics. September 30, 2024.](/img/state_of_wallets_figures/figure_5_frontend_trade_sizes.png)
 
 Figure 5. Frontend Trade Sizes (7 days), Dune Analytics. September 30, 2024.
 
@@ -168,7 +168,7 @@ Two major trends in Ethereum that affect Order Flow Originators are 1) the centr
 
 [Ethereumʻs builder market](https://arxiv.org/pdf/2405.01329) has become increasingly centralized with two builders capturing more than 90% of the block market.
 
-![Figure 6. [30-day builder market share from September 30, 2024.](/static/img/state_of_wallets_figures/figure_6._30-day_builder_market_share.png)
+![Figure 6. [30-day builder market share from September 30, 2024.](/img/state_of_wallets_figures/figure_6._30-day_builder_market_share.png)
 
 Figure 6. [30-day builder market share from September 30, 2024.](https://libmev.com/builders?presetRange=%2230D%22).
 
@@ -203,19 +203,19 @@ Currently known EOF relationships:
 - Banana Gun and Titan Builder
 - Maestro and Beaver
 
-![Figure 7. Banana Gun EOF blocks*.](/static/img/state_of_wallets_figures/figure_7_banana_gun_eof_blocks.png)
+![Figure 7. Banana Gun EOF blocks*.](/img/state_of_wallets_figures/figure_7_banana_gun_eof_blocks.png)
 
 Figure 7. Banana Gun EOF blocks*.
 
-![Figure 8. Banana Gun multiplexed blocks.](/static/img/state_of_wallets_figures/figure_8_banana_gun_multiplexed_blocks.png)
+![Figure 8. Banana Gun multiplexed blocks.](/img/state_of_wallets_figures/figure_8_banana_gun_multiplexed_blocks.png)
 
 Figure 8. Banana Gun multiplexed blocks.
 
-![Figure 9. Maestro EOF blocks.](/static/img/state_of_wallets_figures/figure_9_maestro_eof_blocks.png)
+![Figure 9. Maestro EOF blocks.](/img/state_of_wallets_figures/figure_9_maestro_eof_blocks.png)
 
 Figure 9. Maestro EOF blocks.
 
-![Figure 10.  Maestro multiplexed blocks.](/static/img/state_of_wallets_figures/figure_10_maestro_multiplexed_blocks.png)
+![Figure 10.  Maestro multiplexed blocks.](/img/state_of_wallets_figures/figure_10_maestro_multiplexed_blocks.png)
 
 Figure 10.  Maestro multiplexed blocks.
 
@@ -230,7 +230,7 @@ Order Flow Auctions (OFAs) were created to protect user transactions from negati
 3. Improved price discovery. Third-party solvers compete for the best execution price.
 4. Enhanced liquidity.  Third-party solvers can aggregate liquidity from numerous sources including DEXs, CEXs, and private inventory.
 
-![Figure 11. [MEV supply chain with Order Flow Auctions](/static/img/state_of_wallets_figures/figure_11_mev_supply_chain.png)
+![Figure 11. [MEV supply chain with Order Flow Auctions](/img/state_of_wallets_figures/figure_11_mev_supply_chain.png)
 
 Figure 11. [MEV supply chain with Order Flow Auctions](https://frontier.tech/the-orderflow-auction-design-space).
 
@@ -261,7 +261,7 @@ Private Order Flow (POF) is the order flow from vertically integrated order flow
 
 The top builders, Beaver Build and Rsync, are integrated with proprietary trading firms SCP and Wintermute and benefit from internal CEX-DEX order flow.  [Integrated searcher-builders](https://frontier.tech/builder-dominance-and-searcher-dependence) have an advantage over normal builders since profits from their searcher can be reallocated to their builder increasing their likelihood of submitting the winning block bid.  Integrated searcher-builders also benefit from latency savings when sending their transaction from the searcher to the builder. This latency savings can then be extended to the block builder auction.
 
-![Figure 12. Exclusive Order Flow (EOF) from the seven most prominent EOF providers based on total value](/static/img/state_of_wallets_figures/figure_12_eof_from_seven_most_eof_providers.png)
+![Figure 12. Exclusive Order Flow (EOF) from the seven most prominent EOF providers based on total value](/img/state_of_wallets_figures/figure_12_eof_from_seven_most_eof_providers.png)
 
 Figure 12.  [Exclusive Order Flow (EOF) from the seven most prominent EOF providers based on total value (a)](https://arxiv.org/pdf/2407.13931).  EOF for Titan (b), Beaverbuild (c), and Rsync builders (d).  Note that only Rsync sees Wintermute private order flow and only Beaverbuild sees SCP private order flow.
 
@@ -300,7 +300,7 @@ The implementation of Account Abstraction, particularly through ERC-4337, is rev
 
 The key goals of account abstraction are to remove the need for all users to have an EOA and to allow users to use smart contract wallets as their primary account.  Account abstraction accomplishes this by separating account management and transaction execution from EOAs.  Account abstraction uses new entities: 1) the Bundler, to initiate transactions and 2) the Paymaster, to determine the gas payment policies.  
 
-![Figure 13.  [ERC-4337 workflow stream](/static/img/state_of_wallets_figures/figure_13_erc-4337_workflow_stream.png)
+![Figure 13.  [ERC-4337 workflow stream](/img/state_of_wallets_figures/figure_13_erc-4337_workflow_stream.png)
 
 Figure 13.  [ERC-4337 workflow stream](https://www.alchemy.com/overviews/what-is-account-abstraction).
 
@@ -310,15 +310,15 @@ Figure 13.  [ERC-4337 workflow stream](https://www.alchemy.com/overviews/what-is
 
 - Paymaster - The Paymaster is a smart contract that handles the walletʻs gas payment policies.  The Paymaster determines which currency, stablecoins or other ERC-20 tokens, are acceptable for gas payments and allows applications to pay gas fees for their users.
     
-    ![Figure 14. Weekly Active Smart Accounts](/static/img/state_of_wallets_figures/figure_14_weekly_active_smart_accounts.png)
+    ![Figure 14. Weekly Active Smart Accounts](/img/state_of_wallets_figures/figure_14_weekly_active_smart_accounts.png)
     
     Figure 14. [Weekly Active Smart Accounts](https://www.bundlebear.com/overview/all) as of September 30, 2024.
     
-    ![Figure 15. [Weekly Bundler Revenue](https://www.bundlebear.com/overview/all) as of September 30, 2024.](/static/img/state_of_wallets_figures/figure_15_weekly_bundler_revenue.png)
+    ![Figure 15. [Weekly Bundler Revenue](https://www.bundlebear.com/overview/all) as of September 30, 2024.](/img/state_of_wallets_figures/figure_15_weekly_bundler_revenue.png)
     
     Figure 15. [Weekly Bundler Revenue](https://www.bundlebear.com/overview/all) as of September 30, 2024.
     
-    ![Figure 16.  [Weekly Paymaster Gas Spend](https://www.bundlebear.com/overview/all) as of September 30, 2024.](/static/img/state_of_wallets_figures/figure_16_weekly_paymaster_gas_spend.png)
+    ![Figure 16.  [Weekly Paymaster Gas Spend](https://www.bundlebear.com/overview/all) as of September 30, 2024.](/img/state_of_wallets_figures/figure_16_weekly_paymaster_gas_spend.png)
     
     Figure 16.  [Weekly Paymaster Gas Spend](https://www.bundlebear.com/overview/all) as of September 30, 2024.
     
@@ -360,7 +360,7 @@ As the focus shifts from broad decentralization to nuanced discussions of contro
 
 Preconfimations (”preconfs”) is a research proposal that allows users to receive a transaction confirmation before their transaction is confirmed in consensus.  Preconfs aim to improve the user experience by eliminating high network congestion on Ethereum, layer 2 rollups, and validiums through faster confirmations.  First introduced by Justin Drake, based preconfs allow L1 proposers to provide economic guarantees that an L2 user transaction will be included.
 
-![Figure 17. Based Preconfirmations for Rollups](/static/img/state_of_wallets_figures/figure_17_based_preconfs_for_rollups.png)
+![Figure 17. Based Preconfirmations for Rollups](/img/state_of_wallets_figures/figure_17_based_preconfs_for_rollups.png)
 
 Figure 17. [Based Preconfirmations for Rollups](https://hackmd.io/@EspressoSystems/bft-and-proposer-promised-preconfirmations)
 
@@ -428,7 +428,7 @@ EIP-7212, or [RIP-7212](https://www.alchemy.com/blog/what-is-rip-7212), creates 
 
 RIP-7212 is the roll-up version of EIP-7212 and teams from Kakarot, Polygon, Optimism, zkSync, Scroll, and Arbitrum have already committed to implementation.  Polygon has RIP-7212 available on their testnet and Coinbaseʻs recently launched Smart Wallets include passkey authentication. 
 
-![Figure 18. Mobile authentication via passkeys](/static/img/state_of_wallets_figures/figure_18_mobile_authentication_via_passkeys.png)
+![Figure 18. Mobile authentication via passkeys](/img/state_of_wallets_figures/figure_18_mobile_authentication_via_passkeys.png)
 
 Figure 18. Mobile authentication via passkeys
 
@@ -470,11 +470,11 @@ References:
 
 EIP-712 is a standard for typed message signing which aims to allow off-chain message signing for on-chain signing allowing for a better user experience.  Rather than reading byte strings, EIP-712 enables signatures to be displayed in a readable format without losing system security properties.  Off-chain signing saves gas and reduces the number of transactions on-chain.  
 
-![Figure 19. Current message signature](/static/img/state_of_wallets_figures/figure_19_current_message_signature.png)
+![Figure 19. Current message signature](/img/state_of_wallets_figures/figure_19_current_message_signature.png)
 
 Figure 19. Current message signature
 
-![Figure 20. Message signature with EIP-712](/static/img/state_of_wallets_figures/figure_20_message_signature_with_eip-712.png)
+![Figure 20. Message signature with EIP-712](/img/state_of_wallets_figures/figure_20_message_signature_with_eip-712.png)
 
 Figure 20. Message signature with EIP-712 
 
@@ -486,7 +486,7 @@ How does EIP-712 work?
 
 One of the key features that EIP-712 unlocks is that it allows dApps to control the transaction flow for users rather than wallets.  Applications like Uniswap, can minimize their usersʻ MEV since swaps would bypass OFAs and other MEV value extractors.
 
-![Figure 21.  Uniswapʻs interest in transaction flow control.](/static/img/state_of_wallets_figures/figure_21_uniswap_interest_in_transaction_flow_control.png)
+![Figure 21.  Uniswapʻs interest in transaction flow control.](/img/state_of_wallets_figures/figure_21_uniswap_interest_in_transaction_flow_control.png)
 
 Figure 21. Uniswapʻs interest in transaction flow control.
 
@@ -624,18 +624,18 @@ Flashbots Mates: Tesa Ho, George Zhang, Reid Yager, Quintus Kilbourn, Fred, Dann
 Friends: Ivo Georgiev, Joe Huang, Nic Lin, Tina He, Nico Csgy, Eric Siu, Samuel Akpan, Brian Friel, Andre Geest, Daniel.
  
 
-![amber wallet logo.png](/static/img/state_of_wallets_figures/ambire_wallet_logo.png)
+![amber wallet logo.png](/img/state_of_wallets_figures/ambire_wallet_logo.png)
 
-![OKX wallet logo.png](/static/img/state_of_wallets_figures/okx_wallet_logo.png)
+![OKX wallet logo.png](/img/state_of_wallets_figures/okx_wallet_logo.png)
 
-![rainbow wallet logo.png](/static/img/state_of_wallets_figures/rainbow_wallet_logo.svg)
+![rainbow wallet logo.png](/img/state_of_wallets_figures/rainbow_wallet_logo.svg)
 
-![im wallet logo.png](/static/img/state_of_wallets_figures/im_wallet_logo.png)
+![im wallet logo.png](/img/state_of_wallets_figures/im_wallet_logo.png)
 
-![base wallet logo.jpg](/static/img/state_of_wallets_figures/base_wallet_logo.png)
+![base wallet logo.jpg](/img/state_of_wallets_figures/base_wallet_logo.png)
 
-![cw logo.png](/static/img/state_of_wallets_figures/cw_logo.png)
+![cw logo.png](/img/state_of_wallets_figures/cw_logo.png)
 
-![safe wallet logo.png](/static/img/state_of_wallets_figures/safe_wallet_logo.png)
+![safe wallet logo.png](/img/state_of_wallets_figures/safe_wallet_logo.png)
 
-![block daemon logo.png](/static/img/state_of_wallets_figures/block_daemon_logo.png)
+![block daemon logo.png](/img/state_of_wallets_figures/block_daemon_logo.png)
