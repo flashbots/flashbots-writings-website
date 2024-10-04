@@ -504,17 +504,22 @@ While EIP-7702 is still a proposal, RIP-7212 is being actively integrated into L
 
 EIP-712 is a standard for typed message signing which aims to allow off-chain message signing for on-chain signing allowing for a better user experience. Rather than reading byte strings, EIP-712 enables signatures to be displayed in a readable format without losing system security properties. Off-chain signing saves gas and reduces the number of transactions on-chain.
 
-<Figure
-  src="/img/state_of_wallets_figures/figure_19_current_message_signature.png"
-  number={19}
-  caption="Current message signature"
-/>
-
-<Figure
-  src="/img/state_of_wallets_figures/figure_20_message_signature_with_eip-712.png"
-  number={20}
-  caption="Message signature with EIP-712"
-/>
+<div className="row">
+  <div className="col col--6">
+    <Figure
+      src="/img/state_of_wallets_figures/figure_19_current_message_signature.png"
+      number={19}
+      caption="Current message signature"
+    />
+  </div>
+  <div className="col col--6">
+    <Figure
+      src="/img/state_of_wallets_figures/figure_20_message_signature_with_eip-712.png"
+      number={20}
+      caption="Message signature with EIP-712"
+    />
+  </div>
+</div>
 
 #### How does EIP-712 work?
 
