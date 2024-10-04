@@ -105,6 +105,11 @@ h1, h2, h3, h4, h5, h6 {
   margin: 4rem auto 2rem;
 }
 
+.markdown > h4 {
+  margin: 2rem auto 1rem;
+  font-size: 1.1em;
+}
+
 // Align writings' hero with website's hero
 .margin-top--md,
 .margin-vert--md {
@@ -154,4 +159,8 @@ h1, h2, h3, h4, h5, h6 {
 .container {
   max-width: var(--ifm-container-width-xl);
   width: 88vw;
+}
+
+.figure-caption {
+  color: var(--ifm-color-content);
 }
