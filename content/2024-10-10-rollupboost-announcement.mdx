@@ -1,5 +1,5 @@
 ---
-slug: announcing-rollup-boost
+slug: introducing-rollup-boost
 title: Introducing Rollup-Boost- Launching on Unichain
 authors: [flashbots]
 tags: [rollup, decentralization, platform, l2, optimism, unichain]
@@ -57,7 +57,11 @@ Flashblocks is a streaming layer that gives users near-instant UX while still ru
 4. Calculating the state root and consensus once for multiple partial blocks, amortizing costly parts of block production.  
 5. Serving early execution state over the existing, unmodified Ethereum JSON-RPC standard, enabling easy wallet and front end integration.
 
-\[picture\]
+<Figure
+  src="/img/rollupboost/figure.png"
+  number={1}
+  caption="Flashblocks architecture"
+/>
 
 Flashblocks draw inspiration from innovations in block propagation and execution, such as Solana's [shreds](https://github.com/solana-foundation/specs/blob/main/p2p/shred.md) and Celestia's [data squares](https://celestiaorg.github.io/celestia-app/data_square_layout.html). The "flashblock" specification for the OP Stack enables the streaming of partial blocks between clients. This approach dovetails seamlessly with execution innovations from [reth](https://www.paradigm.xyz/2024/04/reth-perf) and our [modular rust block builder](https://github.com/flashbots/rbuilder). The result is a potential multiple-fold increase in gas per second, pushing the boundaries of what's possible in rollup performance.
 
@@ -83,26 +87,10 @@ Unichain uses verifiable ordering to:
 # **Future roadmap**
 
 <Figure
-  src="/img/rollupboost/figure.png"
+  src="/img/rollupboost/roadmap.png"
   number={1}
   caption="The future of Rollup-Boost"
 />
-
-* **Performance & Scalability**  
-  * ✅ Flashblocks 250ms streaming layer  
-  * ⚙️ High performance state root calculation  
-  * ⏳ Parallel execution  
-  * ⏳ On demand TEE L3s  
-* **User guarantees & Decentralization**  
-  * ⚙️ TEE validity proofs for upgrading rollups to Stage 2  
-  * ⚙️ Encrypted mempool  
-  * ⏳ Multi-operator support and further decentralization roadmap  
-  * ⏳ Tools for inclusion guarantees (e.g. FOCIL)  
-* **Programmability**  
-  * ✅ Verifiable priority ordering to internalize MEV  
-  * ⚙️ TEE coprocessing  
-  * ⏳ Multi-VM rollups  
-  * ⏳ New MEV internalization primitives
 
 Rollup-Boost will launch with **Flashblocks** and **Credible Priority Ordering**, but our roadmap is ambitious, and we want to highlight three key extensions we're currently working on.
 
