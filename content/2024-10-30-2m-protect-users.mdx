@@ -1,0 +1,84 @@
+---
+slug: 2m-protect-users
+title: 2 Million Protect Users
+authors: [shea]
+tags: [protect]
+image: /img/protect_3y_anniversary_cover.png
+hide_table_of_contents: false
+description: Flashbots Protect is the longest running and most used private RPC in crypto. Since 2021, Protect has been used by 2.1 million Ethereum accounts to protect $41 billion in DEX volume and earn 313 ETH in refunds. Today, on its third anniversary, we look back on Protect’s journey and where it’s going next.
+---
+
+![Cover image](/img/2m_protect_users_cover.png)
+
+Flashbots Protect is the longest running and most used private RPC in crypto. Since 2021, Protect has been used by 2.1 million Ethereum accounts to protect $41 billion in DEX volume and earn 313 ETH in refunds. Today, on its third anniversary, we look back on Protect’s journey and where it’s going next:
+* More ways to earn and save gas
+* Better observability into private mempools
+* Enhanced privacy and refunds powered by secure hardware
+
+<!--truncate-->
+
+## Why Protect
+
+Ethereum users want fast, cheap, and safe transactions. But the public mempool on Ethereum isn’t optimized for a great transacting experience. Public transactions are exposed to [frontrunning](https://www.youtube.com/watch?v=UZ-NNd6yjFM), get executed at the [worst possible price](https://0x.org/post/measuring-the-impact-of-hidden-dex-costs) in DeFi, and [overpay](https://dune.com/queries/3588844/6044218) for inclusion on chain.
+
+[Flashbots Protect](https://protect.flashbots.net/) is a private alternative to the public mempool that offers Ethereum users a better transacting experience. It protects transactions from frontrunning by keeping them private before they land on chain. And it helps users save money and get better prices by using MEV auctions to optimize execution on their behalf.
+
+## How it works
+
+The Protect RPC is a simple drop-in replacement for the standard Ethereum RPC. Users and wallets can upgrade to Protect with a one line code change or a few clicks of a [button](http://protect.flashbots.net). Apps can also send transactions directly to a compatible [API](https://docs.flashbots.net/flashbots-protect/additional-documentation/eth-sendPrivateTransaction).
+
+When a transaction is sent to Protect, it’s forwarded directly to a private mempool that’s designed to optimize its execution. This private mempool is:
+
+1. Safe — Protected transactions are not seen by the frontrunning bots that lurk in the public mempool. This keeps sensitive transactions like whitehat rescues safe from hackers, and reduces slippage on DeFi trades that otherwise would have been sandwiched.
+2. Cheap — Protect uses MEV auctions behind the scenes to help users earn refunds if they [overspend gas](https://docs.flashbots.net/flashbots-protect/gas-fee-refunds) or [create MEV](https://docs.flashbots.net/flashbots-protect/mev-refunds). This helps users transact efficiently and avoid wasting gas or losing funds on misconfigured trades.
+3. Fast — Protect gives users access to the majority of Ethereum blockspace via the Flashbots block builder and other top builders. This ensures that the median Protect transaction lands at public mempool speeds.
+
+## Evolution of Protect
+
+The goal of Flashbots Protect from Day 1 has been to keep users safe when transacting onchain. For this reason privacy and security are some of our most important goals. But over time, changes on Ethereum have made other parts of the transaction experience just as important too.
+
+After the Ethereum Merge in 2022, new parties began offering private transaction services similar to Flashbots Protect and [Builder](https://docs.flashbots.net/flashbots-auction/quick-start). This created a need for users to safely share their transactions with multiple providers at a time, so they could be included quickly on chain regardless of which party landed the next block. Later, as the [MEV-Boost](https://docs.flashbots.net/flashbots-mev-boost/introduction) market grew, wallets and apps also began exploring how they could capture the [extra value](https://libmev.com/) that this MEV market was able to generate from their users’ transactions.
+
+Any good product evolves to meet new user needs. So over the past year, we’ve been upgrading Protect to be the market leader in all dimensions of the transacting experience that users care about — not only safety, but also cost and speed.
+
+![Timeline](/img/2m_protect_users_timeline.png)
+
+**The median Protect transaction now lands in under 1 block and saves $5 per MEV refund.**
+
+## What’s next
+
+Protect is the most used private RPC in crypto today. It serves 2.1 million unique Ethereum accounts, and has protected $41 billion in DEX volume and saved users 313 ETH in MEV refunds to date. The RPC alone processes >30 million daily requests with ~five nines of uptime since 2021.
+
+Protect is also constantly upgrading to give users a better transacting experience. Tomorrow we intend to make it even safer, cheaper, and more seamless to use. And because we believe in building in the open, here’s exactly what we plan to focus on.
+
+#### **More ways to earn**
+
+Protect has been pioneering new ways to reduce costs for users since 2021. With features like free reverts and refunds, users have already saved hundreds of ETH on their transactions. But we want to dramatically increase these earnings, and give apps and wallets more control over their refund experience.
+
+In 2025 we’re **making gas cheaper for Protect users** by offering [gas fee refunds](https://docs.flashbots.net/flashbots-protect/gas-fee-refunds) to all transactions landed by Flashbots. These refunds will reduce gas prices across the board and make it easier for wallets, apps, and rollups to transact. This feature is currently available in 2% of blocks and has helped Flashbots users earn over 50 ETH. Next year we want to make it the industry standard. We’re also exploring **new ways for apps and wallets to integrate refunds** like these into their products — for example by receiving a flat rate per transaction, customizing the schedule they receive refunds on, or setting a threshold for refund amounts.
+
+We believe this is an important time to upgrade the way value is distributed on Ethereum because wallets and apps are actively searching for ways to reduce costs for users and recapture the fees they produce. Some have already made deals with specialized MEV actors or aggregators to reclaim fees on their behalf. But we think everyone should have access to these earnings out of the box — it’s time to replace custom backroom deals with a *permissionless,* simple RPC.
+
+#### **More useful privacy**
+
+We believe privacy-based tools create better outcomes for users and have been using these techniques to enhance Protect since 2021. Through frontrunning protection and privacy-preserving auctions like [MEV-Share](https://docs.flashbots.net/flashbots-mev-share/introduction), Protect has saved billions of DEX volume from sandwich attacks and helped users earn millions in refunds. Now, we want to use new privacy technologies to upgrade the entire supply chain that Protect users rely on to transact.
+
+In 2025 we intend to run the majority of MEV infrastructure on Ethereum in [Trusted Execution Environments](https://collective.flashbots.net/t/flashwares-i-tees-feat-intel-sgx/3405) (TEEs). TEEs will make the services that Protect users rely on dramatically more secure, because they prevent the operator of these services from viewing sensitive data or tampering with their software. And better security properties unlock better user experiences. We’re actively developing [TEE block builders](https://collective.flashbots.net/t/first-blocks-built-inside-tdx/3386) that can deliver **end-to-end privacy for Protect transactions**, even if the builder isn’t operated by Flashbots. This can be especially important for sensitive transactions like whitehat rescues. And we’re exploring ways to use [TEE searchers](https://collective.flashbots.net/t/searching-in-tdx/3902) to **unlock more valuable MEV refunds**, by directly backrunning Protect transactions and blocks in a secure environment. We estimate this can increase refund amounts nearly 10x.
+
+We believe that now is the right time to innovate with secure hardware, as solutions like TDX become widely available and capable of [supporting production MEV workloads](https://ethcc.io/archives/decentralized-block-building). By removing the bottleneck of trust, TEEs let Protect users safely interact with many more parties to enrich their transacting experience — without compromising on safety.
+
+#### **More observability**
+
+Protect was the first RPC to make private mempools accessible for millions of regular Ethereum users. By packaging this experience into a simple RPC, Protect makes it easy for anyone to get safer and cheaper transactions just by changing a setting in their wallet. But integrating an RPC is just one part of the story. We want the whole experience — from discovery to monitoring — to be seamless too.
+
+In 2025 we’re shipping **best-in-class observability** for Protect users. We’ll be upgrading our status system so users can track and debug their transactions in real time, in a way that’s compatible with the unique security requirements of private mempools. We're also investing in better dashboards so wallets and apps can track important metrics like refunds and inclusion speed for their users. To start, we’re releasing a [new version of our public Dune dashboard](https://dune.com/flashbots/flashbots-protect) today and we plan to add more tools for customer insights down the line.
+
+As more people migrate to private mempools, we think it’s important to ensure that they have the data they need to make informed decisions about how their transactions are processed. Private mempools account for over [half of all gas on Ethereum](https://www.blocknative.com/blog/ethereum-private-transactions-the-flippening) this year and the raw volume of private transactions has nearly doubled since the start of 2024. Increasing transparency into these channels will ensure that the market remains efficient and keeps empowering users as it grows.
+
+## Get protected
+
+Protect is available to everyone at [protect.flashbots.net](http://protect.flashbots.net).
+
+Data can be found on our [public dashboard](https://dune.com/flashbots/flashbots-protect) (now updated to include gas refunds!).
+
+If you’re interested in contributing or want to talk more about integrating Protect with your app, we’d love to hear from you. Find our open job listings [here](https://jobs.flashbots.net/) or reach out on Telegram (@sketsdever).
