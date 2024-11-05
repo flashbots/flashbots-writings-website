@@ -5,7 +5,7 @@ authors: [robert]
 tags: [engineering]
 image: /img/posts/parallel-builder/conflict_nodes.png
 hide_table_of_contents: false
-description: Flashbots Protect is the longest running and most used private RPC in crypto. Since 2021, Protect has been used by 2.1 million Ethereum accounts to protect $43 billion in DEX volume and earn 313 ETH in refunds. Today, on its third anniversary, we look back on Protect’s journey and where it’s going next.
+description: We introduce a new approach to block building: parallel block building. Instead of treating all transactions as potentially conflicting - as traditional sequential building algorithms do - parallel block building recognizes that most transactions in a block are actually independent. When a user swaps ETH for USDC, it doesn't affect someone minting an NFT - so why process them sequentially?
 ---
 
 ![Cover image](/img/posts/parallel-builder/conflict_nodes.png)
