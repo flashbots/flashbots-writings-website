@@ -22,7 +22,7 @@ Parallel building doesn't. It identifies up front what groups of transactions tr
 - **Resource maximization:** available computing power flexibly shifts between essential and speculative optimizations, ensuring resource usage is maximized
 - **Pipelining**: key components operate independently and concurrently - from orderflow processing to conflict resolution to block assembly
 
-This post describes [our open source implementation a](https://github.com/flashbots/rbuilder/tree/develop/crates/rbuilder/src/building/builders/parallel_builder)nd shares early results from testing: in production environments it's already building more valuable blocks 19% of the time and in backtesting it shows potential for up to 50%.
+This post describes [our open source implementation](https://github.com/flashbots/rbuilder/tree/develop/crates/rbuilder/src/building/builders/parallel_builder) and shares early results from testing: in production environments it's already building more valuable blocks 19% of the time and in backtesting it shows potential for up to 50%.
 
 Let's dive into how it works.
 
