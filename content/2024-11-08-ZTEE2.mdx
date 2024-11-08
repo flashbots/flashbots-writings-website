@@ -33,7 +33,7 @@ The current chain of trust for a semiconductor looks something like the followin
 
 1. **Design phase:** A design team goes through this heavily simplified design process. The logic of the chip is dictated by the [RTL](https://en.wikipedia.org/wiki/Register-transfer_level) (register transfer level) code -- which is just a string: a piece of code that describes the hardware in terms of the data flow between registers and the logical operations performed on that data. Writing the RTL is called the "frontend design" portion of the chip design process. The next step (the "backend design") turns that RTL into GDS, the image of the chip. Between the RTL and the GDS we find an gate-level description, the netlist. The entire process is not possible without [EDA software](https://en.wikipedia.org/wiki/Electronic_design_automation) which costs several million dollars to license and a Process Design Kit (PDK) that is provided by the fab. The PDK includes the set of building blocks (“standard cells”) required to assemble the chip image. Section (II) provides more colour on these concepts.
     
-![image|690x283, 75%](upload://5pIO5meo803wiuGU1qhuHoQO9ty.png)
+![RTL to GDS](/img/ZTEE/rtl2gds.png)
 
     
 2. **Fabrication**: The fab receives the GDS, which is pretty much a giant layered image, and prints it layer by layer. A big variable determining the performance, size and cost of the chip is the quality of the [process node](https://www.design-reuse.com/articles/43316/a-brief-history-of-process-node-evolution.html) - the technology the fab uses to produce the chip - that is used. Big process nodes (e.g. 130nm) are less precise than smaller nodes and therefore can’t pack transistors as tightly. The state of the art is around 2nm^[[The actual physical pitch of features at 2nm is 45nm for gates and 20nm for metal](https://en.wikipedia.org/wiki/2_nm_process).]. Each process node has its own dedicated PDK.
@@ -44,7 +44,7 @@ The current chain of trust for a semiconductor looks something like the followin
 7. **Verification**: Now if a user wants to interact with this machine, the user can be presented with the certificate. If everything has gone to plan, this certificate shows that the hardware key indeed corresponds to a trustworthy machine.
 8. **Building on the attestation**: If we wanted to attest arbitrary applications running on the secure hardware (SH), the attested firmware can then be used to sign new software running on top of it using the hardware key or derivatives of it.
     
-![image(1)|571x268, 100%](upload://peNnOsJjmUSrHbxdOBawp9d5NdW.png)   
+![RTL to GDS](/img/ZTEE/attestation.png)
 *This figure taken from [Teamwork makes TEE work](https://arxiv.org/pdf/2402.08908) depicts a simplified remote attestation flow.*
     
 
@@ -101,7 +101,7 @@ endmodule
 ```
 
 The next phase of producing the GDS file requires the netlist that we derive from the RTL, EDA software and a PDK. PDKs are provided by fabs for their process nodes and are typically kept completely closed as the PDK can reveal information about the fab processes which are core to its business. NDAs that fabs use to enforce this IP protection also extend to GDS files so fabless designers cannot release GDS files derived from these PDKs even if no 3rd party components were licensed. Old process nodes are well understood technology so some fabs open their corresponding PDK’s. The EDA software is also closed and is licensed from one of a handful of providers with the largest being Synopsys and Cadence. Given licenses for using this software cost hundreds of thousands to millions of dollars per year, the incentive for keeping the software closed is understandable. Importantly, PDKs are often certified for specific EDAs. A GDS file is pictured below.
-![image(2)|495x500, 50%](upload://rMVHbcaxUrxFYuH5lO0MWPw7zNc.jpeg)
+![GDS](/img/ZTEE/GDS.png)
 
 
 As Mark’s talk explains in more detail, there are many other files and pieces of software that sit between the designer’s idea and the GDSII file. Ownership of these is spread across a variety of parties who take legal measures to keep their IP from becoming public.
@@ -111,7 +111,7 @@ The motivation for these legal measures varies. As in the case of fabs, some act
 The result of this IP quagmire is that most design documentation doesn’t see the light of day. Some of the time these legal restrictions permeate all the way to low level software/firmware. For example, the critically important “microcode” that instantiates Intel’s SGX and TDX security cannot be publicly audited.
 
 [This explainer](https://www.ledger.com/academy/topics/ledgersolutions/is-ledger-open-source) on a popular crypto hardware wallet captures the situation well:
-![image(3)|689x266](upload://yROICIIxYOiER5BqgELLrpou2n8.png)
+![Ledger](/img/ZTEE/ledger.png)
 
 
 An obvious repercussion of this closedness is that, for users of these systems, there is little way to directly verify the security properties of a system without trusting private audits. An even more impactful implication is that anyone who wants to build fully open hardware, must rely on the little technology that is not legally encumbered. For components like DDR DRAM interfaces, PCIe and RISC-V cores, the closed source state of the art far outperforms open designs, impacting security and performance of open designs. This gap between closed and open technology is most critical at the level of process nodes. A determined fabless design team may be willing to implement an open source version of a needed component (at substantial cost), but this is not an option for process nodes and their PDKs. Without open PDKs, GDS files cannot be publicly released.
@@ -140,7 +140,7 @@ Neither of these provide any of the other benefits of openness like public scrut
 **Opening Everything**
 Fortunately, there are already several designs which are ***partially*** open. [OpenTitan](https://opentitan.org/), [Cramium](https://www.crossbar-inc.com/products/secure-processing-units/overview/) and [Tropic Square](https://tropicsquare.com/) are projects building chips with many, but not all aspects of their chip design collateral publicly released. By keeping the GDS and some other details closed, chips can be produced with high quality process nodes. However, enough material is open for users to be able to audit the design for potential bugs or side channels. For example, some side-channel mitigation techniques ([1](https://ieeexplore.ieee.org/abstract/document/9190067), [2](https://eprint.iacr.org/2022/507), [3](https://tches.iacr.org/index.php/TCHES/article/view/11689)) can be verified by existing tooling given the netlist ([1](https://eprint.iacr.org/2020/634), [2](https://tches.iacr.org/index.php/TCHES/article/view/9820), [3](https://graz.elsevierpure.com/en/publications/cocoalma-a-versatile-masking-verifier), [4](https://tches.iacr.org/index.php/TCHES/article/view/9822)) or RTL ([1](https://link.springer.com/chapter/10.1007/978-3-030-29959-0_15), [2](https://ieeexplore.ieee.org/abstract/document/9833600)). There’s also the benefit of lessened vendor lock-in and easier extensibility. To address trojans, we could throw weight behind the movement to open up tools and designs. **The aim would be to get better open PDKs** and make enough of an economic, social and/or political argument to sway foundries into opening up higher quality process nodes, making it possible to have a public commercially viable chip with an open GDS. Since some process nodes (e.g. ~28nm^[The 2x node is also the “last node of Moore’s law” in that it was the last node where transistors got cheaper. It used to be that the cost of wafers always dropped to around $3k as the process matured; 2x nm was the end of that. For smaller nodes, wafer cost doesn’t come down, and they may even go up. This makes 2x nm a very economically important node. For instance, TSMC is doubling down on this node and trying to get legacy customers to migrate to the node.]) have been around for quite some time, the “edge” lost from opening these PDKs is not that large and it is realistic to expect that, especially with demonstration of sufficient demand, some of these will be opened up in the next 2 years.
 
-![image(4)|490x488](upload://f387HyyNbYD5nFRrmICZSdncpaV.png)
+![OS Trojan](/img/ZTEE/trojanmeme.png)
 
 
 #### Partial Openness
@@ -159,7 +159,7 @@ Non-destructive approaches are intuitively more appealing, but are not nearly as
 
 Fortunately, there is another promising non-destructive technique that *does* scale, Infra-Red In-Situ ([IRIS](https://www.bunniestudios.com/blog/2024/iris-infra-red-in-situ-project-updates/)). This technique uses short-wave infra-red light to image a chip. The infra red light can pass through silicon, but not metal, providing us with an image of the empty metal fill pattern on metal layer 1 (M1). In other words, IRIS can show us where the transistors are *not*, but it can’t show us what the towers of transistors do look like, nor can we learn about the wiring that connects the transistors in the deeper metal layers. 
 
-![image(5)|690x492, 75%](upload://34orgD5BVsRvK2VgoqkBnghaV0b.jpeg)
+![IRIS 22nm](/img/ZTEE/IRIS22.png)
 This low-resolution imaging means that IRIS is in a similar position as the mathematical proving approach outlined in (II). Since IRIS can only detect big deviations in transistor density, we must develop techniques that mitigate small trojans - i.e. trojans that do not require many additional transistors. Fortunately, there are many candidate solutions which can be used in concert. The first “solution" is **black box testing** like fuzzing or [test vector leakage assessment (TVLA)](https://eprint.iacr.org/2016/1152.pdf) with power analysis which can likely detect *untriggered* trojans that are “always on.” With sufficiently effective black box testing, we are left with *triggered* trojans - e.g. trojans that only take effect if a predetermined value appears on a bus. Given that a 64-bit comparison against a constant value already requires more than 100 CMOS logic gates (>400 transistors), triggered trojans may be large enough for IRIS to detect.
 
 A similar partial solution is [**scan chains**](https://en.wikipedia.org/wiki/Scan_chain) which logically stimulate the chip’s logic to see if the behaviour is as expected. Scan chains can be circumvented by trojans, but it may be possible to use formal methods to prove a lower bound on the size of trojans that can do so. Notably, using scan chains requires changes to the chip design. **Other design choices** like redundant coding schemes, sharding computations with error checking and modular redundancy are all ways to spread the footprint of a computation over a larger set of gates, so an adversary must also make their Trojans larger to attack the circuit successfully. Another example is how one picks the coding of state machine states - e.g., a one-hot encoded state machine creates roughly 2^n unused states that an attacker can hide information inside; finding ways to robustly defeat the repurposing of unused state will complicate Trojans trying to scavenge latent state space to hide from physical inspection.
@@ -168,7 +168,7 @@ Trojans which attempt to insert side channels (e.g. timing or power) may not dir
 
 Understanding the how IRIS performs on chips from smaller process nodes, developing techniques for provably lower-bounding trojan size, identifying classes of trojan attacks which are able to circumvent infra-red imaging, and designing around these slippery trojans are top open research directions. We elaborate on open questions at the end of the post.
 
-![image(6)|690x453, 75%](upload://8cOrmltRH3H4Ol8hbhry6wBhYkk.png)
+![IRIS scan chain](/img/ZTEE/IRISscanchain.png)
 *A diagram from [Bunnie’s blog](https://www.bunniestudios.com/blog/2024/iris-infra-red-in-situ-project-updates/)*
 
 Another important caveat is that designing a chip to be amenable to IRIS may be in tension with securing against physical attacks. For instance, [the use of scan chains increases side channel attack surface area](https://ieeexplore.ieee.org/document/1386969). IRIS also currently requires the backside of a chip to be exposed, ruling out common anti-tamper techniques like tamper-evident meshes or epoxy coatings, although detecting disturbances to backside silicon (e.g. some PUFs) remains a viable anti-temper mechanism that is compatible with IRIS. In the case where the verifier and the user are the ~same entity (e.g. hardware wallet), this is not a big complication as the verifier can apply tamper defenses like dropping epoxy on the chip “at home.” For more sophisticated users, installing tamper-evident meshes could be stronger option (we discuss tamper defenses in greater length in the next post). However, when publicly verifiable remote attestation is necessary, relying on defenses that can only be applied *after* inspection significantly complicates the verification process as a the next section explores.
@@ -210,7 +210,7 @@ Neither of these approaches give watertight guarantees so we view continuous att
 The next post will look at attacks on complete chips in more detail.
 
 # Where does this leave us?
-![image|690x394](upload://qlqiylt8k23d2OxCjoQjsWRZWKV.png)
+![Overview](/img/ZTEE/overview.png)
 
 We believe the techniques described above illustrate that a supply chain with far better trust assumptions is within reach. Our writing should not be taken as an exhaustive survey - there may be much better techniques for achieving the same goals. If your favourite or newly invented approach is better, please let us know. If you’re reading this on the Flashbots website there should be a “leave a reply” button at the top.
 
