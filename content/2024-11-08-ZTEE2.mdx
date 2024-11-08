@@ -6,8 +6,6 @@ tags: [ZTEE, hardware, TEE]
 hide_table_of_contents: false 
 ---
 
-By [Quintus Kilbourn](https://x.com/0xquintus), [Sylvain Bellemare](https://x.com/sbellem), [Bunnie](https://www.bunniestudios.com/) & [Michael Gao](https://x.com/gaoist) from [Fabric Crypto](https://www.fabriccryptography.com/) with special thanks to Thorben Moos from [Simple Crypto](https://www.simple-crypto.org/).
-
 Every distributed cryptographic protocol, key management system or wallet runs on opaque hardware. In almost all cases, we do not know with any certainty that our hardware is executing the expected program and that it is not actually acting against us. [Many cases](https://www.spiegel.de/international/world/the-nsa-uses-powerful-toolbox-in-effort-to-spy-on-global-networks-a-940969.html) of [exactly](https://web.archive.org/web/20230721093448/https://www.bloomberg.com/features/2021-supermicro/) this kind of [betrayal](https://eprint.iacr.org/2024/1275) have been [uncovered](https://arstechnica.com/tech-policy/2014/05/photos-of-an-nsa-upgrade-factory-show-cisco-router-getting-implant/). The [latest](https://www.aljazeera.com/economy/2024/9/19/lebanon-blasts-raise-alarm-about-supply-chain-security-tech-safety) proved deadly. This precedent suggests the likely existence of undetected malicious hardware in use today.
 
 In [our first post](https://writings.flashbots.net/ZTEE), we went over the big picture security shortcomings of TEEs and broke up the work that needs to be done into two: securing the completed chip against remote and physical attackers, and securing the chip against actors in the supply chain. While there is a lot of existing work on both categories, the latter is less explored for our purposes and requires more fundamental research so we are dedicating this post to the topic, and address remote and physical attackers in the next post.
@@ -43,6 +41,7 @@ The current chain of trust for a semiconductor looks something like the followin
 8. **Building on the attestation**: If we wanted to attest arbitrary applications running on the secure hardware (SH), the attested firmware can then be used to sign new software running on top of it using the hardware key or derivatives of it.
     
 ![RTL to GDS](/img/ZTEE/attestation.png)
+
 *This figure taken from [Teamwork makes TEE work](https://arxiv.org/pdf/2402.08908) depicts a simplified remote attestation flow.*
     
 
@@ -234,4 +233,4 @@ We have also touched on several open problems and challenges, which would be a g
     - Design governance mechanism and consider how verifier selection should be conducted.
     - For continuous attestation, understand the impact of frequency of attestations on passive side-channel attacks and physical attacks. Higher frequency should make physical attacks harder and side-channel attacks easier.
 
-Thanks to [Zach Belateche](https://x.com/blip_tm), Leonardo Arias, [James Ball](https://x.com/_troglobyte) and Nikki Sigurdson for review.
+This post would not have been possible without Thorben Moos from [Simple Crypto](https://www.simple-crypto.org/). Thanks to [Zach Belateche](https://x.com/blip_tm), Leonardo Arias, [James Ball](https://x.com/_troglobyte) and Nikki Sigurdson for valuable review and discussion.
