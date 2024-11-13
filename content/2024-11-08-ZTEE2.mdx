@@ -134,7 +134,7 @@ Another approach recognises that the march to a sufficiently powerful open hardw
 ![image|690x205, 75%](/img/ZTEE/zklvs1.jpeg)
 
 One way ([proposed by Bunnie](https://www.bunniestudios.com/blog/2024/iris-infra-red-in-situ-project-updates/)) to do this is to **bound the density of logic** (i.e. number of transistors per unit of area) we should expect in different regions of the chip. We could rely on formal methods to achieve these bounds, but partial reliance on heuristics may also be a viable path. The reasoning behind these heuristics would be that there are large financial incentives to develop techniques to pack logic more tightly and to advertise such improvements instead of secretly developing them for the insertion of trojans. Sufficiently tight bounds would render large trojans detectable. Given how [small](https://link.springer.com/chapter/10.1007/978-3-642-40349-1_12) some (dopant-level) trojans can be, we would also need other techniques to force trojans to a detectable size. We cover this issue in more depth in the next section. The proof techniques for upper bounding logic density and lower bounding trojans still need to be developed so this should be considered a direction for exploration rather than an option today.^[If you are knowledgeable or interested in working on (or funding) these problems reach out to us or Bunnie directly.]
-![image|690x379, 75%](/img/ZTEE/zklv2.jpeg)
+![image|690x379, 75%](/img/ZTEE/zklvs2.jpeg)
 
 
 Other ideas require the fab to select special actors to be given access to the GDS and PDK. These chosen verifiers can use the GDS and PDK to make public statements that link an image of a chip to the netlist. These statements would actually consist of two claims: 
