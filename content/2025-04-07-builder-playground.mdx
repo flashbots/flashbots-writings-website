@@ -1,0 +1,98 @@
+---
+slug: builder-playground
+title: Builder-Playground - Simplifying Local Testing Environments for Block Building
+authors: [ferran]
+tags: [mev-boost, pbs, builder, testing]
+hide_table_of_contents: false
+forum_link: https://collective.flashbots.net/t/builder-playground-simplifying-local-testing-environments-for-block-building/4863
+---
+
+![Builder Playground](/img/builder_playground.png)
+
+We’re excited to announce [Builder Playground](https://github.com/flashbots/builder-playground), an open-source framework to quickly spin up comprehensive block-building test environments for L1 and L2. After wrestling with tools that were either too slow, too inflexible, or too cumbersome for our specialized needs at Flashbots, we built Builder Playground. This purpose-built solution lets developers deploy complete blockchain testing environments in seconds rather than minutes, with minimal configuration and maximum reliability.
+
+<!--truncate-->
+
+## Challenges of Building Block Builder Infrastructure
+
+At the core of blockchains are blocks, and behind every block is an actor known as a “block builder”. At Flashbots we’ve been developing block-building infrastructure for over half a decade. Block building is not an isolated task, it requires interacting with numerous pieces of infrastructure, from consensus mechanisms to execution environments, all the way down to the user's wallet.  The most basic setup to test an L1 block builder includes an Execution Layer client (EL), a Consensus Layer client (CL), validators, and MEV-Boost - and this is just the beginning. As you move up to L2s and beyond, these environments grow exponentially more complex with additional components and dependencies.
+
+While it's possible to mock some components for certain types of testing, having an easy way to deploy complete, production-like environments locally remains essential for comprehensive testing and validation. Fast, reliable local deployments give us confidence that our implementations handle the interactions between real components properly, exposing complexities that can't be fully simulated with mocks.
+
+The most widely used tool for deploying blockchain testing environments is Kurtosis, a general-purpose deployment tool with support for Ethereum and Optimism. However, its design didn't align with our block builder development workflow for several reasons:
+
+- **Performance constraints**: Running even simple setups takes considerable time, which impacts our development process.
+- **Extending beyond standard packages**: Beyond the main Ethereum and Optimism packages maintained by the EthPandaOps team, it's challenging to create and maintain your own custom packages due to the complexity of Starlark scripts. This is particularly important for us as Flashbots is iterating rapidly on different network topologies and block building paradigms (such as Buildernet and Rollup-boost).
+- **Post-deployment workflow challenges**: After a Kurtosis environment is deployed, accessing and interacting with the services requires additional steps. Container names and ports are assigned dynamically, making it difficult to consistently access specific services.
+
+Looking at alternatives, simply using docker-compose files directly isn't a viable solution either. While Kurtosis adds complexity through abstractions, docker-compose is too basic for our requirements. Blockchain deployments require extensive pre-setting of states and artifacts before containers can be started. This crucial preparation step is outside the scope of what docker-compose is designed to handle.
+
+Furthermore, using docker-compose would require developers to manually manage service configurations, handle port mappings, implement container networking, and create their own health monitoring systems - all while dealing with dozens of client-specific flags and parameters. This approach would be too low-level and manual for efficiently testing complex blockchain environments.
+
+**To address these specific challenges, we created Builder Playground - a purpose-built tool that simplifies the deployment of block builder testing environments.**
+
+## Builder Playground Architecture
+
+At the core of Builder Playground are two key abstractions:
+
+- **Components:** Components represent individual compute services like execution clients, consensus clients, or relays. Each component is defined as a Go struct that encapsulates the service's configuration. Components expose only the essential parameters while abstracting users from the numerous underlying configuration details through sensible defaults. Components include both execution parameters and important metadata such as exported ports and service dependencies. This information is used to validate deployments and generate relationship graphs between services.
+- **Recipes**: Recipes combine components to create concrete testing environments, such as L1 stack, OP-stack, or OP interop stack. Developers simply declare which components should be included in the environment.
+
+The execution flow in Builder Playground consists of three phases:
+
+1. **Artifact Generation** First, Builder Playground generates all necessary artifacts required for the deployment, such as blockchain genesis files, validator keys, and configuration files.
+2. **Manifest Creation and Validation** Next, it processes the recipe definition to create a deployment manifest. During this phase, Builder Playground validates all service connections, ensures components are properly configured to work together, and checks that all required ports and dependencies are correctly specified.
+3. **Deployment Execution** Finally, the validated manifest is converted into a docker-compose file for execution. Builder Playground handles all the Docker networking, volume mounting, and service orchestration automatically.
+
+The entire system is written in Go, without using separate configuration languages, though it does make certain aspects of modularity and encapsulation more challenging compared to domain-specific languages. We believe this is a worthwhile tradeoff since we're targeting a specific domain (block building scenarios) where the benefits of performance, type safety, and developer familiarity with Go outweigh the limitations on extensibility.
+
+This component-based approach allows for high reusability - the same component can be used across multiple recipes with different configurations. Adding a new network topology is as simple as writing a new recipe that combines existing components.
+
+## Design Principles
+
+Our experience with existing deployment tools informed several key design decisions for Builder Playground:
+
+**Direct implementation of core functionality**: Unlike tools that rely on layers of indirection, Builder Playground implements critical functionality directly in Go. Configuration manipulation, network setup, and artifact generation are handled natively, eliminating the overhead of container executions for simple tasks. This results in significantly faster deployments, reducing iteration time during development.
+
+**Cognitive load minimization** : Instead of exposing dozens of flags for each service, we provide carefully selected defaults optimized for block building scenarios. By exposing only what's necessary, we reduce cognitive load on developers, allowing them to focus on block building logic rather than infrastructure details.
+
+**Modular, extensible architecture**: Builder Playground is split into two key layers that separate service configuration from environment composition. This separation makes it easier to add new components or create new testing scenarios without modifying the core system, making it easier to support different network configurations.
+
+**Domain-specific optimizations**: By focusing exclusively on block builder testing, we applied targeted optimizations that wouldn't be practical in a general-purpose tool. We hardcoded common parameters, created purpose-built abstractions for network topologies, and eliminated unnecessary flexibility. This specialized approach improves performance for our specific workflows while deliberately sacrificing generality we don't need.
+
+### Getting Started with Builder Playground
+
+To use Builder Playground:
+
+1. Clone the repo or download the binary from the [releases page on GitHub](https://github.com/flashbots/builder-playground/releases)
+2. Run the tool with the `cook` command:
+
+```bash
+$ ./builder-playground cook l1
+```
+
+That's it! This single command deploys a complete L1 chain environment with a Lighthouse beacon node and validator, a Reth execution client, and an in-memory MEV-Boost relay.
+
+### Understanding the Output
+
+Builder Playground creates an output directory (default: `$HOME/.playground/devnet`) containing configuration files, genesis files, and validator keys. Each service writes logs to the `/logs` folder, making it easy to debug issues. You'll also find a `.dot` file showing relationships between services, providing a clear view of how components connect and depend on each other.
+
+![Builder Playground diagram](/img/Builder_Playground_diagram.png)
+
+
+All services run in Docker containers with DNS discovery, allowing services to find each other by name. The services expose ports to the host machine on predictable port numbers close to their default bindings, making it easy to connect external tools.
+
+When you stop Builder Playground (Ctrl+C), it automatically stops all running containers and cleans up resources.
+
+## Conclusion
+
+Builder Playground addresses specific challenges we faced when testing block building components. By creating a specialized tool that prioritizes speed, reliability, and simplicity, we've reduced the friction in testing complex blockchain infrastructure.
+
+What started as an internal tool has evolved into a key component of our development workflow. The faster feedback loop has helped us iterate more quickly on our development process.
+
+We invite you to try Builder Playground for your own block building development and welcome contributions to make it even better. We hope this tool helps others working on block building to streamline their testing processes just as it has for us.
+
+## Join us
+
+- The code is [open source](https://github.com/flashbots/builder-playground) if you want to take a look or to contribute.
+- We’re hiring [engineers for the builder](https://jobs.ashbyhq.com/flashbots.net/b014d3bb-1773-464b-9f21-3787d0c76ba0) to work on similar industry leading ideas. Feel free to reach out if you’re interested and want to learn more:)
