@@ -109,12 +109,12 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
             title: 'x',
             items: [
               {
-                label: 'Github',
-                href: 'https://github.com/flashbots',
-              },
-              {
                 label: 'Forum',
                 href: 'https://collective.flashbots.net/',
+              },
+              {
+                label: 'Github',
+                href: 'https://github.com/flashbots',
               },
               {
                 label: 'Documentation',
@@ -130,46 +130,16 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
             title: 'x',
             items: [
               {
-                label: 'What Is MEV',
-                href: 'https://docs.flashbots.net/new-to-mev',
+                label: 'Youtube',
+                href: 'https://www.youtube.com/@flashbots',
               },
-              {
-                label: 'MEV Protection',
-                href: 'https://docs.flashbots.net/flashbots-protect/overview',
-              },
-              {
-                label: 'The MEV Letter',
-                href: 'https://collective.flashbots.net/tag/the-mev-letter',
-              },
-            ],
-          },
-          {
-            title: 'x',
-            items: [
-              {
-                label: 'Ethereum Block Building',
-                href: 'https://docs.flashbots.net/flashbots-mev-boost/block-builders',
-              },
-              {
-                label: 'Transparency reports',
-                href: 'https://writings.flashbots.net/tags/transparency-report',
-              },
-            ],
-          },
-          {
-            title: 'x',
-            items: [
               {
                 label: 'Discord',
                 href: 'http://discord.gg/flashbots',
               },
               {
-                label: 'YouTube',
-                href: 'https://www.youtube.com/channel/UCclbTgsnYUy3vmrptIqCmqQ',
-              },
-              {
-                label: 'Calendar',
-                href: 'https://calendar.flashbots.net',
+                label: 'The MEV Letter',
+                href: 'https://collective.flashbots.net/tag/the-mev-letter',
               },
             ],
           },
