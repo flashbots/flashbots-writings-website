@@ -6,9 +6,9 @@ tags: [TEE, ORAM, privacy]
 hide_table_of_contents: false
 forum_link: 
 ---
-[Oblivious Labs](https://obliviouslabs.com/) + [Flashbots](https://www.flashbots.net/)
+<center>[Oblivious Labs](https://obliviouslabs.com/) + [Flashbots](https://www.flashbots.net/)</center>
 
-# Mitigating MEV using trusted hardware
+### Mitigating MEV using trusted hardware
 
 An important problem faced by many cryptocurrencies today is called Maximal Extractable Value (MEV). Transactions are submitted in the clear, and they are prone to front-running and back-running attacks. Such attacks allow the arbitrager to make unfair profit, at the expense of the users who are forced to buy and sell at a less favorable price. Because of such MEV attacks, an offchain ecosystem has developed: block builders now sell favorable positions in the block to both arbitragers and users alike, leading to a centralization effect. Today, 80%-90% of the Ethereum blocks are produced by the largest two block builders [[Yang et al.](https://arxiv.org/pdf/2405.01329)].
 
@@ -24,7 +24,7 @@ For example, Flashbot’s BuilderNet architecture provides a platform for decent
 
 **Figure 1: Private order flow using TEE**
 
-# Understanding access pattern leakage
+### Understanding access pattern leakage
 
 Encryption alone is not enough for achieving privacy. As mentioned, to privately build a new block, the block builder speculatively executes the transactions inside the enclave. The smart contract execution requires accesses to the blockchain’s state, and the access patterns are observable by the server. 
 
@@ -47,7 +47,7 @@ There are several ways the untrusted server can observe access patterns.
 
 We also stress that simply permuting the data in untrusted storage does not work. It is fairly easy for the adversary to infer which location is storing what through statistical inference, by leveraging frequency and co-occurrence. This is similar to why deterministic encryption is not secure.
 
-# Taming the access pattern leakage through Oblivious RAM
+### Taming the access pattern leakage through Oblivious RAM
 
 So what can we do to prevent the access pattern leakage? We can use the help of Oblivious RAM (ORAM).  ORAM is an algorithmic technique that provably hides a program’s access patterns to data.  Below we will give a quick crash course on the [Path ORAM](https://eprint.iacr.org/2013/280.pdf) algorithm.
 
@@ -65,7 +65,7 @@ In summary, in Path ORAM, ignoring the recursion, then each request involves vis
 
 ![Path ORAM](/img/scalable_obl_3.png)
 
-# Performance of ORAM
+### Performance of ORAM
 
 Now, you should see that ORAM is just a simple tree-based data structure, and contrary to what many believe, there is no cryptography involved! For this reason, ORAM’s performance is comparable to storing data in a database, i.e., we can enjoy almost native performance. Indeed, the scalability of ORAM has already been attested to in Web2 applications. Notably, Signal, the private messenger, employs ORAM for their private contact discovery service --- see [Signal’s blog post](https://signal.org/blog/building-faster-oram/) on this topic.  Prior to adopting ORAM, they relied on a naive batched linear scan algorithm to achieve privacy, requiring ~500 servers. After rolling out ORAM, they were able to cut down to only 6 servers, saving almost 100x in computing cost.
 
@@ -79,7 +79,7 @@ If you are convinced and you want to use ORAM, you can check out the [open-sourc
 
 **Projected performance in blockchain applications.** If we want to use ORAM during block building to secure the accesses of all Uniswap transactions, how much delay are we looking at? We looked at the recent Ethereum block data. On average, each block has ~20 Uniswap transactions. Each Uniswap transaction makes 3 memory accesses (sload/sstore operations) that are sensitive. Using our microbenchmarks above, the projected delay for building a block would be 3ms, if we store the entire Ethereum state in ORAM. The latency can be further reduced to 0.5ms if we store each uniswap contract in a separate ORAM, but this would leak which pair of tokens are being exchanged. 
 
-# Demo: oblivious balance checker
+### Demo: oblivious balance checker
 
 At [Oblivious Labs Inc.](http://obliviouslabs.com), we have created a demo for an oblivious Ethereum ERC20 token balance checker, allowing a user to check its ERC20 token balance without identifying the queried account. Our demo is available at https://obliviouslabs.com/WBTCdemo/. 
 
@@ -87,14 +87,14 @@ At [Oblivious Labs Inc.](http://obliviouslabs.com), we have created a demo for a
 
 Our balance checker demo (shown above) is for the WBTC token. We maintain a fresh copy of the WBTC’s contract state in an oblivious key-value store. We also implemented an **updater** that keeps reading the newly minted blocks from a geth node. The updater then verifies the Merkle Patricia Tree (MPT) proofs before adding the state updates to the oblivious key-value store. With the oblivious key-value store, a user can query its balances without identifying herself.
 
-# Towards an Oblivious Data Access Layer for Ethereum
+### Towards an Oblivious Data Access Layer for Ethereum
 
 Our current oblivious balance checker only provides oblivious accesses for the state of a single contract, but our next step is to extend it and support oblivious queries to the entire Ethereum state as well as blockchain data, based on the same architecture. The end result will be an **oblivious data access layer** for Ethereum, supporting fast support queries to Ethereum’s full state and logs while hiding the user’s intentions. 
 
 Please contact [obliviouslabs@gmail.com](mailto:obliviouslabs@gmail.com) if you are interested in collaborating with us. 
 
 
-# Further Reading
+### Further Reading
 
 * [Talk “ORAM: from theory to practice”](https://www.youtube.com/watch?v=NcSiqtmHaJk)
 * [Path ORAM paper](http://elaineshi.com/docs/pathoram.pdf)
