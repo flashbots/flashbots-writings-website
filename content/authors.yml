@@ -184,6 +184,16 @@ elaineshi:
     name: Elaine Shi
     title: President & Chief Scientist at Oblivious Labs
     url: https://elaineshi.com/
+    
+afonsotinoco:
+    name: Afonso Tinoco
+    title: Co-Founder & Research Engineer at Oblivious Labs
+    url: https://scholar.google.com/citations?user=PUvxukkAAAAJ&hl=en
+    
+tianyaogu:
+    name: Tianyao Gu
+    title: Co-Founder at Oblivious Labs
+    url: https://www.linkedin.com/in/tianyao-gu/
 
 friends:
     name: friends
