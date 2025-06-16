@@ -18,7 +18,7 @@ At a time when leading networks like Ethereum, its L2s, and Solana are racing to
 This is not a theoretical or isolated problem. We can observe it everywhere from Solana, [where MEV bots consume 40% of blockspace](https://x.com/chrischang43/status/1923835638261907921), to the [Ethereum L2 ecosystem](https://arxiv.org/abs/2506.01462). To quantify the impact, we conducted a deep dive on top OP-Stack rollups where specific trace endpoints were available. The results serve as a clear window into a market-wide problem:
 
 * Spam bots across multiple rollups are consuming **more than 50% of gas** and paying **less than 10% of fees.**
-* Between November 2024 to February 2025 Base added **11M in gas/s throughput and it was all consumed by spam bots.** (Three Ethereum Mainnets worth of capacity!)
+* Between November 2024 to February 2025 Base added **11M in gas/s throughput and almost all of it was consumed by spam bots.** (Three Ethereum Mainnets worth of capacity!)
 * Spam bots’ constant demand for gas creates **persistently higher fees for users.**
 * The market for spam is **extremely concentrated** with two searchers responsible for more than 80% of spam on Base.
 
@@ -123,7 +123,7 @@ We found that across a million blocks in February, spam bots on Base were respon
 
 Third, this inefficiency directly neutralizes the benefits of scaling. To measure the negative effect of spam, we introduce a new metric called effective gas throughput —the gas per second a rollup processes after deducting the gas used by spam bots.
 
-The trend on Base is stark: in November 2024, the overall gas throughput was 15 Mgas/s while the effective gas throughput for users was only 12 Mgas/s. Over the next four months, while the total gas throughput grew by another 11 Mgas/s, the effective gas throughput held roughly constant. **Put another way, almost 100% of the new throughput was captured by spam.**
+The trend on Base is stark: in November 2024, the overall gas throughput was 15 Mgas/s while the effective gas throughput for users was only 12 Mgas/s. Over the next four months, while the total gas throughput grew by another 11 Mgas/s, the effective gas throughput held roughly constant. **Put another way, almost all new throughput was captured by spam..**
 
 Interestingly, after the end of February, there was a divergence and effective gas throughput started growing more closely with overall gas throughput. This appears to be tied to the amount of trading, and thereby MEV, in the market. [The Libra scandal](https://en.wikipedia.org/wiki/$Libra_cryptocurrency_scandal) started on February 14th, and soon after effective gas throughput started to increase again. This correlates with the decrease in memecoin trading volume indicated by [Telegram Bots trading volume](https://dune.com/whale_hunter/dex-trading-bot-wars?Timeframe+in+Days_n793f0=320).
 
