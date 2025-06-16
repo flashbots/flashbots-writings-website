@@ -93,7 +93,7 @@ Our analysis confirms that MEV driven spam imposes economic limits on scaling.
 
 **We classified spam by identifying transactions that make repeated DEX queries but transfer no tokens.** This was a specific heuristic chosen to identify systematically wasteful backrunning arbitrage that could be done offchain but is being forced onchain. We implemented this heuristic both in Python tooling as well as Dune dashboards. **For more detail on the methodology behind this data, see the [appendix](###appendix).**
 
-**Our data analysis was limited to OP-Stack rollups only because of the availability of certain RPC methods necessary for our spam inspection tools.** Data from the Ghost Logs team confirms our findings are relevant for Solana as well, and [others have found evidence](https://arxiv.org/abs/2506.01462) of spam on other Ethereum rollups like zksync and Arbitrum.
+**Our data analysis was limited to OP-Stack rollups only because of the availability of certain RPC methods necessary for our spam inspection tools.** Data from the Ghost Logs team confirms our findings are [relevant for Solana](https://x.com/chrischang43/status/1923835638261907921) as well, and [others have found evidence](https://arxiv.org/abs/2506.01462) of spam on other Ethereum rollups like zksync and Arbitrum.
 
 **#1 Spam is systemic and widespread**
 
