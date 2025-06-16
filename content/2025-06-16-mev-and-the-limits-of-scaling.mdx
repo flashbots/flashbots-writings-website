@@ -219,9 +219,9 @@ We believe that these heuristics are robust as of the time of writing. Doing any
 
 However, this definition needs to be made more robust going forward. It would be trivial for spam bots to game this by transferring tokens. How to classify what is “spam” or not is an exciting area for follow-up research. Moreover, this definition notably captures blind backrunning arbitrage bots which make up the majority of MEV, but omits other forms of MEV strategies like liquidations.
 
-Spam identification methodology
+**Spam identification methodology**
 
-To identify spam activity, we examined transaction’s traces. For each transaction, we looked at each of their traces to determine whether it invokes a token transfer function or a dex price function (such as slot0(), getReserves(), etc.). If the transaction transfers *any* token then it would not be classified as spam. However, if it transfers no tokens *and* it makes 4 calls to get DEX prices, then we classify it as spam.
+To identify spam activity, we examined transaction’s traces. For each transaction, we looked at each of their traces to determine whether it invokes a token transfer function or a dex price function (such as `slot0()`, `getReserves()`, etc.). If the transaction transfers *any* token then it would not be classified as spam. However, if it transfers no tokens *and* it makes 4 calls to get DEX prices, then we classify it as spam.
 
 We chose 4 to be conservative but experimented with setting a threshold of 3 calls instead of 4 and found it to have little impact overall. Similarly, we used transfer events to filter out transactions with transfers on Dune, but found that to similarly not have a large difference relative to using traces.
 
