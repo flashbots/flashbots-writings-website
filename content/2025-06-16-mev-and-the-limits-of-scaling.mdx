@@ -232,7 +232,7 @@ This requires the `trace_block` method. At the time of writing, that method is o
 
 We built Dune materialized views that identified transaction hashes which meet the above criteria by filtering out transactions which have a Transfer event, and looking for repeated DEX price calls. This slightly differs from `spam-inspect` in that it relies on Transfer *events* rather than traces. These materialized views of spam transactions were used to build follow-on queries.
 
-DA estimation
+**DA estimation**
 
 Although this article is mostly about how spam affects gas, it also affects other resource usage, like L1 data availability that rollups use. To derive an estimate of the amount of L1 DA that spam on L2s waste we built a custom data pipeline that reused parts of `op-batcher`. To arrive at our DA estimate we ran two calculations:
 
