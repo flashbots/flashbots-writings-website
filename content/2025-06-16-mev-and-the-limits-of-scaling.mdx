@@ -97,13 +97,13 @@ Our analysis confirms that MEV driven spam imposes economic limits on scaling.
 
 **Our data analysis was limited to OP-Stack rollups only because of the availability of certain RPC methods necessary for our spam inspection tools.** Data from the Ghost Logs team confirms our findings are [relevant for Solana](https://x.com/chrischang43/status/1923835638261907921) as well, and [others have found evidence](https://arxiv.org/abs/2506.01462) of spam on other Ethereum rollups like zksync and Arbitrum.
 
-## #1 Spam is systemic and widespread
+## 1 Spam is systemic and widespread
 
 ![SHARE OF GAS USED BY SPAM BOTS](/img/mev-and-the-limits-of-scaling/5.png)
 
 First, the problem is systemic and widespread. An analysis of top OP-Stack rollups shows that spam is not an isolated issue but a dominant force across the ecosystem. On chains like Unichain, Base, and OP Mainnet spam has regularly consumed over 50% of all gas used. As a result, we can conclude that this is a structural consequence of the current market design, not a localized anomaly.
 
-## #2 Spam consumes disproportionately more gas than it pays in fees
+## 2 Spam consumes disproportionately more gas than it pays in fees
 
 Our second finding is that spam is extraordinarily inefficient from the chain's perspective.
 
@@ -119,7 +119,7 @@ Further, we also analyzed how spam on L2s affected a rollup’s usage of L1 Data
 
 We found that across a million blocks in February, spam bots on Base were responsible for approximately 56% of gas usage, 26% of L1 DA usage, and 14% of the chain’s fees. The % of DA usage by spam bots initially surprised us, but we found it correlates with the % of transactions by spam bots instead of gas usage. This makes sense because DA usage is a function of how well data compresses, not how much gas it uses.
 
-## #3 Spam limits and neutralizes the benefits of scaling
+## 3 Spam limits and neutralizes the benefits of scaling
 
 ![EFFECTIVE GAS THROUGHPUT ON BASE](/img/mev-and-the-limits-of-scaling/8.png)
 
@@ -129,7 +129,7 @@ The trend on Base is stark: in November 2024, the overall gas throughput was 15 
 
 Interestingly, after the end of February, there was a divergence and effective gas throughput started growing more closely with overall gas throughput. This appears to be tied to the amount of trading, and thereby MEV, in the market. [The Libra scandal](https://en.wikipedia.org/wiki/$Libra_cryptocurrency_scandal) started on February 14th, and soon after effective gas throughput started to increase again. This correlates with the decrease in memecoin trading volume indicated by [Telegram Bots trading volume](https://dune.com/whale_hunter/dex-trading-bot-wars?Timeframe+in+Days_n793f0=320).
 
-## #4 Spam’s constant demand raises fees for users
+## 4 Spam’s constant demand raises fees for users
 
 ![BASE FEE AND GAS USAGE ON BASE](/img/mev-and-the-limits-of-scaling/9.png)
 
@@ -141,7 +141,7 @@ In practice this is not what happens. MEV searchers trying to capture MEV with s
 
 Although fees are still low for end users, they are *significantly higher than they need to be* overall. That’s a problem because it means novel use cases that require abundant and cheap blockspace are being priced out, like onchain social networks or agentic micropayments.
 
-## #5 The spam market is highly concentrated
+## 5 The spam market is highly concentrated
 
 Finally, our analysis reveals that the searcher market for MEV spam is extremely concentrated.
 
