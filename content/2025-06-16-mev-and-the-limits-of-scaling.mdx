@@ -1,7 +1,7 @@
 ---
 slug: mev-and-the-limits-of-scaling
 title: MEV and the Limits of Scaling
-authors: [robert]
+authors: [flashbots]
 tags: [layer2, spam]
 hide_table_of_contents: false
 image: /img/mev-and-the-limits-of-scaling/1.png
@@ -28,7 +28,7 @@ Technical scaling efforts like database sharding (i.e. rollups), validity provid
 
 In this article, we will unpack this market failure, show data demonstrating its impact, and argue for a new MEV auction designed to solve it.
 
-# Anatomy of a spam transaction
+## Anatomy of a spam transaction
 
 To understand why blockspace is being wasted, let’s first dissect a [single, successful arbitrage transaction](https://basescan.org/tx/0x65a35c3f0efae6746c96e09e6119276cef5de04abe14e4a3ba541eba09103569):
 
@@ -69,7 +69,7 @@ Across chains like Base, World, and Solana this is the dominant strategy for ext
 
 Huge amounts of resources are being used just to read prices and not do anything with them. And this single searcher isn’t alone, every other searcher needs to adopt this strategy to capture atomic MEV. The result is what we see reflected in the data: **chains congested with spam and fees elevated by that spam.**
 
-# The root causes of spam
+## The root causes of spam
 
 The spam congesting high-throughput chains isn’t an accident. It is the direct and rational response to a flaw in the market structure: to profitably read the latest state of a block and react to it, a searcher must blindly write a transaction within that same block.
 
@@ -89,7 +89,7 @@ The phenomenon of rampant onchain searching is due to the interplay of our diffe
 
 When combined, these four factors effectively create a spam auction. This is a profoundly wasteful mechanism that incentivizes network congestion and poorly captures value from MEV. To quantify the true scale of the inefficiency created by spam, we turned to the data.
 
-# Findings
+## Findings
 
 Our analysis confirms that MEV driven spam imposes economic limits on scaling.
 
@@ -97,13 +97,13 @@ Our analysis confirms that MEV driven spam imposes economic limits on scaling.
 
 **Our data analysis was limited to OP-Stack rollups only because of the availability of certain RPC methods necessary for our spam inspection tools.** Data from the Ghost Logs team confirms our findings are [relevant for Solana](https://x.com/chrischang43/status/1923835638261907921) as well, and [others have found evidence](https://arxiv.org/abs/2506.01462) of spam on other Ethereum rollups like zksync and Arbitrum.
 
-## 1 Spam is systemic and widespread
+### 1 Spam is systemic and widespread
 
 ![SHARE OF GAS USED BY SPAM BOTS](/img/mev-and-the-limits-of-scaling/5.png)
 
 First, the problem is systemic and widespread. An analysis of top OP-Stack rollups shows that spam is not an isolated issue but a dominant force across the ecosystem. On chains like Unichain, Base, and OP Mainnet spam has regularly consumed over 50% of all gas used. As a result, we can conclude that this is a structural consequence of the current market design, not a localized anomaly.
 
-## 2 Spam consumes disproportionately more gas than it pays in fees
+### 2 Spam consumes disproportionately more gas than it pays in fees
 
 Our second finding is that spam is extraordinarily inefficient from the chain's perspective.
 
@@ -119,7 +119,7 @@ Further, we also analyzed how spam on L2s affected a rollup’s usage of L1 Data
 
 We found that across a million blocks in February, spam bots on Base were responsible for approximately 56% of gas usage, 26% of L1 DA usage, and 14% of the chain’s fees. The % of DA usage by spam bots initially surprised us, but we found it correlates with the % of transactions by spam bots instead of gas usage. This makes sense because DA usage is a function of how well data compresses, not how much gas it uses.
 
-## 3 Spam limits and neutralizes the benefits of scaling
+### 3 Spam limits and neutralizes the benefits of scaling
 
 ![EFFECTIVE GAS THROUGHPUT ON BASE](/img/mev-and-the-limits-of-scaling/8.png)
 
@@ -129,7 +129,7 @@ The trend on Base is stark: in November 2024, the overall gas throughput was 15 
 
 Interestingly, after the end of February, there was a divergence and effective gas throughput started growing more closely with overall gas throughput. This appears to be tied to the amount of trading, and thereby MEV, in the market. [The Libra scandal](https://en.wikipedia.org/wiki/$Libra_cryptocurrency_scandal) started on February 14th, and soon after effective gas throughput started to increase again. This correlates with the decrease in memecoin trading volume indicated by [Telegram Bots trading volume](https://dune.com/whale_hunter/dex-trading-bot-wars?Timeframe+in+Days_n793f0=320).
 
-## 4 Spam’s constant demand raises fees for users
+### 4 Spam’s constant demand raises fees for users
 
 ![BASE FEE AND GAS USAGE ON BASE](/img/mev-and-the-limits-of-scaling/9.png)
 
@@ -141,7 +141,7 @@ In practice this is not what happens. MEV searchers trying to capture MEV with s
 
 Although fees are still low for end users, they are *significantly higher than they need to be* overall. That’s a problem because it means novel use cases that require abundant and cheap blockspace are being priced out, like onchain social networks or agentic micropayments.
 
-## 5 The spam market is highly concentrated
+### 5 The spam market is highly concentrated
 
 Finally, our analysis reveals that the searcher market for MEV spam is extremely concentrated.
 
@@ -157,7 +157,7 @@ When we group the data by profit taking addresses the market looks sharply more 
 
 The result is stark, just two entities are responsible for over 80% of spam on Base. The extreme concentration shown suggests significant barriers to entry and that the current spam auction is not truly competitive. This lack of competition further blunts price discovery, meaning that the chain fails to capture the true value of the MEV being extracted, **while also** on top of suffering the externalities of spam.
 
-# The Path Forward
+## The Path Forward
 
 We posit that blockchains should **maximize how much useful economic activity they can fit in their limited blockspace.**
 
@@ -169,7 +169,7 @@ To do so, we return to the four reasons why onchain searching became the dominan
 
 Thus, the solution must be found in addressing the other two: allowing searchers to read upcoming state and express their preferences over it in a way that both upholds user guarantees and minimizes spam on the blockchain itself.
 
-## Toward the solution
+### Toward the solution
 
 First, we will address state access through programmable privacy. An efficient market must **provide searchers with real-time access to the transaction flow, while programmatically enforcing restrictions on how they can use that information.**
 
@@ -186,7 +186,7 @@ These two components, **programmable privacy and explicit bidding**, work in tan
 
 That allows for the running of searchers inside of TEEs where they are verifiably allowed to backrun private transactions, but aren’t allowed to sandwich or export any private data. We have proven this out on Ethereum L1, where [searchers have been backrunning transactions](https://collective.flashbots.net/t/searching-in-tdx/3902) in a similar system for several months now, and are actively adapting it for L2.
 
-# Conclusion
+## Conclusion
 
 The conversation around scaling has been narrowly focused on raw technical throughput for too long. Our findings show that the critical frontier is no longer making blocks bigger. **It is using blockspace more efficiently.**[^3]
 
@@ -204,13 +204,13 @@ What might be possible when we break through the limits imposed by spam? What ge
 
 There’s only one way to find out.
 
-# Collaborate with us
+## Collaborate with us
 
 We are actively designing and building this future for rollups. Come and talk to us if you want to push past economic limits and innovate onchain market design together. You can DM [dmarz](https://x.com/DistributedMarz) or [myself](http://x.com/bertcmiller) on Twitter.
 
 *Thank you to [DataAlways](https://x.com/Data_Always), [Hasu](https://x.com/hasufl), [Fahim](https://x.com/0xOptimus), [Danning](https://x.com/sui414), [dmarz](https://x.com/DistributedMarz), [Nathan](https://x.com/NathanWorsley_), [Georgios](https://x.com/gakonst/), [Dan](https://x.com/danrobinson), [buffalu](https://x.com/buffalu__), [Quintus](https://x.com/0xQuintus), [Tesa](https://x.com/defin00b), [Anika](https://x.com/AnikaRaghu), [Brian](https://x.com/brianisbland), [Xin](https://x.com/xin__wan), [Sam](https://x.com/sammcingvale), Eli, [Christine](https://x.com/christine_dkim/), [Christoph](https://christophschlegel.com/), [Alex](https://x.com/ralexstokes), [Fred](https://x.com/Freddmannen), and many others for their helpful comments. A special thanks goes to [Phil](https://x.com/phildaian). And thanks to [Achal](https://x.com/achalvs) for the design help.*
 
-# Appendix
+## Appendix
 
 **Spam identification heuristics**
 
