@@ -153,7 +153,7 @@ When we group the data by profit taking addresses the market looks sharply more 
 
 ![TOP SPAM GAS USERS BY PROFIT-TAKING ADDRESS](/img/mev-and-the-limits-of-scaling/11.png)
 
-The result is stark, just two entities are responsible for over 80% of spam on Base. The extreme concentration shown suggests significant barriers to entry and that the current spam auction is not truly competitive. This lack of competition further blunts price discovery, meaning that the chain fails to capture the true value of the MEV being extracted on top of suffering the externalities of spam.
+The result is stark, just two entities are responsible for over 80% of spam on Base. The extreme concentration shown suggests significant barriers to entry and that the current spam auction is not truly competitive. This lack of competition further blunts price discovery, meaning that the chain fails to capture the true value of the MEV being extracted, **while also** on top of suffering the externalities of spam.
 
 ### The Path Forward
 
@@ -180,7 +180,9 @@ These two components, **programmable privacy and explicit bidding**, work in tan
 1. Programmable privacy eliminates the need to write to the chain to read the latest state, without exposing users to frontrunning.
 2. Explicit bidding provides an efficient, price-based mechanism to capture the value that controlled visibility reveals.
 
-**Flashbots has been experimenting with Trusted Execution Environments (TEEs) to give searchers visibility without the ability to sandwich.** TEEs give guarantees that specific code is being executed with data that is kept confidential even from the machine’s operator. That allows for the running of searchers inside of TEEs where they are verifiably allowed to backrun private transactions, but aren’t allowed to sandwich or export any private data. We have proven this out on Ethereum L1, where [searchers have been backrunning transactions](https://collective.flashbots.net/t/searching-in-tdx/3902) in a similar system for several months now, and are actively adapting it for L2.
+**Flashbots has been experimenting with Trusted Execution Environments (TEEs) to give searchers visibility without the ability to sandwich.** TEEs give guarantees that specific code is being executed with data that is kept confidential even from the machine’s operator.
+
+That allows for the running of searchers inside of TEEs where they are verifiably allowed to backrun private transactions, but aren’t allowed to sandwich or export any private data. We have proven this out on Ethereum L1, where [searchers have been backrunning transactions](https://collective.flashbots.net/t/searching-in-tdx/3902) in a similar system for several months now, and are actively adapting it for L2.
 
 ### Conclusion
 
