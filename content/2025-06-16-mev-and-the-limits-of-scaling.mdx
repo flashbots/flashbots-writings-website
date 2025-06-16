@@ -49,6 +49,7 @@ At a glance this transaction looks innocuous. It executed successfully and perfo
 However, if you look under the hood at its traces we can see a long list of `calls` to dozens of different DEX pools, querying their state with `getReserves()` and `slot0()` calls. These calls are essentially getting the prices of different assets on different DEXes.
 
 ![Example traces](/img/mev-and-the-limits-of-scaling/4.png)
+
 *Example traces showing repeated calls of `slot0()` and `getReserves()`*
 
 `cast run 0x561d3f12bafb1c199af03746c2f31a44aa4f1fb0a658a66f9e93d0b71cc1959e --rpc-url $YOUR_RPC_URL`
