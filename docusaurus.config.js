@@ -144,7 +144,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
             ],
           },
         ],
-        copyright: `© 2025 Flashbots, Ltd`,
+        copyright: `© ${new Date().getFullYear()} Flashbots, Ltd`,
       },
       // algolia: {
       //   apiKey: '',
