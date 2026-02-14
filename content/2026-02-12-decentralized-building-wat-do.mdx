@@ -1,0 +1,217 @@
+---
+slug: decentralized-building-wat-do
+title: "decentralized building: wat do?"
+authors: [flashbots]
+tags: [block building, decentralization, roadmap]
+hide_table_of_contents: false
+image: /img/decentralizedbuildwatdo/banner.png
+forum_link: 
+---
+![decentralized-watdo](/img/decentralizedbuildwatdo/banner.png)
+
+
+*“Ethereum was not created to make finance efficient or apps convenient. It was created to set people free...”*
+
+*"Gateways become platforms. Platforms become landlords. Landlords decide who may enter and what they may do."* - [The Trustless Manifesto](https://trustlessness.eth.limo/general/2025/11/11/the-trustless-manifesto.html)
+
+What is going on in the MEV and orderflow market today and how does it relate to achieving [the mission of Ethereum](https://x.com/VitalikButerin/status/2006737662942871574?s=20) and to all blockchains? Do MEV systems... builders, relays, orderflow routers, simply comprise nothing beyond gateways, platforms, and intermediaries? Is the time ripe for the centralization and stagnation of crypto, or are the lessons we have learned from years of building decentralized blockchains finally ready for the mainstream? What is the value of the “free and open internet” of money, and how can we make sure that decentralization fuels rather than fights user outcomes, best execution, scaling, and privacy guarantees? And finally, what is Flashbots doing about all of this?
+<!--truncate-->
+## Block Building Decentralization: Time for an Update
+
+We believe that substantial structural innovations are possible in this market that will **improve user outcomes, security, and robustness across the board**. Excitingly,these objectives  and innovations are not in contrast to business or economic goals, but rather can be fueled by deeper integrations between systems and the block building substrate. We will outline these. We also believe the R&D happening in this mature market and the primitives used for building blocks there can be reused, recombined, leveraged, and customized for any distributed financial application, even ones that do not feature a blockchain or monolithic shared state.
+
+In practice, execution outcomes on Ethereum are shaped by an ecosystem of actors operating under market forces: routers, solvers, searchers, sequencers, builders, relays, and validators—each specialized, each operating under different trust assumptions, each influencing **who gets routed, who gets seen, who gets censored, who gets sandwiched, and who gets reliable execution under congestion. **When we say block building, we mean the process throughout the entire transaction lifecycle: from intent construction all the way to inclusion on chain. We believe all of these actors would benefit from a market that operated on more decentralized rails.
+
+The question is whether this block building market structure, including all its architecturally centralized and decentralized components from frontends to validator endpoints, improves user outcomes or quietly degrades them. Such a system can degrade outcomes through blatant externalities like censorship, high fees, and adverse execution, or through hidden externalities like architectural centralization and fragility, regulatory chokepoints, and backroom deals. Conversely, it can improve outcomes with a healthy, transparent, privacy preserving market structure that features fair, competitive execution at every step.
+
+[Three years ago, we proposed a block building decentralization roadmap towards the Single Unified Auction for Value Expression (SUAVE) abstraction](https://writings.flashbots.net/the-future-of-mev-is-suave). Our understanding of what is possible in a scalable distributed context has advanced substantially due to new technologies, resulting in both [a new scaling roadmap for Ethereum](https://www.coindesk.com/business/2026/02/04/from-ethereum-s-sidekick-to-standalone-stars-how-vitalik-buterin-s-latest-pivot-is-forcing-layer-2s-to-grow-up) and in a new call for [“a block building model that we are confident will resist centralization pressure and guarantee censorship resistance even in unknown future environments.”](https://x.com/VitalikButerin/status/2010621884811845708)
+
+In this post, we build upon our R&D learning and share our updated perspective on the phased SUAVE roadmap and how it maps onto the Ethereum ecosystem scaling and privacy R&D efforts. We will also cover how these lessons can be applied to other systems, so all MEV actors can teach each other through a shared modular stack.
+
+It is time to live our values. Block building is not a [wart on the system](https://liner.com/review/private-order-flows-and-builder-bidding-dynamics-road-to-monopoly), it is [its engine](https://blog.chainsafe.io/beyond-mev-navigating-ethereums-decentralization-and-block-building-future/). To build the value of decentralization, we must color in the schematic together. Let's fucking go?
+
+> NOTE:  This article assumes as a prerequisite some basic knowledge of block building today. Some good background on block building, PBS, and the various centralization and latency collapse risks it can introduce into a system can be found [here](https://arxiv.org/abs/2401.12120).
+> 
+
+## The Three (?) Phases of Block Building
+
+Decentralization is a fuzzy term. To talk about it in a calibrated standardized way, we will draw from the [Ethereum L2 community’s](https://l2beat.com/scaling/summary) approach, and establish phases in an attempt to define and measure progress towards our dual mandates: decentralization and efficient user outcomes. We will use these phases to benchmark and classify where we are in the evolution of decentralized block building, and what the next few years hold from a technical and competitive perspective. We will then lay out an R&D tech tree, much of which Flashbots is already building. We will discuss how other systems fit into this future, from Solana to Tempo and more. Finally, we leave some big questions for the space.
+
+We will now posit a few phases for evolving the technical architecture of MEV auctions. These phases are not mutually exclusive, and can coexist in the market, with different structures and actors at different phases at similar times. They can, however, guide a roadmap. We will also mention what we believe the economic impact of each phase will be: our belief is that **good user outcomes** and **healthy competition** are essential properties to achieve political decentralization in these systems, as systems with few participants or ones that do not work for users have little hope of decentralizing. The technical architecture should support and harmonize with, not diverge from, these changes.
+
+To summarize these phases before describing them:
+
+  * **Phase 0 (Status Quo):** Fully centralized, monolithic systems running on a company's cloud provider; prone to intermediaries becoming points of excessive control and rent.
+  * **Phase 1 (Replicated Privacy):** Primitive network robust to single-party failure, utilizing technologies like, but not limited to, Trusted Execution Environments (TEEs) to share economically sensitive data and achieve crash fault tolerance. Flashbots is starting to be here.
+  * **Phase 2 (Modular Distributed Building):** A network where properties like robustness and censorship resistance can be validated by checking proofs. Blocks are "co-built" by many cooperating parties, and no single points of failure exist. We are experimenting with primitives useful here.
+  * **Phase 3 (Global Parallel Building):** A global, distributed network that has overcome centralizing effects and latency moats. Meaningful economic block building activity occurs on nodes around the world, allowing a single machine to permissionlessly enter and exit.
+
+### Phase 0
+
+![Phase 0: status quo, MEV activity happens on private entities' cloud infrastructure](/img/decentralizedbuildwatdo/0clean.png)
+
+*Is it a network? No, it is a server.*
+
+As in most systems, Phase 0 is the nascent phase. Fully centralized, monolithic systems running on a company's cloud provider process transactions, route orderflow, and build blocks. These systems network and communicate through a complex series of legal, political, and economic arrangements. This is the hardest phase to leave, the valley of centralized entrenchment.
+
+The good news is, we are leaving this behind. The risks to the system are obvious... with such intermediaries becoming chokepoints, as the opening quote suggests, freedom and individual liberty in the system is lost. The system dies, and chokes on itself as it fails to differentiate itself from a multitude of legacy competitors and traditional centralized plays. The biggest risk to any new transaction processing system is stagnation at Phase 0, as centralized moats become barriers to upgrade.
+
+**A test for Phase 0 is the ability to attribute blocks to specific infrastructure endpoints and legally accountable entities, and the substantial drop in system welfare (total MEV) if such parties fail.** This test shows that individual actors and their proprietary infrastructure hold key and direct technical influence over system outcomes.
+
+The *economic/market structure* impact of being at Phase 0 is a world of central intermediaries who are in a position to extract rent, degrade user outcomes and [threaten the security and stability of the underlying blockchain](https://arxiv.org/abs/1904.05234) or system.
+
+### Phase 1
+
+![Phase 1: any single entity going down results in the network producing an identical block. privacy is leveraged for sharing. To enter this phase, Flashbots is building TEE-based technologies, detailed later](/img/decentralizedbuildwatdo/1clean.png)
+
+*Replicated Privacy* - *Is it a network? Yes, but a primitive one. It is at least robust to any party going down. Is it self organizing and robust to extreme failures (nuclear war, byzantine adversaries, ...)? No.*
+
+In Phase 1, system actors use new forms of technology to bolster the robustness in the system, and decrease the trust required in its participants and legal structures, but have not achieved a fully horizontal and scalable [“small node” network for block building](https://vitalik.eth.limo/general/2021/12/06/endgame.html). These new forms of technology include confidential computing such as trusted execution environments (TEEs), Multi-Party Computation (MPC), Fully Homomorphic Encryption (FHE), and Zero-Knowledge (ZK) based systems [[1](https://collective.flashbots.net/t/frp-10-distributed-blockbuilding-networks-via-secure-knapsack-auctions/1955), [2](https://vitalik.eth.limo/general/2020/07/20/homomorphic.html), [3](https://ethresear.ch/t/hybrid-encrypted-mempools/23360)]. In the first phase, these parties achieve limited and ad-hoc forms of cooperation via this technology, but attain the ability to share economically sensitive data and crash fault tolerance with regards to a single legal or technical entity.
+
+**A test for a network at Phase 1 is identical block output regardless of number of parties in the production pipeline that fail (up to a high threshold)**. This essentially establishes a 1/N crash fault tolerant model with replicas across entities. This test shows that single failure points have been removed, but says nothing about the distribution of computation therein. The ability to compute on shared data without leaking it allows for new forms of cooperation, including in co-building blocks.
+
+The *economic/market structure* impact of being at Phase 1 is improved stability and reliability allowing for a more robust, performant, deeply integrated market. The introduction of cryptographic privacy into distribution of information into the system also enables better execution, allowing users to begin taking control of their data. This creates an iteratively better, but not transformed, market.
+
+### Phase 2
+
+![Phase 2: MEV activity happens in a BFT network; blocks are co-built by many cooperating parties, no single points of failure exist](/img/decentralizedbuildwatdo/2clean.png)
+
+*Modular Distributed Building* - *It is a network. Like Bitcoin and Ethereum, the properties that matter for the network (robustness, censorship resistance, fairness, privacy) can be validated by checking proofs as a node. Any entity can join and exit the network permissionlessly. This verification provides trust to its output blocks, in the same way verifying proofs of work provide trust to a blockchain.*
+
+Phase 2 begins to capture some aspects of decentralization by requiring a distributed technical architecture that can operate *across parties* through purely technical means. Rather than simply duplicating computation, these parties together compute and interact to jointly build blocks. This allows for new forms of cooperation that begin to form the ramps for global building. Phase 2 is not enough by itself for a fully decentralized system, and rather embodies a *byzantine fault tolerant* one. This is because Phase 2 could occur across for example several cloud providers, which is not consistent with the full properties of cryptosystems like Bitcoin and Ethereum, whose properties are verifiable and networks joinable by end-user nodes.
+
+To get from Phase 1 to 2, the existing Map-Reduce-style architecture of block building and transaction processing must be enshrined into APIs that can run on specialized but interchangeable nodes, with some nodes simulating transactions and generating proofs and other nodes aggregating partial and full outputs to deliver to a validator. The Flashbots proposal for a system architecture of this phase will be the subject of an in-depth future deep dive, but the **test for a network at Phase 2 is  blocks that are “co-built” in a distributed manner, and can no longer be attributed to a single entity.** In this phase, market share races, subsidy wars, and [censorship risks surrounding a single party cease to define a market](https://buildernet.org/blog/introducing-buildernet#censorship-resistance).
+
+Interestingly, Phase 2 can even be measured in a variety of ways: the number of parties whose infrastructure is directly involved in building each block in a chain, which we hope will increase as the technical architecture becomes more modular and distributed, can provide a measure of economic decentralization backed by the roadmap. Alternatively, the number of parties involved in the routing of a dex transaction, or the upper bound on a single party's ability to impact its execution price, can further highlight the division of responsibility that contrasts today's monolithic systems.
+
+In a co-built block world, each block is built by several such inter-operating nodes, potentially run by a diversity of parties that are able to permissionlessly enter and exit the system at any time. The *economic/market structure* impact of being at Phase 2 is that system actors can incorporate their diverse skillsets into a single output and unlock complementarities. This makes the market structure more fluid, allowing it to adapt to evolving market needs and evolve economically independently from the technical direction of the block builder. It also allows the market to connect to more diverse systems, applications, and domains. 
+
+### Phase 3
+
+![Phase 3: the network is distributed globally, conquering latency moats that otherwise counter decentralization and introduce chokepoints](/img/decentralizedbuildwatdo/3clean.png)
+
+*Global Parallel Building* - In this phase, the system has overcome centralizing effects and exists as a global, distributed network. Blocks are seamlessly and iteratively created from proofs, along a robust and permissionless supply chain, where everyone can freely join or exit. 
+
+**The test for a system at this phase is that meaningful economic block building activity occurs on nodes around the world, and that a single machine in any of these locations can enter and exit the network at will, like with many verifiable blockchains**. Here, “meaningful” means that regions do not gatekeep in technical architecture the effect of other regions on the output block. For example farther regions following the output of economically central ones without being able to economically affect outputs renders them less meaningful, as their participation is gatekept by the central regions. How to achieve this is the biggest open question in block building in our opinion, and is essential to ensure that [certain regions do not become gatekeepers of others, and the system further develops its robustness](https://collective.flashbots.net/t/decentralized-crypto-needs-you-to-be-a-geographical-decentralization-maxi/1385).
+
+The *economic/market structure* impact of being at Phase 3 is ultimate reliability and market integrity properties, serving user and infrastructure needs all over the world. In this phase, economic incentives keep the system decentralized, not human intervention. The architectural and network structure physically distributes computation to optimally route information with minimal latencies, no matter where in the world this information originates. We believe Phase 3 represents the ultimate distributed combinatorial global market, *what we think of as SUAVE*.
+
+### Phase ??
+
+After Phase 3, we are in a green field... let's farm!
+
+
+## why do?
+
+... we believe our success and progress as an ecosystem is guided by the sum total of economic activity and power across these phases. We hope that all block building systems, networks, and products will contribute to a rich forest of Phase 3 networks. Beyond that, we believe that a Phase 3 ecosystem represents a beacon of hope, solving two critical problems constraining cryptocurrencies: **scaling under MEV contention** and **0-metadata privacy**.
+
+### scaling under contention
+
+Solving scaling for financial systems requires handling contention, conflict, spam, arbitrage, and adversarial behavior at scale, properties that greatly benefit from efficient verifiable computation. Put simply, true scaling [requires solving MEV](https://writings.flashbots.net/mev-and-the-limits-of-scaling). To scale horizontally, a block builder must be **modular**, so it can be decomposed, replicated, and deployed when needed. And it must be **distributed**, with communication and computation happening worldwide, across trust and information boundaries.
+
+If a builder is not modular, the onus is on a single system to meet diverse and often conflicting preferences of a universe of stakeholders. Even within single categories, like decentralized exchanges, there is a wide variety of integration preferences, technical architectures, and resources. By achieving modularity, the relevant needs of each system can be integrated without requiring a monolithic change to a single system or architecture, rather putting the emphasis on communication between components. This is the clear architectural choice for any kind of interoperability, including of block buiilders.
+
+By achieving these properties, we can scale to global-scale contention resolution for the systems of tomorrow, trading and otherwise. By achieving the interoperability across trust boundaries that is required to decompose this modular block builder, we also build a robust technical stack that can address the hard problems inherent to interoperability across cryptocurrency, in the L1 and L2 ecosystems, and beyond. The same primitives required to communicate between block builders on two different domains can also guide  block production in real time, without requiring centralization of infrastructure, representing a bottom up path to the global interoperability dream that no single blockchain or bridge has thusfar achieved.
+
+In this way, block building can be the entrypoint for disparate systems where interoperability has been distinctly challenging: after all, all blockchains require state and blocks to be built or transactions to be sequenced. It is clear that geographic distribution is required for this interoperability to occur worldwide, essential to a diverse ecosystem of global and localized (hyperfast) blockchains. And it is also clear that an MEV auction is required to prevent MEV externalities and strategies from affecting execution outside the system. So, a geographically distributed MEV auction is the only possible solution, and what our phases aim to achieve.
+
+These technical properties cannot be in contrast to **economic best execution** for each user of the system. While centralized solutions to this problem introduce intermediaries and gates under the guise of handling contention, or ignore contention entirely, permissionless distributed solutions to state contention allow for an ecosystem of permissionless innovation. Specifically, in addition to being distributed, block building systems must make the argument that their handling of contested state can improve user outcomes and competition in the market, even in adversarial settings. We will now explore our belief that privacy is the key to harmonizing these requirements.
+
+### 0-metadata privacy
+
+Privacy, combined with a rules based approach to execution and transaction creation, is the key to harmonizing user needs on transactions with technical execution. Users can only optimally harness and leverage their information by keeping their information private from intermediaries, due to [principal agent problems](https://www.congress.gov/crs-product/IF12332) that have spawned a host of traditional finance regulations. Obviously inappropriate for cryptocurrencies, this calls for a new form of settlement system without requiring trusted intermediaries, and therefore without centralizing parties, motivating a distributed block building network.
+
+Therefore, we feature privacy and information flow control heavily in the roadmap, as a defining characteristic of Phase 1 and 2 systems. As block building evolves, this will allow for very granular control of how information is used and shared with real world parties as blocks are built. We believe this privacy is key for users and applications to achieve the outcomes they want without compromising chain security with intermediaries like centralized builders, gateways, or transaction processors. We also believe failure points in this privacy should be studied and defended against end-to-end, from the moment a transaction is generated to the moment it is confirmed in the system.
+
+This is why distributed building is critical. Changes like ePBS or time-boost that bring MEV markets closer to protocols by enshrining features **must be supported** by decentralized infrastructure. The underlying markets must be competitive, verifiable, and distributed widely to avoid excessive rent extraction, bad user outcomes, and eventual systemic failure. Ordering manipulation can happen at any point in the transaction pipeline, even before a transaction is submitted to the network, and it can even happen [without control of ordering in encrypted mempools or FCFS systems](https://writings.flashbots.net/mev-and-the-limits-of-scaling). This makes complete and programmable privacy the only solution for harmonizing best execution with distributed security involving many parties, and a defining requirement of any system past Phase 0.
+
+It is worth noting that a high standard of privacy and control over information is expected by both the most hardened cypherpunks and the most traditional institutions. Put simply, it is a universal property that must be technically robust, and its value is understood universally.
+
+All technically robust privacy solutions require the avoidance of [metadata](https://abcnews.go.com/blogs/headlines/2014/05/ex-nsa-chief-we-kill-people-based-on-metadata) and [routing chokepoints](https://www.theguardian.com/technology/2016/feb/25/us-defence-department-funding-carnegie-mellon-research-break-tor) that can introduce policing and leak data. Much like with blockchains, these security properties must be robust to a well funded attack, so must be secured by substantial financial flows within the system. In fact, we view [the extra bandwidth requirements fundamental to anonymity in these systems](https://eprint.iacr.org/2024/1227) as a new form of *communication-based proof of work* for anonymity, which can be verified in the output of the privacy protocol. Both of these requirements motivate the privacy solutions we will discuss later, that will be the subjects of their own future posts.
+
+### decentralization types
+
+It is obvious how a more distributed (higher phase) builder contributes to the [**architectural** decentralization](https://medium.com/@VitalikButerin/the-meaning-of-decentralization-a0c92b76a274) of how blocks are built in a system (as it is laying out a path to include more and more diverse computers). We believe scaling such a network to more actors and infrastructure also requires **logical** centralization in the same way as blockchains, with the Phase 2 network requiring a standard for interoperability to allow free joining of actors and free exchange of data as detailed above.
+
+Finally, **political** and economic decentralization remain open questions, but are aided by the inclusion of many actors who control their own dataflows, in the same way that by allowing miners to co-operate, blockchain software allows them to then evenly distribute the resulting rewards. We also believe geographic decentralization in Phase 3 further fuels the possibility of political decentralization, for [the reasons outlined in the post defining it](https://medium.com/@VitalikButerin/the-meaning-of-decentralization-a0c92b76a274).
+
+## wat do?
+
+### Flashbots wat do?
+
+So, the Flashbots roadmap to push the market towards Stage 3 looks roughly as follows:
+
+1. **Unbottle the Network:** Remove centralized bottlenecks from today's building infrastructure via TEEs. This includes better rewards sharing that does not rely on central computation and a permissionless join/exit mechanism. Release public goods and tools to fuel this, such as [Flashtestations](https://github.com/flashbots/flashtestations), which allows for on-chain TDX attestations to verify the transparency and fair execution of blockchain ordering rules.    
+2. **Enable Co-Building:** Leverage our research in distributed sandboxing to achieve Phase 2—co-building blocks with other entities. This produces blocks that remove the pressure on any single market actor.
+3. **Integrate Across Boundaries:** Start connecting geographically diverse domains with different trust assumptions into single block building pipelines, testing the limits of interoperability under latency. This will require us to further expand our already distributed BuilderNet node infrastructure, which currently operates in the US, EU, and Tokyo.
+4. In parallel, explore next generation enhancements and applications that are possible through new forms of cryptography, new privacy overlays, and other tech enhancements generated by our one of a kind R&D engine.
+
+At the end of these steps, we will have *achieved the SUAVE vision*... literally, a single unified auction for value expression, due to the permissionless network and standardized APIs that now power the blocks built on the network. Rather than building SUAVE as a monolithic top-down product, this path allows for tight coupling with Ethereum and other chains' needs, and can let us harmonize these needs with rapidly evolving blockchain and validation protocols to achieve a sustainable Phase 3.
+
+We cannot achieve this by ourselves, and collaborating with other MEV actors as well as the community is critical for us all to build a decentralized system, together. We will now outline a few systems we are building, focusing on what in our view is critical to achieve Phase 2. It is our hope that the community will join us in the R&D required for us all to progress the MEV market, together.
+
+**1. Trust Minimized Market Structure**
+To advance the market structure towards a higher, decentralized phase, we must move beyond trusted intermediaries. We are building **BuilderNet**, a TEE-based block building network. By [transitioning the market to a TEE-based market structure](https://writings.flashbots.net/migrating-to-buildernet), we enable broader data sharing, fault tolerance, and permissionless operation over sensitive data. While TEEs are not a silver bullet, they are the most performant path to competing with Phase 0 systems, allowing us to remove Flashbots as a trusted point of failure.
+
+* **Codebases:** [`BuilderNet`](https://buildernet.org/docs/os-services-builds#key-services)
+
+**2. Secure Co-location & Programmable Privacy**
+We need the ability to securely operate applications directly on top of builder-time state diffs—unlocking innovation previously gated behind walled gardens. We are generalizing our ["Bottom of Block"](https://collective.flashbots.net/t/searching-in-tdx/3902) architecture into **Signal-boost**, a family of protocols that provides secure sandboxing and co-location. This allows untrusted parties to build specific parts of a block (co-building) and capture value, while maintaining privacy and aiming for side-channel resistance. For example, deeper integrations between decentralized exchanges and centralized liquidity, block-building-time interoperability gadgets, and better auctions for real-time events like liquidations can all integrate to interact with internal block builder state in real time as blocks or partial blocks are being built.
+
+* **Codebase:** `signal-boost` (coming soon)
+* **Codebase:** [`flashbox`](https://github.com/flashbots/flashbots-images/tree/main/bob-l1)
+
+**3. Standardized Modular Primitives**
+For horizontal scaling, the ecosystem needs a standard way to speak "block building." We are releasing **rblib**, an open-source library of modular block building primitives. This standardizes the technical overlay, allowing different domains to share technical infrastructure and programmatic APIs. This ensures that as Ethereum approaches Phase 3, other chains and domains can inherit those decentralization gains without rebuilding the stack from scratch.
+
+* **Codebase:** [`rblib`](https://github.com/flashbots/rblib)
+
+**4. Verifiable Physical Infrastructure**
+TEEs in a lab are one thing; TEEs in the wild are another. To survive [attacks on TEEs in lab environments](https://tee.fail/) and expand beyond simple cloud infrastructure, we are developing **DCEA (Data Center Execution Assurance)** and **Proof of Cloud** primitives. These capability sets allow us to bind TEEs to specific physical deployments or secure containers, verifying not just the computation, but the physical environment in which it occurs. While Proof of Cloud doesn’t bring us fully into permissionlessness, it represents a large near-term step to hardening infrastructure and incorporating more actors and removing Flashbots as a central dependency in the system.
+
+* **Research Artifact:** [`DCEA`](https://arxiv.org/pdf/2510.12469)
+* Why we need Proof of Cloud (*coming soon*, watch this blog)
+
+**5. Self-Organizing Topologies**
+A decentralized builder needs a data routing topology that retains permissionlessness while managing policy-based routing. We are developing **Mosaik**, a library for self-organizing networks. Mosaik enables metadata or tag-based routing in a peer-to-peer environment without central control, ensuring transactions efficiently become bundles, and bundles efficiently become blocks, regardless of network turbulence.
+
+* **Codebase:** [`mosaik`](https://github.com/flashbots/mosaik)
+
+**6. Network Anonymity & Censorship Resistance**
+Privacy at the builder layer is insufficient if the network layer can be policed. We are building **NAMP (Network Anonymized Mempools)**. This includes anonymity systems integrated with protocol innovations like FOCIL, ensuring that the pipes themselves remain as censorship-resistant as the builders, or integrations directly into chain staking protocols that could allow validators' actions on the network to become private. All of these integrations would remove routing chokepoints from the system, increasing both efficiency and robustness.
+
+* **Codebase:** [`ADCNet`](https://github.com/flashbots/adcnet) (*builds on [ZIPNet](https://eprint.iacr.org/2024/1227)*)
+* **Research Artifact:** `Flashnet` (coming soon))
+
+**7. Frontier Research**
+Beyond immediate code, we are actively researching the theoretical limits of **Trustless TEEs**, **Geographic Decentralization** metrics, and **Hyperfast/Local Chains**. Research is a core part of our DNA, and we have [listed open problems](https://www.flashbots.net/research-database) and are actively inviting interested researchers to help us define the next set of capabilities needed for Phase 4.
+
+... if any of these directions interest you, [let us know](https://collective.flashbots.net/)!
+
+### Other Domains: “wat do?”
+
+We have long since known that [cross domain MEV](https://arxiv.org/abs/2112.01472) means that no blockchain or domain is an island, and that economically, every single domain, centralized or otherwise, affects the other. Decentralized block building primitives are useful for all of these, and can interoperate across them.
+
+So how can MEV lead this market? Well, in the same way that the goal of *frontier* research is to establish a baseline for what is possible, the goal of *frontier* decentralization is to push the world towards a more robust, trustless, decentralized status quo. Years of research and operation on Ethereum has taught us many lessons that can bolster the robustness and execution quality of any blockchain system or MEV-carrying trust domain. To name a few examples:
+
+1. **ETH L2s**: By opening up joint builder abstractions on a common stack, cross domain MEV builders can inherit the decentralized architecture of the L1. This may be desirable when domains want to interoperate without the centralization pressure introduced by a centralized cloud based super builder.
+2. **dapps**: dapps can participate or plug into various aspects of this well defined block building network. We believe this will allow for fully permissionless innovation on transactions, order types, orderflow auctions, and programmable/app-specific sequencers that operate on granular state diffs within the block building process. These permissionless, distributed integrations gain their trust guarantees from the attested pipeline and privacy model that a decentralized builder that has advanced past Phase 2 requires.
+3. **Payment/DeFi L1s**: As tradfi onboards onto crypto, a number of special purpose Layer 1 chains and domains are competing for the uptake of currently centralized activity like payments and trading. By enabling these chains to share a core reusable builder architecture, they can customize their block builder for their specific use case's MEV requirements (with payments and defi separately), program features and compliance and privacy into the block building algorithm itself, build better data custody and compliance pipelines, and more. These chains will require bespoke block builders, but should remain modular stacks that are as similar as possible to other chains, allowing for interoperability, application portability, and many of the other benefits EVM based L2s have enjoyed thus far.
+4. **Centralized Systems**: Centralized systems can also build builder time apps using programmable sandbox architectures like signal-boost, or can provide proprietary integrations and data sources for block building apps like arbitrageurs, back-running bots, and more. By more deeply integrating into the decentralized stacks, these applications can start to interface with some of this value, ideally without imposing centralization on the underlying system due to the robust decentralized network that supports.
+5. **Solana/Low Latency Chains**: Unlike most low latency chains, which see little usage, Solana MEV is a relatively mature market, with many players and products like the Block Assembly Marketplace and Temporal providing either TEE-based or centralized collection and orderflow preprocessing services. If Solana wishes to achieve Phase 3 for itself, it will have to avoid centralized players from dominating these key infrastructure choke-points (indeed, this is [already a problem](https://unchainedcrypto.com/mev-lawsuit-against-pump-fun-solana-heats-up/)). The R&D on ETH L1, which prioritizes reaching Phase 3, as well as its low latency subdomains like L2s, can inform the design and development of Solana MEV mechanisms. We believe there is alignment to be found in the visions of the systems in deconstructing chokepoints of the block production pipelines, and believe that any MEV-aware system, regardless of latency requirements and proposer structure, [can and should converge to use these primitives for financial flows](https://www.youtube.com/watch?v=SBOGdofF4u8). Specifically, MCP on Solana can be viewed as a variant of co-built blocks, though one which remains fragile to MEV attacks that can be avoided by explicitly designing for a distributed MEV auction.
+
+We believe there is demand for all of these trade-off points, and MEV innovation can occur anywhere, from low latency systems like centralized exchanges and blockchains to global and broadly decentralized chains like Ethereum. By integrating each step as deeply as possible into a decentralized and modular architecture, the most decentralized chains do not need to accept centralization trade-offs in their integrations with other domains: centralized arbitrageurs for exchanges, bridges for currencies, etc., and can instead make more nuanced trust trade offs that serve this demand.
+
+We hope that all of the above combine between deeper integrations into the distributed block building substrate to form a roadmap for cooperation between domains and trust boundaries, featuring interoperability that harmonizes with business and application needs rather than purely designing for a technical problem. In this way, MEV markets can shore up decentralization, privacy, scale, and ultimately adoption.
+
+## The Bull Case
+
+So, we have laid out a phased roadmap for the future of the block building market. We believe **we will achieve Level 3 decentralized block building.**
+
+This is what we are building, and how distributed MEV marketplaces will lead the next generation of financial systems. Not through speed, but through resilience, robustness, and trustless operation. Privacy, verifiability, programmability, enforceable market rules through technology, and deeper real-time application integrations will provide the fuel, harmonizing the MEV market with the needs of its users and applications.
+
+Let us go beyond today's stagnant market and towards a *rich block building diaspora*, together. [Join the discussion](https://collective.flashbots.net/) or [join our team](https://www.flashbots.net/jobs). Join *someone's* team. Build a local chain. Measure your system with these phases. Argue about these phases. Run a validator. Build a decentralized chain, or an L2. Or, whatever. **LET'S GO!**
+
+
+> *the authorship of this piece itself was decentralized; we would like to give heartfelt thanks to the many Flashbots and friends of Flashbots without whom this vision, piece, and market would not exist. and to the broader Ethereum community, for supporting us in many years of R&D. thank you all <3*
+
