@@ -13,7 +13,7 @@ forum_link:
 
 *This post is part of a Flashbots research series exploring how decentralized blockbuilding connects Ethereum's scaling and privacy roadmap to real-world execution.*
 
-**tl;dr:** *this post introduces Flashnet, a new anonymous broadcast protocol with much lower latency than existing alternatives. We plan to deploy Flashnet both (1) as a user-facing censorship resistance and anonymity tool that complements onchain privacy solutions and censorship resistance mechanisms like FOCIL; and (2) as a means to connect actors along the block building pipeline, moving BuilderNet closer to permissionlessness and the SUAVE vision. Flashnet is the event horizon for distributed block building — the signal passes through, the sender disappears.*
+**tl;dr:** ***this post introduces Flashnet, a new anonymous broadcast protocol with much lower latency than existing alternatives. We plan to deploy Flashnet both (1) as a user-facing censorship resistance and anonymity tool that complements onchain privacy solutions and censorship resistance mechanisms like FOCIL; and (2) as a means to connect actors along the block building pipeline, moving BuilderNet closer to permissionlessness and the SUAVE vision. Flashnet is the event horizon for distributed block building — the signal passes through, the sender disappears.***
 
 <!--truncate-->
 
@@ -41,7 +41,7 @@ So far we have only taken the first step. **Even when infrastructure runs in TEE
 
 For simple transfers, high latency simply means bad UX relative to unprotected designs. This may not sound like that big of a deal but more usage means stronger anonymity for the users who need it most. For DeFi and other use cases that touch contentious state, outcomes depend heavily on other transactions (e.g. swaps on the same DEX) and millisecond price movements on centralized exchanges. For these use cases, *latency can translate to money lost or prevent participation altogether.* As we drive down latency overheads, the same anonymous broadcast primitive that protects a Railgun user from metadata-based deanonymization can also prevent block builders or intermediaries from filtering or disadvantaging participants based on network identity, and deliver blocks to validators.
 
-Today, BuilderNet blocks are being built by Flashbots, Beaver Build and Nethermind, because we are able to verify that these nodes are running the appropriate privacy-preserving software in a secure environment. **Our next planned architecture modularizes and distributes block building across a larger set of specialized actors. Incorporating Flashnet is one of the steps to getting there - a key piece to letting anyone run a node and scaling BuilderNet beyond the limitations of reputation and trust.**
+Today, BuilderNet blocks are being built by Flashbots, beaverbuild and Nethermind, because we are able to verify that these nodes are running the appropriate privacy-preserving software in a secure environment. **Our next planned architecture modularizes and distributes block building across a larger set of specialized actors. Incorporating Flashnet is one of the steps to getting there - a key piece to letting anyone run a node and scaling BuilderNet beyond the limitations of reputation and trust.**
 
 ## Anonymity vs. Latency vs. Bandwidth
 
