@@ -61,7 +61,7 @@ Several well-established blueprints exist that are worth revisiting here shortly
 
 **Onion routing,** famously employed by the TOR network, is highly efficient in terms of bandwidth overhead and allows each client to asynchronously decide when to send their message. In practice, it can also achieve low latency, but at the cost of weak anonymity against adversarial network-level observers.
 
-**Mix-Nets**, such as Nym, provide high levels of anonymity, but do so at the price of requiring all messages to be sent in synchronous rounds. Nodes collect messages for a round and then forward them after reordering and delaying them, which increases end-to-end latency.
+**Mix-Nets**, such as Nym, achieve stronger anonymity at the cost of performance and requiring synchronous rounds. In order to achieve anonymity against global passive adversaries, mix-nets rely batch, reorder and delay messages, which increases end-to-end latency. The result is increased end-to-end latency and higher bandwidth overhead compared to low-latency networks.
 
 **DC-Nets** ("Dining Cryptographers" Nets) are different from relay-based designs like TOR and Nym. Instead of routing messages through several machines on the network, participants simultaneously contribute to a shared computation that reveals a batch of messages without linking sender to message. DC-Nets can provide strong sender anonymity with moderate latency in synchronous settings, but typically at the cost of higher bandwidth and computational overheads.
 
