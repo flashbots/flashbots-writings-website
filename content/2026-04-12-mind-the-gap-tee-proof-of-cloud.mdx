@@ -16,11 +16,9 @@ tl;dr: TEE attestations on their own do not provide all the information we need 
 
 <!--truncate-->
 
-## Introduction
+## It's Not as Easy as "Just Put It in a TEE"
 
-## It's not as easy as "just put it in a TEE"
-
-Confidential Virtual Machines (CVMs) running inside Trusted Execution Environments (TEEs) like Intel Trust Domain Extensions (TDX) have gained significant adoption in the web3 space. Flashbots operates multiple services from cloud TDX instances ([Buildernet](https://buildernet.org/), [Flashbox](https://collective.flashbots.net/t/searching-in-tdx/3902), …). The adoption of TEEs has also seen a sharp increase alongside the wave of AI adoption, where models can now [run](https://tinfoil.sh/) [within](https://phala.com/solutions/private-ai-inference) [a TEE](https://docs.near.ai/cloud/private-inference/) to provide guarantees about sensitive information shared with your favorite LLM.
+Confidential Virtual Machines (CVMs) running inside Trusted Execution Environments (TEEs) like Intel Trust Domain Extensions (TDX) have gained significant adoption in the web3 space. Flashbots operates multiple services from cloud TDX instances ([BuilderNet](https://buildernet.org/), [Flashbox](https://collective.flashbots.net/t/searching-in-tdx/3902), …). The adoption of TEEs has also seen a sharp increase alongside the wave of AI adoption, where models can now [run](https://tinfoil.sh/) [within](https://phala.com/solutions/private-ai-inference) [a TEE](https://docs.near.ai/cloud/private-inference/) to provide guarantees about sensitive information shared with your favorite LLM.
 
 **TEE adoption is surging — but so is the volume of published attacks against them.** This gives cause to be extra vigilant. To navigate the landscape responsibly, it helps to understand which attacks are actually relevant to how TEEs are deployed today and which classes of attacks we can rule out or have defenses for.
 
