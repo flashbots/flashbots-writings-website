@@ -5,14 +5,14 @@ authors: [jopasserat, rezabfil]
 tags: [TEE, privacy, research, secure hardware]
 image: /img/mind-the-gap-tee-poc/cover.png
 hide_table_of_contents: false
-description: "Introducing Flashnet, a new low-latency anonymous broadcast protocol for Ethereum's execution pipeline."
+description: "Covering Proof of Cloud and motivating why it is needed and where it falls short and requires future extensions."
 forum_link:
 ---
 
 ![Mind The Gap ](/img/mind-the-gap-tee-poc/cover.png)
 
 
-tl;dr: TEE attestations on their own do not provide all the information we need to use them securely. Attacks mounted with physical access or control over privileged software should also be mitigated. We have designed the Data Center Execution Assurance (DCEA) attestation protocol to extend attestation to trusted data center hardware. We do so by combining two roots of trust - one from the chip manufacturer and second from the date center operator. Intel has also announced Platform Ownership Endorsement (POE) that specifically addresses physical attacks. These protocols take a big step in reducing the attack surface area and trust dependencies of TEEs.
+TEE attestations on their own do not provide all the information we need to use them securely. Attacks mounted with physical access or control over privileged software should also be mitigated. We have designed the Data Center Execution Assurance (DCEA) attestation protocol to extend attestation to trusted data center hardware. We do so by combining two roots of trust - one from the chip manufacturer and second from the date center operator. Intel has also announced Platform Ownership Endorsement (POE) that specifically addresses physical attacks. These protocols take a big step in reducing the attack surface area and trust dependencies of TEEs.
 
 <!--truncate-->
 
@@ -80,9 +80,9 @@ More precisely, we define **Proof of Cloud** as a cryptographic proof that a con
 
 This is not about removing trust in cloud providers. It is about formalising a trust relationship that already exists and providing verifiers with a way to verify it. As a corollary, when you are trusting an actor for your security, it matters a great deal to know *who* that actor is. The cloud provider becomes a named, accountable participant in the attestation chain rather than an invisible assumption. We cannot avoid involving them. As long as TEEs cannot credibly guard against physical adversaries, having an identifiable data center owner signal ownership of a machine in their fleet will be part of the threat model. We are just making things clearer.
 
-Proof of cloud is thus better discussed as a concept rather than a single protocol. It can be instantiated via the **Data Center Execution Assurance (DCEA)** protocol we developed, Intel's recent **Platform Ownership Endorsement (POE)**, or simpler mechanisms such as [cloud-provider-signed PPID lists](https://collective.flashbots.net/t/portrait-of-a-tee-applications-and-identity/4142). Each offers different trade-offs between deployment simplicity and the strength of the guarantees it provides.
+Proof of cloud is thus better discussed as a concept rather than a single protocol. It can be instantiated via the **Data Center Execution Assurance (DCEA)** protocol we developed, Intel's recent **Platform Ownership Endorsement (POE)**, or simpler mechanisms such as [cloud-provider-signed PPID lists](https://collective.flashbots.net/t/portrait-of-a-tee-applications-and-identity/4142). Each offers different trade-offs between deployment simplicity and the strength of the guarantees it provides, as we show in the upcoming sections. 
 
-### DCEA
+## DCEA
 
 We introduced the initial problem of proof of cloud in our [position paper](https://www.net.in.tum.de/fileadmin/bibtex/publications/papers/SysTEX-DCEA-Narrowing-the-Gap.pdf) in 2025, and later developed the [DCEA](https://arxiv.org/pdf/2510.12469) protocol. DCEA closes the physical-access gap by establishing two parallel roots of trust and binding them together: one from the TEE manufacturer (e.g., Intel's TDX attestation chain) and one from the infrastructure owner (via a discrete TPM (dTPM) or virtual TPM (vTPM)).
 
@@ -124,7 +124,7 @@ DCEA is currently prototyped on Google Cloud with Intel TDX and vTPM. At the tim
 Unlike POE, DCEA is a heavier-weight protocol that provides a richer set of guarantees — including host software integrity verification — but requires deeper integration with the platform's boot chain and TPM infrastructure. This integration dependency is also DCEA's main practical limitation today: cloud providers must expose TPM access and support measured launch (e.g., Intel TXT), which not all providers currently offer. Providers may be reluctant to surface these primitives because doing so adds operational complexity and may expose internal platform details they prefer to keep opaque.
 
 
-### Intel POE
+## Intel POE
 
 As we discussed, Proof of Cloud is a missing feature in today's attestation stack. We define Proof of Cloud as a cryptographic proof that a confidential workload runs on hardware within a known infrastructure environment, binding guest attestation to the provider’s root of trust so that remote verifiers can confirm execution on trusted data center hardware. DCEA is one possible instantiation of Proof of Cloud. More recently, Intel released a technical report describing their own approach, labelled [**Platform Ownership Endorsement (POE)**](https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/platform-ownership-endorsements.html). POE functions differently from DCEA. It is both leaner and provides a narrower set of guarantees, while still fulfilling the core Proof of Cloud requirement.
 
@@ -155,7 +155,7 @@ If an attacker tries to run a CVM on their own unendorsed hardware (a "dummy mac
 
 Furthermore, POE relies on operational discipline. If a machine is retired or sold, the provider performs a "factory reset" which regenerates the PIID — or alternatively, initiates a revocation request (similar to how Intel revokes specific PCK certificates for compromised hardware) — effectively nullifying the old endorsements. This makes it significantly harder for an attacker to use old, discarded data center hardware to spoof a valid cloud node, as long as the data center maintains its fleet inventory up to date.
 
-### The Limitation: Identity Without Host State
+## The Limitation: Identity Without Host State
 
 POE provides robust *hardware identity* guarantees. However, the hypervisor and host software stack sit outside the TEE's Trusted Computing Base (TCB) by design — this is true of TDX and SEV-SNP generally, not a POE-specific limitation. POE does not change this boundary. The host-to-CVM interface remains a [broad attack surface that is difficult to fully reason about](https://iacoma.cs.uiuc.edu/iacoma-papers/top_colocate.pdf), and researchers have demonstrated [practical microarchitectural attacks](https://arxiv.org/abs/2506.15924) that instrument the hypervisor while remaining within the cloud TEE threat model — primarily targeting AMD SEV-SNP, with analogous concerns flagged for TDX page tables and caches (though Intel has applied mitigations to the TDX module to limit hypervisor-induced VM exits and add noise to side-channel signals).
 
