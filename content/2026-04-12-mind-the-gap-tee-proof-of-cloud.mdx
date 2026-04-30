@@ -1,0 +1,187 @@
+---
+slug: mind-the-gap-tee-poc
+title: Mind the Gap - Where TEE Attestations Fall Short and Why Do TEEs Need Proof of Cloud
+authors: [jopasserat, rezabfil]
+tags: [TEE, privacy, research, secure hardware]
+image: /img/mind-the-gap-tee-poc/cover.png
+hide_table_of_contents: false
+description: "Covering Proof of Cloud and motivating why it is needed and where it falls short and requires future extensions."
+forum_link:
+---
+
+![Mind The Gap ](/img/mind-the-gap-tee-poc/cover.png)
+
+
+TEE attestations on their own do not provide all the information we need to use them securely. Attacks mounted with physical access or control over privileged software should also be mitigated. We have designed the Data Center Execution Assurance (DCEA) attestation protocol to extend attestation to trusted data center hardware. We do so by combining two roots of trust - one from the chip manufacturer and second from the date center operator. Intel has also announced Platform Ownership Endorsement (POE) that specifically addresses physical attacks. These protocols take a big step in reducing the attack surface area and trust dependencies of TEEs.
+
+<!--truncate-->
+
+## It's Not as Easy as "Just Put It in a TEE"
+
+Confidential Virtual Machines (CVMs) running inside Trusted Execution Environments (TEEs) like Intel Trust Domain Extensions (TDX) have gained significant adoption in the web3 space. Flashbots operates multiple services from cloud TDX instances ([BuilderNet](https://buildernet.org/), [Flashbox](https://collective.flashbots.net/t/searching-in-tdx/3902), …). The adoption of TEEs has also seen a sharp increase alongside the wave of AI adoption, where models can now [run](https://tinfoil.sh/) [within](https://phala.com/solutions/private-ai-inference) [a TEE](https://docs.near.ai/cloud/private-inference/) to provide guarantees about sensitive information shared with your favorite LLM.
+
+**TEE adoption is surging — but so is the volume of published attacks against them.** This gives cause to be extra vigilant. To navigate the landscape responsibly, it helps to understand which attacks are actually relevant to how TEEs are deployed today and which classes of attacks we can rule out or have defenses for.
+
+One way to categorize attacks is by the type of access an attacker has to the target machine: physical or remote. An attacker with physical access can closely monitor and control the hardware interacting with the TEE, aiming to extract the attestation keys that underpin its integrity guarantees. A successful attacker would then be able to forge attestations outside of a TEE and masquerade a transparent environment as a CVM. Critically, these attacks do not require high-bandwidth data exfiltration — learning even a small number of secret bits is enough to undermine the entire security model.
+
+**A TEE attestation report certifies a CPU model, microcode revision, and measured launch state, but provides no evidence of the processor's physical location.** A determined operator with physical custody of a server can therefore produce a perfectly valid attestation while running the server in an uncontrolled basement rather than a reputable data center providing physical security. Recent attacks have made this concrete: researchers have demonstrated the extraction of SGX attestation keys via physical bus interposition on DDR5 memory ([TEE.fail](https://tee.fail/), [WireTap](https://wiretap.fail/)), techniques that also affect TDX. The attestation looks identical whether the machine sits in a hyperscaler data center or a garage.
+
+While these physical-access attacks are impressive and cost-effective, they are considered out of scope by TEE vendors, who exclude attackers with physical access from their threat model. Modern TEEs have been openly branded as cloud-only technologies ever since Intel SGX v1 was [retired from the consumer range of CPUs](https://community.intel.com/t5/Blogs/Products-and-Solutions/Security/Rising-to-the-Challenge-Data-Security-with-Intel-Confidential/post/1353141) in favor of multi-socket, server-grade versions, allowing the creation of enclaves containing more memory and later based on Virtual Machine (VM) images.
+
+During this migration to the cloud, Remote Attestations (RAs) have remained largely unchanged. RAs let a verifier confirm *what* code is running: the firmware version, the guest kernel, the VM image. They root the authenticity of this information in hardware that the CPU vendor vouches for. **What attestation does not tell you is *where* that code is running.** This is not a hypothetical concern, as interposer attacks have shown.
+
+We call this the [**physical-access gap**](https://arxiv.org/abs/2506.14964): commercial TEEs explicitly exclude adversaries with physical access from their threat model, yet the attestation they produce provides no evidence that a CVM executes on hardware residing within a facility where physical access *is* actually controlled. Beyond interposer attacks, this gap enables [**proxy or relay attacks**](https://ivanpuddu.com/files/papers/proximiTEE.pdf) that can achieve the same outcome. Proxy attacks produce valid attestation artifacts combined across machines — one in the cloud, one under the physical control of the attacker — to falsely assert trusted execution on protected infrastructure.
+
+> Note: The next three sections dive into the technical details of how these gaps manifest in Web3 deployments and how Data Center Execution Assurance (DCEA) and Platform Ownership Endorsement (POE) address them. If you're primarily interested in the practical implications, you can skip ahead to "Summary: A Necessary Snapshot, Not the End Game."
+
+
+## Why Web2 Never Cared (and Web3 Must)
+
+To understand why the physical-access gap matters more in some contexts than others, it helps to introduce the distinct roles involved in a TEE deployment. Throughout this post we refer to three actors:
+
+- The **CVM operator** ⓞ deploys and maintains the workload image running inside the Confidential VM (CVM).
+- The **host manager** ⓜ runs the underlying host OS, hypervisor, and (where applicable) the virtual TPM. In a managed cloud setting, this is the cloud provider.
+- The **hardware provider** ⓟ owns the physical server and the data center facility that houses it.
+
+![Roles in cloud deployments. The host-to-CVM interface is an adversarial attack surface: the hypervisor, vTPM, and host-guest communication channels are controlled by an entity the workload owner has no reason to trust.](/img/mind-the-gap-tee-poc/stack-attack.png)
+
+In Web2, the physical-access gap barely matters. A company deploying in a hyperscaler — say, GCP — signs a contract with Google, trusts their operational security, and has legal recourse if something goes wrong. The roles ⓞ, ⓜ, and ⓟ typically collapse into the same entity or into parties bound by commercial agreements. The Host-to-CVM interface is not adversarial: the same organisation deploys and controls both sides, and you trust the machine provider through contracts and IP-based verification.
+
+Some providers already surface partial platform provenance through proprietary services. Microsoft's Azure Attestation (MAA) validates TEE evidence and issues attestation tokens. On GCP, vTPM endorsement key certificates are signed by Google's subordinate CA and encode the VM's instance ID and project. These give verifiers *some* location signal within a specific provider's ecosystem.
+
+But these approaches are vendor-specific and do not generalize across clouds — a verifier must understand each provider's proprietary format and trust their specific CA hierarchy. Relying on multiple cloud providers is crucial for decentralization of HW providers. More importantly, none of these solutions work for bare-metal deployments, a hard requirement for latency-sensitive DeFi workloads where managed cloud VMs cannot meet performance needs. And for Web3 participants — who are often pseudonymous and may lack any contractual relationship with the infrastructure provider — there is no out-of-band channel to verify provenance.
+
+That said, the need for proof of cloud is not exclusive to Web3. Any multi-party scenario where distinct organisations must share sensitive data inside a TEE — for instance, health institutes collaborating on proprietary AI models trained on patient data with a must to run in a specific jurisdiction — faces a similar trust gap when the CVM operator, host manager, and hardware provider are separate entities. Web3 simply makes this the default rather than the exception.
+
+
+## The Role Separation Problem
+
+Web3 breaks the Web2 trust model because participants are **mutually untrusted**, pseudonymous, and frequently in direct economic competition. Multiple independent parties with misaligned incentives must coordinate around shared infrastructure without trusting any single operator.
+
+This is not abstract. Consider [Flashbox sandboxes](https://collective.flashbots.net/t/searching-in-tdx/3902), where Flashbots enables block builders to collaborate with atomic arbitrage searcher bots to source bottom-of-block (BoB) backruns. The setup involves three distinct parties: the **TDX operator** (Flashbots) deploys and maintains the CVM images, the **block builder** streams sensitive state diffs into the CVM, and the **searcher** uploads proprietary arbitrage code into the TEE. Each party's interests conflict directly: the searcher's code must remain private from both the operator and the builder, while the builder's order flow must remain private from the searcher. TEE attestation provides the mechanism for this mutual privacy, but **only if the searcher can trust that the attested machine actually sits in a controlled data center** rather than on hardware under the operator's physical control.
+
+
+More broadly, across the MEV supply chain, users of TEE-protected services implicitly interact with the three roles we defined above — ⓞ, ⓜ, and ⓟ — and none trusts the others:
+
+- The **operator** ⓞ may differ from the host manager ⓜ who runs the underlying OS and hypervisor. And ⓜ may run on infrastructure owned by a hardware provider ⓟ they do not fully control. Each boundary is a potential attack surface.
+- **Searchers** do not trust the operator. A CEX-DEX searcher competing on latency worries about information snooping. An atomic longtail searcher whose annual revenue depends on a highly specialised strategy to land a handful of blocks a year treats any leakage as existential.
+- **Order flow providers** do not trust the operator either. They ship user transactions — sometimes for major L2 platforms — and need guarantees against front-running and selective leaking.
+- **Users** can be searchers, block builders, private order flow providers or in general, who relies on the attestation capabilities provided by the TEE. 
+
+Because these roles are fulfilled by distinct entities, the Host-to-CVM interface becomes a critical attack surface. The hypervisor, the vTPM, the communication channels between guest and host: all controlled by a party the workload owner has no reason to trust. (It is worth noting that some host-to-CVM attack vectors — such as controlled-channel attacks — can be partially mitigated by hardening the CVM workload itself, for example through [oblivious memory](https://writings.flashbots.net/scalable-oblivious-accesses-to-blockchain-data) access patterns. However, this is workload-specific and does not generalize.)
+
+A standard TEE attestation tells the searcher that the CVM it is uploading its code to is running as expected in a TEE. It does not tell them whether it runs on infrastructure where the operator could mount a physical side-channel attack. This is the gap that Proof of Cloud fills.
+
+## Proof of Cloud: Making the Implicit Explicit
+
+Every TEE deployment in the cloud already implicitly trusts the data center operator not to mount physical attacks. This is *implicitly* baked into the threat models of Intel TDX and AMD SEV-SNP. Proof of Cloud makes this implicit assumption *explicit* and *verifiable*.
+
+More precisely, we define **Proof of Cloud** as a cryptographic proof that a confidential workload runs on hardware within a known infrastructure environment, binding guest attestation to the provider's root of trust so that remote verifiers can confirm execution on trusted data center hardware. The threat model assumes the host software stack (OS, hypervisor, vTPM) is adversarial, but CPU/TPM hardware roots and their supply chains are trusted for attestation evidence, while broader supply-chain guarantees remain out of scope. The cloud provider is trusted for physical integrity and correct certificate issuance, but not for the confidentiality of any software-visible state.
+
+This is not about removing trust in cloud providers. It is about formalising a trust relationship that already exists and providing verifiers with a way to verify it. As a corollary, when you are trusting an actor for your security, it matters a great deal to know *who* that actor is. The cloud provider becomes a named, accountable participant in the attestation chain rather than an invisible assumption. We cannot avoid involving them. As long as TEEs cannot credibly guard against physical adversaries, having an identifiable data center owner signal ownership of a machine in their fleet will be part of the threat model. We are just making things clearer.
+
+Proof of cloud is thus better discussed as a concept rather than a single protocol. It can be instantiated via the **Data Center Execution Assurance (DCEA)** protocol we developed, Intel's recent **Platform Ownership Endorsement (POE)**, or simpler mechanisms such as [cloud-provider-signed PPID lists](https://collective.flashbots.net/t/portrait-of-a-tee-applications-and-identity/4142). Each offers different trade-offs between deployment simplicity and the strength of the guarantees it provides, as we show in the upcoming sections. 
+
+## DCEA
+
+We introduced the initial problem of proof of cloud in our [position paper](https://www.net.in.tum.de/fileadmin/bibtex/publications/papers/SysTEX-DCEA-Narrowing-the-Gap.pdf) in 2025, and later developed the [DCEA](https://arxiv.org/pdf/2510.12469) protocol. DCEA closes the physical-access gap by establishing two parallel roots of trust and binding them together: one from the TEE manufacturer (e.g., Intel's TDX attestation chain) and one from the infrastructure owner (via a discrete TPM (dTPM) or virtual TPM (vTPM)).
+
+Before diving into how this works, a few key concepts:
+
+- **Platform Configuration Registers (PCRs)** are special-purpose registers inside a TPM that record a cumulative hash of every software component loaded during boot. They form a tamper-evident log of the platform's state.
+- **Runtime-Extendable Measurement Registers (RTMRs)** serve a similar purpose inside Intel TDX, recording measurements of the TD's launch configuration and runtime state.
+- **Attestation Key (AK):** A TPM-resident signing key used to sign quotes (attestation reports). Its provenance is tied to the platform's Endorsement Key (EK), which is provisioned by the TPM manufacturer.
+
+
+At its core, DCEA leverages the fact that overlapping measurements exist between the vTPM's PCRs and the CVM's RTMRs. While the vTPM's PCRs capture static attestation — reflecting the boot-time state of the platform — the CVM's RTMRs provide dynamic attestation, measuring the runtime environment within the trusted execution enclave. A verifier can cross-reference these two independently rooted artifacts; any inconsistency between the static and dynamic measurement chains reveals that the TEE attestation and the platform quote originate from different machines.
+
+We focus on two deployment scenarios — Managed CVM and bare-metal — each coming with a different set of requirements and possible threats. Bare-metal systems in particular are susceptible to proxy attacks, where an attacker runs a TD on their own hardware while relaying TPM interactions to a legitimate cloud server.
+
+### How DCEA Works
+
+DCEA defines two deployment scenarios and a four-step protocol that applies to both.
+
+- **Scenario I — Managed CVM:** The cloud provider manages the host OS, hypervisor, and vTPM. Here, the provider is trusted to issue correct certificates and maintain measured boot — but the vTPM state visible to the provider does not compromise the confidentiality of the TD's workload, because the TEE still provides its standard isolation guarantees (assuming the paravisor is open source and verifiable). The vTPM's PCR values and the TD quote's RTMRs overlap on a common measurement set, enabling cross-verification.
+- **Scenario II — Bare-Metal:** A tenant runs a TD on a single-tenant server with a discrete TPM (dTPM). The entire host software stack (OS, hypervisor, vTPM) is untrusted. We rely on Dynamic Root of Trust Measurement (DRTM), as implemented by Intel Trusted Execution Technology (TXT). DRTM measures firmware, kernel, and the vTPM binary into PCR 17–18 of the platform dTPM. This scenario offers stronger guarantees — specifically because the firmware and kernel are themselves measured into the trust chain — at the cost of greater complexity.
+
+
+**The Four-Step Protocol:**
+
+1. **Establish Measured Launch and Platform Roots.** The platform boots with Intel TXT, which resets the TPM and extends measurements of early boot components (ACM, SEAM loader) into PCR 17. The host OS and vTPM binary are then measured into PCR 18, creating a hardware-backed summary of the host stack.
+2. **Provision and Seal the AK.** The TPM generates an Attestation Key (AK) and seals its private key to a policy bound to PCR 17–18. This ensures the AK can sign quotes only when the host's boot state matches the approved measured configuration. The AK's provenance is tied to the platform's Endorsement Key (EK) via a provider-issued certificate or EK-anchored registrar.
+3. **In-Guest Evidence Binding.** The TD embeds the hash of the (v)TPM's public AK in its attestation report (via `report_data` or `MRCONFIGID`). This creates a transitive binding: the TD's evidence chains to the sealed AK, which in turn chains to the TXT-measured platform. Only quotes signed by the attested AK under the correct measured state will be accepted.
+4. **Verifier Workflow.** The verifier issues nonce-based challenges and obtains both a TD report (signed by Intel's Quoting Enclave) and a (v)TPM quote (signed by the sealed AK). It then validates that: the TD report carries the expected hash(AK_pub); nonces are fresh across both artifacts; TD RTMRs are consistent with the quoted PCRs; and the EK chain and QE signature confirm hardware provenance.
+
+![Four steps shown across stack.](/img/mind-the-gap-tee-poc/DCEA-steps.png)
+
+
+### DCEA in Action
+
+Consider again the proxy attack, where an attacker runs a TD on their own hardware while relaying TPM interactions to a legitimate cloud server. DCEA defeats this through a combination of its binding mechanisms. The TD-embedded AK hash reveals any cross-machine quote, because the attacker's local TD references a different AK than the one sealed on the remote platform. The AK sealing to PCR 17–18 prevents key use off-platform entirely. Nonce freshness defeats simple replay, and concurrent challenges with timing bounds make long proxy paths observable.
+
+DCEA is currently prototyped on Google Cloud with Intel TDX and vTPM. At the time of writing, GCP is among the few major cloud platforms offering both managed CVM and bare-metal TDX with hardware TPM access, though other providers (e.g., OpenMetal) are exploring similar configurations. The design itself generalises to any TEE offering comparable attestation primitives and overlapping measurement registers; AMD SEV-SNP currently lacks native RTMR-style fields, though equivalent logic could be approximated by embedding measurement hashes in the guest image's command line (similar to how dm-verity root hashes are passed today). Arm's Confidential Compute Architecture (CCA) offers a natural fit with four Realm Extensible Measurements REM[0–3] — providing the relevant attestation features DCEA exploits. However, there is no chip available in the market yet. 
+
+Unlike POE, DCEA is a heavier-weight protocol that provides a richer set of guarantees — including host software integrity verification — but requires deeper integration with the platform's boot chain and TPM infrastructure. This integration dependency is also DCEA's main practical limitation today: cloud providers must expose TPM access and support measured launch (e.g., Intel TXT), which not all providers currently offer. Providers may be reluctant to surface these primitives because doing so adds operational complexity and may expose internal platform details they prefer to keep opaque.
+
+
+## Intel POE
+
+As we discussed, Proof of Cloud is a missing feature in today's attestation stack. We define Proof of Cloud as a cryptographic proof that a confidential workload runs on hardware within a known infrastructure environment, binding guest attestation to the provider’s root of trust so that remote verifiers can confirm execution on trusted data center hardware. DCEA is one possible instantiation of Proof of Cloud. More recently, Intel released a technical report describing their own approach, labelled [**Platform Ownership Endorsement (POE)**](https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/technical-documentation/platform-ownership-endorsements.html). POE functions differently from DCEA. It is both leaner and provides a narrower set of guarantees, while still fulfilling the core Proof of Cloud requirement.
+
+Recall the relay attack: a malicious actor relays attestation signing requests from a basement server to a legitimate cloud TPM. This is an existential threat to decentralised networks relying on TEEs and will be our benchmark for establishing POE's suitability.
+
+Intel POE is a mechanism that binds platform attestation to verified physical ownership. It is currently designed as a sidecar to the existing attestation stack, with a clear path to integration directly into Intel SGX/TDX DCAP attestation quotes — which would bind POE endorsements alongside existing measurements (MRTD, RTMRs) in the same signed artifact. Our description relies entirely on Intel's technical report, and we are not aware of a concrete deployment timeline just yet. It is worth noting that the design does not involve Intel-specific features and could, in theory, be adopted by other TEE manufacturers.
+
+As such, POE is poised to become the de facto standard for cloud location verification. However, while it solves the immediate hardware identity problem, it addresses physical attacks without providing guarantees about the host-to-CVM software interface.
+
+
+### How POE Works
+
+POE manipulates two critical identifiers:
+
+1. **PRID (Processor Registration ID):** A permanent, immutable ID unique to the silicon.
+2. **PIID (Platform Instance Identity):** A resettable ID generated on the platform's first boot.
+
+In this model, the Cloud Provider acts as the trusted authority. During the supply chain phase, the provider collects the PRIDs of their fleet into a Trusted Supply Chain Inventory. They then sign a POE "token" (typically in IETF CoRIM format) certifying that the machine with a specific PIID belongs to them. Crucially, the PIID and PRIDs are bound together through an Intel-signed Platform Composition Manifest (PCM), which cryptographically attests that a given PIID belongs to a platform composed of specific, inventoried processors. This ensures that even after a maintenance event that regenerates the PIID, a valid POE can only be issued if the underlying silicon was previously enrolled in the trusted inventory.
+
+When a CVM generates an attestation quote, the hardware automatically embeds the PIID. The verifier then cross-references this with the provider-signed POE. If the PIID in the quote matches the PIID in the valid POE, you have cryptographic proof that the workload is running on hardware previously endorsed by that cloud provider as running in one of its data centers.
+
+
+![POE Flow.](/img/mind-the-gap-tee-poc/POE-flow.png)
+
+### POE in Action
+
+If an attacker tries to run a CVM on their own unendorsed hardware (a "dummy machine"), they cannot generate a valid quote because their machine's PIID will not have a corresponding signature from a trusted cloud provider.
+
+Furthermore, POE relies on operational discipline. If a machine is retired or sold, the provider performs a "factory reset" which regenerates the PIID — or alternatively, initiates a revocation request (similar to how Intel revokes specific PCK certificates for compromised hardware) — effectively nullifying the old endorsements. This makes it significantly harder for an attacker to use old, discarded data center hardware to spoof a valid cloud node, as long as the data center maintains its fleet inventory up to date.
+
+## The Limitation: Identity Without Host State
+
+POE provides robust *hardware identity* guarantees. However, the hypervisor and host software stack sit outside the TEE's Trusted Computing Base (TCB) by design — this is true of TDX and SEV-SNP generally, not a POE-specific limitation. POE does not change this boundary. The host-to-CVM interface remains a [broad attack surface that is difficult to fully reason about](https://iacoma.cs.uiuc.edu/iacoma-papers/top_colocate.pdf), and researchers have demonstrated [practical microarchitectural attacks](https://arxiv.org/abs/2506.15924) that instrument the hypervisor while remaining within the cloud TEE threat model — primarily targeting AMD SEV-SNP, with analogous concerns flagged for TDX page tables and caches (though Intel has applied mitigations to the TDX module to limit hypervisor-induced VM exits and add noise to side-channel signals).
+
+The POE documentation explicitly states that the PIID "remains constant across… Trusted Computing Base (TCB) Recoveries." This is intentional by design: it allows cloud providers to patch firmware without re-issuing ownership certificates. However, it means **POE does not extend the attestation to a measured launch of the host software stack**.
+
+POE proves *who* owns the machine, but not *what* software launched it. This distinction matters in the Web3 context: we trust the cloud provider not to mount *physical* attacks (that is the whole point of proof of cloud), but we may not trust them — or a compromised insider — not to run a modified hypervisor that exploits the host-to-CVM interface. These are different levels of trust. A malicious or compromised host operator could theoretically run a modified hypervisor on valid, endorsed hardware to mount side-channel attacks. DCEA's approach of measuring the host stack via Intel TXT addresses this specific layer.
+
+## Summary: A Necessary Snapshot, Not the End Game
+
+POE is a massive step forward. It transforms "Proof of Cloud" from a theoretical concept into a deployable feature that effectively counters low-effort proxy attacks. For the vast majority of users, knowing the hardware is in a secure Azure or GCP facility is enough.
+
+DCEA goes further by also binding the attestation to the measured state of the host software stack — including the hypervisor — addressing a class of host-to-CVM attacks that POE by design does not cover, at the cost of less portability and deeper platform integration requirements.
+
+Neither approach alone is sufficient for all use cases. POE gives you proof that the hardware belongs to a known provider. DCEA includes an evidence about the integrity of the software layers between the hardware and your workload, but is more challenging to deploy. They represent the current state of the art in making "Proof of Cloud" a deployable reality.
+
+However, we must also recognize that proof of cloud protocols are essentially a **supply chain snapshot**. They trust the provider's database and maintenance processes. A malicious data center operator could collude with an external adversary to offload endorsed machines without resetting them, allowing the adversary to obtain POE endorsement while physically running the machine outside the data center. (Of course, if the incentives are high enough, a malicious provider could also mount physical attacks directly — a reminder that many physical attacks remain out of scope for TEE threat models.) If a valid machine is physically stolen and rebooted without a factory reset, it retains its PIID. Until the POE token expires, the provider actively updates their inventory, or revocation is triggered, that stolen machine can still generate valid "cloud" attestations. One would expect hyperscalers to run automated inventory monitoring and revocation processes, but the security guarantee ultimately depends on operational discipline.
+
+### The Trust Supply Chain Problem
+
+The problem deepens when you trace the full infrastructure supply chain. Cloud computing is not a monolithic service. It is a complex, layered stack of providers, each with different responsibilities and trust properties.
+
+A hyperscaler like Google does not simply "run a data center." The hardware may be manufactured by one entity, assembled in a facility operated by another, managed through software maintained by yet another team, and offered to customers through distributors or managed service layers. Each link in this chain is a potential trust boundary that may have strong incentives to exploit any information asymmetry.
+
+For high-stakes adversarial environments like MEV block building, where we cannot blindly trust the host operator, POE should be viewed as the baseline, not the ceiling. To fully mitigate supply chain attacks and malicious insiders, we eventually need to move toward [**Trustless TEEs**](https://collective.flashbots.net/t/zero-trust-execution-environments/3966) that reduce the importance of hardware manufacturers in establishing hardware roots of trust. Concrete directions include relying on Physical Unclonable Functions (PUFs) for root key generation, building a verifiable hardware and software stack, and minimizing trust in individual parties along the chain. A contrasting model is vertical integration, where a single entity controls hardware manufacturing, provisioning, and runtime integrity — Apple's [hardware integrity lifecycle](https://security.apple.com/documentation/private-cloud-compute/hardwareintegrity) for Private Cloud Compute illustrates this approach, though it does not enable independent third-party verification.
+
+Regardless of the path, Proof of Cloud today remains a point-in-time snapshot. Coupling inventory-based ownership proofs (like POE) with continuous runtime assurance (like DCEA's measured-launch binding) points toward a natural extension — [Trustless TEE architectures](https://writings.flashbots.net/ZTEE2-Supply-Chains) — that we believe warrants further investigation by the community.
+
+
+Acknowledgments. We are grateful to Moe, Quintus, Peg, and Sarah for their thoughtful feedback on earlier drafts of this post. Their comments sharpened both the technical arguments and the exposition. Any remaining errors are, of course, our own.
