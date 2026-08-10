@@ -1,8 +1,8 @@
 alejo:
-    name: Alejo Salles
-    title: Research @Flashbots
-    url: https://twitter.com/fiiiu_
-    image_url: https://pbs.twimg.com/profile_images/1005592876930224128/JRAMFVUq_400x400.jpg
+  name: Alejo Salles
+  title: Research @Flashbots
+  url: https://twitter.com/fiiiu_
+  image_url: https://pbs.twimg.com/profile_images/1005592876930224128/JRAMFVUq_400x400.jpg
 
 flashbots:
   name: Flashbots
@@ -44,10 +44,10 @@ jolene:
   title: Research @Flashbots
 
 kristof:
-    name: Kristof Gazso
-    title: Research @Nethermind
-    url: https://twitter.com/kristofgazso?lang=en
-    image_url: https://pbs.twimg.com/profile_images/1326269994074779648/840HwaDE_400x400.jpg
+  name: Kristof Gazso
+  title: Research @Nethermind
+  url: https://twitter.com/kristofgazso?lang=en
+  image_url: https://pbs.twimg.com/profile_images/1326269994074779648/840HwaDE_400x400.jpg
 
 lakshman:
   name: Lakshman Sankar
@@ -80,16 +80,16 @@ obadiaa:
   image_url: https://pbs.twimg.com/profile_images/1432425822707650565/bKxdVmeR_400x400.jpg
 
 phil:
-    name: Phil Daian
-    title: Research @Flashbots
-    url: https://pdaian.com/
-    image_url: https://pbs.twimg.com/profile_images/968496806639398912/Th087Dhz_400x400.jpg
+  name: Phil Daian
+  title: Research @Flashbots
+  url: https://pdaian.com/
+  image_url: https://pbs.twimg.com/profile_images/968496806639398912/Th087Dhz_400x400.jpg
 
 robert:
-    name: Robert Miller
-    title: Product @Flashbots
-    url: https://twitter.com/bertcmiller
-    image_url: https://pbs.twimg.com/profile_images/1336354612064911360/qGVMxddJ_400x400.jpg
+  name: Robert Miller
+  title: Product @Flashbots
+  url: https://twitter.com/bertcmiller
+  image_url: https://pbs.twimg.com/profile_images/1336354612064911360/qGVMxddJ_400x400.jpg
 
 ryry79261:
   name: Ryan James Noble
@@ -146,10 +146,10 @@ sarah:
   url: https://twitter.com/sarahalle_
 
 amiller:
-    name: Andrew Miller
-    title: Research @Flashbots
-    url: https://twitter.com/socrates1024
-    image_url: https://pbs.twimg.com/profile_images/1711562697941155840/UtnytefN_400x400.jpg
+  name: Andrew Miller
+  title: Research @Flashbots
+  url: https://twitter.com/socrates1024
+  image_url: https://pbs.twimg.com/profile_images/1711562697941155840/UtnytefN_400x400.jpg
 
 shana:
   name: Sarah Liu
@@ -157,50 +157,80 @@ shana:
   image_url: https://avatars.githubusercontent.com/u/32314588?v=4
 
 jopasserat:
-    name: Jonathan Passerat-Palmbach
-    title: Research @Flashbots
-    url: https://jopasser.at
+  name: Jonathan Passerat-Palmbach
+  title: Research @Flashbots
+  url: https://jopasser.at
 
 rezabfil:
-    name: Filip Rezabek
-    title: Researcher
-    url: https://x.com/rezabfil
+  name: Filip Rezabek
+  title: Researcher
+  url: https://x.com/rezabfil
+
+boz:
+  name: Burak Öz
+  title: Research @ Flashbots
+  url: https://x.com/boez95
+
+fwu:
+  name: Fei Wu
+  title: Researcher
+  url: https://sites.google.com/view/feiwukcl
+
+lcorreia:
+  name: Luis Correia
+  title: Research @ Flashbots
+  url: https://collective.flashbots.net/u/luiscorreia/summary
+
+syang:
+  name: Sen Yang
+  title: Researcher
+  url: https://syang.xyz/
+
+bmazorra:
+  name: Bruno Mazorra
+  title: Research @ Flashbots
+  url: https://x.com/0xBrMazoRoig
+
+sleonardos:
+  name: Stefanos Leonardos
+  title: Researcher
+  url: https://stefanosleonardos.wordpress.com/
 
 ferran:
-    name: Ferran Borreguero
-    url: https://x.com/ferranbt
+  name: Ferran Borreguero
+  url: https://x.com/ferranbt
 
 sbellem:
-    name: Sylvain Bellemare (IC3)
-    title: Researcher
-    url: https://x.com/sbellem
+  name: Sylvain Bellemare (IC3)
+  title: Researcher
+  url: https://x.com/sbellem
 
 bunnie:
-    name: Bunnie
-    title: Researcher
-    url: https://www.bunniestudios.com/
+  name: Bunnie
+  title: Researcher
+  url: https://www.bunniestudios.com/
 
 michaelgao:
-    name: Michael Gao
-    title: Founder At Fabric Cryptography
-    url: https://x.com/gaoist
+  name: Michael Gao
+  title: Founder At Fabric Cryptography
+  url: https://x.com/gaoist
 
 elaineshi:
-    name: Elaine Shi
-    title: President & Chief Scientist at Oblivious Labs
-    url: https://elaineshi.com/
-    
+  name: Elaine Shi
+  title: President & Chief Scientist at Oblivious Labs
+  url: https://elaineshi.com/
+
 afonsotinoco:
-    name: Afonso Tinoco
-    title: Co-Founder & Research Engineer at Oblivious Labs
-    url: https://scholar.google.com/citations?user=PUvxukkAAAAJ&hl=en
-    
+  name: Afonso Tinoco
+  title: Co-Founder & Research Engineer at Oblivious Labs
+  url: https://scholar.google.com/citations?user=PUvxukkAAAAJ&hl=en
+
 tianyaogu:
-    name: Tianyao Gu
-    title: Co-Founder at Oblivious Labs
-    url: https://www.linkedin.com/in/tianyao-gu/
+  name: Tianyao Gu
+  title: Co-Founder at Oblivious Labs
+  url: https://www.linkedin.com/in/tianyao-gu/
 
 friends:
-    name: friends
-    title: council of vibes
-    url: https://en.wikipedia.org/wiki/Friends
+  name: friends
+  title: council of vibes
+  url: https://en.wikipedia.org/wiki/Friends
