@@ -83,7 +83,7 @@ MEV transactions are fascinating, sometimes by their complexity, sometimes by th
 ### Network Overhead from MEV Extraction
 DeFi trading bot operators compete for MEV opportunities by engaging in frontrunning/priority gas auctions like in example 1 and engaging in [backrunning](https://github.com/ethereum/go-ethereum/issues/21350) (ie. aiming to be, in the same block, as close as possible behind a specific transaction such as an oracle update by spamming the network with many transactions with a gas price slightly below or equal to the target and hoping one gets included).
 
-Both of these practices are nefarious to Ethereum by bloating the chain and exercising an upwards pressure on gas prices, as we can see from the gas price of example 2 above. This problem is particularly relevant at the moment given the high gas prices we’re seeing. Such prices contribute to eroding Ethereum’s permisionlessness by pushing out small users from the network as it becomes too costly for them.
+Both of these practices are nefarious to Ethereum by bloating the chain and exercising an upwards pressure on gas prices, as we can see from the gas price of example 2 above. This problem is particularly relevant at the moment given the high gas prices we’re seeing. Such prices contribute to eroding Ethereum’s permissionlessness by pushing out small users from the network as it becomes too costly for them.
 
 In addition, since a single transaction will win an MEV opportunity, we find that the Ethereum blockchain is littered with Reverted and Checked transactions which we’ve classified as Failed MEV transactions. We believe none of these failed MEV transactions needed to be recorded on chain and take up valuable block space.
 
